@@ -1,0 +1,42 @@
+name: Update WC 2026 Scores
+
+on:
+  schedule:
+    # Toutes les heures de 13h à 23h UTC (15h-01h Paris)
+    # Couvre tous les créneaux horaires de match
+    - cron: '0 13-23 * * *'
+    - cron: '0 0-1 * * *'
+  workflow_dispatch: # Déclenchement manuel possible
+
+jobs:
+  update-scores:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch and update scores
+        env:
+          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+        run: python scripts/update_scores.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --staged --quiet && echo "Pas de changement." || (
+            git commit -m "🏆 Scores CDM mis à jour — $(date -u '+%d/%m/%Y %H:%M UTC')"
+            git push
+          )
