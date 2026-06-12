@@ -2,10 +2,8 @@ name: Update WC 2026 Scores
 
 on:
   schedule:
-    # Toutes les heures de 13h à 23h UTC (15h-01h Paris)
-    # Couvre tous les créneaux horaires de match
-    - cron: '0 13-23 * * *'
-    - cron: '0 0-1 * * *'
+    # Toutes les heures, 24h/24 (repo public = gratuit sans limite)
+    - cron: '0 * * * *'
   workflow_dispatch: # Déclenchement manuel possible
 
 jobs:
