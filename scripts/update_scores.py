@@ -121,9 +121,27 @@ def parse_group_id(match):
 def fetch_finished_matches(api_key):
     url = 'https://api.football-data.org/v4/competitions/WC/matches'
     headers = {'X-Auth-Token': api_key}
-    resp = requests.get(url, headers=headers, params={'status': 'FINISHED'}, timeout=15)
-    resp.raise_for_status()
-    return resp.json().get('matches', [])
+    # Récupère tous les matchs (SCHEDULED, IN_PLAY, PAUSED, FINISHED)
+    # On filtre ensuite manuellement pour avoir les scores définitifs
+    resp = requests.get(url, headers=headers, timeout=15)
+    print(f'  HTTP {resp.status_code} — {url}')
+    if not resp.ok:
+        print(f'  Réponse API : {resp.text[:500]}')
+        resp.raise_for_status()
+    data = resp.json()
+    all_matches = data.get('matches', [])
+    print(f'  Total matchs dans l\'API : {len(all_matches)}')
+    # Affiche les 5 premiers pour débogage
+    for m in all_matches[:5]:
+        home = m.get('homeTeam', {}).get('name', '?')
+        away = m.get('awayTeam', {}).get('name', '?')
+        status = m.get('status', '?')
+        stage = m.get('stage', '?')
+        grp = m.get('group', '?')
+        print(f'    [{status}] {stage} | {grp} | {home} vs {away}')
+    # Garde uniquement les matchs terminés (score définitif)
+    finished = [m for m in all_matches if m.get('status') == 'FINISHED']
+    return finished
 
 
 def build_locked(matches):
