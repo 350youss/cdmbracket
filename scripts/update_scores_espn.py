@@ -109,59 +109,83 @@ def find_pair(teams, team_a, team_b):
     return None, None
 
 
+FINISHED_STATUSES = {'STATUS_FINAL', 'STATUS_FULL_TIME', 'STATUS_FT', 'FINISHED'}
+
+# Slugs ESPN à essayer dans l'ordre
+ESPN_SLUGS = ['fifa.world', 'fifa.world-cup', 'FIFA.World']
+
+
+def fetch_scoreboard(slug, date_str):
+    url = f'https://site.api.espn.com/apis/site/v2/sports/soccer/{slug}/scoreboard'
+    resp = requests.get(url, params={'dates': date_str}, timeout=10)
+    if not resp.ok:
+        return None
+    data = resp.json()
+    events = data.get('events', [])
+    if events:
+        print(f'  ESPN slug "{slug}" date {date_str} → {len(events)} event(s)')
+    return events
+
+
+def parse_events(events, date_str, finished):
+    for event in events:
+        comps = event.get('competitions', [])
+        for comp in comps:
+            status_name = comp.get('status', {}).get('type', {}).get('name', '')
+            status_desc = comp.get('status', {}).get('type', {}).get('description', '')
+            competitors = comp.get('competitors', [])
+            if len(competitors) != 2:
+                continue
+            home = next((c for c in competitors if c.get('homeAway') == 'home'), None)
+            away = next((c for c in competitors if c.get('homeAway') == 'away'), None)
+            if not home or not away:
+                continue
+            home_name = home.get('team', {}).get('displayName', '')
+            away_name = away.get('team', {}).get('displayName', '')
+            home_score = home.get('score')
+            away_score = away.get('score')
+            if home_score is None or away_score is None:
+                continue
+            is_finished = (status_name in FINISHED_STATUSES
+                           or status_desc.upper() in FINISHED_STATUSES
+                           or 'FINAL' in status_name.upper()
+                           or 'FULL' in status_name.upper())
+            if not is_finished:
+                print(f'    (en cours / pas terminé : {status_name} | {home_name} vs {away_name})')
+                continue
+            # Dédoublonnage
+            key = (home_name, away_name)
+            if any(m['home'] == home_name and m['away'] == away_name for m in finished):
+                continue
+            finished.append({
+                'home': home_name,
+                'away': away_name,
+                'home_score': int(home_score),
+                'away_score': int(away_score),
+                'date': date_str,
+            })
+
+
 def fetch_espn_matches():
-    """
-    ESPN scoreboard for FIFA World Cup.
-    We iterate over a range of dates to get all group stage matches.
-    """
-    base_url = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard'
+    """Itère sur les dates de la phase de groupes et récupère les matchs terminés."""
     finished = []
 
     # WC 2026 group stage: June 11 – July 2, 2026
-    start = datetime(2026, 6, 11, tzinfo=timezone.utc)
-    end   = datetime(2026, 7, 3, tzinfo=timezone.utc)
-    today = datetime.now(timezone.utc)
-    # Don't go beyond tomorrow
-    scan_end = min(end, today + timedelta(days=1))
+    start    = datetime(2026, 6, 11, tzinfo=timezone.utc)
+    end      = datetime(2026, 7, 3, tzinfo=timezone.utc)
+    scan_end = min(end, datetime.now(timezone.utc) + timedelta(days=1))
 
     current = start
     while current <= scan_end:
         date_str = current.strftime('%Y%m%d')
-        try:
-            resp = requests.get(base_url, params={'dates': date_str}, timeout=10)
-            if not resp.ok:
-                current += timedelta(days=1)
-                continue
-            data = resp.json()
-            events = data.get('events', [])
-            for event in events:
-                comps = event.get('competitions', [])
-                for comp in comps:
-                    status_type = comp.get('status', {}).get('type', {}).get('name', '')
-                    if status_type != 'STATUS_FINAL':
-                        continue
-                    competitors = comp.get('competitors', [])
-                    if len(competitors) != 2:
-                        continue
-                    home = next((c for c in competitors if c.get('homeAway') == 'home'), None)
-                    away = next((c for c in competitors if c.get('homeAway') == 'away'), None)
-                    if not home or not away:
-                        continue
-                    home_name = home.get('team', {}).get('displayName', '')
-                    away_name = away.get('team', {}).get('displayName', '')
-                    home_score = home.get('score', None)
-                    away_score = away.get('score', None)
-                    if home_score is None or away_score is None:
-                        continue
-                    finished.append({
-                        'home': home_name,
-                        'away': away_name,
-                        'home_score': int(home_score),
-                        'away_score': int(away_score),
-                        'date': date_str,
-                    })
-        except Exception as e:
-            print(f'  ⚠ Erreur pour {date_str}: {e}')
+        for slug in ESPN_SLUGS:
+            try:
+                events = fetch_scoreboard(slug, date_str)
+                if events:
+                    parse_events(events, date_str, finished)
+                    break  # slug trouvé pour cette date
+            except Exception as e:
+                print(f'  ⚠ {slug} {date_str}: {e}')
         current += timedelta(days=1)
 
     return finished
@@ -230,6 +254,16 @@ if __name__ == '__main__':
     print(f'{len(matches)} match(s) terminé(s) trouvé(s).')
     for m in matches:
         print(f"  {m['date']} {m['home']} {m['home_score']}-{m['away_score']} {m['away']}")
+
+    if not matches:
+        print('⚠ Aucun match trouvé — index.html NON modifié (protection contre écrasement).')
+        sys.exit(0)
+
     locked = build_locked(matches)
     print(f'Groupes avec résultats : {sorted(locked.keys()) or "aucun"}')
+
+    if not locked:
+        print('⚠ Aucun match mappé — index.html NON modifié.')
+        sys.exit(0)
+
     update_html(str(html_path), locked)
