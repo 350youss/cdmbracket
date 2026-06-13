@@ -2574,7 +2574,7 @@ function shareToTwitter() {
   function openTwitter(imgUrl) {
     // Lien vers le simulateur dans le texte (cliquable), image en aperçu via le param url
     var SITE = 'https://350youss.github.io/cdmbracket/';
-    var text = encodeURIComponent('Mes pronos Coupe du Monde 2026 🏆 Fais les tiens 👉 ' + SITE + '\n#CDM2026 #WC2026');
+    var text = encodeURIComponent('Mes pronos du jour 🏆 Fais les tiens 👉 ' + SITE + '\n#CDM2026 #WC2026');
     var url  = encodeURIComponent(imgUrl || SITE);
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
     twBtn.disabled = false;
@@ -2836,8 +2836,8 @@ function sharePronos() {
     c.fillStyle=g; c.fillRect(0,0,W,6);
     c.textBaseline='middle'; c.font='800 20px Inter,Arial,sans-serif';
     c.fillStyle='#fff'; c.textAlign='left';
-    c.fillText('Mes pronos',PAD,6+34);
-    var tw=c.measureText('Mes pronos ').width;
+    c.fillText('Mes pronos du jour',PAD,6+34);
+    var tw=c.measureText('Mes pronos du jour ').width;
     c.fillStyle='#4a8cff'; c.fillText('· '+mdjLabel(_mdjDateStr),PAD+tw,6+34);
     c.font='600 11px Inter,Arial,sans-serif'; c.fillStyle='#555'; c.textAlign='right';
     c.fillText('350youss.github.io/cdmbracket',W-PAD,6+34);
