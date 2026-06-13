@@ -65,6 +65,7 @@ TEAM_MAP = {
     'Colombia': 'Colombie',
     'DR Congo': 'RD Congo',
     'Congo, DR': 'RD Congo',
+    'Congo DR': 'RD Congo',
     'Democratic Republic of Congo': 'RD Congo',
     'Uzbekistan': 'Ouzbékistan',
     'England': 'Angleterre',
