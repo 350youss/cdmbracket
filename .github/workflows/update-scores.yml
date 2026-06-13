@@ -27,9 +27,7 @@ jobs:
         run: pip install requests
 
       - name: Fetch and update scores
-        env:
-          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
-        run: python scripts/update_scores.py
+        run: python scripts/update_scores_espn.py
 
       - name: Commit and push if changed
         run: |
