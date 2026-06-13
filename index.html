@@ -733,13 +733,13 @@ function renderGroupNav() {
   });
 
   document.querySelectorAll('#gpnav-prev').forEach(function(btn){
-    btn.onclick = function(){ showGroupPage(currentGroupPage - 1); };
+    addTapOnly(btn, function(){ showGroupPage(currentGroupPage - 1); });
   });
   document.querySelectorAll('#gpnav-next').forEach(function(btn){
-    btn.onclick = function(){ showGroupPage(currentGroupPage + 1); };
+    addTapOnly(btn, function(){ showGroupPage(currentGroupPage + 1); });
   });
   document.querySelectorAll('.gpnav-dot').forEach(function(dot){
-    dot.onclick = function(){ showGroupPage(parseInt(dot.dataset.page)); };
+    addTapOnly(dot, function(){ showGroupPage(parseInt(dot.dataset.page)); });
   });
 }
 
@@ -1239,6 +1239,21 @@ document.addEventListener('touchend', function(e) {
     setTimeout(function(){ t.focus(); t.select && t.select(); }, 0);
   }
 }, {passive: true});
+
+// Tap sans scroll — évite que les boutons/dots de pagination se déclenchent pendant un scroll
+function addTapOnly(el, fn) {
+  var _sy = 0, _sx = 0;
+  el.addEventListener('touchstart', function(e) {
+    _sy = e.touches[0].clientY;
+    _sx = e.touches[0].clientX;
+  }, {passive: true});
+  el.addEventListener('touchend', function(e) {
+    var dy = Math.abs(e.changedTouches[0].clientY - _sy);
+    var dx = Math.abs(e.changedTouches[0].clientX - _sx);
+    if (dy < 8 && dx < 8) { e.preventDefault(); fn(); }
+  });
+  el.addEventListener('click', fn);
+}
 
 // Blur sur scroll réel uniquement (seuil 10px pour ne pas interférer avec le tap)
 var _touchStartY = 0;
