@@ -430,10 +430,11 @@ main { padding:36px 44px 60px; }
 
 <main class="wrap">
   <div class="page active" id="tab-groups">
-    <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
+    <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
       <button onclick="simulateGroups()" style="background:var(--accent);color:#fff;border:none;padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer">⚡ SIMULER GROUPES</button>
       <button onclick="simulateAll()" style="background:#22c55e;color:#fff;border:none;padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer">🎲 SIMULER TOUT</button>
       <button onclick="resetAll()" style="background:rgba(255,255,255,.08);color:var(--sub);border:1px solid var(--line);padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer">✕ TOUT RÉINITIALISER</button>
+      <span id="save-ind" style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:.08em;opacity:0;transition:opacity .4s">✓ Sauvegardé</span>
     </div>
     <div id="group-nav"></div>
     <div class="groups-grid" id="groups-grid"></div>
@@ -844,6 +845,7 @@ document.addEventListener('input', function(e) {
   renderThirdPlace();
   renderElo._cache = null;
   renderGroupNav();
+  saveState();
 
   // Auto-avance mobile entre cases : après 1 chiffre, passe à l'input suivant
   if (window.innerWidth < 768 && inp.classList.contains('sinline') && /^[0-9]$/.test(inp.value)) {
@@ -996,6 +998,7 @@ function confirmBracket() {
 
   closeModal();
   renderBracket();
+  saveState();
   if (round === 'f') showWinnerPopup(winner, round);
 }
 
@@ -1983,6 +1986,7 @@ function resetAll() {
   BSCR.f   = new Array(1).fill(null);
   BSCR.pet = new Array(1).fill(null);
   renderElo._cache = null;
+  try { localStorage.removeItem('cdm2026_pronostic'); } catch(e) {}
   renderGroups();
   renderBracket();
   renderThirdPlace();
@@ -2228,8 +2232,68 @@ function generateShareCard() {
 }
 
 /* ================================================
+   LOCALSTORAGE — SAUVEGARDE PRONOSTICS
+================================================ */
+var _saveTimer;
+function saveState() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(function() {
+    var resOut = {};
+    GRP.forEach(function(g) {
+      var entries = {};
+      Object.keys(RES[g.id]).forEach(function(idx) {
+        if (!LOCKED[g.id] || LOCKED[g.id].indexOf(parseInt(idx)) < 0) {
+          entries[idx] = RES[g.id][idx];
+        }
+      });
+      if (Object.keys(entries).length) resOut[g.id] = entries;
+    });
+    try {
+      localStorage.setItem('cdm2026_pronostic', JSON.stringify({ res: resOut, bs: BS, bscr: BSCR }));
+      var ind = document.getElementById('save-ind');
+      if (ind) {
+        ind.style.opacity = '1';
+        clearTimeout(ind._t);
+        ind._t = setTimeout(function(){ ind.style.opacity = '0'; }, 2000);
+      }
+    } catch(e) {}
+  }, 600);
+}
+
+function loadState() {
+  try {
+    var raw = localStorage.getItem('cdm2026_pronostic');
+    if (!raw) return false;
+    var state = JSON.parse(raw);
+    if (state.res) {
+      Object.keys(state.res).forEach(function(gid) {
+        if (!RES[gid]) return;
+        Object.keys(state.res[gid]).forEach(function(idx) {
+          var i = parseInt(idx);
+          if (LOCKED[gid] && LOCKED[gid].indexOf(i) >= 0) return;
+          RES[gid][i] = state.res[gid][idx];
+        });
+      });
+    }
+    if (state.bs) {
+      ['r32','r16','qf','sf','f','pet'].forEach(function(r) {
+        if (state.bs[r]) BS[r] = state.bs[r];
+      });
+      if (state.bs.sfLosers) BS.sfLosers = state.bs.sfLosers;
+    }
+    if (state.bscr) {
+      ['r32','r16','qf','sf','f','pet'].forEach(function(r) {
+        if (state.bscr[r]) BSCR[r] = state.bscr[r];
+      });
+    }
+    return true;
+  } catch(e) { return false; }
+}
+
+/* ================================================
    INIT
 ================================================ */
+loadState();
 renderGroups();
 renderBracket();
 renderElo();
