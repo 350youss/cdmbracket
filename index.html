@@ -760,13 +760,20 @@ function showGroupPage(page) {
   }
 }
 
-var _resizeTimer;
+var _resizeTimer, _lastIPP = getIPP(), _lastWidth = window.innerWidth;
 window.addEventListener('resize', function() {
   clearTimeout(_resizeTimer);
   _resizeTimer = setTimeout(function() {
-    // Keep the same group in view
-    var ipp = getIPP();
-    currentGroupPage = Math.floor(currentGroupPage * (window.innerWidth < 768 ? 3 : 1/3));
+    var newWidth = window.innerWidth;
+    if (newWidth === _lastWidth) return; // hauteur seule (barre nav mobile) — ignorer
+    var newIPP = getIPP();
+    if (newIPP !== _lastIPP) {
+      // Garder le premier groupe visible de la page courante
+      var firstGroup = currentGroupPage * _lastIPP;
+      currentGroupPage = Math.floor(firstGroup / newIPP);
+      _lastIPP = newIPP;
+    }
+    _lastWidth = newWidth;
     currentGroupPage = Math.max(0, Math.min(currentGroupPage, getTotalPages() - 1));
     showGroupPage(currentGroupPage);
   }, 200);
