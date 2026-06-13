@@ -2567,26 +2567,24 @@ function uploadToImgBB(canvas, callback) {
 }
 
 function shareToTwitter() {
-  var link = document.getElementById('share-link-input').value;
   var twBtn = document.getElementById('share-tw-btn');
-  twBtn.disabled = true;
+  var status = document.getElementById('share-tw-status');
+  var SITE = 'https://350youss.github.io/cdmbracket/';
 
-  function openTwitter(imgUrl) {
-    // Un seul lien (l'image imgBB) pour maximiser l'aperçu image dans le tweet
-    var SITE = 'https://350youss.github.io/cdmbracket/';
-    var text = encodeURIComponent('Mes pronos du jour 🏆 #CDM2026 #WC2026');
-    var url  = encodeURIComponent(imgUrl || SITE);
-    window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
-    twBtn.disabled = false;
+  // 1. Télécharger l'image (X ne permet pas d'attacher une image via le web)
+  if (_shareBlobUrl) {
+    var a = document.createElement('a');
+    a.download = 'pronos-du-jour.png';
+    a.href = _shareBlobUrl;
+    a.click();
   }
 
-  // Si déjà uploadé pour cette session, réutilise
-  if (_imgbbUrl) { openTwitter(_imgbbUrl); return; }
+  // 2. Ouvrir le tweet pré-rempli (texte + lien site, l'utilisateur glisse l'image)
+  var text = encodeURIComponent('Mes pronos du jour 🏆 Fais les tiens 👉 ' + SITE + '\n#CDM2026 #WC2026');
+  window.open('https://twitter.com/intent/tweet?text=' + text, '_blank');
 
-  // Sinon upload d'abord
-  if (!_shareCanvas) { openTwitter(link); twBtn.disabled = false; return; }
-  uploadToImgBB(_shareCanvas, openTwitter);
-  twBtn.disabled = false;
+  // 3. Indiquer à l'utilisateur d'attacher l'image téléchargée
+  if (status) status.innerHTML = '✅ Image téléchargée — glisse-la dans le tweet 📎';
 }
 
 function nativeShare() {
