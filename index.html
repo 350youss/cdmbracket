@@ -2144,14 +2144,15 @@ function getSurprise() {
 function generateShareCard() {
   if(!BS.f[0]){ alert('La finale n\'est pas encore jouée !'); return; }
 
-  var champion = BS.f[0];
-  var finalist = BS.sf[0]&&BS.sf[1]?(BS.f[0]===BS.sf[0]?BS.sf[1]:BS.sf[0]):null;
-  var third    = BS.pet[0]||null;
-  var fourth   = (BS.sfLosers[0]&&BS.sfLosers[1])?(BS.pet[0]===BS.sfLosers[0]?BS.sfLosers[1]:BS.sfLosers[0]):null;
-  var flop     = getFlop();
-  var surprise = getSurprise();
+  var champion  = BS.f[0];
+  var finalist  = BS.sf[0]&&BS.sf[1]?(BS.f[0]===BS.sf[0]?BS.sf[1]:BS.sf[0]):null;
+  var third     = BS.pet[0]||null;
+  var sf1Winner = BS.sf[0]||null, sf1Loser = BS.sfLosers[0]||null;
+  var sf2Winner = BS.sf[1]||null, sf2Loser = BS.sfLosers[1]||null;
+  var flop      = getFlop();
+  var surprise  = getSurprise();
 
-  var needed = [champion,finalist,third,fourth,flop?flop.name:null,surprise?surprise.name:null].filter(Boolean);
+  var needed = [champion,finalist,third,sf1Winner,sf1Loser,sf2Winner,sf2Loser,flop?flop.name:null,surprise?surprise.name:null].filter(Boolean);
   var imgs = {}, left = 0;
 
   function tryDraw(){ if(left===0) document.fonts.ready.then(draw); }
@@ -2189,8 +2190,8 @@ function generateShareCard() {
 
   function draw(){
     var W=680, PAD=36;
-    var champH=260, top3H=175, flopH=100, surprH=100;
-    var H=8+72+champH+20+top3H+20+flopH+12+surprH+28;
+    var champH=260, bktH=290, flopH=100, surprH=100;
+    var H=8+72+champH+20+bktH+20+flopH+12+surprH+28;
     var cvs=document.createElement('canvas');
     cvs.width=W; cvs.height=H;
     var c=cvs.getContext('2d');
@@ -2238,31 +2239,79 @@ function generateShareCard() {
     c.fillStyle='#ffffff'; c.textAlign='center';
     c.fillText(fitText(c,champion.toUpperCase(),W-PAD*2-40),W/2,fY+fH+34);
 
-    // ── TOP 3 row ──
-    var t3y=cy+champH+20;
-    var colW=Math.floor((W-PAD*2-24)/3);
-    var top3=[{t:finalist,lbl:'FINALISTE'},{t:third,lbl:'3E PLACE'},{t:fourth,lbl:'4E PLACE'}];
-    top3.forEach(function(item,i){
-      var cx=PAD+i*(colW+12);
-      c.fillStyle='rgba(255,255,255,.03)'; rr(c,cx,t3y,colW,top3H,4); c.fill();
-      c.strokeStyle='rgba(255,255,255,.07)'; c.lineWidth=1; rr(c,cx,t3y,colW,top3H,4); c.stroke();
-
-      c.font='700 10px Inter, Arial, sans-serif';
-      c.fillStyle='#666'; c.textAlign='center';
-      c.fillText(item.lbl,cx+colW/2,t3y+18);
-
-      if(item.t){
-        var fw=88,fh=62, fx=cx+colW/2-fw/2, fy=t3y+28;
-        drawFlag(c,item.t,fx,fy,fw,fh);
-        c.font='800 14px Inter, Arial, sans-serif';
-        c.fillStyle='#fff'; c.textAlign='center';
-        c.fillText(fitText(c,item.t.toUpperCase(),colW-16),cx+colW/2,fy+fh+20);
-      }
-    });
-
-    // ── FLOP + SURPRISE blocks (stacked vertically) ──
+    // ── BRACKET block ──
     var bW=W-PAD*2;
+    var bktY=cy+champH+20;
+    var GOLD='#c9a84c';
 
+    c.fillStyle='rgba(255,255,255,.02)'; rr(c,PAD,bktY,bW,bktH,4); c.fill();
+    c.strokeStyle='rgba(255,255,255,.06)'; c.lineWidth=1; rr(c,PAD,bktY,bW,bktH,4); c.stroke();
+
+    c.font='700 10px Inter, Arial, sans-serif';
+    c.fillStyle='#555'; c.textAlign='center';
+    c.fillText('BRACKET — TOP 4',W/2,bktY+16);
+
+    var rowH=46, lblH=22, finW=220, sfW=188;
+    var finX=PAD+(bW-finW)/2, finY=bktY+30;
+    var sf1X=PAD+16, sf2X=PAD+bW-sfW-16;
+    var sfY=finY+lblH+rowH*2+38;
+
+    function drawTeamRow(team,x,y,w,isWin){
+      c.fillStyle=isWin?'rgba(201,168,76,.10)':'rgba(255,255,255,.03)';
+      rr(c,x,y,w,rowH-4,4); c.fill();
+      c.strokeStyle=isWin?'rgba(201,168,76,.45)':'rgba(255,255,255,.07)';
+      c.lineWidth=1; rr(c,x,y,w,rowH-4,4); c.stroke();
+      var fW=34,fH=24;
+      drawFlag(c,team,x+10,y+(rowH-4-fH)/2,fW,fH);
+      c.font=(isWin?'800':'600')+' 13px Inter, Arial, sans-serif';
+      c.fillStyle=isWin?'#ffffff':'#777777';
+      c.textAlign='left';
+      c.fillText(fitText(c,team.toUpperCase(),w-fW-36),x+fW+20,y+(rowH-4)/2+1);
+      c.textAlign='center';
+    }
+
+    // Finale (top center)
+    c.font='700 9px Inter, Arial, sans-serif';
+    c.fillStyle=GOLD; c.textAlign='center';
+    c.fillText('FINALE',finX+finW/2,finY+10);
+    if(champion) drawTeamRow(champion,finX,finY+lblH,finW,true);
+    if(finalist) drawTeamRow(finalist,finX,finY+lblH+rowH,finW,false);
+
+    // Connector lines
+    var finCX=finX+finW/2, finBotY=finY+lblH+rowH*2-4;
+    var sf1CX=sf1X+sfW/2, sf2CX=sf2X+sfW/2;
+    var midY=finBotY+20;
+    c.lineWidth=1.5; c.setLineDash([4,4]);
+    c.strokeStyle='rgba(201,168,76,.35)';
+    c.beginPath(); c.moveTo(finCX,finBotY); c.lineTo(finCX,midY);
+    c.lineTo(sf1CX,midY); c.lineTo(sf1CX,sfY); c.stroke();
+    c.strokeStyle='rgba(255,255,255,.12)';
+    c.beginPath(); c.moveTo(finCX,midY);
+    c.lineTo(sf2CX,midY); c.lineTo(sf2CX,sfY); c.stroke();
+    c.setLineDash([]);
+
+    // SF1 (bottom left)
+    c.font='700 9px Inter, Arial, sans-serif';
+    c.fillStyle='#555'; c.textAlign='center';
+    c.fillText('DEMI-FINALE 1',sf1X+sfW/2,sfY+10);
+    if(sf1Winner) drawTeamRow(sf1Winner,sf1X,sfY+lblH,sfW,true);
+    if(sf1Loser)  drawTeamRow(sf1Loser, sf1X,sfY+lblH+rowH,sfW,false);
+
+    // SF2 (bottom right)
+    c.fillText('DEMI-FINALE 2',sf2X+sfW/2,sfY+10);
+    if(sf2Winner) drawTeamRow(sf2Winner,sf2X,sfY+lblH,sfW,true);
+    if(sf2Loser)  drawTeamRow(sf2Loser, sf2X,sfY+lblH+rowH,sfW,false);
+
+    // 3e place (centered below SFs)
+    var p3y=sfY+lblH+rowH*2+8;
+    if(third){
+      c.font='700 9px Inter, Arial, sans-serif';
+      c.fillStyle='#555'; c.textAlign='center';
+      c.fillText('3E PLACE',W/2,p3y+10);
+      drawTeamRow(third,PAD+(bW-finW)/2,p3y+lblH,finW,false);
+    }
+
+    // ── FLOP + SURPRISE blocks ──
     function drawInfoBlock(by,bh,bColor,bBorder,label,team,roundKey){
       c.fillStyle=bColor; rr(c,PAD,by,bW,bh,4); c.fill();
       c.strokeStyle=bBorder; c.lineWidth=1.5; rr(c,PAD,by,bW,bh,4); c.stroke();
@@ -2287,7 +2336,7 @@ function generateShareCard() {
       }
     }
 
-    var fly=t3y+top3H+20;
+    var fly=bktY+bktH+20;
     drawInfoBlock(fly,        flopH,'rgba(255,77,109,.07)','rgba(255,77,109,.25)','MON FLOP',    flop?flop.name:null,     flop?flop.round:null);
     drawInfoBlock(fly+flopH+12,surprH,'rgba(52,199,123,.07)','rgba(52,199,123,.25)','MA SURPRISE',surprise?surprise.name:null,surprise?surprise.round:null);
 
