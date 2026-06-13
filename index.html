@@ -2652,45 +2652,48 @@ var MDJ_MAP = {
   'England':'Angleterre','Croatia':'Croatie','Ghana':'Ghana','Panama':'Panama'
 };
 var _mdjTimer = null, _mdjMatches = [], _mdjDateStr = '';
+var _mdjWinStart = 0, _mdjWinEnd = 0;
 var MDJ_FIN = {STATUS_FINAL:1,STATUS_FULL_TIME:1,STATUS_FT:1,FINISHED:1};
 
 function mdjDateOffset(ds, n) {
-  var d = new Date(parseInt(ds.slice(0,4)), parseInt(ds.slice(4,6))-1, parseInt(ds.slice(6,8)));
-  d.setDate(d.getDate() + n);
-  return d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+  var d = new Date(Date.UTC(parseInt(ds.slice(0,4)), parseInt(ds.slice(4,6))-1, parseInt(ds.slice(6,8))));
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.getUTCFullYear() + String(d.getUTCMonth()+1).padStart(2,'0') + String(d.getUTCDate()).padStart(2,'0');
 }
 
+// Date "ancre" de la journée de matchs.
+// Une journée CDM s'étale ~16:00Z → 04:00Z(+1) ; midi UTC tombe toujours dans le
+// trou entre deux journées. On définit donc la journée par la fenêtre
+// [D 12:00Z, D+1 12:00Z) et on prend D = date UTC de (maintenant − 12h).
 function getMDJDate() {
-  // ESPN groupe les matchs par jour US Eastern (UTC-4)
-  var now = new Date();
-  var et = new Date(now.getTime() - 4 * 3600 * 1000);
-  return et.getUTCFullYear() + String(et.getUTCMonth()+1).padStart(2,'0') + String(et.getUTCDate()).padStart(2,'0');
-}
-function getMDJDatePrev() {
-  var now = new Date();
-  var et = new Date(now.getTime() - 4 * 3600 * 1000 - 86400 * 1000);
-  return et.getUTCFullYear() + String(et.getUTCMonth()+1).padStart(2,'0') + String(et.getUTCDate()).padStart(2,'0');
+  var anchor = new Date(Date.now() - 12 * 3600 * 1000);
+  return anchor.getUTCFullYear() + String(anchor.getUTCMonth()+1).padStart(2,'0') + String(anchor.getUTCDate()).padStart(2,'0');
 }
 function mdjLabel(ds) {
   var days=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
   var months=['jan.','fév.','mars','avr.','mai','juin','juil.','août','sep.','oct.','nov.','déc.'];
-  var d=new Date(parseInt(ds.slice(0,4)),parseInt(ds.slice(4,6))-1,parseInt(ds.slice(6,8)));
-  return days[d.getDay()]+' '+d.getDate()+' '+months[d.getMonth()];
+  var d=new Date(Date.UTC(parseInt(ds.slice(0,4)),parseInt(ds.slice(4,6))-1,parseInt(ds.slice(6,8))));
+  return days[d.getUTCDay()]+' '+d.getUTCDate()+' '+months[d.getUTCMonth()];
 }
 function mdjParisTime(iso) {
   try {
     var dt = new Date(iso);
-    var p = new Date(dt.getTime() + 2 * 3600 * 1000); // Paris = UTC+2
+    var p = new Date(dt.getTime() + 2 * 3600 * 1000); // Paris = UTC+2 (CEST, juin-juil.)
     return String(p.getUTCHours()).padStart(2,'0') + 'h' + String(p.getUTCMinutes()).padStart(2,'0');
   } catch(e){ return ''; }
 }
 function fetchMDJ() {
   _mdjDateStr = getMDJDate();
-  var prev = getMDJDatePrev();
+  var next = mdjDateOffset(_mdjDateStr, +1);
+  // Fenêtre UTC de la journée : [D 12:00Z, D+1 12:00Z)
+  var y=parseInt(_mdjDateStr.slice(0,4)), mo=parseInt(_mdjDateStr.slice(4,6)), da=parseInt(_mdjDateStr.slice(6,8));
+  _mdjWinStart = Date.UTC(y, mo-1, da, 12, 0, 0);
+  _mdjWinEnd = _mdjWinStart + 24 * 3600 * 1000;
+  // Les matchs de la journée sont répartis par ESPN sous D et D+1 → on fetch les deux
   var ESPN = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=';
   Promise.all([
-    fetch(ESPN+prev).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
-    fetch(ESPN+_mdjDateStr).then(function(r){return r.json();}).catch(function(){return {events:[]};})
+    fetch(ESPN+_mdjDateStr).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
+    fetch(ESPN+next).then(function(r){return r.json();}).catch(function(){return {events:[]};})
   ]).then(function(res){
     parseMDJ((res[0].events||[]).concat(res[1].events||[]));
   });
@@ -2700,6 +2703,9 @@ function parseMDJ(events) {
   events.forEach(function(ev){
     (ev.competitions||[]).forEach(function(comp){
       var iso=comp.date||ev.date||'';
+      // Filtrer sur la fenêtre UTC de la journée
+      var ts = iso ? new Date(iso).getTime() : NaN;
+      if(isNaN(ts) || ts < _mdjWinStart || ts >= _mdjWinEnd) return;
       var sn=(comp.status||{}).type&&comp.status.type.name||'';
       var fin=!!(MDJ_FIN[sn]||sn.indexOf('FINAL')>=0||sn.indexOf('FULL')>=0);
       if(fin) return; // ne pas afficher les matchs terminés
@@ -2723,12 +2729,12 @@ function parseMDJ(events) {
         });
       });
       matches.push({hFr:hFr,aFr:aFr,hScore:home.score||null,aScore:away.score||null,
-        status:fin?'done':live?'live':'sched',time:mdjParisTime(iso),
+        status:fin?'done':live?'live':'sched',time:mdjParisTime(iso),ts:ts,
         gid:gid,idx:idx,flipped:flipped});
     });
   });
-  // Trier par heure
-  matches.sort(function(a,b){ return a.time.localeCompare(b.time); });
+  // Trier par horodatage réel (chronologique)
+  matches.sort(function(a,b){ return a.ts - b.ts; });
   _mdjMatches=matches;
   renderMDJ();
   clearTimeout(_mdjTimer);
