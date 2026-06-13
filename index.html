@@ -2567,7 +2567,6 @@ function uploadToImgBB(canvas, callback) {
 }
 
 function shareToTwitter() {
-  var twBtn = document.getElementById('share-tw-btn');
   var status = document.getElementById('share-tw-status');
   var SITE = 'https://350youss.github.io/cdmbracket/';
 
@@ -2579,12 +2578,22 @@ function shareToTwitter() {
     a.click();
   }
 
-  // 2. Ouvrir le tweet pré-rempli (texte + lien site, l'utilisateur glisse l'image)
-  var text = encodeURIComponent('Mes pronos du jour 🏆 Fais les tiens 👉 ' + SITE + '\n#CDM2026 #WC2026');
-  window.open('https://twitter.com/intent/tweet?text=' + text, '_blank');
+  // 2. Ouvrir une fenêtre tout de suite (évite le blocage popup pendant l'upload)
+  var w = window.open('about:blank', '_blank');
 
-  // 3. Indiquer à l'utilisateur d'attacher l'image téléchargée
-  if (status) status.innerHTML = '✅ Image téléchargée — glisse-la dans le tweet 📎';
+  function go(imgUrl) {
+    var msg = 'Mes pronos du jour 🏆 Fais les tiens 👉 ' + SITE;
+    if (imgUrl) msg += '\nMon image : ' + imgUrl;
+    msg += '\n#CDM2026 #WC2026';
+    var u = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(msg);
+    if (w) w.location.href = u; else window.open(u, '_blank');
+    if (status) status.innerHTML = '✅ Image téléchargée — glisse-la dans le tweet 📎';
+  }
+
+  // 3. Uploader sur imgBB pour récupérer le lien image, puis ouvrir le tweet
+  if (_imgbbUrl) { go(_imgbbUrl); return; }
+  if (!_shareCanvas) { go(null); return; }
+  uploadToImgBB(_shareCanvas, go);
 }
 
 function nativeShare() {
