@@ -369,6 +369,47 @@ main { padding:36px 44px 60px; }
 .tp-top .tp-rank { color:var(--gold); }
 .tp-note { margin-top:12px; font-size:12px; color:var(--muted); padding-left:2px; }
 
+/* ── SHARED VIEW BANNER ── */
+#shared-banner {
+  display:none; position:sticky; top:0; z-index:2000;
+  background:linear-gradient(90deg,rgba(74,140,255,.15),rgba(74,140,255,.08));
+  border-bottom:1px solid rgba(74,140,255,.3);
+  padding:10px 16px; text-align:center;
+}
+#shared-banner.show { display:block; }
+#shared-banner strong { color:var(--accent); font-size:13px; }
+#shared-banner button {
+  margin-left:12px; padding:6px 14px;
+  background:var(--accent); color:#fff; border:none;
+  font-weight:800; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; cursor:pointer; border-radius:3px;
+}
+
+/* ── SHARE MODAL ── */
+#share-modal {
+  position:fixed; inset:0; z-index:4000;
+  background:rgba(0,0,0,.7); display:none;
+  align-items:center; justify-content:center; padding:16px;
+}
+#share-modal.show { display:flex; }
+#share-modal-box {
+  background:var(--card); border:1px solid var(--line);
+  border-radius:12px; padding:20px; width:100%; max-width:400px;
+  max-height:90vh; overflow-y:auto;
+}
+#share-modal-box h3 { margin:0 0 14px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.share-link-row { display:flex; gap:6px; margin-top:10px; }
+.share-link-row input {
+  flex:1; background:rgba(255,255,255,.05); border:1px solid var(--line);
+  color:var(--sub); font-size:11px; padding:8px 10px; border-radius:4px; outline:none;
+  font-family:monospace;
+}
+.share-link-row button {
+  padding:8px 14px; background:var(--accent); color:#fff; border:none;
+  font-weight:800; font-size:11px; cursor:pointer; border-radius:4px; white-space:nowrap;
+}
+#share-copy-ok { font-size:11px; color:var(--green); margin-top:6px; opacity:0; transition:opacity .3s; text-align:center; }
+
 /* ── WINNER POPUP ── */
 .winner-popup {
   position:fixed; inset:0; z-index:3000;
@@ -457,6 +498,33 @@ main { padding:36px 44px 60px; }
 
 
 <!-- WINNER POPUP -->
+<div id="shared-banner">
+  <strong>👀 Pronostic partagé</strong>
+  <span style="font-size:12px;color:var(--sub);margin-left:6px">— mode lecture seule</span>
+  <button onclick="window.location.href=window.location.pathname">Faire le mien →</button>
+</div>
+
+<div id="share-modal">
+  <div id="share-modal-box">
+    <h3>📸 Partager mon pronostic</h3>
+    <img id="share-preview" style="width:100%;border-radius:8px;border:1px solid var(--line);display:block" src="" alt="aperçu">
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button id="share-dl-btn" style="flex:1;padding:10px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">⬇ Télécharger</button>
+    </div>
+    <div style="margin-top:16px;border-top:1px solid var(--line);padding-top:14px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">🔗 Lien à partager</div>
+      <div class="share-link-row">
+        <input id="share-link-input" type="text" readonly>
+        <button onclick="copyShareLink()">Copier</button>
+      </div>
+      <div id="share-copy-ok">✓ Lien copié !</div>
+    </div>
+    <div style="margin-top:14px;text-align:center">
+      <span onclick="closeShareModal()" style="font-size:11px;color:var(--muted);cursor:pointer">Fermer</span>
+    </div>
+  </div>
+</div>
+
 <div class="winner-popup" id="winner-popup">
   <div class="winner-backdrop" id="winner-backdrop"></div>
   <div class="winner-card">
@@ -2220,13 +2288,27 @@ function generateShareCard() {
     drawInfoBlock(fly,        flopH,'rgba(255,77,109,.07)','rgba(255,77,109,.25)','MON FLOP',    flop?flop.name:null,     flop?flop.round:null);
     drawInfoBlock(fly+flopH+12,surprH,'rgba(52,199,123,.07)','rgba(52,199,123,.25)','MA SURPRISE',surprise?surprise.name:null,surprise?surprise.round:null);
 
-    // Download
+    // Affiche la share modal
     cvs.toBlob(function(blob){
-      var url=URL.createObjectURL(blob);
-      var a=document.createElement('a');
-      a.download='bracket-cdm2026-350youss.png';
-      a.href=url; a.click();
-      setTimeout(function(){ URL.revokeObjectURL(url); },1000);
+      if (_shareBlobUrl) URL.revokeObjectURL(_shareBlobUrl);
+      _shareBlobUrl = URL.createObjectURL(blob);
+
+      // Aperçu image
+      document.getElementById('share-preview').src = _shareBlobUrl;
+
+      // Bouton télécharger
+      var dlBtn = document.getElementById('share-dl-btn');
+      dlBtn.onclick = function() {
+        var a = document.createElement('a');
+        a.download = 'bracket-cdm2026-350youss.png';
+        a.href = _shareBlobUrl; a.click();
+      };
+
+      // Lien de partage
+      var link = buildShareLink();
+      document.getElementById('share-link-input').value = link || '';
+
+      document.getElementById('share-modal').classList.add('show');
     },'image/png');
   }
 }
@@ -2291,13 +2373,104 @@ function loadState() {
 }
 
 /* ================================================
+   PARTAGE PAR LIEN
+================================================ */
+function buildShareLink() {
+  var resOut = {};
+  GRP.forEach(function(g) {
+    var entries = {};
+    Object.keys(RES[g.id]).forEach(function(idx) {
+      var i = parseInt(idx);
+      if (!LOCKED[g.id] || LOCKED[g.id].indexOf(i) < 0) entries[idx] = RES[g.id][idx];
+    });
+    if (Object.keys(entries).length) resOut[g.id] = entries;
+  });
+  var state = {
+    r: resOut,
+    b: { r32:BS.r32, r16:BS.r16, qf:BS.qf, sf:BS.sf, f:BS.f, pet:BS.pet, sfl:BS.sfLosers },
+    s: { r32:BSCR.r32, r16:BSCR.r16, qf:BSCR.qf, sf:BSCR.sf, f:BSCR.f, pet:BSCR.pet }
+  };
+  try {
+    var enc = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+    return location.origin + location.pathname + '#p=' + enc;
+  } catch(e) { return null; }
+}
+
+function applySharedState(state) {
+  if (state.r) {
+    Object.keys(state.r).forEach(function(gid) {
+      if (!RES[gid]) return;
+      Object.keys(state.r[gid]).forEach(function(idx) {
+        RES[gid][parseInt(idx)] = state.r[gid][idx];
+      });
+    });
+  }
+  if (state.b) {
+    ['r32','r16','qf','sf','f','pet'].forEach(function(r) { if (state.b[r]) BS[r] = state.b[r]; });
+    if (state.b.sfl) BS.sfLosers = state.b.sfl;
+  }
+  if (state.s) {
+    ['r32','r16','qf','sf','f','pet'].forEach(function(r) { if (state.s[r]) BSCR[r] = state.s[r]; });
+  }
+}
+
+var IS_SHARED_VIEW = false;
+(function detectShared() {
+  var hash = location.hash;
+  if (!hash || hash.indexOf('#p=') !== 0) return;
+  try {
+    var state = JSON.parse(decodeURIComponent(escape(atob(hash.slice(3)))));
+    applySharedState(state);
+    IS_SHARED_VIEW = true;
+  } catch(e) {}
+})();
+
+function enterReadOnly() {
+  document.getElementById('shared-banner').classList.add('show');
+  // Masquer les boutons d'action
+  var btnBar = document.querySelector('#tab-groups > div');
+  if (btnBar) btnBar.style.display = 'none';
+  // Désactiver tous les inputs
+  document.querySelectorAll('.sinline, .bsinline').forEach(function(el) {
+    el.disabled = true; el.style.pointerEvents = 'none';
+  });
+  // Désactiver les clics bracket
+  document.querySelectorAll('.bmatch, .bteam').forEach(function(el) {
+    el.style.pointerEvents = 'none';
+  });
+  // Masquer le bouton share de la winner popup (pas de partage en vue partagée)
+  var wpShare = document.getElementById('wp-share');
+  if (wpShare) wpShare.style.display = 'none';
+}
+
+// Share modal
+var _shareBlobUrl = null;
+function closeShareModal() {
+  document.getElementById('share-modal').classList.remove('show');
+}
+document.getElementById('share-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeShareModal();
+});
+
+function copyShareLink() {
+  var inp = document.getElementById('share-link-input');
+  inp.select(); inp.setSelectionRange(0, 99999);
+  try { navigator.clipboard.writeText(inp.value); } catch(e) { document.execCommand('copy'); }
+  var ok = document.getElementById('share-copy-ok');
+  ok.style.opacity = '1';
+  clearTimeout(ok._t);
+  ok._t = setTimeout(function(){ ok.style.opacity = '0'; }, 2500);
+}
+
+/* ================================================
    INIT
 ================================================ */
-loadState();
+if (!IS_SHARED_VIEW) loadState();
 renderGroups();
 renderBracket();
 renderElo();
 renderThirdPlace();
+if (IS_SHARED_VIEW) enterReadOnly();
 </script>
 </body>
 </html>
