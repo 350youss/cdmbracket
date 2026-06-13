@@ -2190,7 +2190,7 @@ function generateShareCard() {
 
   function draw(){
     var W=680, PAD=36;
-    var champH=260, bktH=290, flopH=100, surprH=100;
+    var champH=160, bktH=315, flopH=100, surprH=100;
     var H=8+72+champH+20+bktH+20+flopH+12+surprH+28;
     var cvs=document.createElement('canvas');
     cvs.width=W; cvs.height=H;
@@ -2230,14 +2230,14 @@ function generateShareCard() {
 
     c.font='700 11px Inter, Arial, sans-serif';
     c.fillStyle='#c9a84c'; c.textAlign='center';
-    c.fillText('CHAMPION DU MONDE 2026',W/2,cy+24);
+    c.fillText('CHAMPION DU MONDE 2026',W/2,cy+20);
 
-    var fW=138,fH=98, fX=W/2-fW/2, fY=cy+40;
+    var fW=90,fH=64, fX=W/2-fW/2, fY=cy+34;
     drawFlag(c,champion,fX,fY,fW,fH);
 
-    c.font='900 40px Inter, Arial, sans-serif';
+    c.font='900 32px Inter, Arial, sans-serif';
     c.fillStyle='#ffffff'; c.textAlign='center';
-    c.fillText(fitText(c,champion.toUpperCase(),W-PAD*2-40),W/2,fY+fH+34);
+    c.fillText(fitText(c,champion.toUpperCase(),W-PAD*2-40),W/2,fY+fH+26);
 
     // ── BRACKET block ──
     var bW=W-PAD*2;
@@ -2302,13 +2302,20 @@ function generateShareCard() {
     if(sf2Winner) drawTeamRow(sf2Winner,sf2X,sfY+lblH,sfW,true);
     if(sf2Loser)  drawTeamRow(sf2Loser, sf2X,sfY+lblH+rowH,sfW,false);
 
-    // 3e place (centered below SFs)
-    var p3y=sfY+lblH+rowH*2+8;
-    if(third){
+    // 3e place (entre les deux demis, centré)
+    var p3W=sf2X-sf1X-sfW-16;
+    var p3X=sf1X+sfW+8;
+    var p3CY=sfY+lblH+rowH; // centré verticalement entre les deux demis
+    if(third && p3W>60){
       c.font='700 9px Inter, Arial, sans-serif';
       c.fillStyle='#555'; c.textAlign='center';
-      c.fillText('3E PLACE',W/2,p3y+10);
-      drawTeamRow(third,PAD+(bW-finW)/2,p3y+lblH,finW,false);
+      c.fillText('3E PLACE',p3X+p3W/2,p3CY-rowH/2+4);
+      // mini flag + nom empilés
+      var p3fW=40,p3fH=28;
+      drawFlag(c,third,p3X+(p3W-p3fW)/2,p3CY-rowH/2+14,p3fW,p3fH);
+      c.font='700 11px Inter, Arial, sans-serif';
+      c.fillStyle='#aaaaaa'; c.textAlign='center';
+      c.fillText(fitText(c,third.toUpperCase(),p3W-8),p3X+p3W/2,p3CY-rowH/2+14+p3fH+13);
     }
 
     // ── FLOP + SURPRISE blocks ──
