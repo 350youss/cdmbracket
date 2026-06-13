@@ -448,6 +448,33 @@ main { padding:36px 44px 60px; }
 .winner-label { font-weight:700; font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); }
 .winner-dismiss { margin-top:20px; font-size:11px; color:var(--muted); cursor:pointer; }
 .winner-dismiss:hover { color:var(--sub); }
+
+/* MATCHS DU JOUR */
+.mdj { background:var(--s1); border:1px solid var(--line); margin-bottom:20px; }
+.mdj-header { padding:10px 16px 9px; border-bottom:1px solid var(--line); display:flex; align-items:center; }
+.mdj-day { font-family:'Inter'; font-weight:800; font-size:13px; color:#fff; text-transform:capitalize; }
+.mdj-live-dot { width:7px; height:7px; border-radius:50%; background:var(--red); display:inline-block; margin-right:6px; vertical-align:middle; animation:mdjpulse 1.2s ease-in-out infinite; }
+@keyframes mdjpulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+.mdj-matches { padding:0 16px; }
+.mdj-row { display:grid; grid-template-columns:1fr 100px 1fr; align-items:center; gap:8px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+.mdj-row:last-child { border-bottom:none; }
+.mdj-team-l { display:flex; align-items:center; gap:7px; }
+.mdj-team-r { display:flex; align-items:center; gap:7px; justify-content:flex-end; flex-direction:row-reverse; }
+.mdj-tname { font-size:13px; font-weight:600; }
+.mdj-center { text-align:center; }
+.mdj-score { font-family:'Inter'; font-weight:800; font-size:17px; }
+.mdj-score.live { color:var(--red); }
+.mdj-score.done { color:#fff; }
+.mdj-time-str { font-family:'Inter'; font-weight:700; font-size:14px; color:var(--sub); }
+.mdj-prono { font-size:11px; font-weight:700; color:var(--muted); margin-top:2px; letter-spacing:.02em; }
+.mdj-prono.ok { color:var(--green); }
+.mdj-footer { padding:10px 16px; border-top:1px solid var(--line); }
+.mdj-share-btn { width:100%; padding:9px; background:rgba(74,140,255,.08); border:1px solid rgba(74,140,255,.3); color:var(--accent); font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:all .15s; }
+.mdj-share-btn:hover { background:rgba(74,140,255,.18); }
+@media(max-width:767px){
+  .mdj-row { grid-template-columns:1fr 80px 1fr; }
+  .mdj-tname { font-size:11px; }
+}
 </style>
 </head>
 <body>
@@ -471,6 +498,7 @@ main { padding:36px 44px 60px; }
 
 <main class="wrap">
   <div class="page active" id="tab-groups">
+    <div id="mdj-section"></div>
     <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
       <button onclick="simulateGroups()" style="background:var(--accent);color:#fff;border:none;padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer">⚡ SIMULER GROUPES</button>
       <button onclick="simulateAll()" style="background:#22c55e;color:#fff;border:none;padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer">🎲 SIMULER TOUT</button>
@@ -2590,6 +2618,201 @@ function copyShareLink() {
 }
 
 /* ================================================
+   MATCHS DU JOUR
+================================================ */
+var MDJ_MAP = {
+  'Mexico':'Mexique','South Africa':'Afrique du Sud','Korea Republic':'Corée du Sud','South Korea':'Corée du Sud',
+  'Czech Republic':'Tchéquie','Czechia':'Tchéquie','Switzerland':'Suisse','Canada':'Canada',
+  'Bosnia and Herzegovina':'Bosnie-H.','Bosnia & Herzegovina':'Bosnie-H.','Bosnia-Herzegovina':'Bosnie-H.',
+  'Qatar':'Qatar','Brazil':'Brésil','Morocco':'Maroc','Scotland':'Écosse','Haiti':'Haïti',
+  'United States':'USA','USA':'USA','Turkey':'Turquie','Türkiye':'Turquie',
+  'Australia':'Australie','Paraguay':'Paraguay','Germany':'Allemagne','Ecuador':'Équateur',
+  "Côte d'Ivoire":"Côte d'Ivoire",'Ivory Coast':"Côte d'Ivoire",'Curaçao':'Curaçao','Curacao':'Curaçao',
+  'Netherlands':'Pays-Bas','Japan':'Japon','Sweden':'Suède','Tunisia':'Tunisie',
+  'Belgium':'Belgique','Egypt':'Égypte','Iran':'Iran','New Zealand':'Nouvelle-Zélande',
+  'Spain':'Espagne','Uruguay':'Uruguay','Saudi Arabia':'Arabie Saoudite','Cape Verde':'Cap-Vert',
+  'France':'France','Senegal':'Sénégal','Norway':'Norvège','Iraq':'Irak',
+  'Argentina':'Argentine','Algeria':'Algérie','Austria':'Autriche','Jordan':'Jordanie',
+  'Portugal':'Portugal','Colombia':'Colombie','DR Congo':'RD Congo','Congo DR':'RD Congo',
+  'Democratic Republic of Congo':'RD Congo','Uzbekistan':'Ouzbékistan',
+  'England':'Angleterre','Croatia':'Croatie','Ghana':'Ghana','Panama':'Panama'
+};
+var _mdjTimer = null, _mdjMatches = [], _mdjDateStr = '';
+var MDJ_FIN = {STATUS_FINAL:1,STATUS_FULL_TIME:1,STATUS_FT:1,FINISHED:1};
+
+function getMDJDate() {
+  var now = new Date();
+  var paris = new Date(now.getTime() + (now.getTimezoneOffset() + 120) * 60000);
+  return paris.getFullYear() + String(paris.getMonth()+1).padStart(2,'0') + String(paris.getDate()).padStart(2,'0');
+}
+function mdjLabel(ds) {
+  var days=['dim.','lun.','mar.','mer.','jeu.','ven.','sam.'];
+  var months=['jan.','fév.','mars','avr.','mai','juin','juil.','août','sep.','oct.','nov.','déc.'];
+  var d=new Date(parseInt(ds.slice(0,4)),parseInt(ds.slice(4,6))-1,parseInt(ds.slice(6,8)));
+  return days[d.getDay()]+' '+d.getDate()+' '+months[d.getMonth()];
+}
+function mdjParisTime(iso) {
+  try {
+    var dt=new Date(iso);
+    var p=new Date(dt.getTime()+(dt.getTimezoneOffset()+120)*60000);
+    return String(p.getHours()).padStart(2,'0')+'h'+String(p.getMinutes()).padStart(2,'0');
+  } catch(e){ return ''; }
+}
+function fetchMDJ() {
+  _mdjDateStr = getMDJDate();
+  fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates='+_mdjDateStr)
+    .then(function(r){ return r.json(); })
+    .then(function(d){ parseMDJ(d.events||[]); })
+    .catch(function(){});
+}
+function parseMDJ(events) {
+  var matches=[];
+  events.forEach(function(ev){
+    (ev.competitions||[]).forEach(function(comp){
+      var sn=(comp.status||{}).type&&comp.status.type.name||'';
+      var comps=comp.competitors||[];
+      if(comps.length!==2) return;
+      var home=comps.find(function(c){return c.homeAway==='home';});
+      var away=comps.find(function(c){return c.homeAway==='away';});
+      if(!home||!away) return;
+      var hFr=MDJ_MAP[home.team.displayName]||home.team.displayName;
+      var aFr=MDJ_MAP[away.team.displayName]||away.team.displayName;
+      var fin=!!(MDJ_FIN[sn]||sn.indexOf('FINAL')>=0||sn.indexOf('FULL')>=0);
+      var live=!fin&&(sn==='STATUS_IN_PROGRESS'||sn==='STATUS_HALFTIME');
+      var gid=null,idx=null,flipped=false;
+      GRP.forEach(function(g){
+        if(gid) return;
+        pairs(g.teams).forEach(function(p,i){
+          if(gid) return;
+          if(p[0]===hFr&&p[1]===aFr){gid=g.id;idx=i;flipped=false;}
+          else if(p[0]===aFr&&p[1]===hFr){gid=g.id;idx=i;flipped=true;}
+        });
+      });
+      matches.push({hFr:hFr,aFr:aFr,hScore:home.score||null,aScore:away.score||null,
+        status:fin?'done':live?'live':'sched',time:mdjParisTime(comp.date||ev.date||''),
+        gid:gid,idx:idx,flipped:flipped});
+    });
+  });
+  _mdjMatches=matches;
+  renderMDJ();
+  clearTimeout(_mdjTimer);
+  if(matches.some(function(m){return m.status==='live';}))
+    _mdjTimer=setTimeout(fetchMDJ,60000);
+}
+function mdjProno(m) {
+  if(m.gid===null||m.idx===null) return null;
+  var r=RES[m.gid][m.idx]; if(!r) return null;
+  return m.flipped?{a:r.b,b:r.a}:{a:r.a,b:r.b};
+}
+function renderMDJ() {
+  var el=document.getElementById('mdj-section');
+  if(!el||!_mdjMatches.length) return;
+  var hasLive=_mdjMatches.some(function(m){return m.status==='live';});
+  var h='<div class="mdj"><div class="mdj-header"><span class="mdj-day">'+
+    (hasLive?'<span class="mdj-live-dot"></span>':'')+'Matchs du '+mdjLabel(_mdjDateStr)+'</span></div>';
+  h+='<div class="mdj-matches">';
+  _mdjMatches.forEach(function(m){
+    var p=mdjProno(m), ctr='';
+    if(m.status==='sched'){
+      ctr='<div class="mdj-time-str">'+m.time+'</div>';
+      if(p) ctr+='<div class="mdj-prono">prono '+p.a+'-'+p.b+'</div>';
+    } else {
+      var cls=m.status==='live'?' live':' done';
+      var dot=m.status==='live'?'<span class="mdj-live-dot" style="width:6px;height:6px;margin-right:3px"></span>':'';
+      ctr='<div class="mdj-score'+cls+'">'+dot+m.hScore+'-'+m.aScore+'</div>';
+      if(p){
+        var ok=m.status==='done'&&parseInt(p.a)===parseInt(m.hScore)&&parseInt(p.b)===parseInt(m.aScore);
+        ctr+='<div class="mdj-prono'+(ok?' ok':'')+'">'+( ok?'✓ ':'')+p.a+'-'+p.b+'</div>';
+      }
+    }
+    h+='<div class="mdj-row">'+
+      '<div class="mdj-team-l">'+flag(m.hFr)+'<span class="mdj-tname">'+m.hFr+'</span></div>'+
+      '<div class="mdj-center">'+ctr+'</div>'+
+      '<div class="mdj-team-r">'+flag(m.aFr)+'<span class="mdj-tname">'+m.aFr+'</span></div>'+
+      '</div>';
+  });
+  h+='</div><div class="mdj-footer"><button class="mdj-share-btn" onclick="sharePronos()">📤 Partager mes pronos du jour</button></div></div>';
+  el.innerHTML=h;
+}
+function sharePronos() {
+  if(!_mdjMatches.length){ alert('Aucun match aujourd\'hui.'); return; }
+  var teams=[];
+  _mdjMatches.forEach(function(m){
+    if(teams.indexOf(m.hFr)<0) teams.push(m.hFr);
+    if(teams.indexOf(m.aFr)<0) teams.push(m.aFr);
+  });
+  var imgs={},left=0;
+  function tryDraw(){ if(left===0) drawPronoCard(); }
+  teams.forEach(function(t){
+    var code=FC[t]; if(!code) return;
+    left++;
+    var img=new Image(); img.crossOrigin='anonymous';
+    img.onload=function(){imgs[t]=img;left--;tryDraw();};
+    img.onerror=function(){left--;tryDraw();};
+    img.src='https://flagcdn.com/w160/'+code+'.png';
+  });
+  tryDraw();
+  function drawPronoCard(){
+    var W=620,PAD=28,rowH=58,headerH=72,footerH=36;
+    var H=headerH+_mdjMatches.length*rowH+footerH+8;
+    var cvs=document.createElement('canvas'); cvs.width=W; cvs.height=H;
+    var c=cvs.getContext('2d');
+    c.fillStyle='#0a0a0a'; c.fillRect(0,0,W,H);
+    var g=c.createLinearGradient(0,0,W,0);
+    g.addColorStop(0,'#4a8cff'); g.addColorStop(.35,'#1a2fff');
+    g.addColorStop(.65,'#ff2d55'); g.addColorStop(1,'#4a8cff');
+    c.fillStyle=g; c.fillRect(0,0,W,6);
+    c.textBaseline='middle'; c.font='800 20px Inter,Arial,sans-serif';
+    c.fillStyle='#fff'; c.textAlign='left';
+    c.fillText('Mes pronos',PAD,6+34);
+    var tw=c.measureText('Mes pronos ').width;
+    c.fillStyle='#4a8cff'; c.fillText('· '+mdjLabel(_mdjDateStr),PAD+tw,6+34);
+    c.font='600 11px Inter,Arial,sans-serif'; c.fillStyle='#555'; c.textAlign='right';
+    c.fillText('350youss.github.io/cdmbracket',W-PAD,6+34);
+    function dFlag(t,x,y,fw,fh){
+      if(imgs[t]){c.save();c.beginPath();c.rect(x,y,fw,fh);c.clip();c.drawImage(imgs[t],x,y,fw,fh);c.restore();}
+      else{c.fillStyle='#2a2a2a';c.fillRect(x,y,fw,fh);}
+    }
+    _mdjMatches.forEach(function(m,i){
+      var y=headerH+i*rowH, midY=y+rowH/2;
+      c.fillStyle='rgba(255,255,255,.04)'; c.fillRect(PAD,y,W-PAD*2,1);
+      var fW=26,fH=18,fY=midY-fH/2, cx=W/2;
+      dFlag(m.hFr,PAD,fY,fW,fH);
+      c.font='600 12px Inter,Arial,sans-serif'; c.fillStyle='#ddd'; c.textAlign='left';
+      c.fillText(m.hFr,PAD+fW+7,midY);
+      dFlag(m.aFr,W-PAD-fW,fY,fW,fH);
+      c.textAlign='right'; c.fillText(m.aFr,W-PAD-fW-7,midY);
+      var p=mdjProno(m);
+      c.textAlign='center';
+      if(m.status==='sched'){
+        c.font='700 13px Inter,Arial,sans-serif'; c.fillStyle='#555';
+        c.fillText(m.time,cx,midY-(p?8:0));
+        if(p){c.font='800 15px Inter,Arial,sans-serif'; c.fillStyle='#4a8cff'; c.fillText(p.a+' - '+p.b,cx,midY+9);}
+      } else {
+        var rCol=m.status==='live'?'#ff4d6d':'#fff';
+        c.font='800 18px Inter,Arial,sans-serif'; c.fillStyle=rCol;
+        c.fillText((m.hScore||'?')+' - '+(m.aScore||'?'),cx,midY-(p?8:0));
+        if(p){
+          var ok=m.status==='done'&&parseInt(p.a)===parseInt(m.hScore)&&parseInt(p.b)===parseInt(m.aScore);
+          c.font='700 11px Inter,Arial,sans-serif'; c.fillStyle=ok?'#34c77b':'#666';
+          c.fillText((ok?'✓ ':'')+p.a+'-'+p.b,cx,midY+9);
+        }
+      }
+    });
+    c.font='600 10px Inter,Arial,sans-serif'; c.fillStyle='#2a2a2a'; c.textAlign='center';
+    c.fillText('FIFA World Cup 2026 · Simulateur de pronostics',W/2,H-footerH/2);
+    cvs.toBlob(function(blob){
+      if(_shareBlobUrl) URL.revokeObjectURL(_shareBlobUrl);
+      _shareBlobUrl=URL.createObjectURL(blob);
+      _shareCanvas=cvs;
+      _shareFile=new File([blob],'pronos-du-jour.png',{type:'image/png'});
+      _imgbbUrl=null;
+      showShareModal('');
+    },'image/png');
+  }
+}
+
+/* ================================================
    INIT
 ================================================ */
 if (!IS_SHARED_VIEW) loadState();
@@ -2598,6 +2821,7 @@ renderBracket();
 renderElo();
 renderThirdPlace();
 if (IS_SHARED_VIEW) enterReadOnly();
+if (!IS_SHARED_VIEW) fetchMDJ();
 </script>
 </body>
 </html>
