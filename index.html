@@ -2640,13 +2640,19 @@ var MDJ_MAP = {
 var _mdjTimer = null, _mdjMatches = [], _mdjDateStr = '';
 var MDJ_FIN = {STATUS_FINAL:1,STATUS_FULL_TIME:1,STATUS_FT:1,FINISHED:1};
 
+function mdjDateOffset(ds, n) {
+  var d = new Date(parseInt(ds.slice(0,4)), parseInt(ds.slice(4,6))-1, parseInt(ds.slice(6,8)));
+  d.setDate(d.getDate() + n);
+  return d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+}
+
 function getMDJDate() {
   var now = new Date();
   var paris = new Date(now.getTime() + (now.getTimezoneOffset() + 120) * 60000);
   return paris.getFullYear() + String(paris.getMonth()+1).padStart(2,'0') + String(paris.getDate()).padStart(2,'0');
 }
 function mdjLabel(ds) {
-  var days=['dim.','lun.','mar.','mer.','jeu.','ven.','sam.'];
+  var days=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
   var months=['jan.','fév.','mars','avr.','mai','juin','juil.','août','sep.','oct.','nov.','déc.'];
   var d=new Date(parseInt(ds.slice(0,4)),parseInt(ds.slice(4,6))-1,parseInt(ds.slice(6,8)));
   return days[d.getDay()]+' '+d.getDate()+' '+months[d.getMonth()];
@@ -2658,17 +2664,31 @@ function mdjParisTime(iso) {
     return String(p.getHours()).padStart(2,'0')+'h'+String(p.getMinutes()).padStart(2,'0');
   } catch(e){ return ''; }
 }
+function mdjParisDate(iso) {
+  try {
+    var dt=new Date(iso);
+    var p=new Date(dt.getTime()+(dt.getTimezoneOffset()+120)*60000);
+    return p.getFullYear()+String(p.getMonth()+1).padStart(2,'0')+String(p.getDate()).padStart(2,'0');
+  } catch(e){ return ''; }
+}
 function fetchMDJ() {
   _mdjDateStr = getMDJDate();
-  fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates='+_mdjDateStr)
-    .then(function(r){ return r.json(); })
-    .then(function(d){ parseMDJ(d.events||[]); })
-    .catch(function(){});
+  var prev = mdjDateOffset(_mdjDateStr, -1);
+  var ESPN = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=';
+  Promise.all([
+    fetch(ESPN+_mdjDateStr).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
+    fetch(ESPN+prev).then(function(r){return r.json();}).catch(function(){return {events:[]};})
+  ]).then(function(res){
+    parseMDJ((res[0].events||[]).concat(res[1].events||[]));
+  });
 }
 function parseMDJ(events) {
-  var matches=[];
+  var seen={}, matches=[];
   events.forEach(function(ev){
     (ev.competitions||[]).forEach(function(comp){
+      var iso=comp.date||ev.date||'';
+      // Garder uniquement les matchs dont la date Paris = aujourd'hui
+      if(mdjParisDate(iso)!==_mdjDateStr) return;
       var sn=(comp.status||{}).type&&comp.status.type.name||'';
       var comps=comp.competitors||[];
       if(comps.length!==2) return;
@@ -2677,6 +2697,8 @@ function parseMDJ(events) {
       if(!home||!away) return;
       var hFr=MDJ_MAP[home.team.displayName]||home.team.displayName;
       var aFr=MDJ_MAP[away.team.displayName]||away.team.displayName;
+      var key=hFr+'|'+aFr;
+      if(seen[key]) return; seen[key]=1;
       var fin=!!(MDJ_FIN[sn]||sn.indexOf('FINAL')>=0||sn.indexOf('FULL')>=0);
       var live=!fin&&(sn==='STATUS_IN_PROGRESS'||sn==='STATUS_HALFTIME');
       var gid=null,idx=null,flipped=false;
@@ -2689,20 +2711,17 @@ function parseMDJ(events) {
         });
       });
       matches.push({hFr:hFr,aFr:aFr,hScore:home.score||null,aScore:away.score||null,
-        status:fin?'done':live?'live':'sched',time:mdjParisTime(comp.date||ev.date||''),
+        status:fin?'done':live?'live':'sched',time:mdjParisTime(iso),
         gid:gid,idx:idx,flipped:flipped});
     });
   });
+  // Trier par heure
+  matches.sort(function(a,b){ return a.time.localeCompare(b.time); });
   _mdjMatches=matches;
   renderMDJ();
   clearTimeout(_mdjTimer);
   if(matches.some(function(m){return m.status==='live';}))
     _mdjTimer=setTimeout(fetchMDJ,60000);
-}
-function mdjProno(m) {
-  if(m.gid===null||m.idx===null) return null;
-  var r=RES[m.gid][m.idx]; if(!r) return null;
-  return m.flipped?{a:r.b,b:r.a}:{a:r.a,b:r.b};
 }
 function renderMDJ() {
   var el=document.getElementById('mdj-section');
@@ -2712,24 +2731,45 @@ function renderMDJ() {
     (hasLive?'<span class="mdj-live-dot"></span>':'')+'Matchs du '+mdjLabel(_mdjDateStr)+'</span></div>';
   h+='<div class="mdj-matches">';
   _mdjMatches.forEach(function(m){
-    var p=mdjProno(m), ctr='';
-    if(m.status==='sched'){
-      ctr='<div class="mdj-time-str">'+m.time+'</div>';
-      if(p) ctr+='<div class="mdj-prono">prono '+p.a+'-'+p.b+'</div>';
+    // Réutilise exactement le même format que renderGroups
+    var isLocked=LOCKED[m.gid]&&m.idx!==null&&LOCKED[m.gid].indexOf(m.idx)>=0;
+    var r=m.gid!==null&&m.idx!==null?RES[m.gid][m.idx]:undefined;
+    // Si le match est flipped, on affiche quand même hFr à gauche (c'est l'équipe "home" ESPN)
+    // mais on lit RES avec idx/flipped
+    var va='',vb='';
+    if(r!==undefined){ va=m.flipped?r.b:r.a; vb=m.flipped?r.a:r.b; }
+    var hv=va!==''?' has-val':'';
+    var lockedCls=isLocked?' locked':'';
+    var lockedAttr=isLocked?' readonly':'';
+    var gidAttr=m.gid!==null?m.gid:'';
+    var idxAttr=m.idx!==null?m.idx:'';
+    var sideA=m.flipped?'b':'a', sideB=m.flipped?'a':'b';
+
+    // Heure / état du match
+    var statusHtml='';
+    if(m.status==='live'){
+      statusHtml='<span class="mdj-live-dot" style="width:6px;height:6px;vertical-align:middle;margin-right:3px"></span>'
+        +'<span style="font-size:11px;font-weight:700;color:var(--red)">LIVE '+m.hScore+'-'+m.aScore+'</span>';
+    } else if(m.status==='done'){
+      statusHtml='<span style="font-size:11px;font-weight:700;color:var(--green)">✓ '+m.hScore+'-'+m.aScore+'</span>';
     } else {
-      var cls=m.status==='live'?' live':' done';
-      var dot=m.status==='live'?'<span class="mdj-live-dot" style="width:6px;height:6px;margin-right:3px"></span>':'';
-      ctr='<div class="mdj-score'+cls+'">'+dot+m.hScore+'-'+m.aScore+'</div>';
-      if(p){
-        var ok=m.status==='done'&&parseInt(p.a)===parseInt(m.hScore)&&parseInt(p.b)===parseInt(m.aScore);
-        ctr+='<div class="mdj-prono'+(ok?' ok':'')+'">'+( ok?'✓ ':'')+p.a+'-'+p.b+'</div>';
-      }
+      statusHtml='<span style="font-size:11px;color:var(--muted)">⏱ '+m.time+'</span>';
     }
-    h+='<div class="mdj-row">'+
-      '<div class="mdj-team-l">'+flag(m.hFr)+'<span class="mdj-tname">'+m.hFr+'</span></div>'+
-      '<div class="mdj-center">'+ctr+'</div>'+
-      '<div class="mdj-team-r">'+flag(m.aFr)+'<span class="mdj-tname">'+m.aFr+'</span></div>'+
-      '</div>';
+
+    h+='<div style="padding:2px 0 6px;border-bottom:1px solid var(--line)">';
+    h+='<div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:6px 0 2px">'+
+      (m.gid?'Groupe '+m.gid:'')+' <span style="font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)">'+statusHtml+'</span></div>';
+    h+='<div class="mrow">';
+    h+='<div class="m-left">'+flag(m.hFr)+'<span style="font-size:13px;font-weight:600;margin-left:6px">'+m.hFr+'</span></div>';
+    h+='<div class="m-score">'+
+      '<input class="sinline'+hv+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+va+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="'+sideA+'">'+
+      '<span class="s-dash">–</span>'+
+      '<input class="sinline'+(vb!==''?' has-val':'')+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+vb+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="'+sideB+'">'+
+    '</div>';
+    h+='<div class="m-right"><span style="font-size:13px;font-weight:600;margin-right:6px">'+m.aFr+'</span>'+flag(m.aFr)+'</div>';
+    h+='</div>';
+    if(isLocked) h+='<div class="m-ft">✓ Score officiel</div>';
+    h+='</div>';
   });
   h+='</div><div class="mdj-footer"><button class="mdj-share-btn" onclick="sharePronos()">📤 Partager mes pronos du jour</button></div></div>';
   el.innerHTML=h;
