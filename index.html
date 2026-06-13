@@ -2389,12 +2389,8 @@ function commitSave() {
 }
 function saveState() {
   clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(commitSave, 200);
-}
-window.addEventListener('beforeunload', function() {
-  clearTimeout(_saveTimer);
   commitSave();
-});
+}
 
 function loadState() {
   try {
