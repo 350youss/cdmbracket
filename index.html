@@ -2572,8 +2572,10 @@ function shareToTwitter() {
   twBtn.disabled = true;
 
   function openTwitter(imgUrl) {
-    var text = encodeURIComponent('Mon pronostic pour la Coupe du Monde 2026 🏆 #CDM2026 #WC2026');
-    var url  = encodeURIComponent(imgUrl || link);
+    // Lien vers le simulateur dans le texte (cliquable), image en aperçu via le param url
+    var SITE = 'https://350youss.github.io/cdmbracket/';
+    var text = encodeURIComponent('Mes pronos Coupe du Monde 2026 🏆 Fais les tiens 👉 ' + SITE + '\n#CDM2026 #WC2026');
+    var url  = encodeURIComponent(imgUrl || SITE);
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
     twBtn.disabled = false;
   }
