@@ -509,6 +509,7 @@ main { padding:36px 44px 60px; }
     <h3>📸 Partager mon pronostic</h3>
     <img id="share-preview" style="width:100%;border-radius:8px;border:1px solid var(--line);display:block" src="" alt="aperçu">
     <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button id="share-native-btn" onclick="nativeShare()" style="flex:1;padding:10px;background:rgba(74,140,255,.15);border:1px solid rgba(74,140,255,.4);color:var(--accent);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:none">📤 Partager</button>
       <button id="share-dl-btn" style="flex:1;padding:10px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">⬇ Télécharger</button>
       <button id="share-tw-btn" onclick="shareToTwitter()" style="flex:1;padding:10px;background:rgba(29,161,242,.15);border:1px solid rgba(29,161,242,.5);color:#1da1f2;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">𝕏 Partager sur X</button>
     </div>
@@ -535,7 +536,7 @@ main { padding:36px 44px 60px; }
     <div class="winner-name" id="wp-name"></div>
     <div class="winner-label" id="wp-label"></div>
     <div style="margin-top:14px">
-      <button id="wp-share" onclick="generateShareCard()" style="width:100%;padding:11px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-family:'Inter',sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .15s">📤 Partager mon pronostic</button>
+      <button id="wp-share" onclick="generateShareCard()" style="width:100%;padding:11px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-family:'Inter',sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .15s">📤 Partager</button>
     </div>
     <div class="winner-dismiss" id="wp-dismiss">Cliquer pour fermer</div>
   </div>
@@ -2296,23 +2297,7 @@ function generateShareCard() {
       if (_shareBlobUrl) URL.revokeObjectURL(_shareBlobUrl);
       _shareBlobUrl = URL.createObjectURL(blob);
       var link = buildShareLink() || location.href;
-      var file = new File([blob], 'bracket-cdm2026-350youss.png', {type:'image/png'});
-
-      // Web Share API (mobile natif) — partage image + lien en un tap
-      if (navigator.canShare && navigator.canShare({files:[file]})) {
-        navigator.share({
-          files: [file],
-          title: 'Mon pronostic CDM 2026',
-          text: 'Voir mon bracket 👇',
-          url: link
-        }).catch(function(err){
-          // Annulé par l'utilisateur ou erreur → fallback modal
-          if (err.name !== 'AbortError') showShareModal(link);
-        });
-        return;
-      }
-
-      // Fallback : modal avec aperçu + télécharger + copier lien
+      _shareFile = new File([blob], 'bracket-cdm2026-350youss.png', {type:'image/png'});
       showShareModal(link);
     },'image/png');
   }
@@ -2449,7 +2434,7 @@ function enterReadOnly() {
 }
 
 // Share modal
-var _shareBlobUrl = null, _shareCanvas = null;
+var _shareBlobUrl = null, _shareCanvas = null, _shareFile = null;
 
 var IMGBB_KEY = '4f5a1898ad14c58fc6222c5c45ebb61e';
 var _imgbbUrl = null;
@@ -2499,16 +2484,30 @@ function shareToTwitter() {
   twBtn.disabled = false;
 }
 
+function nativeShare() {
+  if (!_shareFile) return;
+  var link = document.getElementById('share-link-input').value;
+  navigator.share({
+    files: [_shareFile],
+    title: 'Mon pronostic CDM 2026',
+    text: 'Voir mon bracket 👇',
+    url: link
+  }).catch(function(){});
+}
+
 function showShareModal(link) {
   document.getElementById('share-preview').src = _shareBlobUrl;
-  var dlBtn = document.getElementById('share-dl-btn');
-  dlBtn.onclick = function() {
+  document.getElementById('share-dl-btn').onclick = function() {
     var a = document.createElement('a');
     a.download = 'bracket-cdm2026-350youss.png';
     a.href = _shareBlobUrl; a.click();
   };
   document.getElementById('share-link-input').value = link || '';
   document.getElementById('share-copy-ok').style.opacity = '0';
+  document.getElementById('share-tw-status').textContent = '';
+  // Bouton natif uniquement si le navigateur supporte le partage de fichiers
+  var nativeBtn = document.getElementById('share-native-btn');
+  nativeBtn.style.display = (navigator.canShare && _shareFile && navigator.canShare({files:[_shareFile]})) ? '' : 'none';
   document.getElementById('share-modal').classList.add('show');
 }
 
