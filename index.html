@@ -2685,12 +2685,14 @@ function mdjParisDate(iso) {
 function fetchMDJ() {
   _mdjDateStr = getMDJDate();
   var prev = mdjDateOffset(_mdjDateStr, -1);
+  var next = mdjDateOffset(_mdjDateStr, +1);
   var ESPN = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=';
   Promise.all([
+    fetch(ESPN+prev).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
     fetch(ESPN+_mdjDateStr).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
-    fetch(ESPN+prev).then(function(r){return r.json();}).catch(function(){return {events:[]};})
+    fetch(ESPN+next).then(function(r){return r.json();}).catch(function(){return {events:[]};})
   ]).then(function(res){
-    parseMDJ((res[0].events||[]).concat(res[1].events||[]));
+    parseMDJ((res[0].events||[]).concat(res[1].events||[]).concat(res[2].events||[]));
   });
 }
 function parseMDJ(events) {
@@ -2698,9 +2700,9 @@ function parseMDJ(events) {
   events.forEach(function(ev){
     (ev.competitions||[]).forEach(function(comp){
       var iso=comp.date||ev.date||'';
-      // Filtrer par date Paris uniquement si on a une date ISO valide
-      if(iso && mdjParisDate(iso)!==_mdjDateStr) return;
       var sn=(comp.status||{}).type&&comp.status.type.name||'';
+      var fin=!!(MDJ_FIN[sn]||sn.indexOf('FINAL')>=0||sn.indexOf('FULL')>=0);
+      if(fin) return; // ne pas afficher les matchs terminés
       var comps=comp.competitors||[];
       if(comps.length!==2) return;
       var home=comps.find(function(c){return c.homeAway==='home';});
@@ -2710,8 +2712,7 @@ function parseMDJ(events) {
       var aFr=MDJ_MAP[away.team.displayName]||away.team.displayName;
       var key=hFr+'|'+aFr;
       if(seen[key]) return; seen[key]=1;
-      var fin=!!(MDJ_FIN[sn]||sn.indexOf('FINAL')>=0||sn.indexOf('FULL')>=0);
-      var live=!fin&&(sn==='STATUS_IN_PROGRESS'||sn==='STATUS_HALFTIME');
+      var live=sn==='STATUS_IN_PROGRESS'||sn==='STATUS_HALFTIME';
       var gid=null,idx=null,flipped=false;
       GRP.forEach(function(g){
         if(gid) return;
