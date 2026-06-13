@@ -931,7 +931,10 @@ document.addEventListener('input', function(e) {
   if (LOCKED[gid] && LOCKED[gid].indexOf(idx) >= 0) return;
   var ins = document.querySelectorAll('.sinline[data-gid="' + gid + '"][data-idx="' + idx + '"]');
   var va = '', vb = '';
-  ins.forEach(function(x){ if (x.dataset.side === 'a') va = x.value.trim(); else vb = x.value.trim(); });
+  // Prendre la valeur non-vide en priorité — les inputs vides (autre section) n'écrasent pas
+  ins.forEach(function(x){ var v=x.value.trim(); if(x.dataset.side==='a'&&v!=='') va=v; else if(x.dataset.side==='b'&&v!=='') vb=v; });
+  // L'input courant a toujours la priorité (valeur que l'utilisateur vient de taper)
+  if(inp.dataset.side==='a') va=inp.value.trim(); else vb=inp.value.trim();
   if (va !== '' && vb !== '' && !isNaN(va) && !isNaN(vb)) {
     RES[gid][idx] = {a: Math.max(0, parseInt(va)), b: Math.max(0, parseInt(vb))};
     ins.forEach(function(x){ x.classList.add('has-val'); });
@@ -2658,9 +2661,15 @@ function mdjDateOffset(ds, n) {
 }
 
 function getMDJDate() {
+  // ESPN groupe les matchs par jour US Eastern (UTC-4)
   var now = new Date();
-  var paris = new Date(now.getTime() + (now.getTimezoneOffset() + 120) * 60000);
-  return paris.getFullYear() + String(paris.getMonth()+1).padStart(2,'0') + String(paris.getDate()).padStart(2,'0');
+  var et = new Date(now.getTime() - 4 * 3600 * 1000);
+  return et.getUTCFullYear() + String(et.getUTCMonth()+1).padStart(2,'0') + String(et.getUTCDate()).padStart(2,'0');
+}
+function getMDJDatePrev() {
+  var now = new Date();
+  var et = new Date(now.getTime() - 4 * 3600 * 1000 - 86400 * 1000);
+  return et.getUTCFullYear() + String(et.getUTCMonth()+1).padStart(2,'0') + String(et.getUTCDate()).padStart(2,'0');
 }
 function mdjLabel(ds) {
   var days=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
@@ -2670,29 +2679,20 @@ function mdjLabel(ds) {
 }
 function mdjParisTime(iso) {
   try {
-    var dt=new Date(iso);
-    var p=new Date(dt.getTime()+(dt.getTimezoneOffset()+120)*60000);
-    return String(p.getHours()).padStart(2,'0')+'h'+String(p.getMinutes()).padStart(2,'0');
-  } catch(e){ return ''; }
-}
-function mdjParisDate(iso) {
-  try {
-    var dt=new Date(iso);
-    var p=new Date(dt.getTime()+(dt.getTimezoneOffset()+120)*60000);
-    return p.getFullYear()+String(p.getMonth()+1).padStart(2,'0')+String(p.getDate()).padStart(2,'0');
+    var dt = new Date(iso);
+    var p = new Date(dt.getTime() + 2 * 3600 * 1000); // Paris = UTC+2
+    return String(p.getUTCHours()).padStart(2,'0') + 'h' + String(p.getUTCMinutes()).padStart(2,'0');
   } catch(e){ return ''; }
 }
 function fetchMDJ() {
   _mdjDateStr = getMDJDate();
-  var prev = mdjDateOffset(_mdjDateStr, -1);
-  var next = mdjDateOffset(_mdjDateStr, +1);
+  var prev = getMDJDatePrev();
   var ESPN = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=';
   Promise.all([
     fetch(ESPN+prev).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
-    fetch(ESPN+_mdjDateStr).then(function(r){return r.json();}).catch(function(){return {events:[]};}),
-    fetch(ESPN+next).then(function(r){return r.json();}).catch(function(){return {events:[]};})
+    fetch(ESPN+_mdjDateStr).then(function(r){return r.json();}).catch(function(){return {events:[]};})
   ]).then(function(res){
-    parseMDJ((res[0].events||[]).concat(res[1].events||[]).concat(res[2].events||[]));
+    parseMDJ((res[0].events||[]).concat(res[1].events||[]));
   });
 }
 function parseMDJ(events) {
@@ -2774,14 +2774,16 @@ function renderMDJ() {
     h+='<div style="padding:2px 0 6px;border-bottom:1px solid var(--line)">';
     h+='<div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:6px 0 2px">'+
       (m.gid?'Groupe '+m.gid:'')+' <span style="font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)">'+statusHtml+'</span></div>';
-    h+='<div class="mrow">';
-    h+='<div class="m-left">'+flag(leftTeam)+'<span style="font-size:13px;font-weight:600;margin-left:6px">'+leftTeam+'</span></div>';
-    h+='<div class="m-score">'+
+    h+='<div style="display:flex;align-items:center;gap:8px;padding:2px 0">';
+    h+='<span style="flex:1;text-align:right;font-size:13px;font-weight:600;color:var(--txt)">'+leftTeam+'</span>';
+    h+='<div style="display:flex;align-items:center;gap:5px;flex-shrink:0">'+
+      flag(leftTeam)+
       '<input class="sinline'+hv+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+va+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="a">'+
       '<span class="s-dash">–</span>'+
       '<input class="sinline'+(vb!==''?' has-val':'')+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+vb+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="b">'+
+      flag(rightTeam)+
     '</div>';
-    h+='<div class="m-right"><span style="font-size:13px;font-weight:600;margin-right:6px">'+rightTeam+'</span>'+flag(rightTeam)+'</div>';
+    h+='<span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+rightTeam+'</span>';
     h+='</div>';
     if(isLocked) h+='<div class="m-ft">✓ Score officiel</div>';
     h+='</div>';
