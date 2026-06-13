@@ -2379,7 +2379,6 @@ function buildStateSnapshot() {
 function commitSave() {
   try {
     var snap = buildStateSnapshot();
-    console.log('[CDM] commitSave: groupes =', Object.keys(snap.res), 'entrées =', JSON.stringify(snap.res).slice(0,150));
     localStorage.setItem('cdm2026_pronostic', JSON.stringify(snap));
     var ind = document.getElementById('save-ind');
     if (ind) {
@@ -2397,10 +2396,8 @@ function saveState() {
 function loadState() {
   try {
     var raw = localStorage.getItem('cdm2026_pronostic');
-    console.log('[CDM] loadState: localStorage =', raw ? raw.slice(0, 200) + '...' : 'vide/null');
     if (!raw) return false;
     var state = JSON.parse(raw);
-    console.log('[CDM] loadState: state.res =', state.res ? Object.keys(state.res) : 'absent');
     if (state.res) {
       Object.keys(state.res).forEach(function(gid) {
         if (!RES[gid]) return;
