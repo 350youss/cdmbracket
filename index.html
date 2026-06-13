@@ -2662,11 +2662,13 @@ function mdjDateOffset(ds, n) {
 }
 
 // Date "ancre" de la journée de matchs.
-// Une journée CDM s'étale ~16:00Z → 04:00Z(+1) ; midi UTC tombe toujours dans le
-// trou entre deux journées. On définit donc la journée par la fenêtre
-// [D 12:00Z, D+1 12:00Z) et on prend D = date UTC de (maintenant − 12h).
+// Une journée CDM s'étale ~16:00Z → 04:00Z(+1). On regroupe ses matchs par la
+// fenêtre [D 12:00Z, D+1 12:00Z) (midi UTC tombe dans le trou entre journées).
+// Pour CHOISIR la journée courante D, on bascule à 06:00Z (= 08h Paris, après
+// les matchs de nuit US) : avant 06:00Z on reste sur la journée de la veille
+// (matchs de nuit encore visibles), après on passe à la journée du jour.
 function getMDJDate() {
-  var anchor = new Date(Date.now() - 12 * 3600 * 1000);
+  var anchor = new Date(Date.now() - 6 * 3600 * 1000);
   return anchor.getUTCFullYear() + String(anchor.getUTCMonth()+1).padStart(2,'0') + String(anchor.getUTCDate()).padStart(2,'0');
 }
 function mdjLabel(ds) {
@@ -2748,7 +2750,12 @@ function mdjProno(m) {
 }
 function renderMDJ() {
   var el=document.getElementById('mdj-section');
-  if(!el||!_mdjMatches.length) return;
+  if(!el) return;
+  if(!_mdjMatches.length){
+    el.innerHTML='<div class="mdj"><div class="mdj-header"><span class="mdj-day">Matchs du '+mdjLabel(_mdjDateStr)+'</span></div>'+
+      '<div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Aucun match à venir aujourd\'hui.</div></div>';
+    return;
+  }
   var hasLive=_mdjMatches.some(function(m){return m.status==='live';});
   var h='<div class="mdj"><div class="mdj-header"><span class="mdj-day">'+
     (hasLive?'<span class="mdj-live-dot"></span>':'')+'Matchs du '+mdjLabel(_mdjDateStr)+'</span></div>';
