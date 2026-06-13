@@ -23,6 +23,7 @@ TEAM_MAP = {
     'Canada': 'Canada',
     'Bosnia and Herzegovina': 'Bosnie-H.',
     'Bosnia & Herzegovina': 'Bosnie-H.',
+    'Bosnia-Herzegovina': 'Bosnie-H.',
     'Qatar': 'Qatar',
     'Brazil': 'Brésil',
     'Morocco': 'Maroc',
