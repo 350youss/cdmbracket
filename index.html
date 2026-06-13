@@ -2363,30 +2363,38 @@ function generateShareCard() {
    LOCALSTORAGE — SAUVEGARDE PRONOSTICS
 ================================================ */
 var _saveTimer;
+function buildStateSnapshot() {
+  var resOut = {};
+  GRP.forEach(function(g) {
+    var entries = {};
+    Object.keys(RES[g.id]).forEach(function(idx) {
+      if (!LOCKED[g.id] || LOCKED[g.id].indexOf(parseInt(idx)) < 0) {
+        entries[idx] = RES[g.id][idx];
+      }
+    });
+    if (Object.keys(entries).length) resOut[g.id] = entries;
+  });
+  return { res: resOut, bs: BS, bscr: BSCR };
+}
+function commitSave() {
+  try {
+    localStorage.setItem('cdm2026_pronostic', JSON.stringify(buildStateSnapshot()));
+    var ind = document.getElementById('save-ind');
+    if (ind) {
+      ind.style.opacity = '1';
+      clearTimeout(ind._t);
+      ind._t = setTimeout(function(){ ind.style.opacity = '0'; }, 2000);
+    }
+  } catch(e) {}
+}
 function saveState() {
   clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(function() {
-    var resOut = {};
-    GRP.forEach(function(g) {
-      var entries = {};
-      Object.keys(RES[g.id]).forEach(function(idx) {
-        if (!LOCKED[g.id] || LOCKED[g.id].indexOf(parseInt(idx)) < 0) {
-          entries[idx] = RES[g.id][idx];
-        }
-      });
-      if (Object.keys(entries).length) resOut[g.id] = entries;
-    });
-    try {
-      localStorage.setItem('cdm2026_pronostic', JSON.stringify({ res: resOut, bs: BS, bscr: BSCR }));
-      var ind = document.getElementById('save-ind');
-      if (ind) {
-        ind.style.opacity = '1';
-        clearTimeout(ind._t);
-        ind._t = setTimeout(function(){ ind.style.opacity = '0'; }, 2000);
-      }
-    } catch(e) {}
-  }, 600);
+  _saveTimer = setTimeout(commitSave, 200);
 }
+window.addEventListener('beforeunload', function() {
+  clearTimeout(_saveTimer);
+  commitSave();
+});
 
 function loadState() {
   try {
