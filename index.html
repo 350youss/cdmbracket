@@ -508,9 +508,11 @@ main { padding:36px 44px 60px; }
   <div id="share-modal-box">
     <h3>📸 Partager mon pronostic</h3>
     <img id="share-preview" style="width:100%;border-radius:8px;border:1px solid var(--line);display:block" src="" alt="aperçu">
-    <div style="margin-top:12px;display:flex;gap:8px">
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
       <button id="share-dl-btn" style="flex:1;padding:10px;background:rgba(201,168,76,.15);border:1px solid var(--gold);color:var(--gold);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">⬇ Télécharger</button>
+      <button id="share-tw-btn" onclick="shareToTwitter()" style="flex:1;padding:10px;background:rgba(29,161,242,.15);border:1px solid rgba(29,161,242,.5);color:#1da1f2;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">𝕏 Partager sur X</button>
     </div>
+    <div id="share-tw-status" style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px;min-height:16px"></div>
     <div style="margin-top:16px;border-top:1px solid var(--line);padding-top:14px">
       <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">🔗 Lien à partager</div>
       <div class="share-link-row">
@@ -2288,6 +2290,8 @@ function generateShareCard() {
     drawInfoBlock(fly,        flopH,'rgba(255,77,109,.07)','rgba(255,77,109,.25)','MON FLOP',    flop?flop.name:null,     flop?flop.round:null);
     drawInfoBlock(fly+flopH+12,surprH,'rgba(52,199,123,.07)','rgba(52,199,123,.25)','MA SURPRISE',surprise?surprise.name:null,surprise?surprise.round:null);
 
+    _shareCanvas = cvs;
+    _imgbbUrl = null;
     cvs.toBlob(function(blob){
       if (_shareBlobUrl) URL.revokeObjectURL(_shareBlobUrl);
       _shareBlobUrl = URL.createObjectURL(blob);
@@ -2445,7 +2449,55 @@ function enterReadOnly() {
 }
 
 // Share modal
-var _shareBlobUrl = null;
+var _shareBlobUrl = null, _shareCanvas = null;
+
+var IMGBB_KEY = '4f5a1898ad14c58fc6222c5c45ebb61e';
+var _imgbbUrl = null;
+
+function uploadToImgBB(canvas, callback) {
+  var status = document.getElementById('share-tw-status');
+  status.textContent = '⏳ Upload en cours...';
+  var base64 = canvas.toDataURL('image/png').split(',')[1];
+  var fd = new FormData();
+  fd.append('key', IMGBB_KEY);
+  fd.append('image', base64);
+  fd.append('name', 'bracket-cdm2026-350youss');
+  fetch('https://api.imgbb.com/1/upload', { method:'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (data && data.data && data.data.url) {
+        _imgbbUrl = data.data.url;
+        status.textContent = '';
+        callback(_imgbbUrl);
+      } else {
+        status.textContent = '❌ Upload échoué, réessaie.';
+      }
+    })
+    .catch(function(){
+      status.textContent = '❌ Erreur réseau, réessaie.';
+    });
+}
+
+function shareToTwitter() {
+  var link = document.getElementById('share-link-input').value;
+  var twBtn = document.getElementById('share-tw-btn');
+  twBtn.disabled = true;
+
+  function openTwitter(imgUrl) {
+    var text = encodeURIComponent('Mon pronostic pour la Coupe du Monde 2026 🏆 #CDM2026 #WC2026');
+    var url  = encodeURIComponent(imgUrl || link);
+    window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+    twBtn.disabled = false;
+  }
+
+  // Si déjà uploadé pour cette session, réutilise
+  if (_imgbbUrl) { openTwitter(_imgbbUrl); return; }
+
+  // Sinon upload d'abord
+  if (!_shareCanvas) { openTwitter(link); twBtn.disabled = false; return; }
+  uploadToImgBB(_shareCanvas, openTwitter);
+  twBtn.disabled = false;
+}
 
 function showShareModal(link) {
   document.getElementById('share-preview').src = _shareBlobUrl;
