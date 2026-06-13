@@ -939,6 +939,17 @@ document.addEventListener('input', function(e) {
     delete RES[gid][idx];
     if (va === '' && vb === '') ins.forEach(function(x){ x.classList.remove('has-val'); });
   }
+  // Sync : propager la valeur à tous les inputs identiques (MDJ ↔ Groupes)
+  ins.forEach(function(x){
+    if(x===inp) return;
+    if(RES[gid]&&RES[gid][idx]!==undefined){
+      x.value=x.dataset.side==='a'?RES[gid][idx].a:RES[gid][idx].b;
+      x.classList.add('has-val');
+    } else {
+      x.value='';
+      x.classList.remove('has-val');
+    }
+  });
   updateStandings(gid);
   renderBracket();
   renderThirdPlace();
@@ -2687,8 +2698,8 @@ function parseMDJ(events) {
   events.forEach(function(ev){
     (ev.competitions||[]).forEach(function(comp){
       var iso=comp.date||ev.date||'';
-      // Garder uniquement les matchs dont la date Paris = aujourd'hui
-      if(mdjParisDate(iso)!==_mdjDateStr) return;
+      // Filtrer par date Paris uniquement si on a une date ISO valide
+      if(iso && mdjParisDate(iso)!==_mdjDateStr) return;
       var sn=(comp.status||{}).type&&comp.status.type.name||'';
       var comps=comp.competitors||[];
       if(comps.length!==2) return;
@@ -2723,6 +2734,11 @@ function parseMDJ(events) {
   if(matches.some(function(m){return m.status==='live';}))
     _mdjTimer=setTimeout(fetchMDJ,60000);
 }
+function mdjProno(m) {
+  if(m.gid===null||m.idx===null) return null;
+  var r=RES[m.gid][m.idx]; if(!r) return null;
+  return {a:r.a, b:r.b};
+}
 function renderMDJ() {
   var el=document.getElementById('mdj-section');
   if(!el||!_mdjMatches.length) return;
@@ -2731,27 +2747,25 @@ function renderMDJ() {
     (hasLive?'<span class="mdj-live-dot"></span>':'')+'Matchs du '+mdjLabel(_mdjDateStr)+'</span></div>';
   h+='<div class="mdj-matches">';
   _mdjMatches.forEach(function(m){
-    // Réutilise exactement le même format que renderGroups
-    var isLocked=LOCKED[m.gid]&&m.idx!==null&&LOCKED[m.gid].indexOf(m.idx)>=0;
+    var isLocked=m.gid&&m.idx!==null&&LOCKED[m.gid]&&LOCKED[m.gid].indexOf(m.idx)>=0;
     var r=m.gid!==null&&m.idx!==null?RES[m.gid][m.idx]:undefined;
-    // Si le match est flipped, on affiche quand même hFr à gauche (c'est l'équipe "home" ESPN)
-    // mais on lit RES avec idx/flipped
-    var va='',vb='';
-    if(r!==undefined){ va=m.flipped?r.b:r.a; vb=m.flipped?r.a:r.b; }
+    // Toujours afficher équipe A du pair à gauche (même ordre que les groupes)
+    var leftTeam=m.flipped?m.aFr:m.hFr;
+    var rightTeam=m.flipped?m.hFr:m.aFr;
+    var va=r!==undefined?r.a:'';
+    var vb=r!==undefined?r.b:'';
     var hv=va!==''?' has-val':'';
     var lockedCls=isLocked?' locked':'';
     var lockedAttr=isLocked?' readonly':'';
     var gidAttr=m.gid!==null?m.gid:'';
     var idxAttr=m.idx!==null?m.idx:'';
-    var sideA=m.flipped?'b':'a', sideB=m.flipped?'a':'b';
 
-    // Heure / état du match
     var statusHtml='';
     if(m.status==='live'){
       statusHtml='<span class="mdj-live-dot" style="width:6px;height:6px;vertical-align:middle;margin-right:3px"></span>'
-        +'<span style="font-size:11px;font-weight:700;color:var(--red)">LIVE '+m.hScore+'-'+m.aScore+'</span>';
+        +'<span style="font-size:11px;font-weight:700;color:var(--red)">LIVE '+(m.flipped?m.aScore:m.hScore)+'-'+(m.flipped?m.hScore:m.aScore)+'</span>';
     } else if(m.status==='done'){
-      statusHtml='<span style="font-size:11px;font-weight:700;color:var(--green)">✓ '+m.hScore+'-'+m.aScore+'</span>';
+      statusHtml='<span style="font-size:11px;font-weight:700;color:var(--green)">✓ '+(m.flipped?m.aScore:m.hScore)+'-'+(m.flipped?m.hScore:m.aScore)+'</span>';
     } else {
       statusHtml='<span style="font-size:11px;color:var(--muted)">⏱ '+m.time+'</span>';
     }
@@ -2760,13 +2774,13 @@ function renderMDJ() {
     h+='<div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:6px 0 2px">'+
       (m.gid?'Groupe '+m.gid:'')+' <span style="font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)">'+statusHtml+'</span></div>';
     h+='<div class="mrow">';
-    h+='<div class="m-left">'+flag(m.hFr)+'<span style="font-size:13px;font-weight:600;margin-left:6px">'+m.hFr+'</span></div>';
+    h+='<div class="m-left">'+flag(leftTeam)+'<span style="font-size:13px;font-weight:600;margin-left:6px">'+leftTeam+'</span></div>';
     h+='<div class="m-score">'+
-      '<input class="sinline'+hv+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+va+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="'+sideA+'">'+
+      '<input class="sinline'+hv+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+va+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="a">'+
       '<span class="s-dash">–</span>'+
-      '<input class="sinline'+(vb!==''?' has-val':'')+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+vb+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="'+sideB+'">'+
+      '<input class="sinline'+(vb!==''?' has-val':'')+lockedCls+'" type="text" inputmode="numeric" pattern="[0-9]*" value="'+vb+'" placeholder="·"'+lockedAttr+' data-gid="'+gidAttr+'" data-idx="'+idxAttr+'" data-side="b">'+
     '</div>';
-    h+='<div class="m-right"><span style="font-size:13px;font-weight:600;margin-right:6px">'+m.aFr+'</span>'+flag(m.aFr)+'</div>';
+    h+='<div class="m-right"><span style="font-size:13px;font-weight:600;margin-right:6px">'+rightTeam+'</span>'+flag(rightTeam)+'</div>';
     h+='</div>';
     if(isLocked) h+='<div class="m-ft">✓ Score officiel</div>';
     h+='</div>';
@@ -2817,11 +2831,13 @@ function sharePronos() {
       var y=headerH+i*rowH, midY=y+rowH/2;
       c.fillStyle='rgba(255,255,255,.04)'; c.fillRect(PAD,y,W-PAD*2,1);
       var fW=26,fH=18,fY=midY-fH/2, cx=W/2;
-      dFlag(m.hFr,PAD,fY,fW,fH);
+      var leftTeam=m.flipped?m.aFr:m.hFr, rightTeam=m.flipped?m.hFr:m.aFr;
+      var lScore=m.flipped?m.aScore:m.hScore, rScore=m.flipped?m.hScore:m.aScore;
+      dFlag(leftTeam,PAD,fY,fW,fH);
       c.font='600 12px Inter,Arial,sans-serif'; c.fillStyle='#ddd'; c.textAlign='left';
-      c.fillText(m.hFr,PAD+fW+7,midY);
-      dFlag(m.aFr,W-PAD-fW,fY,fW,fH);
-      c.textAlign='right'; c.fillText(m.aFr,W-PAD-fW-7,midY);
+      c.fillText(leftTeam,PAD+fW+7,midY);
+      dFlag(rightTeam,W-PAD-fW,fY,fW,fH);
+      c.textAlign='right'; c.fillText(rightTeam,W-PAD-fW-7,midY);
       var p=mdjProno(m);
       c.textAlign='center';
       if(m.status==='sched'){
@@ -2831,7 +2847,7 @@ function sharePronos() {
       } else {
         var rCol=m.status==='live'?'#ff4d6d':'#fff';
         c.font='800 18px Inter,Arial,sans-serif'; c.fillStyle=rCol;
-        c.fillText((m.hScore||'?')+' - '+(m.aScore||'?'),cx,midY-(p?8:0));
+        c.fillText((lScore||'?')+' - '+(rScore||'?'),cx,midY-(p?8:0));
         if(p){
           var ok=m.status==='done'&&parseInt(p.a)===parseInt(m.hScore)&&parseInt(p.b)===parseInt(m.aScore);
           c.font='700 11px Inter,Arial,sans-serif'; c.fillStyle=ok?'#34c77b':'#666';
