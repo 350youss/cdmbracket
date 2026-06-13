@@ -2572,9 +2572,9 @@ function shareToTwitter() {
   twBtn.disabled = true;
 
   function openTwitter(imgUrl) {
-    // Lien vers le simulateur dans le texte (cliquable), image en aperçu via le param url
+    // Un seul lien (l'image imgBB) pour maximiser l'aperçu image dans le tweet
     var SITE = 'https://350youss.github.io/cdmbracket/';
-    var text = encodeURIComponent('Mes pronos du jour 🏆 Fais les tiens 👉 ' + SITE + '\n#CDM2026 #WC2026');
+    var text = encodeURIComponent('Mes pronos du jour 🏆 #CDM2026 #WC2026');
     var url  = encodeURIComponent(imgUrl || SITE);
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
     twBtn.disabled = false;
