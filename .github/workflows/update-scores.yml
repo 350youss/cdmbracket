@@ -2,10 +2,13 @@ name: Update WC 2026 Scores
 
 on:
   schedule:
-    # 19h-minuit Paris (17h-22h UTC)
-    - cron: '0 17-23 * * *'
-    # Minuit-9h Paris (0h-7h UTC)
-    - cron: '0 0-7 * * *'
+    # Toutes les 30 min pendant les heures de match, à des minutes DÉCALÉES
+    # (17 et 47) car la minute 0 est le pic de charge GitHub → runs souvent
+    # retardés/abandonnés. Heures de match CDM : ~16:00 UTC → 07:00 UTC.
+    # 16:00-23:47 UTC = 18h00-01h47 Paris
+    - cron: '17,47 16-23 * * *'
+    # 00:00-07:47 UTC = 02h00-09h47 Paris
+    - cron: '17,47 0-7 * * *'
   workflow_dispatch: # Déclenchement manuel possible
 
 jobs:
