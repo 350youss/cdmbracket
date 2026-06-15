@@ -702,7 +702,7 @@ var RES = {};
 GRP.forEach(function(g){ RES[g.id] = {}; });
 
 // ── SCORES_START ──
-var LOCKED = { 'A': [0, 5], 'B': [2, 3], 'C': [0, 5], 'D': [2, 3], 'E': [2] };
+var LOCKED = { 'A': [0, 5], 'B': [2, 3], 'C': [0, 5], 'D': [2, 3], 'E': [2, 3], 'F': [0, 5] };
 RES['A'][0] = {a:2, b:0}; // Mexique 2-0 Afrique du Sud
 RES['A'][5] = {a:2, b:1}; // Corée du Sud 2-1 Tchéquie
 RES['B'][2] = {a:1, b:1}; // Suisse 1-1 Qatar
@@ -712,6 +712,9 @@ RES['C'][5] = {a:1, b:0}; // Écosse 1-0 Haïti
 RES['D'][2] = {a:4, b:1}; // USA 4-1 Paraguay
 RES['D'][3] = {a:0, b:2}; // Turquie 0-2 Australie
 RES['E'][2] = {a:7, b:1}; // Allemagne 7-1 Curaçao
+RES['E'][3] = {a:0, b:1}; // Équateur 0-1 Côte d'Ivoire
+RES['F'][0] = {a:2, b:2}; // Pays-Bas 2-2 Japon
+RES['F'][5] = {a:5, b:1}; // Suède 5-1 Tunisie
 // ── SCORES_END ──
 
 // Bracket state: winner for each match
