@@ -702,9 +702,11 @@ var RES = {};
 GRP.forEach(function(g){ RES[g.id] = {}; });
 
 // ── SCORES_START ──
-var LOCKED = { 'A': [0, 5], 'B': [2, 3], 'C': [0, 5], 'D': [2, 3], 'E': [2, 3], 'F': [0, 5], 'G': [0, 5], 'H': [2, 3], 'I': [0, 5], 'J': [0, 5], 'K': [1, 4], 'L': [0, 5] };
+var LOCKED = { 'A': [0, 4, 5], 'B': [1, 2, 3], 'C': [0, 5], 'D': [2, 3], 'E': [2, 3], 'F': [0, 5], 'G': [0, 5], 'H': [2, 3], 'I': [0, 5], 'J': [0, 5], 'K': [1, 4], 'L': [0, 5] };
 RES['A'][0] = {a:2, b:0}; // Mexique 2-0 Afrique du Sud
+RES['A'][4] = {a:1, b:1}; // Afrique du Sud 1-1 Tchéquie
 RES['A'][5] = {a:2, b:1}; // Corée du Sud 2-1 Tchéquie
+RES['B'][1] = {a:4, b:1}; // Suisse 4-1 Bosnie-H.
 RES['B'][2] = {a:1, b:1}; // Suisse 1-1 Qatar
 RES['B'][3] = {a:1, b:1}; // Canada 1-1 Bosnie-H.
 RES['C'][0] = {a:1, b:1}; // Brésil 1-1 Maroc
