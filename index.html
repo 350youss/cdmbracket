@@ -702,7 +702,7 @@ var RES = {};
 GRP.forEach(function(g){ RES[g.id] = {}; });
 
 // ── SCORES_START ──
-var LOCKED = { 'A': [0, 1, 4, 5], 'B': [1, 2, 3, 4], 'C': [0, 5], 'D': [2, 3], 'E': [2, 3], 'F': [0, 5], 'G': [0, 5], 'H': [2, 3], 'I': [0, 5], 'J': [0, 5], 'K': [1, 4], 'L': [0, 5] };
+var LOCKED = { 'A': [0, 1, 4, 5], 'B': [1, 2, 3, 4], 'C': [0, 2, 3, 5], 'D': [1, 2, 3, 4], 'E': [2, 3], 'F': [0, 5], 'G': [0, 5], 'H': [2, 3], 'I': [0, 5], 'J': [0, 5], 'K': [1, 4], 'L': [0, 5] };
 RES['A'][0] = {a:2, b:0}; // Mexique 2-0 Afrique du Sud
 RES['A'][1] = {a:1, b:0}; // Mexique 1-0 Corée du Sud
 RES['A'][4] = {a:1, b:1}; // Afrique du Sud 1-1 Tchéquie
@@ -712,9 +712,13 @@ RES['B'][2] = {a:1, b:1}; // Suisse 1-1 Qatar
 RES['B'][3] = {a:1, b:1}; // Canada 1-1 Bosnie-H.
 RES['B'][4] = {a:6, b:0}; // Canada 6-0 Qatar
 RES['C'][0] = {a:1, b:1}; // Brésil 1-1 Maroc
+RES['C'][2] = {a:3, b:0}; // Brésil 3-0 Haïti
+RES['C'][3] = {a:1, b:0}; // Maroc 1-0 Écosse
 RES['C'][5] = {a:1, b:0}; // Écosse 1-0 Haïti
+RES['D'][1] = {a:2, b:0}; // USA 2-0 Australie
 RES['D'][2] = {a:4, b:1}; // USA 4-1 Paraguay
 RES['D'][3] = {a:0, b:2}; // Turquie 0-2 Australie
+RES['D'][4] = {a:0, b:1}; // Turquie 0-1 Paraguay
 RES['E'][2] = {a:7, b:1}; // Allemagne 7-1 Curaçao
 RES['E'][3] = {a:0, b:1}; // Équateur 0-1 Côte d'Ivoire
 RES['F'][0] = {a:2, b:2}; // Pays-Bas 2-2 Japon
