@@ -163,10 +163,10 @@ main { padding:36px 44px 60px; }
 
 /* BRACKET */
 .bracket-scroll { overflow-x:auto; padding-bottom:24px; }
-.bracket { display:flex; min-width:1440px; gap:0; align-items:stretch; }
+.bracket { display:flex; min-width:920px; gap:0; align-items:stretch; }
 .bracket-half { display:flex; flex:1; }
 .bracket-left { flex-direction:row; }
-.bracket-right { flex-direction:row-reverse; }
+.bracket-right { flex-direction:row; }
 .bracket-center { display:flex; flex-direction:column; justify-content:center; align-items:stretch; min-width:190px; padding:0 10px; border-left:1px solid var(--line); border-right:1px solid var(--line); }
 .bc-lbl { font-family:'Tanker'; font-size:13px; letter-spacing:.15em; color:var(--accent); text-align:center; margin-bottom:12px; text-transform:uppercase; }
 .bc-pet-sep { display:flex; align-items:center; margin:18px 0 10px; }
@@ -177,6 +177,14 @@ main { padding:36px 44px 60px; }
 .b-round-matches { display:flex; flex-direction:column; flex:1; padding:0 4px; }
 .b-slot { display:flex; align-items:center; position:relative; }
 .b-slot.b-grp-end::after { content:''; position:absolute; bottom:0; left:4px; right:4px; height:1px; background:rgba(255,255,255,.07); }
+/* Main bracket : flags only */
+#bracket .b-round { min-width:68px; max-width:80px; }
+#bracket .bracket-center { min-width:155px; }
+#bracket .bt-name { display:none; }
+#bracket .bt-pct { display:none; }
+/* Probable bracket: slot padding for visual separation */
+#bracket-probable .b-slot { padding:2px 3px; }
+#bracket-probable .b-round { min-width:128px; max-width:160px; }
 
 /* BRACKET NAV (mobile) */
 .brnav { display:none; }
@@ -258,20 +266,45 @@ main { padding:36px 44px 60px; }
 .bmatch.gold .bt-name { font-size:13px; }
 
 /* BRACKET PROBABLE — read-only match card */
-.bpred { background:var(--s1); border-left:2px solid var(--muted); }
+.bpred { background:var(--s1); border-left:2px solid var(--muted); border-radius:2px; }
 .bpred.bpred-win { border-left-color:var(--accent); }
 .bpred.bpred-gold { border-left-color:var(--gold); }
-.bpred-team { display:flex; align-items:center; justify-content:space-between; padding:6px 8px; gap:6px; }
+.bpred-team { display:flex; align-items:center; justify-content:space-between; padding:5px 8px; gap:6px; }
 .bpred-team:first-child { border-bottom:1px solid var(--line); }
 .bpred-team.bpred-winner { background:rgba(74,140,255,.13); }
-.bpred-team.bpred-winner .bt-name { color:#fff; }
+.bpred-team.bpred-winner .bt-name { color:#fff; font-weight:700; }
 .bpred-gold .bpred-team.bpred-winner { background:rgba(201,168,76,.13); }
 .bpred-gold .bpred-team.bpred-winner .bt-name { color:var(--gold); }
-.bpred-score { font-family:'Tanker'; font-weight:800; font-size:14px; color:var(--sub); min-width:14px; text-align:right; }
-.bpred-team.bpred-winner .bpred-score { color:#fff; }
-.bpred-gold .bpred-team.bpred-winner .bpred-score { color:var(--gold); }
 .bpred-pct { font-family:'Tanker'; font-weight:700; font-size:10px; color:var(--muted); }
 .bpred-team.bpred-winner .bpred-pct { color:var(--accent); }
+.bpred-win-icon { font-size:10px; color:var(--accent); }
+.bpred-gold .bpred-team.bpred-winner .bpred-win-icon { color:var(--gold); }
+/* Predicted bracket sections */
+.pred-section { max-width:860px; margin-top:28px; padding-top:20px; border-top:1px solid var(--line); }
+.pred-stitle { font-family:'Tanker'; font-size:15px; letter-spacing:.12em; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.thirds-list { display:flex; flex-direction:column; gap:5px; }
+.third-row { display:flex; align-items:center; gap:8px; padding:7px 12px; background:var(--s1); border-radius:4px; flex-wrap:wrap; }
+.third-rank { font-family:'Tanker'; font-size:18px; color:var(--muted); min-width:16px; }
+.third-team { font-weight:700; font-size:13px; flex:1; min-width:80px; }
+.third-stats { font-size:11px; color:var(--muted); }
+.third-vs { font-size:11px; font-weight:700; color:var(--muted); }
+.third-opp { font-size:13px; }
+.pmatch-groups { display:flex; flex-wrap:wrap; gap:20px; margin-top:4px; }
+.pmatch-grp { flex:1; min-width:200px; }
+.pmatch-grp-ttl { font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.pmatch-row { display:flex; align-items:center; gap:8px; padding:5px 0; font-size:12px; border-bottom:1px solid rgba(255,255,255,.04); }
+.pmatch-ta { flex:1; display:flex; align-items:center; gap:5px; }
+.pmatch-tb { flex:1; display:flex; align-items:center; gap:5px; justify-content:flex-end; }
+.pmatch-sc { font-family:'Tanker'; font-size:13px; min-width:28px; text-align:center; color:var(--sub); }
+.pmatch-w { color:#fff; font-weight:700; }
+.pred-ko-rows { display:flex; flex-direction:column; gap:3px; }
+.pred-ko-rnd { margin-bottom:16px; }
+.pred-ko-rnd-ttl { font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+.pred-ko-row { display:flex; align-items:center; gap:10px; padding:5px 10px; background:var(--s1); border-radius:3px; font-size:12px; }
+.pred-ko-ta { flex:1; display:flex; align-items:center; gap:5px; }
+.pred-ko-tb { flex:1; display:flex; align-items:center; gap:5px; justify-content:flex-end; }
+.pred-ko-sc { font-family:'Tanker'; font-size:13px; min-width:32px; text-align:center; color:var(--sub); }
+.pk-w { color:#fff; font-weight:700; }
 
 /* MODAL */
 .overlay { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:1000;
@@ -527,11 +560,12 @@ main { padding:36px 44px 60px; }
   <div class="page" id="tab-probable">
     <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
       <div style="font-family:'Tanker';font-size:22px;letter-spacing:.08em;color:#fff">Bracket le plus probable</div>
-      <div style="font-size:12px;color:var(--muted)">Scores prédits · ELO + forme + enjeu · Lecture seule</div>
+      <div style="font-size:12px;color:var(--muted)">ELO + forme + enjeu · Lecture seule</div>
     </div>
     <div class="bracket-scroll">
       <div class="bracket" id="bracket-probable"></div>
     </div>
+    <div id="pred-extra"></div>
   </div>
   <div class="page" id="tab-elo">
     <div class="elo-title">Classement Favoris</div>
@@ -2109,8 +2143,6 @@ function renderBMatchPred(ta, tb, sc, isFinale) {
   var cls = 'bpred' + (isFinale ? ' bpred-gold' : (hasW ? ' bpred-win' : ''));
   var wa = hasW && sc.winner === ta;
   var wb = hasW && sc.winner === tb;
-  var va = sc && sc.a !== '' ? sc.a : '·';
-  var vb = sc && sc.b !== '' ? sc.b : '·';
   var prb = (ta&&ta!=='TBD'&&tb&&tb!=='TBD') ? probsKO(ta,tb) : [50,50];
 
   var html = '<div class="' + cls + '">';
@@ -2118,13 +2150,13 @@ function renderBMatchPred(ta, tb, sc, isFinale) {
   html += '<div class="bt-l">'+(ta&&ta!=='TBD'?flag(ta,'sm'):'<span class="fi sm"></span>')+
           '<span class="bt-name">'+(ta||'TBD')+'</span></div>';
   html += '<div class="bt-r"><span class="bpred-pct">'+(ta&&ta!=='TBD'?prb[0]+'%':'')+'</span>'+
-          '<span class="bpred-score">'+va+'</span></div>';
+          (wa?'<span class="bpred-win-icon">✓</span>':'')+'</div>';
   html += '</div>';
   html += '<div class="bpred-team' + (wb?' bpred-winner':'') + '">';
   html += '<div class="bt-l">'+(tb&&tb!=='TBD'?flag(tb,'sm'):'<span class="fi sm"></span>')+
           '<span class="bt-name">'+(tb||'TBD')+'</span></div>';
   html += '<div class="bt-r"><span class="bpred-pct">'+(tb&&tb!=='TBD'?prb[1]+'%':'')+'</span>'+
-          '<span class="bpred-score">'+vb+'</span></div>';
+          (wb?'<span class="bpred-win-icon">✓</span>':'')+'</div>';
   html += '</div>';
   html += '</div>';
   return html;
@@ -2233,6 +2265,105 @@ function renderProbableBracket() {
   html+='</div>';
 
   document.getElementById('bracket-probable').innerHTML = html;
+
+  // ── Extra sections ──
+  var extra = '';
+
+  // 1. Meilleurs 3es qualifiés
+  extra += '<div class="pred-section">';
+  extra += '<div class="pred-stitle">Meilleurs 3es qualifiés</div>';
+  extra += '<div class="thirds-list">';
+  var best8 = thirds.slice(0,8);
+  for (var ti = 0; ti < best8.length; ti++) {
+    var t3 = best8[ti];
+    var opp = 'TBD';
+    for (var ri = 0; ri < r32.length; ri++) {
+      if (r32[ri][1] === t3.n) { opp = r32[ri][0]; break; }
+    }
+    extra += '<div class="third-row">';
+    extra += '<span class="third-rank">' + (ti+1) + '</span>';
+    extra += flag(t3.n,'sm');
+    extra += '<span class="third-team">' + t3.n + '</span>';
+    extra += '<span class="third-stats">Gr.' + t3.gid + ' · ' + t3.pts + 'pts · ' + (t3.gd >= 0 ? '+' : '') + t3.gd + '</span>';
+    extra += '<span class="third-vs">vs</span>';
+    extra += (opp && opp !== 'TBD' ? flag(opp,'sm') : '');
+    extra += '<span class="third-opp">' + opp + '</span>';
+    extra += '</div>';
+  }
+  extra += '</div></div>';
+
+  // 2. Matchs restants (groupes, non joués)
+  var grpHtml = '';
+  for (var gi = 0; gi < GRP.length; gi++) {
+    var g = GRP[gi];
+    var ms = pairs(g.teams);
+    var unplayed = [];
+    for (var mi = 0; mi < ms.length; mi++) {
+      if (!RES[g.id][mi]) {
+        var rp = predictScoreGroup(ms[mi][0], ms[mi][1], g.id);
+        unplayed.push({ta:ms[mi][0], tb:ms[mi][1], r:rp});
+      }
+    }
+    if (!unplayed.length) continue;
+    grpHtml += '<div class="pmatch-grp"><div class="pmatch-grp-ttl">Groupe ' + g.id + '</div>';
+    for (var ui = 0; ui < unplayed.length; ui++) {
+      var m = unplayed[ui];
+      var w = m.r.a > m.r.b ? m.ta : (m.r.b > m.r.a ? m.tb : null);
+      grpHtml += '<div class="pmatch-row">';
+      grpHtml += '<div class="pmatch-ta' + (w===m.ta?' pmatch-w':'') + '">' + flag(m.ta,'sm') + '<span>' + m.ta + '</span></div>';
+      grpHtml += '<span class="pmatch-sc">' + m.r.a + '–' + m.r.b + '</span>';
+      grpHtml += '<div class="pmatch-tb' + (w===m.tb?' pmatch-w':'') + '"><span>' + m.tb + '</span>' + flag(m.tb,'sm') + '</div>';
+      grpHtml += '</div>';
+    }
+    grpHtml += '</div>';
+  }
+  if (grpHtml) {
+    extra += '<div class="pred-section"><div class="pred-stitle">Matchs restants — groupes</div>';
+    extra += '<div class="pmatch-groups">' + grpHtml + '</div></div>';
+  }
+
+  // 3. Résultats KO prédits
+  function koRow(ta, tb, sc2) {
+    if (!ta || !tb || ta==='TBD' || tb==='TBD') return '';
+    var w2 = sc2 ? sc2.winner : null;
+    var sa = sc2 ? sc2.a : '-', sb2 = sc2 ? sc2.b : '-';
+    return '<div class="pred-ko-row">' +
+      '<div class="pred-ko-ta' + (w2===ta?' pk-w':'') + '">' + flag(ta,'sm') + '<span>' + ta + '</span></div>' +
+      '<span class="pred-ko-sc">' + sa + '–' + sb2 + '</span>' +
+      '<div class="pred-ko-tb' + (w2===tb?' pk-w':'') + '"><span>' + tb + '</span>' + flag(tb,'sm') + '</div>' +
+      '</div>';
+  }
+
+  extra += '<div class="pred-section"><div class="pred-stitle">Résultats prédits — phase KO</div>';
+
+  var koRounds = [
+    {lbl:'Round of 32', list:[]},
+    {lbl:'Huitièmes de finale', list:[]},
+    {lbl:'Quarts de finale', list:[]},
+    {lbl:'Demi-finales', list:[]},
+    {lbl:'Finale', list:[]},
+    {lbl:'Petite finale', list:[]}
+  ];
+  for (var i = 0; i < 16; i++) koRounds[0].list.push({ta:r32[i][0],tb:r32[i][1],sc:pSC.r32[i]});
+  for (var i = 0; i < 8; i++) koRounds[1].list.push({ta:pW.r32[i*2]||'TBD',tb:pW.r32[i*2+1]||'TBD',sc:pSC.r16[i]});
+  for (var i = 0; i < 4; i++) koRounds[2].list.push({ta:pW.r16[i*2]||'TBD',tb:pW.r16[i*2+1]||'TBD',sc:pSC.qf[i]});
+  koRounds[3].list.push({ta:pW.qf[0]||'TBD',tb:pW.qf[1]||'TBD',sc:pSC.sf[0]});
+  koRounds[3].list.push({ta:pW.qf[2]||'TBD',tb:pW.qf[3]||'TBD',sc:pSC.sf[1]});
+  koRounds[4].list.push({ta:pW.sf[0]||'TBD',tb:pW.sf[1]||'TBD',sc:fsc});
+  koRounds[5].list.push({ta:sfLosers[0]||'TBD',tb:sfLosers[1]||'TBD',sc:petsc});
+
+  for (var ki = 0; ki < koRounds.length; ki++) {
+    var rnd = koRounds[ki];
+    extra += '<div class="pred-ko-rnd"><div class="pred-ko-rnd-ttl">' + rnd.lbl + '</div><div class="pred-ko-rows">';
+    for (var li = 0; li < rnd.list.length; li++) {
+      var m = rnd.list[li];
+      extra += koRow(m.ta, m.tb, m.sc);
+    }
+    extra += '</div></div>';
+  }
+  extra += '</div>';
+
+  document.getElementById('pred-extra').innerHTML = extra;
 }
 
 /* ================================================
