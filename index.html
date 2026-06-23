@@ -163,39 +163,35 @@ main { padding:36px 44px 60px; }
 
 /* BRACKET */
 .bracket-scroll { overflow-x:auto; padding-bottom:24px; }
-.bracket { display:flex; min-width:1100px; gap:4px; }
-.b-round { display:flex; flex-direction:column; flex:1; min-width:0; }
+.bracket { display:flex; min-width:1440px; gap:0; align-items:stretch; }
+.bracket-half { display:flex; flex:1; }
+.bracket-left { flex-direction:row; }
+.bracket-right { flex-direction:row-reverse; }
+.bracket-center { display:flex; flex-direction:column; justify-content:center; align-items:stretch; min-width:190px; padding:0 10px; border-left:1px solid var(--line); border-right:1px solid var(--line); }
+.bc-lbl { font-family:'Tanker'; font-size:13px; letter-spacing:.15em; color:var(--accent); text-align:center; margin-bottom:12px; text-transform:uppercase; }
+.bc-pet-sep { display:flex; align-items:center; margin:18px 0 10px; }
+.bc-pet-sep::before,.bc-pet-sep::after { content:''; flex:1; height:1px; background:var(--line); }
+.bc-pet-lbl { font-size:9px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin:0 8px; white-space:nowrap; }
+.b-round { display:flex; flex-direction:column; flex:1; min-width:150px; max-width:190px; }
 .b-round-lbl { font-weight:700; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); padding:0 6px 14px; text-align:center; }
-.b-round-matches { display:flex; flex-direction:column; flex:1; justify-content:space-around; gap:3px; padding:0 4px; }
+.b-round-matches { display:flex; flex-direction:column; flex:1; padding:0 4px; }
+.b-slot { display:flex; align-items:center; position:relative; }
+.b-slot.b-grp-end::after { content:''; position:absolute; bottom:0; left:4px; right:4px; height:1px; background:rgba(255,255,255,.07); }
 
 /* BRACKET NAV (mobile) */
 .brnav { display:none; }
 @media(max-width:767px) {
   .bracket-scroll { overflow-x:visible; padding-bottom:0; }
-  .bracket { min-width:0; flex-direction:column; gap:0; }
-  .b-round { display:none; }
-  .b-round.br-active { display:flex; }
+  .bracket { min-width:0 !important; flex-direction:column; gap:0; align-items:stretch; }
+  .bracket-half { flex-direction:column; flex:none; }
+  .bracket-right { flex-direction:column; }
+  .bracket-center { border:none; padding:0; min-width:0; }
+  .bc-lbl { margin-top:8px; }
+  .b-round { max-width:none; }
   .b-round-lbl { display:none; }
-  .b-round-matches { gap:8px; padding:0; justify-content:flex-start; }
-  .bmatch { cursor:pointer; }
-  .bteam { padding:10px 12px; }
-  .bt-name { font-size:13px; }
-  .brnav { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
-  .brnav-btn { background:var(--s1); border:1px solid var(--line); color:var(--sub);
-    width:40px; height:40px; font-size:22px; cursor:pointer; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center; transition:all .15s; }
-  .brnav-btn:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
-  .brnav-btn:disabled { opacity:.25; cursor:default; }
-  .brnav-dots { display:flex; gap:5px; flex:1; justify-content:center; flex-wrap:wrap; }
-  .brnav-dot { padding:0 10px; height:32px; border-radius:3px;
-    background:var(--s1); border:1px solid var(--line);
-    font-family:'Tanker'; font-weight:700; font-size:10px; color:var(--muted);
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    white-space:nowrap; transition:all .15s; letter-spacing:.05em; }
-  .brnav-dot:hover { border-color:var(--accent); color:var(--accent); }
-  .brnav-dot.active { background:var(--accent); border-color:var(--accent); color:#fff; }
-  .b-spacer { display:none; }
-  .b-sub-lbl { text-align:left; padding:16px 0 6px; }
+  .b-round-matches { gap:8px; padding:0; }
+  .b-slot { flex:none !important; }
+  .b-slot.b-grp-end::after { display:none; }
 }
 
 .bmatch { background:var(--s1); border-left:2px solid var(--accent); transition:border-color .15s,background .15s; user-select:none; }
@@ -256,15 +252,26 @@ main { padding:36px 44px 60px; }
 .bteam.win .bt-sc { color:#fff; }
 .bt-icon { font-size:11px; }
 
-.b-spacer { height:16px; }
-.b-sub-lbl { font-weight:700; font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:#555; text-align:center; padding:8px 0 4px; }
-.finale-col-matches { justify-content:center !important; gap:20px !important; }
-.finale-pet-sep { border-top:1px solid var(--line); padding-top:8px; opacity:.6; }
-.finale-pet-sep .bmatch { transform:scale(.93); transform-origin:top center; }
 /* Mise en valeur du match Finale */
 .bmatch.gold { border-left-width:3px; }
 .bmatch.gold .bteam { padding:8px 10px; }
 .bmatch.gold .bt-name { font-size:13px; }
+
+/* BRACKET PROBABLE — read-only match card */
+.bpred { background:var(--s1); border-left:2px solid var(--muted); }
+.bpred.bpred-win { border-left-color:var(--accent); }
+.bpred.bpred-gold { border-left-color:var(--gold); }
+.bpred-team { display:flex; align-items:center; justify-content:space-between; padding:6px 8px; gap:6px; }
+.bpred-team:first-child { border-bottom:1px solid var(--line); }
+.bpred-team.bpred-winner { background:rgba(74,140,255,.13); }
+.bpred-team.bpred-winner .bt-name { color:#fff; }
+.bpred-gold .bpred-team.bpred-winner { background:rgba(201,168,76,.13); }
+.bpred-gold .bpred-team.bpred-winner .bt-name { color:var(--gold); }
+.bpred-score { font-family:'Tanker'; font-weight:800; font-size:14px; color:var(--sub); min-width:14px; text-align:right; }
+.bpred-team.bpred-winner .bpred-score { color:#fff; }
+.bpred-gold .bpred-team.bpred-winner .bpred-score { color:var(--gold); }
+.bpred-pct { font-family:'Tanker'; font-weight:700; font-size:10px; color:var(--muted); }
+.bpred-team.bpred-winner .bpred-pct { color:var(--accent); }
 
 /* MODAL */
 .overlay { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:1000;
@@ -493,6 +500,7 @@ main { padding:36px 44px 60px; }
   <nav>
     <div class="tab active" data-tab="groups">Groupes</div>
     <div class="tab" data-tab="bracket">Bracket</div>
+    <div class="tab" data-tab="probable">Bracket Probable</div>
     <div class="tab" data-tab="elo">Les Favoris</div>
   </nav>
 </header>
@@ -512,9 +520,17 @@ main { padding:36px 44px 60px; }
     <div id="third-place-section"></div>
   </div>
   <div class="page" id="tab-bracket">
-    <div class="brnav" id="bracket-nav"></div>
     <div class="bracket-scroll">
       <div class="bracket" id="bracket"></div>
+    </div>
+  </div>
+  <div class="page" id="tab-probable">
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <div style="font-family:'Tanker';font-size:22px;letter-spacing:.08em;color:#fff">Bracket le plus probable</div>
+      <div style="font-size:12px;color:var(--muted)">Scores prédits · ELO + forme + enjeu · Lecture seule</div>
+    </div>
+    <div class="bracket-scroll">
+      <div class="bracket" id="bracket-probable"></div>
     </div>
   </div>
   <div class="page" id="tab-elo">
@@ -1628,7 +1644,6 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
 }
 
 function renderBracket() {
-  // Sauvegarde du focus mobile avant re-render
   var fData = null;
   var fEl = document.activeElement;
   if (fEl && fEl.classList.contains('bsinline')) {
@@ -1637,113 +1652,76 @@ function renderBracket() {
 
   var q = getQualified();
   var r32 = buildR32(q);
+  var FLEX = { r32:1, r16:2, qf:4, sf:8 };
+
+  function bSlot(round, localIdx, total, inner) {
+    var f = FLEX[round] || 1;
+    var grpEnd = (localIdx % 2 === 1) && (localIdx < total - 1);
+    return '<div class="b-slot' + (grpEnd ? ' b-grp-end' : '') + '" style="flex:' + f + '">' + inner + '</div>';
+  }
 
   var html = '';
 
-  // Round of 32 — 16 matches
-  html += '<div class="b-round">';
-  html += '<div class="b-round-lbl">Round of 32</div>';
-  html += '<div class="b-round-matches">';
-  for (var i = 0; i < 16; i++) {
-    html += renderBMatch('r32', i, r32[i][0], r32[i][1]);
-  }
+  // ── GAUCHE : R32[0-7] → R16[0-3] → QF[0-1] → SF[0] ──
+  html += '<div class="bracket-half bracket-left">';
+
+  html += '<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  for (var i = 0; i < 8; i++) html += bSlot('r32', i, 8, renderBMatch('r32', i, r32[i][0], r32[i][1]));
   html += '</div></div>';
 
-  // R16 — 8 matches
-  html += '<div class="b-round">';
-  html += '<div class="b-round-lbl">Huitièmes</div>';
-  html += '<div class="b-round-matches">';
-  for (var i = 0; i < 8; i++) {
-    var ta = BS.r32[i*2] || 'TBD', tb = BS.r32[i*2+1] || 'TBD';
-    html += renderBMatch('r16', i, ta, tb);
-  }
+  html += '<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
+  for (var i = 0; i < 4; i++) html += bSlot('r16', i, 4, renderBMatch('r16', i, BS.r32[i*2]||'TBD', BS.r32[i*2+1]||'TBD'));
   html += '</div></div>';
 
-  // QF — 4 matches
-  html += '<div class="b-round">';
-  html += '<div class="b-round-lbl">Quarts de finale</div>';
-  html += '<div class="b-round-matches">';
-  for (var i = 0; i < 4; i++) {
-    var ta = BS.r16[i*2] || 'TBD', tb = BS.r16[i*2+1] || 'TBD';
-    html += renderBMatch('qf', i, ta, tb);
-  }
+  html += '<div class="b-round"><div class="b-round-lbl">Quarts</div><div class="b-round-matches">';
+  for (var i = 0; i < 2; i++) html += bSlot('qf', i, 2, renderBMatch('qf', i, BS.r16[i*2]||'TBD', BS.r16[i*2+1]||'TBD'));
   html += '</div></div>';
 
-  // Demi-finales — 2 matches uniquement
-  html += '<div class="b-round">';
-  html += '<div class="b-round-lbl">Demi-finales</div>';
-  html += '<div class="b-round-matches">';
-  for (var i = 0; i < 2; i++) {
-    var ta = BS.qf[i*2] || 'TBD', tb = BS.qf[i*2+1] || 'TBD';
-    html += renderBMatch('sf', i, ta, tb);
-  }
+  html += '<div class="b-round"><div class="b-round-lbl">Demi-finale</div><div class="b-round-matches">';
+  html += bSlot('sf', 0, 1, renderBMatch('sf', 0, BS.qf[0]||'TBD', BS.qf[1]||'TBD'));
   html += '</div></div>';
 
-  // Finale + Petite finale dans la même colonne
-  html += '<div class="b-round">';
-  html += '<div class="b-round-lbl">Finale</div>';
-  html += '<div class="b-round-matches finale-col-matches">';
-  var fta = BS.sf[0] || 'TBD', ftb = BS.sf[1] || 'TBD';
-  html += renderBMatch('f', 0, fta, ftb);
-  html += '<div class="finale-pet-sep">';
-  html += '<div class="b-sub-lbl">Petite finale</div>';
-  html += renderBMatch('pet', 0, BS.sfLosers[0] || 'TBD', BS.sfLosers[1] || 'TBD');
   html += '</div>';
+
+  // ── CENTRE : Finale + Petite finale ──
+  html += '<div class="bracket-center">';
+  html += '<div class="bc-lbl">Finale</div>';
+  html += renderBMatch('f', 0, BS.sf[0]||'TBD', BS.sf[1]||'TBD');
+  html += '<div class="bc-pet-sep"><span class="bc-pet-lbl">Petite finale</span></div>';
+  html += renderBMatch('pet', 0, BS.sfLosers[0]||'TBD', BS.sfLosers[1]||'TBD');
+  html += '</div>';
+
+  // ── DROITE : SF[1] → QF[2-3] → R16[4-7] → R32[8-15] (row-reverse en CSS) ──
+  html += '<div class="bracket-half bracket-right">';
+
+  html += '<div class="b-round"><div class="b-round-lbl">Demi-finale</div><div class="b-round-matches">';
+  html += bSlot('sf', 0, 1, renderBMatch('sf', 1, BS.qf[2]||'TBD', BS.qf[3]||'TBD'));
   html += '</div></div>';
+
+  html += '<div class="b-round"><div class="b-round-lbl">Quarts</div><div class="b-round-matches">';
+  for (var i = 0; i < 2; i++) html += bSlot('qf', i, 2, renderBMatch('qf', 2+i, BS.r16[(2+i)*2]||'TBD', BS.r16[(2+i)*2+1]||'TBD'));
+  html += '</div></div>';
+
+  html += '<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
+  for (var i = 0; i < 4; i++) html += bSlot('r16', i, 4, renderBMatch('r16', 4+i, BS.r32[(4+i)*2]||'TBD', BS.r32[(4+i)*2+1]||'TBD'));
+  html += '</div></div>';
+
+  html += '<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  for (var i = 0; i < 8; i++) html += bSlot('r32', i, 8, renderBMatch('r32', 8+i, r32[8+i][0], r32[8+i][1]));
+  html += '</div></div>';
+
+  html += '</div>';
 
   document.getElementById('bracket').innerHTML = html;
-  renderBracketNav();
 
-  // Restauration du focus mobile après re-render
   if (fData) {
     var t = document.querySelector('.bsinline[data-round="'+fData.round+'"][data-idx="'+fData.idx+'"][data-side="'+fData.side+'"]');
     if (t) t.focus();
   }
 }
 
-/* ================================================
-   BRACKET NAV MOBILE
-================================================ */
-var currentBracketRound = 0;
-var BRACKET_ROUNDS = ['R32','Huitièmes','Quarts','Demis','Finale'];
-
-function renderBracketNav() {
-  if (window.innerWidth >= 768) return;
-  var rounds = document.querySelectorAll('#bracket .b-round');
-  var total = rounds.length;
-
-  // Clamp
-  currentBracketRound = Math.max(0, Math.min(currentBracketRound, total - 1));
-
-  // Show/hide rounds
-  rounds.forEach(function(r, i) {
-    r.classList.toggle('br-active', i === currentBracketRound);
-  });
-
-  // Build nav
-  var html = '<button class="brnav-btn" id="brnav-prev"' + (currentBracketRound === 0 ? ' disabled' : '') + '>‹</button>';
-  html += '<div class="brnav-dots">';
-  for (var i = 0; i < total; i++) {
-    var lbl = BRACKET_ROUNDS[i] || ('Tour '+(i+1));
-    html += '<div class="brnav-dot' + (i === currentBracketRound ? ' active' : '') + '" data-br="' + i + '">' + lbl + '</div>';
-  }
-  html += '</div>';
-  html += '<button class="brnav-btn" id="brnav-next"' + (currentBracketRound >= total - 1 ? ' disabled' : '') + '>›</button>';
-
-  var nav = document.getElementById('bracket-nav');
-  if (nav) nav.innerHTML = html;
-
-  document.getElementById('brnav-prev').onclick = function(){ showBracketRound(currentBracketRound - 1); };
-  document.getElementById('brnav-next').onclick = function(){ showBracketRound(currentBracketRound + 1); };
-  document.querySelectorAll('.brnav-dot').forEach(function(dot){
-    dot.onclick = function(){ showBracketRound(parseInt(dot.dataset.br)); };
-  });
-}
-
-function showBracketRound(n) {
-  currentBracketRound = n;
-  renderBracketNav();
-}
+function renderBracketNav() {}
+function showBracketRound(n) {}
 
 // Re-render bracket nav on resize (timer séparé du groupe)
 var _brResizeTimer;
@@ -2054,6 +2032,210 @@ function renderElo() {
 }
 
 /* ================================================
+   MOTEUR DE PRÉDICTION — Poisson + forme + enjeu
+================================================ */
+function poissonProb(k, lam) {
+  var r = Math.exp(-lam);
+  for (var i = 1; i <= k; i++) r *= lam / i;
+  return r;
+}
+
+function bestPoissonScore(lamA, lamB, ta, tb, p) {
+  var best = -1, bestA = 1, bestB = 0;
+  for (var a = 0; a <= 5; a++) {
+    for (var b = 0; b <= 5; b++) {
+      var prob = poissonProb(a, lamA) * poissonProb(b, lamB);
+      if (prob > best) { best = prob; bestA = a; bestB = b; }
+    }
+  }
+  var w = bestA > bestB ? ta : (bestB > bestA ? tb : (p >= 0.5 ? ta : tb));
+  return { a: bestA, b: bestB, winner: w };
+}
+
+function getFormFactor(gid, teamName) {
+  var g = GRP.find(function(x){ return x.id === gid; });
+  if (!g) return 1.0;
+  var ms = pairs(g.teams);
+  var actualGF = 0, expectedGF = 0, played = 0;
+  ms.forEach(function(pair, i) {
+    var r = RES[gid][i];
+    if (!r) return;
+    var ta = pair[0], tb = pair[1];
+    if (ta !== teamName && tb !== teamName) return;
+    played++;
+    var p = winP(ta, tb);
+    var isA = ta === teamName;
+    actualGF  += isA ? r.a : r.b;
+    expectedGF += isA ? (1.1 + 0.8*(p-0.5)) : (1.1 - 0.8*(p-0.5));
+  });
+  if (played === 0 || expectedGF === 0) return 1.0;
+  var ratio = actualGF / expectedGF;
+  return Math.max(0.80, Math.min(1.20, 1 + (ratio - 1) * 0.3));
+}
+
+function getStakesMultiplier(gid, teamName) {
+  var g = GRP.find(function(x){ return x.id === gid; });
+  var ms = pairs(g.teams);
+  var played = ms.filter(function(_, i){ return !!RES[gid][i]; }).length;
+  if (played < 4) return 1.0;
+  var s = getStandings(gid);
+  var tidx = s.findIndex(function(t){ return t.n === teamName; });
+  if (tidx < 0) return 1.0;
+  var team = s[tidx];
+  var myRem = ms.filter(function(pair, i){ return !RES[gid][i] && (pair[0]===teamName||pair[1]===teamName); }).length;
+  var myMax = team.pts + myRem * 3;
+  if (s[1] && myMax < s[1].pts) return 0.92;
+  if (tidx <= 1 && team.pts >= 6) return 0.87;
+  return 1.0;
+}
+
+function predictScoreGroup(ta, tb, gid) {
+  var p = winP(ta, tb);
+  var lamA = (1.1 + 0.8*(p-0.5)) * getFormFactor(gid,ta) * getStakesMultiplier(gid,ta);
+  var lamB = (1.1 - 0.8*(p-0.5)) * getFormFactor(gid,tb) * getStakesMultiplier(gid,tb);
+  return bestPoissonScore(lamA, lamB, ta, tb, p);
+}
+
+function predictScoreKO(ta, tb) {
+  if (!ta || !tb || ta==='TBD' || tb==='TBD') return {a:'',b:'',winner:ta||tb||null};
+  var p = winP(ta, tb);
+  var lamA = 1.1 + 0.8*(p-0.5);
+  var lamB = 1.1 - 0.8*(p-0.5);
+  return bestPoissonScore(lamA, lamB, ta, tb, p);
+}
+
+function renderBMatchPred(ta, tb, sc, isFinale) {
+  var hasW = sc && sc.winner;
+  var cls = 'bpred' + (isFinale ? ' bpred-gold' : (hasW ? ' bpred-win' : ''));
+  var wa = hasW && sc.winner === ta;
+  var wb = hasW && sc.winner === tb;
+  var va = sc && sc.a !== '' ? sc.a : '·';
+  var vb = sc && sc.b !== '' ? sc.b : '·';
+  var prb = (ta&&ta!=='TBD'&&tb&&tb!=='TBD') ? probsKO(ta,tb) : [50,50];
+
+  var html = '<div class="' + cls + '">';
+  html += '<div class="bpred-team' + (wa?' bpred-winner':'') + '">';
+  html += '<div class="bt-l">'+(ta&&ta!=='TBD'?flag(ta,'sm'):'<span class="fi sm"></span>')+
+          '<span class="bt-name">'+(ta||'TBD')+'</span></div>';
+  html += '<div class="bt-r"><span class="bpred-pct">'+(ta&&ta!=='TBD'?prb[0]+'%':'')+'</span>'+
+          '<span class="bpred-score">'+va+'</span></div>';
+  html += '</div>';
+  html += '<div class="bpred-team' + (wb?' bpred-winner':'') + '">';
+  html += '<div class="bt-l">'+(tb&&tb!=='TBD'?flag(tb,'sm'):'<span class="fi sm"></span>')+
+          '<span class="bt-name">'+(tb||'TBD')+'</span></div>';
+  html += '<div class="bt-r"><span class="bpred-pct">'+(tb&&tb!=='TBD'?prb[1]+'%':'')+'</span>'+
+          '<span class="bpred-score">'+vb+'</span></div>';
+  html += '</div>';
+  html += '</div>';
+  return html;
+}
+
+function renderProbableBracket() {
+  // 1. Standings prédits (vrais résultats + prédictions pour les matchs restants)
+  var predSt = {};
+  GRP.forEach(function(g) {
+    var ms = pairs(g.teams), t = {}, h2h = {};
+    g.teams.forEach(function(n){ t[n]={pts:0,gf:0,ga:0,w:0,d:0,l:0}; h2h[n]={}; });
+    ms.forEach(function(pair, i) {
+      var ta = pair[0], tb = pair[1];
+      var r = RES[g.id][i] || predictScoreGroup(ta, tb, g.id);
+      t[ta].gf+=r.a; t[ta].ga+=r.b; t[tb].gf+=r.b; t[tb].ga+=r.a;
+      var pA, pB;
+      if (r.a>r.b){ t[ta].pts+=3; t[ta].w++; t[tb].l++; pA=3; pB=0; }
+      else if (r.a<r.b){ t[tb].pts+=3; t[tb].w++; t[ta].l++; pA=0; pB=3; }
+      else { t[ta].pts++; t[tb].pts++; t[ta].d++; t[tb].d++; pA=1; pB=1; }
+      h2h[ta][tb]={pts:pA,gd:r.a-r.b,gf:r.a};
+      h2h[tb][ta]={pts:pB,gd:r.b-r.a,gf:r.b};
+    });
+    predSt[g.id] = g.teams.map(function(n){
+      return {n:n,pts:t[n].pts,gf:t[n].gf,ga:t[n].ga,gd:t[n].gf-t[n].ga,w:t[n].w};
+    }).sort(function(a,b){
+      if (a.pts!==b.pts) return b.pts-a.pts;
+      var ha=h2h[a.n][b.n], hb=h2h[b.n][a.n];
+      if (ha&&hb){
+        if (ha.pts!==hb.pts) return hb.pts-ha.pts;
+        if (ha.gd!==hb.gd) return hb.gd-ha.gd;
+        if (ha.gf!==hb.gf) return hb.gf-ha.gf;
+      }
+      return (b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w);
+    });
+  });
+
+  // 2. Qualifiés prédits
+  var first={}, second={}, thirds=[];
+  GRP.forEach(function(g){
+    var s=predSt[g.id];
+    first[g.id]=s[0].n; second[g.id]=s[1].n;
+    thirds.push({n:s[2].n,gid:g.id,pts:s[2].pts,gd:s[2].gd,gf:s[2].gf,w:s[2].w||0});
+  });
+  thirds.sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w); });
+  var r32 = buildR32({first:first, second:second, best8:thirds.slice(0,8)});
+
+  // 3. Prédiction KO rounds
+  var pW={r32:new Array(16).fill(null),r16:new Array(8).fill(null),qf:new Array(4).fill(null),sf:new Array(2).fill(null)};
+  var pSC={r32:new Array(16).fill(null),r16:new Array(8).fill(null),qf:new Array(4).fill(null),sf:new Array(2).fill(null)};
+  var sfLosers=[null,null];
+
+  for (var i=0;i<16;i++){ var sc=predictScoreKO(r32[i][0],r32[i][1]); pW.r32[i]=sc.winner; pSC.r32[i]=sc; }
+  for (var i=0;i<8;i++){ var sc=predictScoreKO(pW.r32[i*2],pW.r32[i*2+1]); pW.r16[i]=sc.winner; pSC.r16[i]=sc; }
+  for (var i=0;i<4;i++){ var sc=predictScoreKO(pW.r16[i*2],pW.r16[i*2+1]); pW.qf[i]=sc.winner; pSC.qf[i]=sc; }
+  for (var i=0;i<2;i++){
+    var ta=pW.qf[i*2], tb=pW.qf[i*2+1];
+    var sc=predictScoreKO(ta,tb); pW.sf[i]=sc.winner; pSC.sf[i]=sc;
+    sfLosers[i]=(sc.winner===ta?tb:ta);
+  }
+  var fsc = predictScoreKO(pW.sf[0],pW.sf[1]);
+  var petsc = predictScoreKO(sfLosers[0],sfLosers[1]);
+
+  // 4. Rendu
+  var FLEX={r32:1,r16:2,qf:4,sf:8};
+  function pbSlot(round,li,total,inner){
+    var f=FLEX[round]||1, ge=(li%2===1)&&(li<total-1);
+    return '<div class="b-slot'+(ge?' b-grp-end':'')+'" style="flex:'+f+'">'+inner+'</div>';
+  }
+
+  var html='';
+  html+='<div class="bracket-half bracket-left">';
+  html+='<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[i][0],r32[i][1],pSC.r32[i]));
+  html+='</div></div>';
+  html+='<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
+  for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[i*2]||'TBD',pW.r32[i*2+1]||'TBD',pSC.r16[i]));
+  html+='</div></div>';
+  html+='<div class="b-round"><div class="b-round-lbl">Quarts</div><div class="b-round-matches">';
+  for(var i=0;i<2;i++) html+=pbSlot('qf',i,2,renderBMatchPred(pW.r16[i*2]||'TBD',pW.r16[i*2+1]||'TBD',pSC.qf[i]));
+  html+='</div></div>';
+  html+='<div class="b-round"><div class="b-round-lbl">Demi-finale</div><div class="b-round-matches">';
+  html+=pbSlot('sf',0,1,renderBMatchPred(pW.qf[0]||'TBD',pW.qf[1]||'TBD',pSC.sf[0]));
+  html+='</div></div>';
+  html+='</div>';
+
+  html+='<div class="bracket-center">';
+  html+='<div class="bc-lbl">Finale</div>';
+  html+=renderBMatchPred(pW.sf[0]||'TBD',pW.sf[1]||'TBD',fsc,true);
+  html+='<div class="bc-pet-sep"><span class="bc-pet-lbl">Petite finale</span></div>';
+  html+=renderBMatchPred(sfLosers[0]||'TBD',sfLosers[1]||'TBD',petsc);
+  html+='</div>';
+
+  html+='<div class="bracket-half bracket-right">';
+  html+='<div class="b-round"><div class="b-round-lbl">Demi-finale</div><div class="b-round-matches">';
+  html+=pbSlot('sf',0,1,renderBMatchPred(pW.qf[2]||'TBD',pW.qf[3]||'TBD',pSC.sf[1]));
+  html+='</div></div>';
+  html+='<div class="b-round"><div class="b-round-lbl">Quarts</div><div class="b-round-matches">';
+  for(var i=0;i<2;i++) html+=pbSlot('qf',i,2,renderBMatchPred(pW.r16[(2+i)*2]||'TBD',pW.r16[(2+i)*2+1]||'TBD',pSC.qf[2+i]));
+  html+='</div></div>';
+  html+='<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
+  for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[(4+i)*2]||'TBD',pW.r32[(4+i)*2+1]||'TBD',pSC.r16[4+i]));
+  html+='</div></div>';
+  html+='<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[8+i][0],r32[8+i][1],pSC.r32[8+i]));
+  html+='</div></div>';
+  html+='</div>';
+
+  document.getElementById('bracket-probable').innerHTML = html;
+}
+
+/* ================================================
    TABS
 ================================================ */
 document.querySelectorAll('.tab').forEach(function(tab) {
@@ -2064,6 +2246,7 @@ document.querySelectorAll('.tab').forEach(function(tab) {
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
     // Recalculate ELO odds when switching to that tab
     if (tab.dataset.tab === 'elo') renderElo();
+    if (tab.dataset.tab === 'probable') renderProbableBracket();
   });
 });
 
