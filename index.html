@@ -702,7 +702,7 @@ var RES = {};
 GRP.forEach(function(g){ RES[g.id] = {}; });
 
 // ── SCORES_START ──
-var LOCKED = { 'A': [0, 1, 4, 5], 'B': [1, 2, 3, 4], 'C': [0, 2, 3, 5], 'D': [1, 2, 3, 4], 'E': [1, 2, 3, 4], 'F': [0, 1, 4, 5], 'G': [0, 1, 4, 5], 'H': [1, 2, 3, 4], 'I': [0, 5], 'J': [0, 1, 5], 'K': [1, 4], 'L': [0, 5] };
+var LOCKED = { 'A': [0, 1, 4, 5], 'B': [1, 2, 3, 4], 'C': [0, 2, 3, 5], 'D': [1, 2, 3, 4], 'E': [1, 2, 3, 4], 'F': [0, 1, 4, 5], 'G': [0, 1, 4, 5], 'H': [1, 2, 3, 4], 'I': [0, 2, 3, 5], 'J': [0, 1, 4, 5], 'K': [1, 4], 'L': [0, 5] };
 RES['A'][0] = {a:2, b:0}; // Mexique 2-0 Afrique du Sud
 RES['A'][1] = {a:1, b:0}; // Mexique 1-0 Corée du Sud
 RES['A'][4] = {a:1, b:1}; // Afrique du Sud 1-1 Tchéquie
@@ -736,9 +736,12 @@ RES['H'][2] = {a:0, b:0}; // Espagne 0-0 Cap-Vert
 RES['H'][3] = {a:1, b:1}; // Uruguay 1-1 Arabie Saoudite
 RES['H'][4] = {a:2, b:2}; // Uruguay 2-2 Cap-Vert
 RES['I'][0] = {a:3, b:1}; // France 3-1 Sénégal
+RES['I'][2] = {a:3, b:0}; // France 3-0 Irak
+RES['I'][3] = {a:2, b:3}; // Sénégal 2-3 Norvège
 RES['I'][5] = {a:4, b:1}; // Norvège 4-1 Irak
 RES['J'][0] = {a:3, b:0}; // Argentine 3-0 Algérie
 RES['J'][1] = {a:2, b:0}; // Argentine 2-0 Autriche
+RES['J'][4] = {a:2, b:1}; // Algérie 2-1 Jordanie
 RES['J'][5] = {a:3, b:1}; // Autriche 3-1 Jordanie
 RES['K'][1] = {a:1, b:1}; // Portugal 1-1 RD Congo
 RES['K'][4] = {a:3, b:1}; // Colombie 3-1 Ouzbékistan
@@ -793,21 +796,33 @@ function esc(s) { return (s || '').replace(/"/g, '&quot;'); }
 
 function getStandings(gid) {
   var g = GRP.find(function(x){ return x.id === gid; });
-  var ms = pairs(g.teams), t = {};
-  g.teams.forEach(function(n){ t[n] = {pts:0,gf:0,ga:0,w:0,d:0,l:0,p:0}; });
+  var ms = pairs(g.teams), t = {}, h2h = {};
+  g.teams.forEach(function(n){ t[n] = {pts:0,gf:0,ga:0,w:0,d:0,l:0,p:0}; h2h[n] = {}; });
   ms.forEach(function(pair, i) {
     var ta = pair[0], tb = pair[1], r = RES[gid][i];
     if (!r) return;
     t[ta].p++; t[tb].p++;
     t[ta].gf += r.a; t[ta].ga += r.b;
     t[tb].gf += r.b; t[tb].ga += r.a;
-    if (r.a > r.b)      { t[ta].pts+=3; t[ta].w++; t[tb].l++; }
-    else if (r.a < r.b) { t[tb].pts+=3; t[tb].w++; t[ta].l++; }
-    else                { t[ta].pts++; t[tb].pts++; t[ta].d++; t[tb].d++; }
+    var pA, pB;
+    if (r.a > r.b)      { t[ta].pts+=3; t[ta].w++; t[tb].l++; pA=3; pB=0; }
+    else if (r.a < r.b) { t[tb].pts+=3; t[tb].w++; t[ta].l++; pA=0; pB=3; }
+    else                { t[ta].pts++; t[tb].pts++; t[ta].d++; t[tb].d++; pA=1; pB=1; }
+    h2h[ta][tb] = {pts:pA, gd:r.a-r.b, gf:r.a};
+    h2h[tb][ta] = {pts:pB, gd:r.b-r.a, gf:r.b};
   });
   return g.teams.map(function(n){
     return {n:n, pts:t[n].pts, gf:t[n].gf, ga:t[n].ga, gd:t[n].gf-t[n].ga, w:t[n].w, d:t[n].d, l:t[n].l, p:t[n].p};
-  }).sort(function(a,b){ return (b.pts-a.pts) || (b.gd-a.gd) || (b.gf-a.gf) || (b.w-a.w); });
+  }).sort(function(a,b){
+    if (a.pts !== b.pts) return b.pts - a.pts;
+    var ha = h2h[a.n][b.n], hb = h2h[b.n][a.n];
+    if (ha && hb) {
+      if (ha.pts !== hb.pts) return hb.pts - ha.pts;
+      if (ha.gd  !== hb.gd)  return hb.gd  - ha.gd;
+      if (ha.gf  !== hb.gf)  return hb.gf  - ha.gf;
+    }
+    return (b.gd-a.gd) || (b.gf-a.gf) || (b.w-a.w);
+  });
 }
 
 /* ================================================
@@ -1760,8 +1775,8 @@ function calcTournamentOdds() {
   for (var sim = 0; sim < N; sim++) {
     var gRes = {};
     GRP.forEach(function(g) {
-      var tbl = {};
-      g.teams.forEach(function(t){ tbl[t] = {pts:0, gf:0, ga:0, gd:0, w:0}; });
+      var tbl = {}, sh2h = {};
+      g.teams.forEach(function(t){ tbl[t] = {pts:0, gf:0, ga:0, gd:0, w:0}; sh2h[t] = {}; });
       pairs(g.teams).forEach(function(pair, i) {
         var ta = pair[0], tb = pair[1], real = RES[g.id][i];
         var ga, gb;
@@ -1778,13 +1793,25 @@ function calcTournamentOdds() {
         }
         tbl[ta].gf+=ga; tbl[ta].ga+=gb; tbl[ta].gd+=ga-gb;
         tbl[tb].gf+=gb; tbl[tb].ga+=ga; tbl[tb].gd+=gb-ga;
-        if (ga>gb){ tbl[ta].pts+=3; tbl[ta].w++; }
-        else if (ga<gb){ tbl[tb].pts+=3; tbl[tb].w++; }
-        else { tbl[ta].pts++; tbl[tb].pts++; }
+        var pA2, pB2;
+        if (ga>gb){ tbl[ta].pts+=3; tbl[ta].w++; pA2=3; pB2=0; }
+        else if (ga<gb){ tbl[tb].pts+=3; tbl[tb].w++; pA2=0; pB2=3; }
+        else { tbl[ta].pts++; tbl[tb].pts++; pA2=1; pB2=1; }
+        sh2h[ta][tb] = {pts:pA2, gd:ga-gb, gf:ga};
+        sh2h[tb][ta] = {pts:pB2, gd:gb-ga, gf:gb};
       });
       gRes[g.id] = g.teams.map(function(t){
         return {n:t, pts:tbl[t].pts, gd:tbl[t].gd, gf:tbl[t].gf, w:tbl[t].w};
-      }).sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w); });
+      }).sort(function(a,b){
+        if (a.pts !== b.pts) return b.pts - a.pts;
+        var ha = sh2h[a.n][b.n], hb = sh2h[b.n][a.n];
+        if (ha && hb) {
+          if (ha.pts !== hb.pts) return hb.pts - ha.pts;
+          if (ha.gd  !== hb.gd)  return hb.gd  - ha.gd;
+          if (ha.gf  !== hb.gf)  return hb.gf  - ha.gf;
+        }
+        return (b.gd-a.gd) || (b.gf-a.gf) || (b.w-a.w);
+      });
     });
 
     // Reconstruit le vrai tirage (bracket officiel)
