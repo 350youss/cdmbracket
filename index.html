@@ -1577,15 +1577,13 @@ function bTeam(round, idx) {
   return BS[round][idx] || 'TBD';
 }
 
-function getTeamPosLabel(name) {
+function getTeamPosLabel(name, predSt) {
   if (!name || name === 'TBD') return '';
-  // Placeholder "1er E" / "2e F" → déjà formaté
   if (/^\d/.test(name)) return name;
-  // Équipe réelle → cherche dans les groupes
   for (var gi = 0; gi < GRP.length; gi++) {
     var g = GRP[gi];
     if (g.teams.indexOf(name) >= 0) {
-      var s = getStandings(g.id);
+      var s = (predSt && predSt[g.id]) ? predSt[g.id] : getStandings(g.id);
       for (var si = 0; si < s.length; si++) {
         if (s[si].n === name) {
           var pos = si + 1;
@@ -2145,13 +2143,13 @@ function predictScoreKO(ta, tb) {
   return bestPoissonScore(lamA, lamB, ta, tb, p);
 }
 
-function renderBMatchPred(ta, tb, sc, isFinale) {
+function renderBMatchPred(ta, tb, sc, isFinale, predSt) {
   var hasW = sc && sc.winner;
   var cls = 'bpred' + (isFinale ? ' bpred-gold' : (hasW ? ' bpred-win' : ''));
   var wa = hasW && sc.winner === ta;
   var wb = hasW && sc.winner === tb;
   var prb = (ta&&ta!=='TBD'&&tb&&tb!=='TBD') ? probsKO(ta,tb) : [50,50];
-  var posA = getTeamPosLabel(ta), posB = getTeamPosLabel(tb);
+  var posA = getTeamPosLabel(ta, predSt), posB = getTeamPosLabel(tb, predSt);
 
   var html = '<div class="' + cls + '">';
   html += '<div class="bpred-team' + (wa?' bpred-winner':'') + '">';
@@ -2239,38 +2237,38 @@ function renderProbableBracket() {
   var html='';
   html+='<div class="bracket-half bracket-left">';
   html+='<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
-  for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[i][0],r32[i][1],pSC.r32[i]));
+  for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[i][0],r32[i][1],pSC.r32[i],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
-  for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[i*2]||'TBD',pW.r32[i*2+1]||'TBD',pSC.r16[i]));
+  for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[i*2]||'TBD',pW.r32[i*2+1]||'TBD',pSC.r16[i],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Quarts</div><div class="b-round-matches">';
-  for(var i=0;i<2;i++) html+=pbSlot('qf',i,2,renderBMatchPred(pW.r16[i*2]||'TBD',pW.r16[i*2+1]||'TBD',pSC.qf[i]));
+  for(var i=0;i<2;i++) html+=pbSlot('qf',i,2,renderBMatchPred(pW.r16[i*2]||'TBD',pW.r16[i*2+1]||'TBD',pSC.qf[i],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Demi-finale</div><div class="b-round-matches">';
-  html+=pbSlot('sf',0,1,renderBMatchPred(pW.qf[0]||'TBD',pW.qf[1]||'TBD',pSC.sf[0]));
+  html+=pbSlot('sf',0,1,renderBMatchPred(pW.qf[0]||'TBD',pW.qf[1]||'TBD',pSC.sf[0],false,predSt));
   html+='</div></div>';
   html+='</div>';
 
   html+='<div class="bracket-center">';
   html+='<div class="bc-lbl">Finale</div>';
-  html+=renderBMatchPred(pW.sf[0]||'TBD',pW.sf[1]||'TBD',fsc,true);
+  html+=renderBMatchPred(pW.sf[0]||'TBD',pW.sf[1]||'TBD',fsc,true,predSt);
   html+='<div class="bc-pet-sep"><span class="bc-pet-lbl">Petite finale</span></div>';
-  html+=renderBMatchPred(sfLosers[0]||'TBD',sfLosers[1]||'TBD',petsc);
+  html+=renderBMatchPred(sfLosers[0]||'TBD',sfLosers[1]||'TBD',petsc,false,predSt);
   html+='</div>';
 
   html+='<div class="bracket-half bracket-right">';
   html+='<div class="b-round"><div class="b-round-lbl">Demi-finale</div><div class="b-round-matches">';
-  html+=pbSlot('sf',0,1,renderBMatchPred(pW.qf[2]||'TBD',pW.qf[3]||'TBD',pSC.sf[1]));
+  html+=pbSlot('sf',0,1,renderBMatchPred(pW.qf[2]||'TBD',pW.qf[3]||'TBD',pSC.sf[1],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Quarts</div><div class="b-round-matches">';
-  for(var i=0;i<2;i++) html+=pbSlot('qf',i,2,renderBMatchPred(pW.r16[(2+i)*2]||'TBD',pW.r16[(2+i)*2+1]||'TBD',pSC.qf[2+i]));
+  for(var i=0;i<2;i++) html+=pbSlot('qf',i,2,renderBMatchPred(pW.r16[(2+i)*2]||'TBD',pW.r16[(2+i)*2+1]||'TBD',pSC.qf[2+i],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
-  for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[(4+i)*2]||'TBD',pW.r32[(4+i)*2+1]||'TBD',pSC.r16[4+i]));
+  for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[(4+i)*2]||'TBD',pW.r32[(4+i)*2+1]||'TBD',pSC.r16[4+i],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
-  for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[8+i][0],r32[8+i][1],pSC.r32[8+i]));
+  for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[8+i][0],r32[8+i][1],pSC.r32[8+i],false,predSt));
   html+='</div></div>';
   html+='</div>';
 
