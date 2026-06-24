@@ -287,7 +287,10 @@ main { padding:36px 44px 60px; }
 .t3-table td:first-child  { text-align:center !important; padding-left:4px !important; }
 .t3-table th:nth-child(2) { width:auto !important; min-width:110px; }
 .t3-table th:nth-child(n+3):nth-child(-n+10) { width:28px; }
-.t3-opp-cell { display:flex; align-items:center; gap:6px; }
+.t3-opp-cell { display:flex; align-items:center; gap:6px; white-space:nowrap; }
+/* Adversaire column : fit content width */
+.t3-table th:last-child, .t3-table td:last-child { width:1%; white-space:nowrap; }
+.tp-table  th:last-child, .tp-table  td:last-child { width:1%; white-space:nowrap; }
 
 /* MODAL */
 .overlay { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:1000;
@@ -1292,12 +1295,20 @@ function renderThirdPlace() {
   thirds.forEach(function(t, i) {
     var qualifies = i < 8;
     var slot = teamSlot[t.n];
-    var opponent = slot ? '1<sup>er</sup> Gr. ' + slot : '—';
+    var firstTeam = slot ? q.first[slot] : null;
     var rowCls = qualifies ? 'tp-qual' : 'tp-out';
     var gdColor = t.gd > 0 ? 'var(--green)' : (t.gd < 0 ? 'var(--red)' : 'var(--sub)');
     var badge = qualifies
-      ? '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:middle"></span>'
+      ? '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:4px;flex-shrink:0"></span>'
       : '';
+    var oppCell = (t.p > 0 && slot)
+      ? '<div class="t3-opp-cell">' + badge +
+          (firstTeam ? flag(firstTeam,'sm') : '') +
+          '<div class="tc-info">' +
+            '<span class="tname" style="color:' + (qualifies?'var(--accent)':'var(--sub)') + '">' + (firstTeam || '?') + '</span>' +
+            '<span class="telo">Gr.' + slot + '</span>' +
+          '</div></div>'
+      : '<span style="color:var(--muted)">—</span>';
     html += '<tr class="' + rowCls + '">' +
       '<td><div class="tp-rank">' + (i+1) + '</div></td>' +
       '<td><div class="tp-team-cell" data-team="' + esc(t.n) + '">' +
@@ -1308,7 +1319,7 @@ function renderThirdPlace() {
       '<td><strong style="font-family:Tanker;font-weight:800;font-size:15px;color:' + (qualifies?'#fff':'var(--muted)') + '">' + t.pts + '</strong></td>' +
       '<td style="font-family:Tanker;font-weight:700;font-size:13px;color:' + gdColor + '">' + (t.gd>0?'+':'') + t.gd + '</td>' +
       '<td>' + t.gf + '</td>' +
-      '<td style="font-size:12px;font-weight:700;color:' + (slot?'var(--accent)':'var(--muted)') + '">' + badge + (t.p>0 ? opponent : '—') + '</td>' +
+      '<td>' + oppCell + '</td>' +
     '</tr>';
   });
 
@@ -2282,11 +2293,16 @@ function renderProbableBracket() {
       extra += '<tr class="t3-sep"><td colspan="11">Éliminés</td></tr>';
     }
 
-    var opp = null;
+    var opp = null, oppGid = '';
     if (!isElim) {
       opp = 'TBD';
       for (var ri = 0; ri < r32.length; ri++) {
         if (r32[ri][1] === t3.n) { opp = r32[ri][0]; break; }
+      }
+      if (opp && opp !== 'TBD') {
+        for (var gi2 = 0; gi2 < GRP.length; gi2++) {
+          if (GRP[gi2].teams.indexOf(opp) !== -1) { oppGid = GRP[gi2].id; break; }
+        }
       }
     }
 
@@ -2309,7 +2325,9 @@ function renderProbableBracket() {
     extra += '<td style="border-left:1px solid rgba(255,255,255,.12);padding-left:12px">';
     if (opp) {
       extra += '<div class="t3-opp-cell">' + (opp !== 'TBD' ? flag(opp,'sm') : '') +
-        '<span class="tname">' + opp + '</span></div>';
+        '<div class="tc-info"><span class="tname">' + opp + '</span>' +
+        (oppGid ? '<span class="telo">Gr.' + oppGid + '</span>' : '') +
+        '</div></div>';
     } else {
       extra += '<span style="color:var(--muted);font-size:11px">—</span>';
     }
