@@ -165,7 +165,7 @@ main { padding:36px 44px 60px; }
 .bracket-scroll { overflow-x:auto; padding-bottom:24px; }
 .bracket { display:flex; min-width:0; gap:0; align-items:stretch; }
 #bracket { min-width:700px; }
-#bracket-probable { min-width:1120px; }
+#bracket-probable { min-width:750px; }
 .bracket-half { display:flex; flex:1; }
 .bracket-left { flex-direction:row; }
 .bracket-right { flex-direction:row; }
@@ -177,37 +177,32 @@ main { padding:36px 44px 60px; }
 .b-round { display:flex; flex-direction:column; flex:1; min-width:150px; max-width:190px; overflow:hidden; }
 .b-round-lbl { font-weight:700; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); padding:0 6px 14px; text-align:center; }
 .b-round-matches { display:flex; flex-direction:column; flex:1; padding:0 4px; }
-.b-slot { display:flex; align-items:center; position:relative; }
+.b-slot { display:flex; align-items:center; position:relative; padding:4px 0; }
 .b-slot.b-grp-end::after { content:''; position:absolute; bottom:0; left:4px; right:4px; height:1px; background:rgba(255,255,255,.07); }
 /* Flag + position stacked vertically */
-.btfl { display:flex; flex-direction:column; align-items:center; gap:2px; flex-shrink:0; }
-.bt-pos { font-size:7px; color:var(--muted); font-weight:600; white-space:nowrap; letter-spacing:.04em; display:none; }
+.btfl { display:flex; flex-direction:column; align-items:center; gap:2px; flex-shrink:0; width:22px; }
+.bt-pos { font-size:7px; color:var(--muted); font-weight:600; white-space:nowrap; letter-spacing:.04em; display:none; max-width:100%; overflow:hidden; text-overflow:ellipsis; }
 /* Main bracket : flags + position under flag, no name, compact columns */
 #bracket .b-round { min-width:72px; max-width:86px; }
 #bracket .bracket-center { min-width:148px; }
 #bracket .bt-name { display:none; }
 #bracket .bt-pct { display:none; }
 #bracket .bt-pos { display:block; }
-/* Probable bracket: slot padding + standard columns */
+/* Probable bracket: flags + position only (same style as main bracket) */
 #bracket-probable .b-slot { padding:2px 2px; }
-#bracket-probable .b-round { min-width:120px; max-width:138px; }
-#bracket-probable .bpred-team { padding:3px 6px; gap:4px; }
-#bracket-probable .bpred-pct { font-size:9px; }
+#bracket-probable .b-round { min-width:72px; max-width:86px; }
+#bracket-probable .bracket-center { min-width:148px; }
+#bracket-probable .bpred-team { padding:3px 4px; gap:3px; }
+#bracket-probable .bt-name { display:none; }
+#bracket-probable .bpred-pct { display:none; }
+#bracket-probable .bt-pos { display:block; }
+/* 3es table — rows for eliminated teams */
+.t3-elim { opacity:0.42; }
+.t3-sep td { padding:6px 4px 3px; font-size:9px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,.07); text-align:left !important; }
 
-/* BRACKET NAV (mobile) */
-.brnav { display:none; }
+/* BRACKET — scroll horizontal sur mobile */
 @media(max-width:767px) {
-  .bracket-scroll { overflow-x:visible; padding-bottom:0; }
-  .bracket { min-width:0 !important; flex-direction:column; gap:0; align-items:stretch; }
-  .bracket-half { flex-direction:column; flex:none; }
-  .bracket-right { flex-direction:column; }
-  .bracket-center { border:none; padding:0; min-width:0; }
-  .bc-lbl { margin-top:8px; }
-  .b-round { max-width:none; }
-  .b-round-lbl { display:none; }
-  .b-round-matches { gap:8px; padding:0; }
-  .b-slot { flex:none !important; }
-  .b-slot.b-grp-end::after { display:none; }
+  .bracket-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px; }
 }
 
 .bmatch { background:var(--s1); border-left:2px solid var(--accent); transition:border-color .15s,background .15s; user-select:none; }
@@ -250,10 +245,6 @@ main { padding:36px 44px 60px; }
 .bm-info-col { display:flex; flex-direction:column; gap:1px; min-width:0; overflow:hidden; }
 .bm-sub { font-size:10px; color:var(--muted); font-weight:500; white-space:nowrap; }
 
-@media(max-width:767px) {
-  .bteam { display:none; }
-  .bmrow { display:grid; }
-}
 .bt-l { display:flex; align-items:center; gap:5px; min-width:0; flex:1; overflow:hidden; }
 .bt-name { font-weight:700; font-size:11px; color:var(--sub); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .bteam.win { background:rgba(74,140,255,.13); }
@@ -744,7 +735,7 @@ var RES = {};
 GRP.forEach(function(g){ RES[g.id] = {}; });
 
 // ── SCORES_START ──
-var LOCKED = { 'A': [0, 1, 4, 5], 'B': [1, 2, 3, 4], 'C': [0, 2, 3, 5], 'D': [1, 2, 3, 4], 'E': [1, 2, 3, 4], 'F': [0, 1, 4, 5], 'G': [0, 1, 4, 5], 'H': [1, 2, 3, 4], 'I': [0, 2, 3, 5], 'J': [0, 1, 4, 5], 'K': [1, 4], 'L': [0, 5] };
+var LOCKED = { 'A': [0, 1, 4, 5], 'B': [1, 2, 3, 4], 'C': [0, 2, 3, 5], 'D': [1, 2, 3, 4], 'E': [1, 2, 3, 4], 'F': [0, 1, 4, 5], 'G': [0, 1, 4, 5], 'H': [1, 2, 3, 4], 'I': [0, 2, 3, 5], 'J': [0, 1, 4, 5], 'K': [1, 2, 3, 4], 'L': [0, 1, 4, 5] };
 RES['A'][0] = {a:2, b:0}; // Mexique 2-0 Afrique du Sud
 RES['A'][1] = {a:1, b:0}; // Mexique 1-0 Corée du Sud
 RES['A'][4] = {a:1, b:1}; // Afrique du Sud 1-1 Tchéquie
@@ -786,8 +777,12 @@ RES['J'][1] = {a:2, b:0}; // Argentine 2-0 Autriche
 RES['J'][4] = {a:2, b:1}; // Algérie 2-1 Jordanie
 RES['J'][5] = {a:3, b:1}; // Autriche 3-1 Jordanie
 RES['K'][1] = {a:1, b:1}; // Portugal 1-1 RD Congo
+RES['K'][2] = {a:5, b:0}; // Portugal 5-0 Ouzbékistan
+RES['K'][3] = {a:1, b:0}; // Colombie 1-0 RD Congo
 RES['K'][4] = {a:3, b:1}; // Colombie 3-1 Ouzbékistan
 RES['L'][0] = {a:4, b:2}; // Angleterre 4-2 Croatie
+RES['L'][1] = {a:0, b:0}; // Angleterre 0-0 Ghana
+RES['L'][4] = {a:1, b:0}; // Croatie 1-0 Panama
 RES['L'][5] = {a:1, b:0}; // Ghana 1-0 Panama
 // ── SCORES_END ──
 
@@ -1521,11 +1516,18 @@ function assign3rd(q) {
   var result = {};
   THIRD_POOLS.forEach(function(sp) {
     var found = null;
+    // Official pool first
     for (var pi = 0; pi < sp.pool.length; pi++) {
       for (var ri = 0; ri < remaining.length; ri++) {
         if (remaining[ri].gid === sp.pool[pi]) { found = remaining.splice(ri,1)[0]; break; }
       }
       if (found) break;
+    }
+    // Fallback : éviter les affiches impossible (même groupe que le 1er de la poule)
+    if (!found) {
+      for (var ri = 0; ri < remaining.length; ri++) {
+        if (remaining[ri].gid !== sp.slot) { found = remaining.splice(ri,1)[0]; break; }
+      }
     }
     if (!found && remaining.length > 0) found = remaining.shift();
     result[sp.slot] = found ? found.n : 'TBD';
@@ -2138,16 +2140,19 @@ function renderBMatchPred(ta, tb, sc, isFinale) {
   var wa = hasW && sc.winner === ta;
   var wb = hasW && sc.winner === tb;
   var prb = (ta&&ta!=='TBD'&&tb&&tb!=='TBD') ? probsKO(ta,tb) : [50,50];
+  var posA = getTeamPosLabel(ta), posB = getTeamPosLabel(tb);
 
   var html = '<div class="' + cls + '">';
   html += '<div class="bpred-team' + (wa?' bpred-winner':'') + '">';
-  html += '<div class="bt-l"><div class="btfl">'+(ta&&ta!=='TBD'?flag(ta,'sm'):'<span class="fi sm"></span>')+'</div>'+
+  html += '<div class="bt-l"><div class="btfl">'+(ta&&ta!=='TBD'?flag(ta,'sm'):'<span class="fi sm"></span>')+
+          (posA?'<span class="bt-pos">'+posA+'</span>':'')+'</div>'+
           '<span class="bt-name">'+(ta||'TBD')+'</span></div>';
   html += '<div class="bt-r"><span class="bpred-pct">'+(ta&&ta!=='TBD'?prb[0]+'%':'')+'</span>'+
           (wa?'<span class="bpred-win-icon">✓</span>':'')+'</div>';
   html += '</div>';
   html += '<div class="bpred-team' + (wb?' bpred-winner':'') + '">';
-  html += '<div class="bt-l"><div class="btfl">'+(tb&&tb!=='TBD'?flag(tb,'sm'):'<span class="fi sm"></span>')+'</div>'+
+  html += '<div class="bt-l"><div class="btfl">'+(tb&&tb!=='TBD'?flag(tb,'sm'):'<span class="fi sm"></span>')+
+          (posB?'<span class="bt-pos">'+posB+'</span>':'')+'</div>'+
           '<span class="bt-name">'+(tb||'TBD')+'</span></div>';
   html += '<div class="bt-r"><span class="bpred-pct">'+(tb&&tb!=='TBD'?prb[1]+'%':'')+'</span>'+
           (wb?'<span class="bpred-win-icon">✓</span>':'')+'</div>';
@@ -2260,22 +2265,31 @@ function renderProbableBracket() {
 
   document.getElementById('bracket-probable').innerHTML = html;
 
-  // ── Meilleurs 3es qualifiés (style gtable) ──
+  // ── Tous les 3es (style gtable) ──
   var extra = '';
   extra += '<div class="pred-section">';
-  extra += '<div class="pred-stitle">Meilleurs 3es qualifiés</div>';
+  extra += '<div class="pred-stitle">3es de groupes</div>';
   extra += '<table class="gtable t3-table"><thead><tr>';
   extra += '<th>#</th><th>Équipe</th><th>J</th><th>V</th><th>N</th><th>D</th><th>Bp</th><th>Bc</th><th>±</th><th>Pts</th>';
   extra += '<th style="border-left:1px solid rgba(255,255,255,.12);padding-left:12px">Adversaire R32</th>';
   extra += '</tr></thead><tbody>';
 
-  var best8 = thirds.slice(0,8);
-  for (var ti = 0; ti < best8.length; ti++) {
-    var t3 = best8[ti];
-    var opp = 'TBD';
-    for (var ri = 0; ri < r32.length; ri++) {
-      if (r32[ri][1] === t3.n) { opp = r32[ri][0]; break; }
+  for (var ti = 0; ti < thirds.length; ti++) {
+    var t3 = thirds[ti];
+    var isElim = ti >= 8;
+
+    if (ti === 8) {
+      extra += '<tr class="t3-sep"><td colspan="11">Éliminés</td></tr>';
     }
+
+    var opp = null;
+    if (!isElim) {
+      opp = 'TBD';
+      for (var ri = 0; ri < r32.length; ri++) {
+        if (r32[ri][1] === t3.n) { opp = r32[ri][0]; break; }
+      }
+    }
+
     var w3 = t3.w || 0;
     var d3 = t3.pts - 3 * w3;
     var l3 = 3 - w3 - d3;
@@ -2283,19 +2297,23 @@ function renderProbableBracket() {
     var gdStr = (t3.gd > 0 ? '+' : '') + t3.gd;
     var gdColor = t3.gd > 0 ? 'var(--green)' : (t3.gd < 0 ? 'var(--red)' : 'var(--sub)');
 
-    extra += '<tr>';
+    extra += '<tr' + (isElim ? ' class="t3-elim"' : '') + '>';
     extra += '<td style="font-family:\'Tanker\';font-size:16px;color:var(--muted)">' + (ti+1) + '</td>';
     extra += '<td><div class="team-cell">' + flag(t3.n,'sm') +
       '<div class="tc-info"><span class="tname">' + t3.n + '</span>' +
       '<span class="telo">Gr.' + t3.gid + '</span></div></div></td>';
     extra += '<td>3</td><td>' + w3 + '</td><td>' + d3 + '</td><td>' + l3 + '</td>';
     extra += '<td>' + gf3 + '</td><td>' + ga3 + '</td>';
-    extra += '<td style="font-family:\'Tanker\';font-weight:700;font-size:13px;color:' + gdColor + '">' + gdStr + '</td>';
+    extra += '<td style="font-family:\'Tanker\';font-weight:700;font-size:13px;color:' + (isElim?'var(--muted)':gdColor) + '">' + gdStr + '</td>';
     extra += '<td><span class="pts-v">' + t3.pts + '</span></td>';
     extra += '<td style="border-left:1px solid rgba(255,255,255,.12);padding-left:12px">';
-    extra += '<div class="t3-opp-cell">' + (opp !== 'TBD' ? flag(opp,'sm') : '') +
-      '<span class="tname">' + opp + '</span></div></td>';
-    extra += '</tr>';
+    if (opp) {
+      extra += '<div class="t3-opp-cell">' + (opp !== 'TBD' ? flag(opp,'sm') : '') +
+        '<span class="tname">' + opp + '</span></div>';
+    } else {
+      extra += '<span style="color:var(--muted);font-size:11px">—</span>';
+    }
+    extra += '</td></tr>';
   }
 
   extra += '</tbody></table></div>';
