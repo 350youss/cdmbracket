@@ -1518,8 +1518,21 @@ var ANNEX_C = {};
 ANNEX_C_RAW.split(';').forEach(function(c){ if (c.length === 12) ANNEX_C[c.slice(0,4)] = c.slice(4); });
 
 // Fair play (pts disciplinaires du 3e de chaque groupe) : jaune=1, rouge=3 — moins = mieux
-// Groupes A/B/C complets (fetchés ESPN). D-L complétés automatiquement par le watcher.
-var FP3 = {'A':5, 'B':9, 'C':5};
+// A/B/C : 3 matchs complets. D-L : J1+J2 (3e provisoire) — sera mis à jour après J3.
+var FP3 = {
+  'A':5,  // Corée du Sud   — 3J complets
+  'B':9,  // Bosnie-H.      — 3J complets
+  'C':5,  // Écosse         — 3J complets
+  'D':9,  // Paraguay       — J1+J2 (5Y+4Y+1R)
+  'E':2,  // Équateur       — J1+J2 (1Y+1Y)
+  'F':3,  // Suède          — J1+J2 (3Y)
+  'G':6,  // Belgique       — J1+J2 (2Y+1Y+1R)
+  'H':3,  // Cap-Vert       — J1+J2 (1Y+2Y)
+  'I':0,  // Sénégal        — J1+J2 (aucun carton)
+  'J':1,  // Algérie        — J1+J2 (1Y)
+  'K':2,  // RD Congo       — J1+J2 (1Y+1Y)
+  'L':1   // Croatie        — J1+J2 (1Y)
+};
 
 // Comparateur unique pour le classement des 3es (FIFA officiel)
 function cmp3rd(a,b) {
