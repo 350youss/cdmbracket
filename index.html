@@ -1272,7 +1272,7 @@ function renderThirdPlace() {
   if (!anyPlayed) { section.style.display = 'none'; return; }
   section.style.display = 'block';
 
-  thirds.sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w); });
+  thirds.sort(cmp3rd);
 
   // Get bracket assignments
   var q = getQualified();
@@ -1295,6 +1295,7 @@ function renderThirdPlace() {
       '<th>Pts</th>' +
       '<th>±</th>' +
       '<th>Bf</th>' +
+      '<th title="Points disciplinaires (jaune=1, rouge=3)">Disc.</th>' +
       '<th>Adversaire R32</th>' +
     '</tr></thead><tbody>';
 
@@ -1307,7 +1308,7 @@ function renderThirdPlace() {
     var badge = qualifies
       ? '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:4px;flex-shrink:0"></span>'
       : '';
-    var oppCell = (t.p > 0 && slot)
+    var oppCell = (t.p > 0 && qualifies && slot)
       ? '<div class="t3-opp-cell">' + badge +
           (firstTeam ? flag(firstTeam,'sm') : '') +
           '<div class="tc-info">' +
@@ -1325,12 +1326,13 @@ function renderThirdPlace() {
       '<td><strong style="font-family:Tanker;font-weight:800;font-size:15px;color:' + (qualifies?'#fff':'var(--muted)') + '">' + t.pts + '</strong></td>' +
       '<td style="font-family:Tanker;font-weight:700;font-size:13px;color:' + gdColor + '">' + (t.gd>0?'+':'') + t.gd + '</td>' +
       '<td>' + t.gf + '</td>' +
+      '<td style="color:var(--sub)">' + (FP3[t.gid] !== undefined ? FP3[t.gid] : '—') + '</td>' +
       '<td>' + oppCell + '</td>' +
     '</tr>';
   });
 
   html += '</tbody></table>' +
-    '<div class="tp-note">Classement : Pts → Diff. buts → Buts marqués → Victoires. Les adversaires du R32 sont calculés en temps réel.</div>';
+    '<div class="tp-note">Classement : Pts → Diff. buts → Buts marqués → Fair play (disc.) → Classement FIFA. Les adversaires du R32 sont calculés en temps réel.</div>';
 
   section.innerHTML = html;
 }
@@ -1515,6 +1517,15 @@ var ANNEX_C_RAW = "ABCDEJIFHGLK;ABCEHGIDJFLK;ABCFEJIDHGLK;ABCGEJIDHFLK;ABCHEGIDJ
 var ANNEX_C = {};
 ANNEX_C_RAW.split(';').forEach(function(c){ if (c.length === 12) ANNEX_C[c.slice(0,4)] = c.slice(4); });
 
+// Fair play (pts disciplinaires du 3e de chaque groupe) : jaune=1, rouge=3 — moins = mieux
+// Groupes A/B/C complets (fetchés ESPN). D-L complétés automatiquement par le watcher.
+var FP3 = {'A':5, 'B':9, 'C':5};
+
+// Comparateur unique pour le classement des 3es (FIFA officiel)
+function cmp3rd(a,b) {
+  return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||((FP3[a.gid]||0)-(FP3[b.gid]||0))||(el(b.n)-el(a.n));
+}
+
 function getQualified() {
   var first = {}, second = {}, thirds = [];
   GRP.forEach(function(g) {
@@ -1523,7 +1534,7 @@ function getQualified() {
     second[g.id] = (s[1].p > 0) ? s[1].n : null;
     if (s[2].p > 0) thirds.push({n:s[2].n, gid:g.id, pts:s[2].pts, gd:s[2].gd, gf:s[2].gf, w:s[2].w});
   });
-  thirds.sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(el(b.n)-el(a.n)); });
+  thirds.sort(cmp3rd);
   return {first:first, second:second, best8:thirds.slice(0,8)};
 }
 
@@ -1846,7 +1857,7 @@ function calcTournamentOdds() {
       second[g.id] = gRes[g.id][1].n;
       thirds.push({n:gRes[g.id][2].n, gid:g.id, pts:gRes[g.id][2].pts, gd:gRes[g.id][2].gd, gf:gRes[g.id][2].gf, w:gRes[g.id][2].w});
     });
-    thirds.sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w); });
+    thirds.sort(cmp3rd);
     var q = {first:first, second:second, best8:thirds.slice(0,8)};
 
     // Utilise le vrai bracket R32 (comme l'affichage)
@@ -1915,7 +1926,7 @@ function getQualifiedPredicted() {
       thirds.push({n:sorted[2], gid:g.id, pts:0, gd:0, gf:0, w:0});
     }
   });
-  thirds.sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w)||(el(b.n)-el(a.n)); });
+  thirds.sort(cmp3rd);
   return {first:first, second:second, best8:thirds.slice(0,8)};
 }
 
@@ -2216,7 +2227,7 @@ function renderProbableBracket() {
     first[g.id]=s[0].n; second[g.id]=s[1].n;
     thirds.push({n:s[2].n,gid:g.id,pts:s[2].pts,gd:s[2].gd,gf:s[2].gf,w:s[2].w||0});
   });
-  thirds.sort(function(a,b){ return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||(b.w-a.w); });
+  thirds.sort(cmp3rd);
   var r32 = buildR32({first:first, second:second, best8:thirds.slice(0,8)});
 
   // 3. Prédiction KO rounds
