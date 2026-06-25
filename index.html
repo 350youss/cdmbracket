@@ -1326,7 +1326,7 @@ function renderThirdPlace() {
       '<td><strong style="font-family:Tanker;font-weight:800;font-size:15px;color:' + (qualifies?'#fff':'var(--muted)') + '">' + t.pts + '</strong></td>' +
       '<td style="font-family:Tanker;font-weight:700;font-size:13px;color:' + gdColor + '">' + (t.gd>0?'+':'') + t.gd + '</td>' +
       '<td>' + t.gf + '</td>' +
-      '<td style="color:var(--sub)">' + (FP3[t.gid] !== undefined ? FP3[t.gid] : '—') + '</td>' +
+      '<td style="color:var(--sub)">' + (FP3[t.n] !== undefined ? FP3[t.n] : '—') + '</td>' +
       '<td>' + oppCell + '</td>' +
     '</tr>';
   });
@@ -1517,26 +1517,38 @@ var ANNEX_C_RAW = "ABCDEJIFHGLK;ABCEHGIDJFLK;ABCFEJIDHGLK;ABCGEJIDHFLK;ABCHEGIDJ
 var ANNEX_C = {};
 ANNEX_C_RAW.split(';').forEach(function(c){ if (c.length === 12) ANNEX_C[c.slice(0,4)] = c.slice(4); });
 
-// Fair play (pts disciplinaires du 3e de chaque groupe) : jaune=1, rouge=3 — moins = mieux
-// A/B/C : 3 matchs complets. D-L : J1+J2 (3e provisoire) — sera mis à jour après J3.
+// Fair play par équipe : jaune=1, rouge=3 — moins = mieux
+// A/B/C complets (3 matchs). D-L = J1+J2 (sera complété après J3).
 var FP3 = {
-  'A':5,  // Corée du Sud   — 3J complets
-  'B':9,  // Bosnie-H.      — 3J complets
-  'C':5,  // Écosse         — 3J complets
-  'D':9,  // Paraguay       — J1+J2 (5Y+4Y+1R)
-  'E':2,  // Équateur       — J1+J2 (1Y+1Y)
-  'F':3,  // Suède          — J1+J2 (3Y)
-  'G':6,  // Belgique       — J1+J2 (2Y+1Y+1R)
-  'H':3,  // Cap-Vert       — J1+J2 (1Y+2Y)
-  'I':0,  // Sénégal        — J1+J2 (aucun carton)
-  'J':1,  // Algérie        — J1+J2 (1Y)
-  'K':2,  // RD Congo       — J1+J2 (1Y+1Y)
-  'L':1   // Croatie        — J1+J2 (1Y)
+  // Groupe A — complet
+  'Corée du Sud':5,
+  // Groupe B — complet
+  'Bosnie-H.':9,
+  // Groupe C — complet
+  'Écosse':5,
+  // Groupe D
+  'Paraguay':9,'Australie':4,'Turquie':0,
+  // Groupe E
+  'Équateur':2,'Côte d\'Ivoire':3,'Curaçao':0,
+  // Groupe F
+  'Suède':3,'Pays-Bas':3,'Japon':0,
+  // Groupe G
+  'Belgique':6,'Égypte':3,'Iran':2,'Nouvelle-Zélande':2,
+  // Groupe H
+  'Cap-Vert':3,'Espagne':1,'Uruguay':2,'Arabie Saoudite':3,
+  // Groupe I
+  'Sénégal':0,'Irak':2,
+  // Groupe J
+  'Algérie':1,'Autriche':3,
+  // Groupe K
+  'RD Congo':2,'Portugal':4,
+  // Groupe L
+  'Croatie':1,'Ghana':2
 };
 
 // Comparateur unique pour le classement des 3es (FIFA officiel)
 function cmp3rd(a,b) {
-  return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||((FP3[a.gid]||0)-(FP3[b.gid]||0))||(el(b.n)-el(a.n));
+  return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||((FP3[a.n]||0)-(FP3[b.n]||0))||(el(b.n)-el(a.n));
 }
 
 function getQualified() {
