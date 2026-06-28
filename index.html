@@ -201,9 +201,38 @@ main { padding:36px 44px 60px; }
 .t3-sep td { padding:6px 4px 3px; font-size:9px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,.07); text-align:left !important; }
 
 /* BRACKET — scroll horizontal sur mobile */
+#bracket-mobile { display:none; }
 @media(max-width:767px) {
-  .bracket-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px; }
+  .bracket-scroll { display:none; }
+  #bracket-mobile { display:block; }
 }
+
+/* Mobile bracket — pill nav */
+.br-rnav { display:flex; gap:6px; overflow-x:auto; padding-bottom:10px; margin-bottom:14px;
+  scrollbar-width:none; -ms-overflow-style:none; }
+.br-rnav::-webkit-scrollbar { display:none; }
+.br-rpill { flex-shrink:0; padding:6px 14px; border-radius:20px; border:1px solid var(--line);
+  background:transparent; color:var(--sub); font-weight:700; font-size:12px;
+  letter-spacing:.08em; cursor:pointer; transition:all .15s; }
+.br-rpill.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+/* Mobile bracket — match cards */
+.br-mcard-wrap { display:flex; flex-direction:column; gap:8px; }
+.br-mcard-wrap .bmatch { border-radius:4px; }
+.br-mcard-wrap .bteam { padding:9px 12px; gap:8px; }
+.br-mcard-wrap .bteam .bt-name { display:block; font-size:13px; }
+.br-mcard-wrap .bteam .bt-pct { display:block; font-size:11px; }
+.br-mcard-wrap .bteam .btfl { width:auto; flex-direction:row; gap:6px; }
+.br-mcard-wrap .bteam .bt-pos { font-size:10px; display:block; }
+#bracket-mobile .bsinline { width:40px; height:40px; font-size:20px; }
+#bracket-mobile .bteam { padding:10px 12px; gap:8px; }
+#bracket-mobile .bt-name { display:block !important; font-size:14px; }
+#bracket-mobile .bt-pct { display:block !important; font-size:11px; }
+#bracket-mobile .btfl { width:auto; flex-direction:row; gap:6px; align-items:center; }
+#bracket-mobile .bt-pos { display:block !important; font-size:10px; }
+#bracket-mobile .bmatch { border-radius:4px; margin-bottom:2px; }
+.br-mlabel { font-family:'Tanker'; font-size:11px; letter-spacing:.18em; color:var(--muted);
+  text-transform:uppercase; padding:16px 0 6px; }
 
 .bmatch { background:var(--s1); border-left:2px solid var(--accent); transition:border-color .15s,background .15s; user-select:none; }
 .bteam .bsinline { width:30px; height:26px; font-size:13px; }
@@ -542,6 +571,7 @@ main { padding:36px 44px 60px; }
     <div class="bracket-scroll">
       <div class="bracket" id="bracket"></div>
     </div>
+    <div id="bracket-mobile"></div>
   </div>
   <div class="page" id="tab-probable">
     <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
@@ -1815,13 +1845,65 @@ function renderBracket() {
 
   document.getElementById('bracket').innerHTML = html;
 
+  if (window.innerWidth < 768) renderBracketNav();
+
   if (fData) {
     var t = document.querySelector('.bsinline[data-round="'+fData.round+'"][data-idx="'+fData.idx+'"][data-side="'+fData.side+'"]');
     if (t) t.focus();
   }
 }
 
-function renderBracketNav() {}
+function renderBracketNav() {
+  var el = document.getElementById('bracket-mobile');
+  if (!el) return;
+
+  var q = getQualified();
+  var r32 = buildR32(q);
+  var cur = window._brMobileRound || 'r32';
+
+  var roundDefs = [
+    {id:'r32', label:'R32',      getMatch: function(i){ return [r32[i][0], r32[i][1]]; }, count:16},
+    {id:'r16', label:'Huitièmes',getMatch: function(i){ return [BS.r32[i*2]||'TBD', BS.r32[i*2+1]||'TBD']; }, count:8},
+    {id:'qf',  label:'Quarts',   getMatch: function(i){ return [BS.r16[i*2]||'TBD', BS.r16[i*2+1]||'TBD']; }, count:4},
+    {id:'sf',  label:'Demies',   getMatch: function(i){ return [BS.qf[i*2]||'TBD', BS.qf[i*2+1]||'TBD']; }, count:2},
+    {id:'f',   label:'Finale',   getMatch: function(i){ return [BS.sf[0]||'TBD', BS.sf[1]||'TBD']; }, count:1},
+    {id:'pet', label:'3e place', getMatch: function(i){ return [BS.sfLosers[0]||'TBD', BS.sfLosers[1]||'TBD']; }, count:1}
+  ];
+
+  // Pills
+  var html = '<div class="br-rnav">';
+  roundDefs.forEach(function(rd) {
+    html += '<button class="br-rpill' + (cur===rd.id?' active':'') + '" data-brr="' + rd.id + '">' + rd.label + '</button>';
+  });
+  html += '</div>';
+
+  // Matches for selected round
+  var rd = roundDefs.filter(function(r){ return r.id === cur; })[0] || roundDefs[0];
+  html += '<div class="br-mcard-wrap">';
+  for (var i = 0; i < rd.count; i++) {
+    var teams = rd.getMatch(i);
+    html += renderBMatch(rd.id, i, teams[0], teams[1]);
+  }
+  html += '</div>';
+
+  el.innerHTML = html;
+
+  // Restore bsinline values (same as desktop — they share BS/BSCR)
+  el.querySelectorAll('.bsinline').forEach(function(inp) {
+    var sc = BSCR[inp.dataset.round] ? BSCR[inp.dataset.round][inp.dataset.idx] : null;
+    var v = sc !== null && sc !== undefined ? sc[inp.dataset.side] : '';
+    inp.value = v !== '' && v !== undefined ? v : '';
+    inp.classList.toggle('has-val', v !== '' && v !== undefined && v !== null);
+  });
+
+  // Pill click handlers
+  el.querySelectorAll('.br-rpill').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      window._brMobileRound = btn.dataset.brr;
+      renderBracketNav();
+    });
+  });
+}
 function showBracketRound(n) {}
 
 // Re-render bracket nav on resize (timer séparé du groupe)
