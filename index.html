@@ -184,7 +184,7 @@ main { padding:36px 44px 60px; }
 .bt-pos { font-size:7px; color:var(--muted); font-weight:600; white-space:nowrap; letter-spacing:.04em; display:none; max-width:100%; overflow:hidden; text-overflow:ellipsis; }
 /* Main bracket : flags + position under flag, no name, compact columns */
 #bracket .b-round { min-width:72px; max-width:86px; }
-#bracket .bracket-center { min-width:148px; }
+#bracket .bracket-center { min-width:148px; padding-top:127px; }
 #bracket .bt-name { display:none; }
 #bracket .bt-pct { display:none; }
 #bracket .bt-pos { display:block; }
@@ -231,6 +231,9 @@ main { padding:36px 44px 60px; }
 #bracket-mobile .btfl { width:auto; flex-direction:row; gap:6px; align-items:center; }
 #bracket-mobile .bt-pos { display:block !important; font-size:10px; }
 #bracket-mobile .bmatch { border-radius:4px; margin-bottom:2px; }
+#bracket-mobile .bm-tiebreak { padding:0 12px 12px; gap:8px; flex-wrap:wrap; justify-content:center; }
+#bracket-mobile .bm-tb-lbl { width:100%; text-align:center; margin-bottom:-2px; }
+#bracket-mobile .bm-tb-btn { flex:1; padding:12px 8px; font-size:13px; }
 .br-mlabel { font-family:'Tanker'; font-size:11px; letter-spacing:.18em; color:var(--muted);
   text-transform:uppercase; padding:16px 0 6px; }
 
@@ -1172,7 +1175,7 @@ function openBracketModal(round, idx, ta, tb) {
   curModal = {type:'bracket', round:round, idx:idx, ta:ta, tb:tb};
   tabSelWinner = null;
 
-  var labels = {r32:'Round of 32',r16:'Huitièmes',qf:'Quarts de finale',sf:'Demi-finale',f:'Finale',pet:'Petite finale'};
+  var labels = {r32:'Seizièmes',r16:'Huitièmes',qf:'Quarts de finale',sf:'Demi-finale',f:'Finale',pet:'Petite finale'};
   var lbl = labels[round] || round;
   var sc = BSCR[round][idx];
   var prb = probsKO(ta, tb);
@@ -1331,7 +1334,7 @@ function renderThirdPlace() {
   var html =
     '<div class="tp-header">' +
       '<div class="tp-title">Classement des 3<sup>e</sup> de groupes</div>' +
-      '<div class="tp-sub">Les 8 meilleurs sur 12 sont repêchés pour le Round of 32</div>' +
+      '<div class="tp-sub">Les 8 meilleurs sur 12 sont repêchés pour le Seizièmes</div>' +
     '</div>' +
     '<div class="tp-rule"></div>' +
     '<table class="tp-table">' +
@@ -1445,18 +1448,19 @@ document.addEventListener('input', function(e) {
   var sideNow = inp.dataset.side;
   if (/^[0-9]$/.test(inp.value)) {
     var advRound = round, advIdx = idx, advContainer = container;
+    var advScope = inp.closest('#bracket-mobile') || document;
     clearTimeout(inp._advTimer);
     inp._advTimer = setTimeout(function() {
       var next = null;
       if (sideNow === 'a') {
-        var bm2 = document.querySelector('.bmatch[data-round="'+advRound+'"][data-idx="'+advIdx+'"]');
+        var bm2 = advScope.querySelector('.bmatch[data-round="'+advRound+'"][data-idx="'+advIdx+'"]');
         if (bm2) next = bm2.querySelector(advContainer + ' .bsinline[data-side="b"]');
       } else {
-        var allA = Array.from(document.querySelectorAll(advContainer + ' .bsinline[data-side="a"]')).filter(function(el) {
+        var allA = Array.from(advScope.querySelectorAll(advContainer + ' .bsinline[data-side="a"]')).filter(function(el) {
           var br = el.closest('.b-round');
           return !br || window.innerWidth >= 768 || br.classList.contains('br-active');
         });
-        var curBm = document.querySelector('.bmatch[data-round="'+advRound+'"][data-idx="'+advIdx+'"]');
+        var curBm = advScope.querySelector('.bmatch[data-round="'+advRound+'"][data-idx="'+advIdx+'"]');
         var curA = curBm ? curBm.querySelector(advContainer + ' .bsinline[data-side="a"]') : null;
         var i2 = curA ? allA.indexOf(curA) : -1;
         if (i2 !== -1 && i2 + 1 < allA.length) next = allA[i2 + 1];
@@ -1796,7 +1800,7 @@ function renderBracket() {
   // ── GAUCHE : R32[0-7] → R16[0-3] → QF[0-1] → SF[0] ──
   html += '<div class="bracket-half bracket-left">';
 
-  html += '<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  html += '<div class="b-round"><div class="b-round-lbl">Seizièmes</div><div class="b-round-matches">';
   for (var i = 0; i < 8; i++) html += bSlot('r32', i, 8, renderBMatch('r32', i, r32[i][0], r32[i][1]));
   html += '</div></div>';
 
@@ -1837,7 +1841,7 @@ function renderBracket() {
   for (var i = 0; i < 4; i++) html += bSlot('r16', i, 4, renderBMatch('r16', 4+i, BS.r32[(4+i)*2]||'TBD', BS.r32[(4+i)*2+1]||'TBD'));
   html += '</div></div>';
 
-  html += '<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  html += '<div class="b-round"><div class="b-round-lbl">Seizièmes</div><div class="b-round-matches">';
   for (var i = 0; i < 8; i++) html += bSlot('r32', i, 8, renderBMatch('r32', 8+i, r32[8+i][0], r32[8+i][1]));
   html += '</div></div>';
 
@@ -1862,7 +1866,7 @@ function renderBracketNav() {
   var cur = window._brMobileRound || 'r32';
 
   var roundDefs = [
-    {id:'r32', label:'R32',      getMatch: function(i){ return [r32[i][0], r32[i][1]]; }, count:16},
+    {id:'r32', label:'Seizièmes',getMatch: function(i){ return [r32[i][0], r32[i][1]]; }, count:16},
     {id:'r16', label:'Huitièmes',getMatch: function(i){ return [BS.r32[i*2]||'TBD', BS.r32[i*2+1]||'TBD']; }, count:8},
     {id:'qf',  label:'Quarts',   getMatch: function(i){ return [BS.r16[i*2]||'TBD', BS.r16[i*2+1]||'TBD']; }, count:4},
     {id:'sf',  label:'Demies',   getMatch: function(i){ return [BS.qf[i*2]||'TBD', BS.qf[i*2+1]||'TBD']; }, count:2},
@@ -2380,7 +2384,7 @@ function renderProbableBracket() {
 
   var html='';
   html+='<div class="bracket-half bracket-left">';
-  html+='<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  html+='<div class="b-round"><div class="b-round-lbl">Seizièmes</div><div class="b-round-matches">';
   for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[i][0],r32[i][1],pSC.r32[i],false,predSt));
   html+='</div></div>';
   html+='<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
@@ -2411,7 +2415,7 @@ function renderProbableBracket() {
   html+='<div class="b-round"><div class="b-round-lbl">Huitièmes</div><div class="b-round-matches">';
   for(var i=0;i<4;i++) html+=pbSlot('r16',i,4,renderBMatchPred(pW.r32[(4+i)*2]||'TBD',pW.r32[(4+i)*2+1]||'TBD',pSC.r16[4+i],false,predSt));
   html+='</div></div>';
-  html+='<div class="b-round"><div class="b-round-lbl">Round of 32</div><div class="b-round-matches">';
+  html+='<div class="b-round"><div class="b-round-lbl">Seizièmes</div><div class="b-round-matches">';
   for(var i=0;i<8;i++) html+=pbSlot('r32',i,8,renderBMatchPred(r32[8+i][0],r32[8+i][1],pSC.r32[8+i],false,predSt));
   html+='</div></div>';
   html+='</div>';
