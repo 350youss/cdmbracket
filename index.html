@@ -865,9 +865,7 @@ var BSCR = {
   f:   new Array(1).fill(null),
   pet: new Array(1).fill(null)
 };
-// ── BRACKET_START ──
-BS.r32[2] = 'Canada'; BSCR.r32[2] = {a:0, b:1, winner:null};
-// ── BRACKET_END ──
+// ── BRACKET_PLACEHOLDER ──
 
 /* ================================================
    HELPERS
@@ -3397,6 +3395,9 @@ function sharePronos() {
    INIT
 ================================================ */
 if (!IS_SHARED_VIEW) loadState();
+// ── BRACKET_START ──
+BS.r32[2] = 'Canada'; BSCR.r32[2] = {a:0, b:1, winner:null};
+// ── BRACKET_END ──
 renderGroups();
 renderBracket();
 renderElo();
