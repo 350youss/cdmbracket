@@ -3391,12 +3391,20 @@ function sharePronos() {
   }
 }
 
+// Apply a known ESPN result and clear inconsistent downstream predictions
+function _applyKO(r, i, w, a, b) {
+  var old = BS[r][i];
+  BS[r][i] = w;
+  BSCR[r][i] = {a:a, b:b, winner: (a === b ? w : null)};
+  if (old !== w) clearDown(r, i);
+}
+
 /* ================================================
    INIT
 ================================================ */
 if (!IS_SHARED_VIEW) loadState();
 // ── BRACKET_START ──
-BS.r32[2] = 'Canada'; BSCR.r32[2] = {a:0, b:1, winner:null};
+_applyKO('r32', 2, 'Canada', 0, 1);
 // ── BRACKET_END ──
 renderGroups();
 renderBracket();
