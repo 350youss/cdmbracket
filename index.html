@@ -267,6 +267,12 @@ main { padding:36px 44px 60px; }
   border:1px solid var(--line); background:transparent; color:var(--sub);
   transition:all .15s; display:flex; align-items:center; justify-content:center; gap:4px; }
 .bm-tb-btn.sel { border-color:var(--accent); background:rgba(74,140,255,.15); color:var(--accent); }
+/* Badge ESPN (résultat officiel) */
+.bt-lock { font-family:'Tanker'; font-weight:800; font-size:8px; color:#4a8; letter-spacing:.04em;
+  background:rgba(40,180,100,.12); border-radius:2px; padding:1px 4px; }
+.bmatch.bm-locked { border-left-color:#4a8; }
+.bmatch.bm-locked .bsinline:disabled { opacity:1; background:transparent; cursor:default; pointer-events:none; }
+
 /* Badge pénalités */
 .bt-pen { font-family:'Tanker'; font-weight:800; font-size:9px; color:var(--accent);
   background:rgba(74,140,255,.15); border-radius:2px; padding:1px 4px; letter-spacing:.05em; }
@@ -865,7 +871,8 @@ var BSCR = {
   f:   new Array(1).fill(null),
   pet: new Array(1).fill(null)
 };
-// ── BRACKET_PLACEHOLDER ──
+// Slots verrouillés par les résultats ESPN officiels
+var BRACKET_LOCKED = {};
 
 /* ================================================
    HELPERS
@@ -1408,6 +1415,7 @@ document.addEventListener('click', function(e) {
   var tb = e.target.closest ? e.target.closest('.bm-tb-btn') : null;
   if (tb) {
     var round = tb.dataset.round, idx = parseInt(tb.dataset.idx);
+    if (BRACKET_LOCKED[round + '.' + idx]) return;
     var bmatch = tb.closest('.bmatch');
     var ta = bmatch.dataset.ta, tbTeam = bmatch.dataset.tb;
     var winner = tb.dataset.winner === 'a' ? ta : tbTeam;
@@ -1432,6 +1440,7 @@ document.addEventListener('input', function(e) {
   var round = inp.dataset.round, idx = parseInt(inp.dataset.idx);
   var bmatch = inp.closest('.bmatch');
   if (!bmatch) return;
+  if (BRACKET_LOCKED[round + '.' + idx]) return;
   var ta = bmatch.dataset.ta, tb = bmatch.dataset.tb;
   if (!ta || ta === 'TBD' || !tb || tb === 'TBD') return;
 
@@ -1696,10 +1705,12 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
   var w = BS[round][idx];
   var sc = BSCR[round][idx];
   var prb = (ta && ta !== 'TBD' && tb && tb !== 'TBD') ? probsKO(ta, tb) : [50,50];
+  var locked = !!BRACKET_LOCKED[round + '.' + idx];
   var cls = 'bmatch';
   if (extraCls) cls += ' ' + extraCls;
   if (round === 'f' && w) cls += ' gold';
   if (round === 'pet') cls += ' grey';
+  if (locked) cls += ' bm-locked';
 
   var safeTA = esc(ta || ''), safeTB = esc(tb || '');
   var va = sc !== null ? sc.a : '', vb = sc !== null ? sc.b : '';
@@ -1722,8 +1733,9 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
     '</div>' +
     '<div class="bt-r">' +
       '<span class="bt-pct">' + (ta && ta !== 'TBD' ? prb[0]+'%' : '') + '</span>' +
-      '<input class="bsinline' + (va!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + va + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="a">' +
+      '<input class="bsinline' + (va!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + va + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="a"' + (locked?' disabled':'') + '>' +
       (penA ? '<span class="bt-pen">p</span>' : '') +
+      (locked ? '<span class="bt-lock">ESPN</span>' : '') +
       (w === ta && round==='f' ? '<span class="bt-icon">🏆</span>' : '') +
     '</div></div>';
 
@@ -1736,7 +1748,7 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
     '</div>' +
     '<div class="bt-r">' +
       '<span class="bt-pct">' + (tb && tb !== 'TBD' ? prb[1]+'%' : '') + '</span>' +
-      '<input class="bsinline' + (vb!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + vb + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="b">' +
+      '<input class="bsinline' + (vb!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + vb + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="b"' + (locked?' disabled':'') + '>' +
       (penB ? '<span class="bt-pen">p</span>' : '') +
       (w === tb && round==='f' ? '<span class="bt-icon">🏆</span>' : '') +
     '</div></div>';
@@ -1755,9 +1767,9 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
       '</div>' +
     '</div>' +
     '<div class="bm-score-cell">' +
-      '<input class="bsinline' + (va!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + va + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="a">' +
+      '<input class="bsinline' + (va!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + va + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="a"' + (locked?' disabled':'') + '>' +
       '<span class="bs-dash">–</span>' +
-      '<input class="bsinline' + (vb!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + vb + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="b">' +
+      '<input class="bsinline' + (vb!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + vb + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="b"' + (locked?' disabled':'') + '>' +
     '</div>' +
     '<div class="bm-right">' +
       '<div class="bm-info-col" style="align-items:flex-end">' +
@@ -3391,12 +3403,13 @@ function sharePronos() {
   }
 }
 
-// Apply a known ESPN result and clear inconsistent downstream predictions
+// Apply a known ESPN result, lock the slot, and clear downstream predictions
 function _applyKO(r, i, w, a, b) {
-  var old = BS[r][i];
+  var key = r + '.' + i;
+  BRACKET_LOCKED[key] = true;
+  clearDown(r, i);
   BS[r][i] = w;
   BSCR[r][i] = {a:a, b:b, winner: (a === b ? w : null)};
-  if (old !== w) clearDown(r, i);
 }
 
 /* ================================================
