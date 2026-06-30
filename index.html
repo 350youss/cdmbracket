@@ -237,7 +237,7 @@ main { padding:36px 44px 60px; }
 .br-mlabel { font-family:'Tanker'; font-size:11px; letter-spacing:.18em; color:var(--muted);
   text-transform:uppercase; padding:16px 0 6px; }
 
-.bmatch { background:var(--s1); border-left:2px solid var(--accent); transition:border-color .15s,background .15s; user-select:none; overflow:hidden; }
+.bmatch { background:var(--s1); border-left:2px solid var(--accent); transition:border-color .15s,background .15s; user-select:none; position:relative; overflow:hidden; }
 .bteam .bsinline { width:30px; height:26px; font-size:13px; }
 .bmatch.gold { border-left-color:var(--gold); }
 .bmatch.grey { border-left-color:#555; }
@@ -262,6 +262,8 @@ main { padding:36px 44px 60px; }
 .bs-dash { font-family:'Tanker'; font-weight:700; font-size:14px; color:var(--muted); }
 .bm-tiebreak { display:none; flex-direction:column; align-items:stretch; gap:4px; padding:4px 8px 8px; }
 .bm-tiebreak.show { display:flex; }
+/* Desktop : sort du flux pour ne pas élargir la carte */
+#bracket .bm-tiebreak { position:absolute; left:0; right:0; top:100%; z-index:50; background:var(--s1); border:1px solid var(--line); border-top:none; border-left:2px solid var(--accent); }
 .bm-tb-lbl { width:100%; text-align:center; font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding-bottom:2px; }
 .bm-tb-btn { width:100%; min-width:0; padding:8px 4px; font-weight:700; font-size:11px; cursor:pointer;
   border:1px solid var(--line); background:transparent; color:var(--sub);
