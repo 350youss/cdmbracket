@@ -267,11 +267,13 @@ main { padding:36px 44px 60px; }
   border:1px solid var(--line); background:transparent; color:var(--sub);
   transition:all .15s; display:flex; align-items:center; justify-content:center; gap:4px; }
 .bm-tb-btn.sel { border-color:var(--accent); background:rgba(74,140,255,.15); color:var(--accent); }
-/* Badge ESPN (résultat officiel) */
-.bt-lock { font-family:'Tanker'; font-weight:800; font-size:8px; color:#4a8; letter-spacing:.04em;
-  background:rgba(40,180,100,.12); border-radius:2px; padding:1px 4px; }
+/* Résultat officiel ESPN — bordure verte + inputs non éditables */
 .bmatch.bm-locked { border-left-color:#4a8; }
 .bmatch.bm-locked .bsinline:disabled { opacity:1; background:transparent; cursor:default; pointer-events:none; }
+/* Score pénalités */
+.bm-tab-row { font-family:'Tanker'; font-weight:800; font-size:10px; color:var(--accent);
+  text-align:center; padding:2px 8px 5px; letter-spacing:.06em; }
+.bm-tab-row span { color:var(--muted); font-weight:700; }
 
 /* Badge pénalités */
 .bt-pen { font-family:'Tanker'; font-weight:800; font-size:9px; color:var(--accent);
@@ -1735,7 +1737,6 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
       '<span class="bt-pct">' + (ta && ta !== 'TBD' ? prb[0]+'%' : '') + '</span>' +
       '<input class="bsinline' + (va!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + va + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="a"' + (locked?' disabled':'') + '>' +
       (penA ? '<span class="bt-pen">p</span>' : '') +
-      (locked ? '<span class="bt-lock">ESPN</span>' : '') +
       (w === ta && round==='f' ? '<span class="bt-icon">🏆</span>' : '') +
     '</div></div>';
 
@@ -1779,6 +1780,11 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
       (tb && tb !== 'TBD' ? flag(tb,'sm') : '') +
     '</div>' +
   '</div>';
+
+  // Score t.a.b. (résultat ESPN officiel uniquement)
+  if (isPen && sc && sc.pa !== undefined) {
+    html += '<div class="bm-tab-row">' + sc.pa + '–' + sc.pb + ' <span>t.a.b.</span></div>';
+  }
 
   // Tirs au but (desktop + mobile) — masqué une fois le vainqueur choisi
   html += '<div class="bm-tiebreak' + (showTB?' show':'') + '">' +
@@ -3404,12 +3410,15 @@ function sharePronos() {
 }
 
 // Apply a known ESPN result, lock the slot, and clear downstream predictions
-function _applyKO(r, i, w, a, b) {
+// pa, pb = optional penalty shootout scores (team A, team B)
+function _applyKO(r, i, w, a, b, pa, pb) {
   var key = r + '.' + i;
   BRACKET_LOCKED[key] = true;
   clearDown(r, i);
   BS[r][i] = w;
-  BSCR[r][i] = {a:a, b:b, winner: (a === b ? w : null)};
+  var sc = {a:a, b:b, winner: (a === b ? w : null)};
+  if (pa !== undefined) { sc.pa = pa; sc.pb = pb; }
+  BSCR[r][i] = sc;
 }
 
 /* ================================================
@@ -3417,9 +3426,9 @@ function _applyKO(r, i, w, a, b) {
 ================================================ */
 if (!IS_SHARED_VIEW) loadState();
 // ── BRACKET_START ──
-_applyKO('r32', 0, 'Paraguay', 1, 1);
+_applyKO('r32', 0, 'Paraguay', 1, 1, 3, 4);
 _applyKO('r32', 2, 'Canada', 0, 1);
-_applyKO('r32', 3, 'Maroc', 1, 1);
+_applyKO('r32', 3, 'Maroc', 1, 1, 2, 3);
 _applyKO('r32', 8, 'Brésil', 2, 1);
 // ── BRACKET_END ──
 renderGroups();
