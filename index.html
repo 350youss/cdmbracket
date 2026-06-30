@@ -1503,8 +1503,15 @@ document.addEventListener('input', function(e) {
   var tbDiv = bmatch.querySelector('.bm-tiebreak');
   if (tbDiv) {
     var showTb = a === b && !winner;
-    tbDiv.classList.toggle('show', showTb);
-    if (showTb && window.innerWidth < 768) setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+    if (showTb) {
+      // Verrouille la largeur AVANT d'afficher pour éviter que le contenu élargisse la carte
+      tbDiv.style.width = bmatch.offsetWidth + 'px';
+      tbDiv.classList.add('show');
+      if (window.innerWidth < 768) setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+    } else {
+      tbDiv.classList.remove('show');
+      tbDiv.style.width = '';
+    }
   }
 
   if (winner) {
