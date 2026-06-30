@@ -1503,7 +1503,7 @@ document.addEventListener('input', function(e) {
   if (tbDiv) {
     var showTb = a === b && !winner;
     tbDiv.classList.toggle('show', showTb);
-    if (showTb) setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+    if (showTb && window.innerWidth < 768) setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
   }
 
   if (winner) {
