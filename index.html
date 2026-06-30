@@ -1500,7 +1500,11 @@ document.addEventListener('input', function(e) {
   BSCR[round][idx] = {a:a, b:b, winner:winner};
 
   var tbDiv = bmatch.querySelector('.bm-tiebreak');
-  if (tbDiv) tbDiv.classList.toggle('show', a === b && !winner);
+  if (tbDiv) {
+    var showTb = a === b && !winner;
+    tbDiv.classList.toggle('show', showTb);
+    if (showTb) setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+  }
 
   if (winner) {
     BS[round][idx] = winner;
