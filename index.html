@@ -183,7 +183,7 @@ main { padding:36px 44px 60px; }
 .btfl { display:flex; flex-direction:column; align-items:center; gap:2px; flex-shrink:0; width:22px; }
 .bt-pos { font-size:7px; color:var(--muted); font-weight:600; white-space:nowrap; letter-spacing:.04em; display:none; max-width:100%; overflow:hidden; text-overflow:ellipsis; }
 /* Main bracket : flags + position under flag, no name, compact columns */
-#bracket .b-round { min-width:72px; max-width:86px; overflow:visible; }
+#bracket .b-round { min-width:72px; max-width:86px; overflow:hidden; }
 #bracket .bracket-center { min-width:148px; padding-top:127px; }
 #bracket .bt-name { display:none; }
 #bracket .bt-pct { display:none; }
@@ -262,8 +262,8 @@ main { padding:36px 44px 60px; }
 .bs-dash { font-family:'Tanker'; font-weight:700; font-size:14px; color:var(--muted); }
 .bm-tiebreak { display:none; flex-direction:column; align-items:stretch; gap:4px; padding:4px 8px 8px; }
 .bm-tiebreak.show { display:flex; }
-/* Desktop : tiebreak inline masqué — géré par le modal */
-#bracket .bm-tiebreak { display:none !important; }
+/* Desktop : tiebreak inline — contraint à la largeur de la colonne */
+#bracket .bm-tiebreak { width:100%; max-width:100%; box-sizing:border-box; padding:2px 4px 6px; gap:2px; }
 .bm-tb-lbl { width:100%; text-align:center; font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding-bottom:2px; }
 .bm-tb-btn { width:100%; min-width:0; padding:8px 4px; font-weight:700; font-size:11px; cursor:pointer;
   border:1px solid var(--line); background:transparent; color:var(--sub);
@@ -1505,22 +1505,13 @@ document.addEventListener('input', function(e) {
   var prevWinner = BS[round][idx];
   BSCR[round][idx] = {a:a, b:b, winner:winner};
 
-  var showTb = a === b && !winner;
-  if (showTb) {
-    if (window.innerWidth >= 768) {
-      // Desktop : modal TAB (pas de layout shift)
-      openBracketModal(round, idx, ta, tb);
-    } else {
-      // Mobile : tiebreak inline
-      var tbDiv = bmatch.querySelector('.bm-tiebreak');
-      if (tbDiv) {
-        tbDiv.classList.add('show');
-        setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
-      }
+  var tbDiv = bmatch.querySelector('.bm-tiebreak');
+  if (tbDiv) {
+    var showTb = a === b && !winner;
+    tbDiv.classList.toggle('show', showTb);
+    if (showTb && window.innerWidth < 768) {
+      setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
     }
-  } else {
-    var tbDiv2 = bmatch.querySelector('.bm-tiebreak');
-    if (tbDiv2) { tbDiv2.classList.remove('show'); }
   }
 
   if (winner) {
