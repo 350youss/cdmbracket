@@ -231,9 +231,9 @@ main { padding:36px 44px 60px; }
 #bracket-mobile .btfl { width:auto; flex-direction:row; gap:6px; align-items:center; }
 #bracket-mobile .bt-pos { display:block !important; font-size:10px; }
 #bracket-mobile .bmatch { border-radius:4px; margin-bottom:2px; }
-#bracket-mobile .bm-tiebreak { padding:0 12px 12px; gap:8px; flex-wrap:wrap; justify-content:center; }
+#bracket-mobile .bm-tiebreak { flex-direction:row; flex-wrap:wrap; justify-content:center; padding:0 12px 12px; gap:8px; }
 #bracket-mobile .bm-tb-lbl { width:100%; text-align:center; margin-bottom:-2px; }
-#bracket-mobile .bm-tb-btn { flex:1; padding:12px 8px; font-size:13px; }
+#bracket-mobile .bm-tb-btn { flex:1; width:auto; padding:12px 8px; font-size:13px; }
 .br-mlabel { font-family:'Tanker'; font-size:11px; letter-spacing:.18em; color:var(--muted);
   text-transform:uppercase; padding:16px 0 6px; }
 
@@ -260,10 +260,10 @@ main { padding:36px 44px 60px; }
 .bsinline.has-val { background:rgba(74,140,255,.1); border-bottom-color:rgba(74,140,255,.4); }
 .bsinline::placeholder { color:var(--muted); font-size:14px; font-weight:400; }
 .bs-dash { font-family:'Tanker'; font-weight:700; font-size:14px; color:var(--muted); }
-.bm-tiebreak { display:none; align-items:center; gap:6px; padding:0 10px 8px; flex-wrap:wrap; justify-content:center; }
+.bm-tiebreak { display:none; flex-direction:column; align-items:stretch; gap:4px; padding:4px 8px 8px; }
 .bm-tiebreak.show { display:flex; }
-.bm-tb-lbl { width:100%; text-align:center; margin-bottom:-2px; font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-.bm-tb-btn { flex:1; padding:10px 4px; font-weight:700; font-size:11px; cursor:pointer;
+.bm-tb-lbl { width:100%; text-align:center; font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding-bottom:2px; }
+.bm-tb-btn { width:100%; padding:8px 4px; font-weight:700; font-size:11px; cursor:pointer;
   border:1px solid var(--line); background:transparent; color:var(--sub);
   transition:all .15s; display:flex; align-items:center; justify-content:center; gap:4px; }
 .bm-tb-btn.sel { border-color:var(--accent); background:rgba(74,140,255,.15); color:var(--accent); }
