@@ -262,8 +262,8 @@ main { padding:36px 44px 60px; }
 .bs-dash { font-family:'Tanker'; font-weight:700; font-size:14px; color:var(--muted); }
 .bm-tiebreak { display:none; flex-direction:column; align-items:stretch; gap:4px; padding:4px 8px 8px; }
 .bm-tiebreak.show { display:flex; }
-/* Desktop : sort du flux pour ne pas élargir la carte */
-#bracket .bm-tiebreak { position:absolute; left:0; right:0; top:100%; z-index:50; background:var(--s1); border:1px solid var(--line); border-top:none; border-left:2px solid var(--accent); }
+/* Desktop : tiebreak inline masqué — géré par le modal */
+#bracket .bm-tiebreak { display:none !important; }
 .bm-tb-lbl { width:100%; text-align:center; font-size:10px; color:var(--muted); font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding-bottom:2px; }
 .bm-tb-btn { width:100%; min-width:0; padding:8px 4px; font-weight:700; font-size:11px; cursor:pointer;
   border:1px solid var(--line); background:transparent; color:var(--sub);
@@ -1505,18 +1505,22 @@ document.addEventListener('input', function(e) {
   var prevWinner = BS[round][idx];
   BSCR[round][idx] = {a:a, b:b, winner:winner};
 
-  var tbDiv = bmatch.querySelector('.bm-tiebreak');
-  if (tbDiv) {
-    var showTb = a === b && !winner;
-    if (showTb) {
-      // Verrouille la largeur AVANT d'afficher pour éviter que le contenu élargisse la carte
-      tbDiv.style.width = bmatch.offsetWidth + 'px';
-      tbDiv.classList.add('show');
-      if (window.innerWidth < 768) setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+  var showTb = a === b && !winner;
+  if (showTb) {
+    if (window.innerWidth >= 768) {
+      // Desktop : modal TAB (pas de layout shift)
+      openBracketModal(round, idx, ta, tb);
     } else {
-      tbDiv.classList.remove('show');
-      tbDiv.style.width = '';
+      // Mobile : tiebreak inline
+      var tbDiv = bmatch.querySelector('.bm-tiebreak');
+      if (tbDiv) {
+        tbDiv.classList.add('show');
+        setTimeout(function() { tbDiv.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+      }
     }
+  } else {
+    var tbDiv2 = bmatch.querySelector('.bm-tiebreak');
+    if (tbDiv2) { tbDiv2.classList.remove('show'); }
   }
 
   if (winner) {
