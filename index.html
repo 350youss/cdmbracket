@@ -1736,7 +1736,6 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
     '<div class="bt-r">' +
       '<span class="bt-pct">' + (ta && ta !== 'TBD' ? prb[0]+'%' : '') + '</span>' +
       '<input class="bsinline' + (va!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + va + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="a"' + (locked?' disabled':'') + '>' +
-      (penA ? '<span class="bt-pen">p</span>' : '') +
       (w === ta && round==='f' ? '<span class="bt-icon">🏆</span>' : '') +
     '</div></div>';
 
@@ -1750,7 +1749,6 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
     '<div class="bt-r">' +
       '<span class="bt-pct">' + (tb && tb !== 'TBD' ? prb[1]+'%' : '') + '</span>' +
       '<input class="bsinline' + (vb!==''?' has-val':'') + '" type="text" inputmode="numeric" pattern="[0-9]*" value="' + vb + '" placeholder="·" data-round="' + round + '" data-idx="' + idx + '" data-side="b"' + (locked?' disabled':'') + '>' +
-      (penB ? '<span class="bt-pen">p</span>' : '') +
       (w === tb && round==='f' ? '<span class="bt-icon">🏆</span>' : '') +
     '</div></div>';
 
@@ -1763,7 +1761,7 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
     '<div class="bm-left">' +
       (ta && ta !== 'TBD' ? flag(ta,'sm') : '') +
       '<div class="bm-info-col">' +
-        '<span class="bm-name' + (w===ta?' bm-win':'') + '">' + (ta||'TBD') + (penA?' <span class="bm-pen">p</span>':'') + '</span>' +
+        '<span class="bm-name' + (w===ta?' bm-win':'') + '">' + (ta||'TBD') + '</span>' +
         (subA ? '<span class="bm-sub">' + subA + '</span>' : '') +
       '</div>' +
     '</div>' +
@@ -1774,7 +1772,7 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
     '</div>' +
     '<div class="bm-right">' +
       '<div class="bm-info-col" style="align-items:flex-end">' +
-        '<span class="bm-name' + (w===tb?' bm-win':'') + '">' + (tb||'TBD') + (penB?' <span class="bm-pen">p</span>':'') + '</span>' +
+        '<span class="bm-name' + (w===tb?' bm-win':'') + '">' + (tb||'TBD') + '</span>' +
         (subB ? '<span class="bm-sub">' + subB + '</span>' : '') +
       '</div>' +
       (tb && tb !== 'TBD' ? flag(tb,'sm') : '') +
