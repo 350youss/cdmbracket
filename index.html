@@ -268,6 +268,9 @@ main { padding:36px 44px 60px; }
   transition:all .15s; display:flex; align-items:center; justify-content:center; gap:4px;
   overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
 .bm-tb-btn.sel { border-color:var(--accent); background:rgba(74,140,255,.15); color:var(--accent); }
+/* TAB : noms cachés sur desktop (cartes trop étroites), visibles sur mobile */
+.bm-tb-name { display:none; }
+#bracket-mobile .bm-tb-name { display:inline; }
 /* Résultat officiel ESPN — bordure verte + inputs non éditables */
 .bmatch.bm-locked { border-left-color:#4a8; }
 .bmatch.bm-locked .bsinline:disabled { opacity:1; background:transparent; cursor:default; pointer-events:none; }
@@ -1799,8 +1802,8 @@ function renderBMatch(round, idx, ta, tb, extraCls) {
   // Tirs au but (desktop + mobile) — masqué une fois le vainqueur choisi
   html += '<div class="bm-tiebreak' + (showTB?' show':'') + '">' +
     '<span class="bm-tb-lbl">Tab&nbsp;:</span>' +
-    '<button class="bm-tb-btn" data-round="' + round + '" data-idx="' + idx + '" data-winner="a">' + (ta&&ta!=='TBD'?flag(ta,'sm'):'') + ' ' + (ta||'?') + '</button>' +
-    '<button class="bm-tb-btn" data-round="' + round + '" data-idx="' + idx + '" data-winner="b">' + (tb&&tb!=='TBD'?flag(tb,'sm'):'') + ' ' + (tb||'?') + '</button>' +
+    '<button class="bm-tb-btn" data-round="' + round + '" data-idx="' + idx + '" data-winner="a">' + (ta&&ta!=='TBD'?flag(ta,'sm'):'') + '<span class="bm-tb-name"> ' + (ta||'?') + '</span></button>' +
+    '<button class="bm-tb-btn" data-round="' + round + '" data-idx="' + idx + '" data-winner="b">' + (tb&&tb!=='TBD'?flag(tb,'sm'):'') + '<span class="bm-tb-name"> ' + (tb||'?') + '</span></button>' +
   '</div>';
 
   html += '</div>';
