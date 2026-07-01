@@ -720,6 +720,9 @@ var ELO = {
   'RD Congo':1468,'Qatar':1502,'Haïti':1438,'Curaçao':1422,
   'Nouvelle-Zélande':1452
 };
+// ELO dynamique (recalculé selon les résultats du tournoi) — actif seulement
+// pendant le rendu du bracket probable ; null = on utilise l'ELO de base.
+var ELO_DYN = null;
 
 var INFO = {
   'Mexique':{star:'H. Lozano',str:'Expérience du tournoi, avantage à domicile',wk:'Plafond historique en quarts de finale'},
@@ -900,7 +903,7 @@ function pairs(t) {
       o.push([t[i], t[j]]);
   return o;
 }
-function el(n) { return ELO[n] || 1600; }
+function el(n) { return (ELO_DYN && ELO_DYN[n] != null) ? ELO_DYN[n] : (ELO[n] || 1600); }
 function winP(a, b) { return 1 / (1 + Math.pow(10, (el(b) - el(a)) / 400)); }
 function drawProb(a, b) { return Math.max(0.12, 0.27 - Math.abs(winP(a,b) - 0.5) * 0.35); }
 function probs3(a, b) {
@@ -2355,6 +2358,56 @@ function renderBMatchPred(ta, tb, sc, isFinale, predSt) {
   return html;
 }
 
+// Résultat KO officiel (verrouillé ESPN) pour un slot, sinon null
+function actualKO(round, idx) {
+  if (!BRACKET_LOCKED[round + '.' + idx]) return null;
+  var sc = BSCR[round] && BSCR[round][idx];
+  if (!sc) return null;
+  return {a: sc.a, b: sc.b, winner: sc.winner || BS[round][idx] || null};
+}
+
+// ELO dynamique : part de l'ELO de base et applique un ajustement Elo standard
+// pour chaque match réellement joué (groupes + KO officiels). Traduit la forme
+// et les upsets du tournoi dans les prédictions des tours restants.
+function buildDynamicELO(realR32) {
+  var e = {};
+  Object.keys(ELO).forEach(function(k){ e[k] = ELO[k]; });
+  function upd(ta, tb, ga, gb, K) {
+    if (!ta || !tb || ta === 'TBD' || tb === 'TBD') return;
+    if (ga == null || gb == null) return;
+    if (e[ta] == null) e[ta] = 1600;
+    if (e[tb] == null) e[tb] = 1600;
+    var gd = Math.abs(ga - gb);
+    var G = gd <= 1 ? 1 : (gd === 2 ? 1.5 : (11 + gd) / 8); // marge de but (World Football Elo)
+    var Ea = 1 / (1 + Math.pow(10, (e[tb] - e[ta]) / 400));
+    var Sa = ga > gb ? 1 : (ga < gb ? 0 : 0.5);             // t.a.b. = nul pour l'ELO
+    var d = K * G * (Sa - Ea);
+    e[ta] += d; e[tb] -= d;
+  }
+  // Phase de groupes (K modéré : la base pré-tournoi reste dominante)
+  GRP.forEach(function(g){
+    var ms = pairs(g.teams);
+    ms.forEach(function(pair, i){ var r = RES[g.id][i]; if (r) upd(pair[0], pair[1], r.a, r.b, 15); });
+  });
+  // Matchs à élimination directe officiels (K plus fort : plus révélateurs)
+  var rounds = [
+    {r:'r32', teams:function(i){ return realR32[i]; }},
+    {r:'r16', teams:function(i){ return [BS.r32[i*2], BS.r32[i*2+1]]; }},
+    {r:'qf',  teams:function(i){ return [BS.r16[i*2], BS.r16[i*2+1]]; }},
+    {r:'sf',  teams:function(i){ return [BS.qf[i*2], BS.qf[i*2+1]]; }},
+    {r:'f',   teams:function(i){ return [BS.sf[0], BS.sf[1]]; }},
+    {r:'pet', teams:function(i){ return [BS.sfLosers[0], BS.sfLosers[1]]; }}
+  ];
+  rounds.forEach(function(rd){
+    (BSCR[rd.r] || []).forEach(function(sc, i){
+      if (!sc || !BRACKET_LOCKED[rd.r + '.' + i]) return;
+      var t = rd.teams(i); if (!t) return;
+      upd(t[0], t[1], sc.a, sc.b, 30);
+    });
+  });
+  return e;
+}
+
 function renderProbableBracket() {
   // 1. Standings prédits (vrais résultats + prédictions pour les matchs restants)
   var predSt = {};
@@ -2401,16 +2454,20 @@ function renderProbableBracket() {
   var pSC={r32:new Array(16).fill(null),r16:new Array(8).fill(null),qf:new Array(4).fill(null),sf:new Array(2).fill(null)};
   var sfLosers=[null,null];
 
-  for (var i=0;i<16;i++){ var sc=predictScoreKO(r32[i][0],r32[i][1]); pW.r32[i]=sc.winner; pSC.r32[i]=sc; }
-  for (var i=0;i<8;i++){ var sc=predictScoreKO(pW.r32[i*2],pW.r32[i*2+1]); pW.r16[i]=sc.winner; pSC.r16[i]=sc; }
-  for (var i=0;i<4;i++){ var sc=predictScoreKO(pW.r16[i*2],pW.r16[i*2+1]); pW.qf[i]=sc.winner; pSC.qf[i]=sc; }
+  // ELO dynamique selon tous les résultats du tournoi (actif jusqu'au rendu)
+  ELO_DYN = buildDynamicELO(r32);
+
+  // Résultats réels quand ils existent, sinon prédiction (avec ELO dynamique)
+  for (var i=0;i<16;i++){ var sc=actualKO('r32',i)||predictScoreKO(r32[i][0],r32[i][1]); pW.r32[i]=sc.winner; pSC.r32[i]=sc; }
+  for (var i=0;i<8;i++){ var sc=actualKO('r16',i)||predictScoreKO(pW.r32[i*2],pW.r32[i*2+1]); pW.r16[i]=sc.winner; pSC.r16[i]=sc; }
+  for (var i=0;i<4;i++){ var sc=actualKO('qf',i)||predictScoreKO(pW.r16[i*2],pW.r16[i*2+1]); pW.qf[i]=sc.winner; pSC.qf[i]=sc; }
   for (var i=0;i<2;i++){
     var ta=pW.qf[i*2], tb=pW.qf[i*2+1];
-    var sc=predictScoreKO(ta,tb); pW.sf[i]=sc.winner; pSC.sf[i]=sc;
+    var sc=actualKO('sf',i)||predictScoreKO(ta,tb); pW.sf[i]=sc.winner; pSC.sf[i]=sc;
     sfLosers[i]=(sc.winner===ta?tb:ta);
   }
-  var fsc = predictScoreKO(pW.sf[0],pW.sf[1]);
-  var petsc = predictScoreKO(sfLosers[0],sfLosers[1]);
+  var fsc = actualKO('f',0)||predictScoreKO(pW.sf[0],pW.sf[1]);
+  var petsc = actualKO('pet',0)||predictScoreKO(sfLosers[0],sfLosers[1]);
 
   // 4. Rendu
   var FLEX={r32:1,r16:2,qf:4,sf:8};
@@ -2458,6 +2515,7 @@ function renderProbableBracket() {
   html+='</div>';
 
   document.getElementById('bracket-probable').innerHTML = html;
+  ELO_DYN = null; // fin du scope dynamique : les autres vues utilisent l'ELO de base
 
   // ── Tous les 3es (style gtable) ──
   var extra = '';
