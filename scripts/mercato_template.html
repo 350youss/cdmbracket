@@ -41,7 +41,8 @@ header{padding-top:40px;}
 /* CREST (logo + repli monogramme) */
 .crest{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
   font-family:'Tanker',sans-serif;letter-spacing:0;}
-.crest img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;}
+.crest.has-logo{background-color:#fff !important;color:transparent !important;
+  background-size:78% !important;background-position:center !important;background-repeat:no-repeat !important;}
 
 /* DERNIÈRES ARRIVÉES */
 .latest{margin-top:30px;}
@@ -51,7 +52,18 @@ header{padding-top:40px;}
   background:rgba(52,199,123,.12);border:1px solid rgba(52,199,123,.3);padding:4px 9px;border-radius:20px;}
 .latest-h .pulse{width:8px;height:8px;border-radius:50%;background:var(--in);box-shadow:0 0 0 0 rgba(52,199,123,.6);animation:pulse 1.8s infinite;}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(52,199,123,0)}100%{box-shadow:0 0 0 0 rgba(52,199,123,0)}}
-.latest-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;}
+.carousel{position:relative;}
+.latest-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);gap:12px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:none;}
+.latest-grid::-webkit-scrollbar{display:none;}
+.navbtn{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:38px;height:38px;border-radius:50%;
+  background:rgba(20,20,22,.92);border:1px solid var(--line);color:var(--txt);font-size:22px;line-height:1;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;
+  box-shadow:0 4px 14px rgba(0,0,0,.5);}
+.navbtn:hover{border-color:var(--in);color:var(--in);background:#000;}
+.navbtn.prev{left:-6px;} .navbtn.next{right:-6px;}
+.navbtn[disabled]{opacity:0;pointer-events:none;}
+.carousel:not(:hover) .navbtn{opacity:.55;}
+.carousel:hover .navbtn{opacity:1;}
 .lcard{background:linear-gradient(160deg,var(--s2),var(--s1));border:1px solid var(--line);border-left:3px solid var(--in);
   border-radius:12px;padding:13px 15px;min-width:210px;position:relative;}
 .lcard .lc-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
@@ -80,7 +92,11 @@ header{padding-top:40px;}
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
 
 .jump{position:sticky;top:0;z-index:40;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-top:30px;padding:11px 0;}
-.jump-inner{max-width:1240px;margin:0 auto;padding:0 40px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin;}
+.jump-wrap{position:relative;max-width:1240px;margin:0 auto;padding:0 40px;}
+.jump-inner{display:flex;gap:7px;overflow-x:auto;padding:0 4px;scrollbar-width:none;}
+.jump-inner::-webkit-scrollbar{display:none;}
+.jump .navbtn{width:32px;height:32px;font-size:19px;}
+.jump .navbtn.prev{left:4px;} .jump .navbtn.next{right:4px;}
 .chip{flex-shrink:0;display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--line);border-radius:20px;padding:5px 12px 5px 5px;cursor:pointer;transition:all .15s;color:var(--sub);text-decoration:none;}
 .chip:hover{border-color:var(--accent);color:#fff;}
 .chip .crest{width:24px;height:24px;border-radius:50%;font-size:10px;}
@@ -131,6 +147,7 @@ footer a{color:var(--sub);}
 }
 @media(max-width:440px){.hero h1{font-size:42px;}.stat .val{font-size:26px;}.who .nm{font-size:12.5px;}}
 </style>
+<style>/*__LOGOCSS__*/</style>
 </head>
 <body>
 <div class="bleed-bar"></div>
@@ -155,7 +172,11 @@ footer a{color:var(--sub);}
   </header>
 </div>
 
-<nav class="jump"><div class="jump-inner" id="jump"></div></nav>
+<nav class="jump"><div class="jump-wrap">
+  <button class="navbtn prev" id="jprev" aria-label="Précédent">‹</button>
+  <div class="jump-inner" id="jump"></div>
+  <button class="navbtn next" id="jnext" aria-label="Suivant">›</button>
+</div></nav>
 <main id="clubs"></main>
 
 <footer>
@@ -165,6 +186,7 @@ footer a{color:var(--sub);}
 <script>
 const CLUBS=/*__CLUBS__*/[];
 const LATEST=/*__LATEST__*/[];
+const LOGO_CODES=/*__LOGOCODES__*/[];
 
 function money(v){
   if(v<1)return Math.round(v*1000)+' K€';
@@ -180,8 +202,10 @@ function feeText(t){
 const POS={GdB:'p-gk',ArD:'p-def',ArG:'p-def',DC:'p-def',MDC:'p-mid',MC:'p-mid',MO:'p-mid',MD:'p-mid',MG:'p-mid',AiD:'p-att',AiG:'p-att',AC:'p-att',SA:'p-att'};
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
 function crest(c,cls){
-  return `<span class="crest ${cls||''}" style="background:${c.bg};color:${c.fg}">`
-       + `<img src="logos/${esc(c.code)}.png" alt="" onerror="this.remove()">${esc(c.code).slice(0,4)}</span>`;
+  const code=c.code||c.club_code||'';
+  const has=LOGO_CODES.indexOf(code)>=0;
+  const style=has?'':`background:${c.bg};color:${c.fg}`;
+  return `<span class="crest ${cls||''}${has?' has-logo l-'+code:''}" style="${style}">${esc(code).slice(0,4)}</span>`;
 }
 function whenTxt(fs){
   if(!fs)return '';
@@ -202,8 +226,25 @@ function whenTxt(fs){
       <div class="lc-name">${esc(t.p)}</div>
       <div class="lc-meta"><span class="lc-from">← ${esc(t.club)}</span><span class="lc-fee ${t.type}">${feeText(t)}</span></div>
     </div>`).join('');
-  el.innerHTML=`<div class="latest-h"><span class="pulse"></span><span class="t">Dernières arrivées</span><span class="badge">__LATEST_LABEL__</span></div><div class="latest-grid">${cards}</div>`;
+  el.innerHTML=`<div class="latest-h"><span class="pulse"></span><span class="t">Dernières arrivées</span><span class="badge">__LATEST_LABEL__</span></div>
+    <div class="carousel">
+      <button class="navbtn prev" id="lprev" aria-label="Précédent">‹</button>
+      <div class="latest-grid" id="lgrid">${cards}</div>
+      <button class="navbtn next" id="lnext" aria-label="Suivant">›</button>
+    </div>`;
+  wireScroller('lgrid','lprev','lnext',232);
 })();
+
+/* défilement par boutons — animation maison (smooth natif pas garanti partout) */
+function wireScroller(gridId,prevId,nextId,step){
+  const g=document.getElementById(gridId),p=document.getElementById(prevId),n=document.getElementById(nextId);
+  if(!g||!p||!n)return;
+  const upd=()=>{p.disabled=g.scrollLeft<=2;n.disabled=g.scrollLeft>=g.scrollWidth-g.clientWidth-2;};
+  const by=d=>{const s=step||g.clientWidth*0.85,max=g.scrollWidth-g.clientWidth;
+    g.scrollLeft=Math.max(0,Math.min(max,g.scrollLeft+d*s));upd();};
+  p.onclick=()=>by(-1);n.onclick=()=>by(1);
+  g.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+}
 
 /* ----- totaux ----- */
 function sideTotal(list){let s=0;list.forEach(t=>{if(t.type==='paid'||t.type==='loan')s+=t.val;});return {sum:s,n:list.length};}
@@ -219,6 +260,7 @@ document.getElementById('stats').innerHTML=`
 /* ----- nav ----- */
 document.getElementById('jump').innerHTML=CLUBS.map((c,i)=>
   `<a class="chip" href="#c${i}">${crest(c)}<span class="cn">${esc(c.name)}</span></a>`).join('');
+wireScroller('jump','jprev','jnext',260);
 
 /* ----- clubs ----- */
 function rowHtml(t,dir){

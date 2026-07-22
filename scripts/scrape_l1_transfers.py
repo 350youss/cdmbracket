@@ -111,25 +111,87 @@ def parse_fee(raw):
         return ("free", 0.0, False)
     return ("none", 0.0, False)
 
-def fetch(slug, cid, offline=False):
-    fn = os.path.join(CACHE, f"{cid}.html")
+def fetch_url(fn, url, offline=False, label=""):
     if offline and os.path.exists(fn):
         return open(fn, "rb").read()
-    url = f"https://www.transfermarkt.fr/{slug}/transfers/verein/{cid}/saison_id/{SEASON}"
     for attempt in range(3):
         try:
             r = requests.get(url, headers=HEADERS, timeout=25)
             if r.status_code == 200 and len(r.content) > 5000:
                 open(fn, "wb").write(r.content)
                 return r.content
-            print(f"  ! HTTP {r.status_code} pour {slug} (essai {attempt+1})")
+            print(f"  ! HTTP {r.status_code} pour {label or url} (essai {attempt+1})")
         except Exception as e:
-            print(f"  ! {slug} : {e} (essai {attempt+1})")
+            print(f"  ! {label or url} : {e} (essai {attempt+1})")
         time.sleep(2 + attempt * 2)
     if os.path.exists(fn):
-        print(f"  -> cache utilisé pour {slug}")
+        print(f"  -> cache utilisé pour {label or url}")
         return open(fn, "rb").read()
     return None
+
+def fetch(slug, cid, offline=False):
+    fn  = os.path.join(CACHE, f"{cid}.html")
+    url = f"https://www.transfermarkt.fr/{slug}/transfers/verein/{cid}/saison_id/{SEASON}"
+    return fetch_url(fn, url, offline, slug)
+
+def vid(td):
+    """id du club (verein) depuis le lien d'une cellule, ou None"""
+    a = td.find("a", href=re.compile(r"/verein/\d+"))
+    return int(re.search(r"/verein/(\d+)", a["href"]).group(1)) if a else None
+
+# --- meta clubs par id + logos base64 ---
+L1META = {cid: (code, name, bg, fg) for code, name, slug, cid, bg, fg in CLUBS}
+
+def load_logo(code):
+    for ext in ("png", "svg", "webp", "jpg", "jpeg"):
+        p = os.path.join(ROOT, "logos", f"{code}.{ext}")
+        if os.path.exists(p):
+            mime = "image/svg+xml" if ext == "svg" else \
+                   ("image/jpeg" if ext in ("jpg", "jpeg") else f"image/{ext}")
+            import base64
+            b64 = base64.b64encode(open(p, "rb").read()).decode()
+            return f"data:{mime};base64,{b64}"
+    return ""
+LOGOS = {code: load_logo(code) for code, *_ in CLUBS}
+
+def fetch_latest(offline=False):
+    """arrivées L1 les plus récentes (page 'derniers transferts', triée par date)"""
+    fn  = os.path.join(CACHE, "latest.html")
+    url = ("https://www.transfermarkt.fr/transfers/neuestetransfers/statistik"
+           "?land_id=0&wettbewerb_id=FR1&minMarktwert=0&maxMarktwert=500000000")
+    raw = fetch_url(fn, url, offline, "derniers transferts")
+    if not raw:
+        return []
+    soup = BeautifulSoup(raw, "lxml", from_encoding="utf-8")
+    t = soup.select_one("table.items")
+    out = []
+    for tr in (t.select("tbody > tr") if t else []):
+        tds = tr.find_all("td", recursive=False)
+        if len(tds) < 6:
+            continue
+        dst = vid(tds[4])
+        if dst not in L1META:                       # on ne garde que les arrivées vers la L1
+            continue
+        namea = tds[0].select_one(".hauptlink a") or tds[0].find("a")
+        if not namea:
+            continue
+        name = (namea.get("title") or namea.get_text(strip=True)).strip()
+        inner = tds[0].find_all("tr")
+        pos_full = inner[-1].get_text(" ", strip=True) if inner else ""
+        age = re.sub(r"\D", "", tds[1].get_text(strip=True))[:2]
+        fa  = tds[3].find("a")
+        frm_full = tds[3].get_text(" ", strip=True)     # inclut "U19"/"B" -> filtrage réserve
+        frm = (fa.get_text(strip=True) if fa else frm_full) or "?"
+        typ, val, loan_ret = parse_fee(tds[5].get_text(" ", strip=True))
+        if loan_ret:
+            continue
+        if is_reserve(frm_full) and typ in ("free", "none", "loan"):
+            continue                                # promu équipe B / jeune sans transfert
+        code, cn, bg, fg = L1META[dst]
+        out.append({"p": name, "age": int(age) if age else 0, "pos": pos_short(pos_full),
+                    "club": frm, "type": typ, "val": round(val, 3),
+                    "club_code": code, "club_name": cn, "bg": bg, "fg": fg})
+    return out
 
 def club_name_from_cell(td):
     for a in td.find_all("a"):
@@ -237,12 +299,10 @@ def restore_failed(clubs_data, old):
             print(f"  ↻ {c['name']} : réutilisation de la dernière version connue")
 
 def apply_history(clubs_data, old):
-    """affecte first_seen à chaque transfert et renvoie la liste 'latest'"""
+    """date chaque transfert (first_seen), écrit le snapshot, renvoie (seen, sig)"""
     today = date.today().isoformat()
     prev = old.get("seen", {})
-    first_run = not old
     seen = {}
-    latest = []
     for c in clubs_data:
         if c.get("failed"):
             continue
@@ -252,42 +312,48 @@ def apply_history(clubs_data, old):
                 fs = prev.get(k, today)
                 seen[k] = fs
                 t["fs"] = fs
-                if direction == "in":
-                    latest.append({**t, "club_code": c["code"], "club_name": c["name"],
-                                   "bg": c["bg"], "fg": c["fg"], "fs": fs})
     sig = signature(clubs_data)
     json.dump({"updated": datetime.now().isoformat(timespec="seconds"),
                "sig": sig, "seen": seen, "clubs": clubs_data},
               open(STATE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return seen, sig
 
-    # sélection "dernières arrivées"
-    def days_ago(fs):
-        try:
-            return (date.today() - date.fromisoformat(fs)).days
-        except Exception:
-            return 999
-    if first_run:
-        # pas d'historique : on met en avant les plus gros coups du moment
-        pool = sorted(latest, key=lambda x: (-x["val"], x["p"]))
-    else:
-        recent = [x for x in latest if days_ago(x["fs"]) <= LATEST_DAYS]
-        if not recent:                      # rien de neuf : on montre les plus récentes
-            recent = sorted(latest, key=lambda x: x["fs"], reverse=True)[:LATEST_MAX]
-        pool = sorted(recent, key=lambda x: (x["fs"], x["val"]), reverse=True)
-    return pool[:LATEST_MAX], first_run, sig
+def build_latest(recent_arr, seen):
+    """dernières arrivées : ordre chronologique Transfermarkt, datées via l'historique"""
+    today = date.today().isoformat()
+    for t in recent_arr:
+        k = key(t["club_code"], "in", t)
+        t["fs"] = seen.get(k, today)
+    return recent_arr[:LATEST_MAX]
 
 # ---------- génération HTML ----------
-def generate(clubs_data, latest, first_run):
+def logo_assets():
+    """CSS (un data-URI par club) + liste des codes ayant un logo — évite de
+       répéter l'image base64 à chaque usage du crest."""
+    css, codes = [], []
+    for code, uri in LOGOS.items():
+        if uri:
+            codes.append(code)
+            css.append(f".crest.l-{code}{{background-image:url(\"{uri}\");}}")
+    return "\n".join(css), codes
+
+def generate(clubs_data, latest):
     tpl = open(TPL, encoding="utf-8").read()
     updated = datetime.now().strftime("%d/%m/%Y à %Hh%M")
-    tag = "Plus gros coups du mercato" if first_run else f"Nouvelles arrivées ({LATEST_DAYS} derniers jours)"
+    tag = "du + récent au + ancien"
+    logocss, logocodes = logo_assets()
     out = (tpl
            .replace("/*__CLUBS__*/[]", json.dumps(clubs_data, ensure_ascii=False))
            .replace("/*__LATEST__*/[]", json.dumps(latest, ensure_ascii=False))
+           .replace("/*__LOGOCODES__*/[]", json.dumps(codes_sorted(logocodes)))
+           .replace("/*__LOGOCSS__*/", logocss)
            .replace("__LATEST_LABEL__", tag)
            .replace("__UPDATED__", updated))
     open(OUT, "w", encoding="utf-8").write(out)
     print(f"\n✓ {OUT} régénéré — MAJ {updated}")
+
+def codes_sorted(codes):
+    return sorted(codes)
 
 def main():
     offline = "--offline" in sys.argv
@@ -296,11 +362,14 @@ def main():
     old_sig = old.get("sig")
     clubs_data = scrape(offline)
     restore_failed(clubs_data, old)
-    latest, first_run, sig = apply_history(clubs_data, old)
+    print("· Dernières arrivées …")
+    recent_arr = fetch_latest(offline)
+    seen, sig = apply_history(clubs_data, old)
+    latest = build_latest(recent_arr, seen)
     na = sum(len(c["arr"]) for c in clubs_data)
     nd = sum(len(c["dep"]) for c in clubs_data)
     print(f"\nTotal : {na} arrivées, {nd} départs, {len(latest)} cases 'dernières arrivées'.")
-    generate(clubs_data, latest, first_run)
+    generate(clubs_data, latest)
 
     changed = (sig != old_sig)
     open(os.path.join(DATA, ".push"), "w", encoding="utf-8").write("1" if changed else "0")
