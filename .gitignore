@@ -1,0 +1,16 @@
+# Secrets / config locale (mot de passe OBS WebSocket)
+scripts/obs_config.json
+
+# Sorties locales du marqueur de timecode
+timecodes.txt
+scripts/.timecode_state
+
+# Clips générés et journaux (volumineux / locaux)
+clips/
+watcher.log
+pipeline.log
+
+# Dépendances Node du projet Remotion
+transitions video genesio/node_modules/
+
+scripts/.cache/
