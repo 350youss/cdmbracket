@@ -1,0 +1,7 @@
+# Logos & images : binaires (pas de conversion de fins de ligne)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+logos/*.svg binary
