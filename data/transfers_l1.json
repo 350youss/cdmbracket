@@ -1,5 +1,6 @@
 {
- "updated": "2026-07-22T15:06:10",
+ "updated": "2026-07-22T19:15:17",
+ "sig": "6b49491c129ecf7075eefc3462125475",
  "seen": {
   "PSG|out|Gonçalo Ramos|AC Milan": "2026-07-22",
   "PSG|out|Noham Kamara|Ol. Lyonnais": "2026-07-22",
@@ -94,6 +95,7 @@
   "TFC|out|Warren Kamanzi|Malmö FF": "2026-07-22",
   "TFC|out|Kjetil Haug|Go Ahead Eagles": "2026-07-22",
   "TFC|out|Álex Domínguez|Ponferradina": "2026-07-22",
+  "TFC|out|Ibrahim Cissoko|PEC Zwolle": "2026-07-22",
   "TFC|out|Edhy Zuliani|VVV-Venlo": "2026-07-22",
   "TFC|out|Frank Magri|Sans club": "2026-07-22",
   "TFC|out|Djibril Sidibé|Sans club": "2026-07-22",
@@ -1107,6 +1109,15 @@
      "pos": "GdB",
      "club": "Ponferradina",
      "type": "free",
+     "val": 0.0,
+     "fs": "2026-07-22"
+    },
+    {
+     "p": "Ibrahim Cissoko",
+     "age": 23,
+     "pos": "AiG",
+     "club": "PEC Zwolle",
+     "type": "none",
      "val": 0.0,
      "fs": "2026-07-22"
     },
