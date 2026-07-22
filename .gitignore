@@ -14,3 +14,4 @@ pipeline.log
 transitions video genesio/node_modules/
 
 scripts/.cache/
+data/.push

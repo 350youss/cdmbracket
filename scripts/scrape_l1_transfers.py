@@ -208,17 +208,39 @@ def scrape(offline=False):
 def key(club_code, direction, t):
     return f"{club_code}|{direction}|{t['p']}|{t['club']}"
 
-def apply_history(clubs_data):
+def load_state():
+    if os.path.exists(STATE):
+        try:
+            return json.load(open(STATE, encoding="utf-8"))
+        except Exception:
+            pass
+    return {}
+
+def signature(clubs_data):
+    """empreinte des DONNÉES (hors horodatage) pour détecter un vrai changement"""
+    import hashlib
+    def norm(lst):
+        return sorted([[t["p"], t["club"], t["type"], t["val"]] for t in lst])
+    canon = [[c["code"], "FAILED" if c.get("failed") else norm(c["arr"]),
+              [] if c.get("failed") else norm(c["dep"])] for c in clubs_data]
+    return hashlib.md5(json.dumps(canon, ensure_ascii=False, sort_keys=True)
+                       .encode("utf-8")).hexdigest()
+
+def restore_failed(clubs_data, old):
+    """réutilise la dernière version connue d'un club qui a échoué au scrape"""
+    old_by = {c["code"]: c for c in old.get("clubs", [])}
+    for i, c in enumerate(clubs_data):
+        if c.get("failed") and c["code"] in old_by:
+            oc = old_by[c["code"]]
+            clubs_data[i] = {**c, "arr": oc.get("arr", []), "dep": oc.get("dep", []),
+                             "failed": False, "restored": True}
+            print(f"  ↻ {c['name']} : réutilisation de la dernière version connue")
+
+def apply_history(clubs_data, old):
     """affecte first_seen à chaque transfert et renvoie la liste 'latest'"""
     today = date.today().isoformat()
-    prev = {}
-    first_run = not os.path.exists(STATE)
-    if not first_run:
-        try:
-            old = json.load(open(STATE, encoding="utf-8"))
-            prev = old.get("seen", {})
-        except Exception:
-            prev = {}
+    prev = old.get("seen", {})
+    first_run = not old
     seen = {}
     latest = []
     for c in clubs_data:
@@ -233,10 +255,9 @@ def apply_history(clubs_data):
                 if direction == "in":
                     latest.append({**t, "club_code": c["code"], "club_name": c["name"],
                                    "bg": c["bg"], "fg": c["fg"], "fs": fs})
-    # garde les first_seen des transferts disparus ? non : on ne garde que l'actuel.
+    sig = signature(clubs_data)
     json.dump({"updated": datetime.now().isoformat(timespec="seconds"),
-               "seen": seen,
-               "clubs": clubs_data},
+               "sig": sig, "seen": seen, "clubs": clubs_data},
               open(STATE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
     # sélection "dernières arrivées"
@@ -253,7 +274,7 @@ def apply_history(clubs_data):
         if not recent:                      # rien de neuf : on montre les plus récentes
             recent = sorted(latest, key=lambda x: x["fs"], reverse=True)[:LATEST_MAX]
         pool = sorted(recent, key=lambda x: (x["fs"], x["val"]), reverse=True)
-    return pool[:LATEST_MAX], first_run
+    return pool[:LATEST_MAX], first_run, sig
 
 # ---------- génération HTML ----------
 def generate(clubs_data, latest, first_run):
@@ -271,12 +292,19 @@ def generate(clubs_data, latest, first_run):
 def main():
     offline = "--offline" in sys.argv
     print(f"Scrape Ligue 1 {SEASON}/{SEASON+1} {'(cache)' if offline else '(en ligne)'}\n")
+    old = load_state()
+    old_sig = old.get("sig")
     clubs_data = scrape(offline)
-    latest, first_run = apply_history(clubs_data)
+    restore_failed(clubs_data, old)
+    latest, first_run, sig = apply_history(clubs_data, old)
     na = sum(len(c["arr"]) for c in clubs_data)
     nd = sum(len(c["dep"]) for c in clubs_data)
     print(f"\nTotal : {na} arrivées, {nd} départs, {len(latest)} cases 'dernières arrivées'.")
     generate(clubs_data, latest, first_run)
+
+    changed = (sig != old_sig)
+    open(os.path.join(DATA, ".push"), "w", encoding="utf-8").write("1" if changed else "0")
+    print("→ Données " + ("MODIFIÉES : publication." if changed else "inchangées : pas de publication."))
 
 if __name__ == "__main__":
     main()
