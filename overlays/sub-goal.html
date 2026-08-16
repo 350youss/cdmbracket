@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Sub Goal</title>
+<style>
+  /* Police hébergée en externe (fichier séparé, léger) plutôt qu'en
+     base64 inline : les très longues chaînes base64 collées dans
+     l'éditeur de code StreamElements peuvent être tronquées/corrompues,
+     ce qui faisait échouer silencieusement le chargement de la police. */
+  @font-face {
+    font-family: 'Dharma Gothic';
+    src: url('https://350youss.github.io/cdmbracket/overlays/fonts/DharmaGothicE_ExBold_I.woff2') format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: block;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* Tailles en pixels fixes, calibrées pour un canevas 1920x1080 (la
+     boîte du widget StreamElements doit être réglée sur Width 1920,
+     Height 1080, Top 0, Left 0 pour occuper tout le canevas). Le
+     contenu se positionne lui-même dans le coin haut-droit via CSS,
+     donc plus besoin d'ajuster la boîte à la main. */
+  #wrap {
+    position: absolute;
+    top: 60px;
+    right: 80px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    color: #ffffff;
+    isolation: isolate;
+  }
+
+  /* Un seul halo, opacité faible, qui balaie une large zone autour du
+     bloc et change de teinte (arc-en-ciel) en rythme avec son
+     apparition/disparition. */
+  #glow {
+    position: absolute;
+    inset: -170px -140px;
+    z-index: -1;
+    filter: blur(75px);
+    pointer-events: none;
+  }
+
+  #glow span {
+    position: absolute;
+    width: 640px;
+    height: 640px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(0, 85%, 60%) 0%, hsla(0, 85%, 60%, 0) 70%);
+    opacity: 0;
+    animation: driftHue 11s ease-in-out infinite;
+  }
+
+  @keyframes driftHue {
+    0%   { top: 10%;  left: 55%; opacity: 0;    transform: scale(0.8);  filter: hue-rotate(0deg); }
+    18%  { top: -5%;  left: 15%; opacity: 0.26; transform: scale(1.05); filter: hue-rotate(70deg); }
+    38%  { top: 45%;  left: -5%; opacity: 0.12; transform: scale(0.95); filter: hue-rotate(150deg); }
+    58%  { top: 60%;  left: 45%; opacity: 0.24; transform: scale(1.1);  filter: hue-rotate(230deg); }
+    80%  { top: 15%;  left: 65%; opacity: 0.15; transform: scale(0.9);  filter: hue-rotate(300deg); }
+    100% { top: 10%;  left: 55%; opacity: 0;    transform: scale(0.8);  filter: hue-rotate(360deg); }
+  }
+
+  #count {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Dharma Gothic', 'Segoe UI', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 200px;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    text-shadow: 0 6px 28px rgba(0,0,0,0.65), 0 0 36px rgba(255,255,255,0.25);
+    white-space: nowrap;
+  }
+
+  /* Séparateur dessiné en CSS (pas le glyphe "/" de la police, dont le
+     dessin est disproportionné dans Dharma Gothic) : une simple barre
+     inclinée, dimensionnée précisément par rapport aux chiffres (unité
+     em = automatiquement proportionnelle à font-size). */
+  #count .sep {
+    display: inline-block;
+    width: 0.045em;
+    height: 0.62em;
+    margin: 0 0.22em;
+    background: rgba(255,255,255,0.55);
+    transform: rotate(18deg);
+    border-radius: 0.02em;
+    flex-shrink: 0;
+  }
+
+  #count .goal {
+    opacity: 0.65;
+    text-shadow: inherit;
+  }
+
+  #bar-track {
+    height: 24px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.22);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35) inset;
+  }
+
+  #bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 0 18px rgba(255,255,255,0.9);
+    transition: width 0.6s ease;
+  }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+  <div id="glow"><span></span></div>
+  <div id="count"><span id="current">0</span><span class="sep"></span><span class="goal" id="goal">100</span></div>
+  <div id="bar-track"><div id="bar-fill"></div></div>
+</div>
+
+<script>
+  // ---------------------------------------------------------------
+  // Ce widget compte lui-même les subs (StreamElements ne permet pas
+  // à deux widgets séparés de partager leurs données). Il écoute les
+  // vrais événements "subscriber" envoyés par SE en live, et garde le
+  // total dans le stockage persistant du widget (SE_API.store) pour
+  // survivre aux rechargements OBS.
+  //
+  // Réglages (à définir dans l'onglet "Fields" du widget, ou via URL
+  // pour tester manuellement) :
+  //   - goal        : objectif de subs (ex: 3000)
+  //   - startCount  : nombre de subs actuel au moment où tu démarres
+  //                   le compteur (ex: 179), puisque StreamElements
+  //                   n'expose pas le total absolu aux widgets custom.
+  // ---------------------------------------------------------------
+
+  const STORE_KEY = 'subgoal_count_v1';
+
+  const params = new URLSearchParams(window.location.search);
+  const manualCurrent = params.get('current');
+  const manualGoal = params.get('goal');
+
+  const elCurrent = document.getElementById('current');
+  const elGoal = document.getElementById('goal');
+  const elBar = document.getElementById('bar-fill');
+  const elBarTrack = document.getElementById('bar-track');
+  const elCount = document.getElementById('count');
+
+  let goal = 100;
+  let count = 0;
+
+  function matchBarWidth() {
+    elBarTrack.style.width = elCount.offsetWidth + 'px';
+  }
+
+  function render(current, goalValue) {
+    const safeGoal = goalValue > 0 ? goalValue : 1;
+    const pct = Math.max(0, Math.min(100, (current / safeGoal) * 100));
+    elCurrent.textContent = current;
+    elGoal.textContent = goalValue;
+    elBar.style.width = pct + '%';
+    matchBarWidth();
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(matchBarWidth);
+  }
+  window.addEventListener('resize', matchBarWidth);
+
+  // Test manuel : ?current=42&goal=100 dans l'URL (mode hors StreamElements)
+  if (manualCurrent !== null && manualGoal !== null) {
+    render(Number(manualCurrent), Number(manualGoal));
+  } else {
+    render(0, goal);
+  }
+
+  window.addEventListener('onWidgetLoad', async function (obj) {
+    const fieldData = obj.detail.fieldData || {};
+    goal = Number(fieldData.goal) || Number(manualGoal) || 100;
+    const startCount = Number(fieldData.startCount) || Number(manualCurrent) || 0;
+
+    let stored = null;
+    try {
+      if (window.SE_API && SE_API.store && SE_API.store.get) {
+        stored = await SE_API.store.get(STORE_KEY);
+      }
+    } catch (e) {
+      stored = null;
+    }
+
+    count = (stored && typeof stored.value === 'number') ? stored.value : startCount;
+    render(count, goal);
+  });
+
+  window.addEventListener('onEventReceived', function (obj) {
+    const listener = obj.detail.listener;
+    if (listener !== 'subscriber-latest') return;
+
+    const event = obj.detail.event || {};
+    // Gère les subs groupés (gifted bulk) sans compter deux fois les subs individuels.
+    const amount = Number(event.bulkGifted) || Number(event.amount) || 1;
+
+    count += amount;
+    render(count, goal);
+
+    try {
+      if (window.SE_API && SE_API.store && SE_API.store.set) {
+        SE_API.store.set(STORE_KEY, { value: count });
+      }
+    } catch (e) { /* stockage indisponible, on continue quand même */ }
+  });
+</script>
+
+</body>
+</html>

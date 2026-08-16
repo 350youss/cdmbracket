@@ -1,0 +1,12 @@
+{
+  "goal": {
+    "type": "number",
+    "label": "Objectif de subs",
+    "value": 3000
+  },
+  "startCount": {
+    "type": "number",
+    "label": "Subs actuels (point de départ)",
+    "value": 179
+  }
+}
