@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Effectif & Compo · Grands Clubs 2026/27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d;--s1:#131417;--s2:#191a1e;--s3:#1f2025;
+  --in:#33c07a;--accent:#5b8fef;--gold:#d1a94e;--out:#f04d68;
+  --txt:#f2f2f0;--sub:#98999e;--muted:#5c5d63;--faint:#38393e;--line:rgba(255,255,255,.07);
+  --gk:#e0a23e;--def:#5b8fef;--mid:#33c07a;--att:#f0705f;
+  --mono:'JetBrains Mono',ui-monospace,monospace;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.03;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.bleed-bar{height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));
+  background-size:220% 100%;animation:bar 14s var(--ease) infinite;position:relative;z-index:5;}
+@keyframes bar{50%{background-position:100% 0;}100%{background-position:220% 0;}}
+.hidden{display:none !important;}
+
+.crest{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-family:'Tanker',sans-serif;letter-spacing:0;}
+.crest.has-logo{background-color:transparent !important;color:transparent !important;background-size:contain !important;background-position:center !important;background-repeat:no-repeat !important;}
+.crest.l-JUV{filter:invert(1);}   /* logo Juve noir -> blanc, lisible sur fond sombre */
+
+body>.top{display:flex;align-items:center;gap:14px;padding:12px 28px;border-bottom:1px solid var(--line);flex-wrap:nowrap;
+  position:relative;z-index:10;background:var(--bg);}
+.top h1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw;}
+.top select{max-width:220px;}
+.top .back{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);border:1px solid var(--line);padding:8px 13px;border-radius:9px;transition:all .2s var(--ease);}
+.top .back:hover{border-color:var(--accent);color:#fff;background:rgba(91,143,239,.08);transform:translateY(-1px);}
+.top .crest{width:40px;height:40px;border-radius:11px;font-size:14px;}
+.top h1{font-family:'Tanker',sans-serif;font-size:23px;text-transform:uppercase;line-height:1;letter-spacing:.01em;}
+.top .sel{margin-left:auto;display:flex;gap:10px;align-items:center;}
+select,input{background:var(--s1);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-family:inherit;font-size:13px;font-weight:600;transition:border-color .15s;}
+select:hover,input:hover{border-color:var(--faint);}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+select{cursor:pointer;}
+.hint{font-size:12px;color:var(--muted);}
+
+.layout{display:grid;grid-template-columns:340px 1fr;gap:16px;padding:16px 24px 20px;max-width:1440px;margin:0 auto;align-items:start;position:relative;z-index:10;}
+
+/* MOBILE TABS (masqués en desktop) */
+.mobile-tabs{display:none;}
+
+/* SQUAD PANEL */
+.squad{background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow-y:auto;overflow-x:hidden;
+  max-height:calc(100vh - 112px);scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
+.squad-h{position:sticky;top:0;z-index:2;background:var(--s1);padding:12px 16px;font-family:'Tanker',sans-serif;font-size:15px;text-transform:uppercase;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+.squad-h .n{font-family:var(--mono);font-size:11px;color:var(--sub);font-weight:600;}
+.sect-h{padding:11px 16px 6px;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--sub);display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:6px;}
+.sect-h.arr{color:var(--in);}.sect-h.dep{color:var(--out);}
+.mini-btn{font-size:11px;font-weight:700;color:var(--in);background:rgba(51,192,122,.12);border:1px solid rgba(51,192,122,.3);border-radius:7px;padding:4px 9px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.mini-btn:hover{background:rgba(51,192,122,.22);transform:translateY(-1px);}
+.grp-lab{font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:8px 16px 4px;display:flex;align-items:center;gap:7px;color:var(--sub);}
+.grp-lab .pt{width:8px;height:8px;border-radius:2px;display:inline-block;}
+.gk .pt{background:var(--gk);}.df .pt{background:var(--def);}.md .pt{background:var(--mid);}.at .pt{background:var(--att);}
+
+.pl{display:flex;align-items:center;gap:8px;padding:6px 14px;cursor:grab;transition:background .15s;user-select:none;
+  animation:rowIn .32s var(--ease) backwards;}
+.pl:hover{background:var(--s2);}
+.pl.used{opacity:.32;}
+.pl.sel{background:rgba(209,169,78,.13);box-shadow:inset 3px 0 0 var(--gold);}
+.pl .num{width:22px;text-align:center;font-weight:700;font-size:11.5px;color:var(--sub);font-family:var(--mono);}
+.pl .pos{width:32px;text-align:center;font-size:8.5px;font-weight:800;padding:3px 0;border-radius:5px;color:#0a0a0a;}
+.pos.gk{background:var(--gk);}.pos.def{background:var(--def);}.pos.mid{background:var(--mid);}.pos.att{background:var(--att);}
+.pl .nm{flex:1;min-width:0;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pl .nm .ag{color:var(--muted);font-weight:600;font-size:10.5px;margin-left:4px;font-family:var(--mono);}
+.pl .val{font-size:11px;font-weight:700;color:var(--gold);font-family:var(--mono);}
+.pl .act{width:22px;height:22px;border-radius:7px;border:1px solid var(--line);background:var(--s2);color:var(--sub);font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;}
+.pl .act.out:hover{border-color:var(--out);color:var(--out);background:rgba(240,112,95,.1);}
+.pl .act.rm:hover{border-color:var(--out);color:var(--out);background:rgba(240,112,95,.1);}
+.pl .fee{font-size:11px;font-weight:700;font-family:var(--mono);}
+.fee.paid{color:#fff;}.fee.loan{color:var(--accent);}
+.empty-s{padding:8px 16px 12px;font-size:11.5px;color:var(--muted);font-style:italic;}
+@keyframes rowIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+.pl:nth-child(n+1){animation-delay:0ms;}
+.pl:nth-child(n+2){animation-delay:14ms;}
+.pl:nth-child(n+3){animation-delay:28ms;}
+.pl:nth-child(n+4){animation-delay:42ms;}
+.pl:nth-child(n+5){animation-delay:56ms;}
+.pl:nth-child(n+6){animation-delay:70ms;}
+.pl:nth-child(n+7){animation-delay:84ms;}
+.pl:nth-child(n+8){animation-delay:98ms;}
+.pl:nth-child(n+9){animation-delay:112ms;}
+.pl:nth-child(n+10){animation-delay:126ms;}
+.pl:nth-child(n+14){animation-delay:130ms;}
+.pl:nth-child(n+18){animation-delay:134ms;}
+.pl:nth-child(n+24){animation-delay:138ms;}
+
+.feerow{display:flex;gap:10px;align-items:center;}
+.feerow input[type=number]{flex:1;}
+.feerow label{font-size:12px;color:var(--sub);display:flex;align-items:center;gap:5px;cursor:pointer;white-space:nowrap;}
+
+/* RIGHT */
+.right{display:flex;flex-direction:column;gap:16px;}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.fbtn{background:var(--s1);border:1px solid var(--line);color:var(--sub);font-weight:700;font-size:12px;padding:8px 13px;border-radius:9px;cursor:pointer;transition:all .2s var(--ease);font-family:inherit;}
+.fbtn:hover{border-color:var(--accent);color:#fff;transform:translateY(-1px);}
+.fbtn:active{transform:translateY(0) scale(.97);}
+.fbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 6px 16px -6px rgba(91,143,239,.5);}
+.controls .share{margin-left:auto;background:var(--in);border-color:var(--in);color:#04160c;}
+.controls .share:hover{background:#2bb06c;border-color:#2bb06c;color:#04160c;box-shadow:0 6px 16px -6px rgba(51,192,122,.5);}
+.controls .share[disabled]{opacity:.6;cursor:default;transform:none;box-shadow:none;}
+.controls .reset{color:var(--out);border-color:rgba(240,112,95,.3);}
+.controls .reset:hover{background:var(--out);color:#fff;border-color:var(--out);box-shadow:0 6px 16px -6px rgba(240,112,95,.5);}
+
+.pitch-wrap{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;justify-content:center;position:relative;overflow:hidden;}
+.pitch-wrap::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:120%;height:80%;
+  background:radial-gradient(ellipse at center,rgba(51,192,122,.1),transparent 70%);pointer-events:none;}
+.pitch{position:relative;width:100%;max-width:376px;height:auto;aspect-ratio:68/92;border-radius:11px;overflow:hidden;touch-action:pan-y;
+  background:repeating-linear-gradient(0deg,#166339 0 10%,#14582f 10% 20%);border:2px solid rgba(255,255,255,.13);
+  box-shadow:0 20px 44px -20px rgba(0,0,0,.6);}
+.pitch .lines::before{content:'';position:absolute;left:5%;right:5%;top:50%;height:2px;background:rgba(255,255,255,.22);}
+.pitch .lines::after{content:'';position:absolute;left:34%;right:34%;top:calc(50% - 46px);height:92px;border:2px solid rgba(255,255,255,.2);border-radius:50%;}
+.box{position:absolute;left:26%;right:26%;height:14%;border:2px solid rgba(255,255,255,.2);}
+.box.top{top:0;border-top:0;}.box.bot{bottom:0;border-bottom:0;}
+
+/* le slot est ancré par le CENTRE DU TITULAIRE (translateY fixe, pas -50%) :
+   le remplaçant/étiquette qui suit en dessous ne décale donc jamais l'ancrage. */
+.slot{position:absolute;transform:translate(-50%,-22px);width:72px;text-align:center;}
+.disc{width:44px;height:44px;margin:0 auto;border-radius:50%;border:2px dashed rgba(255,255,255,.45);
+  background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:800;color:rgba(255,255,255,.75);cursor:pointer;transition:all .18s var(--ease);}
+.disc:hover{border-color:rgba(255,255,255,.7);transform:scale(1.05);}
+.slot.filled .starter .disc{border-style:solid;border-color:#fff;background:var(--club,#111);color:#fff;
+  font-size:14px;font-family:'Inter',sans-serif;font-weight:800;cursor:grab;touch-action:none;
+  box-shadow:0 6px 18px -4px rgba(0,0,0,.65);}
+.slot.filled .starter .disc:hover{transform:scale(1.08);box-shadow:0 8px 22px -4px rgba(0,0,0,.7);}
+.slot.dragging .disc{cursor:grabbing;}
+.seat.active .disc,.seat.active .subbox{border-color:var(--gold);box-shadow:0 0 0 3px rgba(209,169,78,.38);}
+.seat.dragover .disc,.seat.dragover .subbox{border-color:var(--in);box-shadow:0 0 0 3px rgba(51,192,122,.45);}
+.lab{font-size:8.5px;font-weight:800;color:rgba(255,255,255,.9);margin-top:1px;text-transform:uppercase;letter-spacing:.03em;text-shadow:0 1px 2px rgba(0,0,0,.7);}
+.who{font-size:10px;font-weight:700;color:#fff;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* remplaçant : simple rectangle avec le nom, sous le titulaire */
+.sub{margin-top:2px;}
+.subbox{min-width:60px;max-width:78px;padding:2px 5px;border-radius:6px;font-size:8.5px;font-weight:700;
+  border:1.5px dashed rgba(255,255,255,.22);background:rgba(0,0,0,.16);color:rgba(255,255,255,.32);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;text-transform:uppercase;letter-spacing:.02em;
+  transition:all .18s var(--ease);}
+.subbox:hover{border-color:rgba(255,255,255,.4);}
+.sub.filled .subbox{border-style:solid;border-color:var(--line);background:var(--s2);color:var(--txt);
+  cursor:pointer;text-transform:none;}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:flex;align-items:flex-start;justify-content:center;
+  padding:8vh 16px 16px;overflow-y:auto;z-index:100;backdrop-filter:blur(2px);}
+.modal-box{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:22px;width:340px;max-width:92vw;
+  max-height:84vh;overflow-y:auto;box-shadow:0 30px 70px -20px rgba(0,0,0,.7);
+  animation:modalIn .25s var(--ease);}
+@keyframes modalIn{from{opacity:0;transform:translateY(10px) scale(.97);}to{opacity:1;transform:none;}}
+.modal-t{font-family:'Tanker',sans-serif;font-size:18px;margin-bottom:6px;}
+.modal-sub{font-size:12px;color:var(--sub);margin-bottom:16px;}
+.modal .feerow{margin-bottom:18px;}
+.modal-btns{display:flex;gap:10px;}
+.modal-btns button{flex:1;padding:10px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;border:1px solid var(--line);transition:transform .15s;}
+.modal-btns button:active{transform:scale(.97);}
+.modal-btns .ok{background:var(--in);border-color:var(--in);color:#04160c;}
+.modal-btns .cancel{background:var(--s2);color:var(--sub);}
+
+/* SELECTION BANNER */
+.pitch-hint{font-size:12px;color:var(--muted);padding:9px 12px;border-radius:9px;background:transparent;transition:all .2s var(--ease);line-height:1.4;}
+.pitch-hint.active-sel{background:rgba(209,169,78,.11);border:1px solid rgba(209,169,78,.32);color:var(--gold);font-weight:700;}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;padding:14px;}
+  .top{padding:10px 14px;flex-wrap:wrap;}
+  .top h1{max-width:55vw;}
+  .top .sel{margin-left:0;width:100%;order:5;}
+  .mobile-tabs{display:flex;gap:8px;margin-bottom:4px;}
+  .mtab{flex:1;background:var(--s1);border:1px solid var(--line);color:var(--sub);font-weight:700;font-size:12px;
+    letter-spacing:.07em;text-transform:uppercase;padding:11px;border-radius:10px;cursor:pointer;font-family:inherit;transition:all .2s var(--ease);}
+  .mtab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .layout.tab-squad .right{display:none;}
+  .layout.tab-pitch .squad{display:none;}
+  .squad{max-height:none;}
+  .subbox{font-size:9.5px;padding:4px 6px;}
+}
+</style>
+<style>.crest.l-L2{background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDcyLjQ4IDI5NTAiPjxnIGZpbGw9IiNmZmYiPgo8cGF0aCBkPSJtMTE4NC43OSwxMDkxLjk2cy0zMDEuMTcsNDMuNjMtMzc0LjIsMzEyLjYyYy03My4wMywyNjguOTktMTU0LjA1LDU1Mi42OS0xNTQuMDUsNTUyLjY5aDg2OC4wMmw3MS44Mi0yNTIuNzhoLTU4Ni41OWwxNzUtNjEyLjUyWiIvPgo8cGF0aCBkPSJtMTAyMS44LDY3MS4xNmwxMTUuNDgtNDEyLjA0UzExODUuMjYsMTAuMzMsMTQwMi4zNSwzLjA1YzEwMy42LTMuNDcsMTUxLjc1LTQuNjMsMjY1LjA3LDAsMCwwLDI2Mi44LDQuMTEsMjIzLjQzLDI5Mi44MS03Ni4xMSwyOTYuNTctMjI5LjgyLDgzMS45Ni0yMjkuODIsODMxLjk2LDAsMC04Ny4yOCwyNjAuMDEtMzcwLjQsMzIxLjY3bDMxOS4wNS0xMTYxLjUxaC0xOTcuOTdsLTE1Ni4zMyw1NjEuNjQtMjMzLjU4LTE3OC40NloiLz4KPHBhdGggZD0ibTIyMDguNzMsMjc5MS42N3Y2LjMzaDI2My43NWwtMjYuMzUsMTEzLjk1aC0zNjEuOTJ2LTg3LjU2YzAtNDAuNDUsMy4xNy03NC4yOCw5LjUtMTAxLjU4LDYuMzMtMjcuMjEsMTcuODQtNTMuMjgsMzQuNTctNzguMDcsMTYuNjktMjQuNzksNDEuNC01MS45Niw3NC4xMi04MS41Mmw2OS42NC02My4zMWMyMy41Ni0yMS4wOSw0MC43LTM4Ljc2LDUxLjQzLTUyLjk5LDEwLjczLTE0LjI2LDE4LjAxLTI5LjQ3LDIxLjkxLTQ1LjY3LDMuODYtMTYuMTUsNS44LTM3Ljk5LDUuOC02NS40di0xMy42OWMwLTI0LjYyLTIuNDctNDMuMzctNy40LTU2LjItNC45My0xMi44Mi0xMi4wNC0yMS41NC0yMS4zOC0yNi4xNC05LjMzLTQuNTYtMjEuODctNi44Mi0zNy43LTYuODJoLTEyLjY2Yy0xNy4yNywwLTMwLjcxLDMuMTYtNDAuMzcsOS40OS05LjY2LDYuMzMtMTYuNjEsMTYuNzctMjAuODQsMzEuMzctNC4yMywxNC41OS02LjMzLDM0LjktNi4zMyw2MC45NiwwLDIwLjcyLjMzLDM5LjU1LDEuMDcsNTYuNDQuMjksNy43My44MiwxNi41MiwxLjQ4LDI2LjQ3bC0xMjAuMjgtNzAuNDJjLS4yOS05LjEzLS40NS0xOC4yMS0uNDUtMjcuMjksMC02Ny4xNywxNi4yOC0xMTcuNTcsNDguOC0xNTEuMTYsMzIuNTYtMzMuNTksNzkuMjYtNTAuMzYsMTQwLjEtNTAuMzZoMjAuMDJjNTkuNDQsMCwxMDMuODQsMTcuOTIsMTMzLjIzLDUzLjgxLDI5LjM1LDM1Ljg1LDQ0LjAzLDg1LjA5LDQ0LjAzLDE0Ny43djkuNDljMCwzNy42Ni0zLjE3LDY5LjEtOS41LDk0LjQzLTYuMzMsMjUuMzItMTguNDYsNTAuNzctMzYuMzgsNzYuMjYtMTcuOTYsMjUuNDktNDUuMjIsNTUuODItODEuNzcsOTEuMDFsLTcxLjc4LDY4LjU3Yy0xOC42MiwxNy45Mi0zMi40MywzMi44OS00MS40LDQ0Ljg1LTguOTYsMTEuOTYtMTUuMDUsMjQuMzQtMTguMjEsMzcuMTYtMy4xNywxMi44Ny00LjczLDI5LjQ3LTQuNzMsNDkuODZaIi8+CjxwYXRoIGQ9Im0xMjUuMzEsMjc5OS4zM3YtNjcwLjI1SDB2NzgyLjg3aDI5NC4xNmwzMi4xNS0xMTIuNjJIMTI1LjMxWiIvPgo8cGF0aCBkPSJtMzgxLjQ0LDIxMjkuMDh2NzgyLjg3aDEyMS4xOXYtNzgyLjg3aC0xMjEuMTlaIi8+CjxwYXRoIGQ9Im0xMDI2LjE4LDI0NzYuNzNoLTIwNi45MmwtMjYuMzYsOTkuMTVoMTE0LjMzYy43LDI0LjY0LDEuMDYsNDQuNTIsMS4wNiw1OS42MiwwLDQzLjk4LTEuOTYsNzcuOTQtNS44LDEwMS44NS0zLjg4LDIzLjkxLTkuNjcsNDEuNjYtMTcuNDMsNTMuMjktNiw4LjQxLTEzLjcxLDE0LjU3LTIzLjIyLDE4LjQ1LTkuNSwzLjg4LTIxLjc5LDUuOC0zNi45Myw1LjhoLTIwLjgxYy0xNi4yLDAtMjkuNzQtMi4yOS00MC42NC02Ljg1LTEwLjktNC41Ny0xOS4zNC0xMi4xMi0yNS4zLTIyLjY5LTcuMDYtMTIuMjgtMTIuMzMtMzYuMTEtMTUuODMtNzEuNDktMy41MS0zNS4zNC01LjI2LTk0LjE0LTUuMjYtMTc2LjQ0di0zMy43OGMwLTgyLjMsMS43NS0xNDEuMDIsNS4yNi0xNzYuMTksMy41MS0zNS4xOCw4Ljc3LTU4LjkyLDE1LjgzLTcxLjI1LDExLjIyLTIwLjA0LDMzLjIxLTMwLjA3LDY1Ljk0LTMwLjA3aDExLjU5YzE1LjQ2LDAsMjcuODcsMS45NiwzNy4yMiw1LjgzLDkuMywzLjg4LDE2LjkzLDEwLDIyLjkzLDE4LjQ1LDYuNjksOS4xOCwxMS4xOCwyMC44NSwxMy40NywzNS4wOSwyLjI5LDE0LjI0LDMuNDMsMzMuNSwzLjQzLDU3Ljc4djQyLjk2bDExNi45OC02OC4zMWMwLTI2LjczLTIuMTMtNDkuNDktNi4zMi02OC4zLTQuMjQtMTguODEtMTEuNjMtMzcuMzgtMjIuMTUtNTUuNjYtMjkuMjItNTAuMzEtODEuNjEtNzUuNDUtMTU3LjIyLTc1LjQ1aC0zMy41Yy0zNC40OCwwLTY1LjE3LDYuNzgtOTIuMDYsMjAuMzItMjYuODksMTMuNTUtNDcuNDIsMzIuNi02MS40NSw1Ny4yNC0xNS41MSwyNi43My0yNi40LDYwLjEtMzIuNzMsMTAwLjIyLTYuMzIsNDAuMTEtOS41LDk4LjMtOS41LDE3NC42NHY5OS4xNmMwLDUxLjcsMS40Myw5NC41NCw0LjI0LDEyOC40NSwyLjgxLDMzLjk1LDcuMTgsNjIuMzUsMTMuMTgsODUuMiw1Ljk2LDIyLjg5LDE0LjI0LDQzLjMsMjQuOCw2MS4yMSwxNC4wNCwyNC42NCwzNC41Niw0My43LDYxLjQ1LDU3LjI0LDI2Ljg5LDEzLjU1LDU3LjU4LDIwLjMyLDkyLjA2LDIwLjMyaDM0LjU2YzM0LjExLDAsNjQuNzktNi4zMiw5Mi4wNi0xOS4wMiwyNy4yNS0xMi42NSw1My4wNS0zMi42OSw2OS4yMS02MC4xNCwyMy45NS00MS44MiwzOS45OS0xMDQuNDYsMzkuOTktMTg3Ljc4LDAtNzMuMTYtLjE2LTEzMi4wNS0uMTYtMTc4Ljg0aC0uMDJaIi8+CjxwYXRoIGQ9Im0xNTI0LjU2LDIxMjkuMDh2NzgyLjg3aC0xMjAuODJjLS4xMi4wNC00LjMzLjA5LTQuNDUuMTJ2LTExNy4zNmwtNjMuNzQsMTE4LjMzYy0yNi45Nyw5LjQ3LTEzNS43OSwyMS41NC0xNzUuNjItMTYuNDQtMzIuMTUtMzAuNjktNTIuOTItNjcuNzQtNTIuOTItMTg4LjI3di01NzkuMjVoMTI1LjMxdjU5MS40OWMwLDIzLjIyLDAsMzcuNyw1LjEsNTAuOTIsNS4xLDEzLjE4LDEzLjYzLDIyLjU2LDI1LjU5LDI4LjIsMTEuOTUsNS42MywyOC40OCw4LjQ1LDQ5LjYyLDguNDVoNS4zOWM0Ni4xNywwLDgxLjI4LTI2LjE2LDgxLjI4LTI2LjE2di02NTIuOWgxMjUuMjdaIi8+CjxwYXRoIGQ9Im0xNzQ3Ljk3LDI4MDMuNDF2LTI0Ny42OGgxMjkuODRsMjguMDctMTEyLjYyaC0xNTcuOTF2LTIwNS40OWgxOTkuNDVsLTI4LjA3LTEwOC41NGgtMjk1LjU5djc4Mi44N2gzMDYuMTFsMjguMDctMTA4LjU0aC0yMDkuOThaIi8+CjwvZz48L3N2Zz4K");}</style>
+</head>
+<body>
+<div class="bleed-bar"></div>
+<div class="top">
+  <a class="back" href="grands-clubs.html">‹ Accueil</a>
+  <span id="topcrestbox"></span>
+  <h1 id="topname"></h1>
+  <div class="sel"><label class="hint" for="clubsel">Équipe</label><select id="clubsel"></select></div>
+</div>
+
+<div class="layout tab-squad" id="layout">
+  <div class="mobile-tabs">
+    <button class="mtab active" data-tab="squad">Effectif</button>
+    <button class="mtab" data-tab="pitch">Terrain</button>
+  </div>
+  <div class="squad">
+    <div class="squad-h"><span>Effectif</span><span class="n" id="squadCount"></span></div>
+    <div id="squadList"></div>
+
+    <div class="sect-h arr"><span>Arrivées</span><button class="mini-btn" id="addRecruit">+ Ajouter</button></div>
+    <div id="recruitList"></div>
+
+    <div class="sect-h dep"><span>Départs</span></div>
+    <div id="departList"></div>
+  </div>
+
+  <div class="right">
+    <div class="controls" id="formations"></div>
+    <div class="pitch-hint">Clique un poste vide puis un joueur (ou glisse-le depuis la liste) pour le placer. Clique un joueur déjà placé pour le retirer. Glisse un titulaire sur le terrain pour ajuster sa position.</div>
+    <div class="pitch-wrap">
+      <div class="pitch" id="pitch">
+        <div class="lines"></div><div class="box top"></div><div class="box bot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal hidden" id="modal"><div class="modal-box">
+  <div class="modal-t" id="modalT"></div>
+  <div class="modal-sub" id="modalSub"></div>
+  <div class="feerow">
+    <input id="mFee" type="number" placeholder="Montant (M€)" min="0" step="0.5">
+    <label><input type="checkbox" id="mLoan"> Prêt</label>
+  </div>
+  <div class="modal-btns"><button class="cancel" id="mCancel">Annuler</button><button class="ok" id="mOk">Valider</button></div>
+</div></div>
+
+<div class="modal hidden" id="recruitModal"><div class="modal-box">
+  <div class="modal-t">Ajouter une recrue</div>
+  <div class="modal-sub">Un joueur qui n'est pas encore dans l'effectif</div>
+  <input id="rName" placeholder="Nom du joueur" maxlength="40" style="width:100%;margin-bottom:10px;">
+  <select id="rPos" style="width:100%;margin-bottom:14px;">
+    <optgroup label="Gardien">
+      <option value="GdB">Gardien de but</option>
+    </optgroup>
+    <optgroup label="Défenseurs">
+      <option value="ArD">Arrière droit</option>
+      <option value="ArG">Arrière gauche</option>
+      <option value="DC">Défenseur central</option>
+    </optgroup>
+    <optgroup label="Milieux">
+      <option value="MDC">Milieu défensif</option>
+      <option value="MC" selected>Milieu central</option>
+      <option value="MO">Milieu offensif</option>
+      <option value="MD">Milieu droit</option>
+      <option value="MG">Milieu gauche</option>
+    </optgroup>
+    <optgroup label="Attaquants">
+      <option value="AiD">Ailier droit</option>
+      <option value="AiG">Ailier gauche</option>
+      <option value="AC">Avant-centre</option>
+      <option value="SA">Second attaquant</option>
+    </optgroup>
+  </select>
+  <div class="feerow">
+    <input id="rFee" type="number" placeholder="Montant (M€)" min="0" step="0.5">
+    <label><input type="checkbox" id="rLoan"> Prêt</label>
+  </div>
+  <div class="modal-btns"><button class="cancel" id="rCancel">Annuler</button><button class="ok" id="rOk">Ajouter</button></div>
+</div></div>
+
+<script>
+const SQUADS={"FCB": [{"n": "1", "p": "Joan García", "pos": "GdB", "grp": "GK", "age": 25, "val": 45.0, "stats": {"m": 45, "s": 45, "g": 0, "a": 0, "min": 4042}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Áron Yaakobishvili", "pos": "GdB", "grp": "GK", "age": 20, "val": 3.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Wojciech Szczesny", "pos": "GdB", "grp": "GK", "age": 36, "val": 0.8, "stats": {"m": 12, "s": 11, "g": 0, "a": 0, "min": 998}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Pau Cubarsí", "pos": "DC", "grp": "DEF", "age": 19, "val": 100.0, "stats": {"m": 48, "s": 45, "g": 1, "a": 0, "min": 3977}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Eric García", "pos": "DC", "grp": "DEF", "age": 25, "val": 40.0, "stats": {"m": 51, "s": 47, "g": 1, "a": 2, "min": 3955}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Gerard Martín", "pos": "DC", "grp": "DEF", "age": 24, "val": 35.0, "stats": {"m": 51, "s": 38, "g": 0, "a": 1, "min": 3223}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Andreas Christensen", "pos": "DC", "grp": "DEF", "age": 30, "val": 8.0, "stats": {"m": 18, "s": 4, "g": 1, "a": 0, "min": 543}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Álvaro Cortés", "pos": "DC", "grp": "DEF", "age": 21, "val": 4.0, "stats": {"m": 1, "s": 1, "g": 0, "a": 0, "min": 90}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Alejandro Balde", "pos": "ArG", "grp": "DEF", "age": 22, "val": 50.0, "stats": {"m": 42, "s": 31, "g": 0, "a": 3, "min": 2806}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Jules Koundé", "pos": "ArD", "grp": "DEF", "age": 27, "val": 60.0, "stats": {"m": 47, "s": 39, "g": 3, "a": 4, "min": 3529}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Héctor Fort", "pos": "ArD", "grp": "DEF", "age": 20, "val": 12.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Xavi Espart", "pos": "ArD", "grp": "DEF", "age": 19, "val": 5.0, "stats": {"m": 6, "s": 1, "g": 0, "a": 0, "min": 190}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Rodri", "pos": "MDC", "grp": "MID", "age": 30, "val": 55.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Marc Bernal", "pos": "MDC", "grp": "MID", "age": 19, "val": 30.0, "stats": {"m": 33, "s": 15, "g": 5, "a": 1, "min": 1313}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Marc Casadó", "pos": "MDC", "grp": "MID", "age": 22, "val": 18.0, "stats": {"m": 34, "s": 15, "g": 0, "a": 1, "min": 1397}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Tommy Marqués", "pos": "MDC", "grp": "MID", "age": 19, "val": 3.0, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 9}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Pedri", "pos": "MC", "grp": "MID", "age": 23, "val": 150.0, "stats": {"m": 43, "s": 35, "g": 2, "a": 12, "min": 3094}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Frenkie de Jong", "pos": "MC", "grp": "MID", "age": 29, "val": 35.0, "stats": {"m": 38, "s": 26, "g": 1, "a": 8, "min": 2569}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Gavi", "pos": "MC", "grp": "MID", "age": 22, "val": 30.0, "stats": {"m": 13, "s": 8, "g": 0, "a": 1, "min": 700}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Guille Fernández", "pos": "MC", "grp": "MID", "age": 18, "val": 3.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Brian Fariñas", "pos": "MC", "grp": "MID", "age": 20, "val": 2.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Fermín López", "pos": "MO", "grp": "MID", "age": 23, "val": 100.0, "stats": {"m": 48, "s": 34, "g": 13, "a": 17, "min": 3053}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Dani Olmo", "pos": "MO", "grp": "MID", "age": 28, "val": 60.0, "stats": {"m": 49, "s": 31, "g": 8, "a": 10, "min": 2838}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Toni Fernández", "pos": "MO", "grp": "MID", "age": 18, "val": 3.0, "stats": {"m": 1, "s": 1, "g": 0, "a": 0, "min": 45}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Anthony Gordon", "pos": "AiG", "grp": "ATT", "age": 25, "val": 80.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Raphinha", "pos": "AiG", "grp": "ATT", "age": 29, "val": 70.0, "stats": {"m": 33, "s": 27, "g": 21, "a": 8, "min": 2194}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Jesse Bisiwu", "pos": "AiG", "grp": "ATT", "age": 18, "val": 0.8, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Lamine Yamal", "pos": "AiD", "grp": "ATT", "age": 19, "val": 220.0, "stats": {"m": 45, "s": 42, "g": 24, "a": 18, "min": 3702}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Karim Adeyemi", "pos": "AiD", "grp": "ATT", "age": 24, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Roony Bardghji", "pos": "AiD", "grp": "ATT", "age": 20, "val": 15.0, "stats": {"m": 28, "s": 10, "g": 2, "a": 4, "min": 872}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "RMA": [{"n": "1", "p": "Thibaut Courtois", "pos": "GdB", "grp": "GK", "age": 34, "val": 15.0, "stats": {"m": 45, "s": 45, "g": 0, "a": 2, "min": 4005}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Andriy Lunin", "pos": "GdB", "grp": "GK", "age": 27, "val": 12.0, "stats": {"m": 12, "s": 11, "g": 0, "a": 0, "min": 1035}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Dean Huijsen", "pos": "DC", "grp": "DEF", "age": 21, "val": 60.0, "stats": {"m": 40, "s": 36, "g": 2, "a": 2, "min": 3038}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "Ibrahima Konaté", "pos": "DC", "grp": "DEF", "age": 27, "val": 45.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Raúl Asencio", "pos": "DC", "grp": "DEF", "age": 23, "val": 20.0, "stats": {"m": 34, "s": 28, "g": 2, "a": 1, "min": 2516}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Éder Militão", "pos": "DC", "grp": "DEF", "age": 28, "val": 20.0, "stats": {"m": 21, "s": 18, "g": 2, "a": 1, "min": 1530}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Antonio Rüdiger", "pos": "DC", "grp": "DEF", "age": 33, "val": 6.0, "stats": {"m": 26, "s": 24, "g": 1, "a": 0, "min": 2190}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Marc Cucurella", "pos": "ArG", "grp": "DEF", "age": 28, "val": 60.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Álvaro Carreras", "pos": "ArG", "grp": "DEF", "age": 23, "val": 50.0, "stats": {"m": 40, "s": 38, "g": 2, "a": 3, "min": 3402}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Ferland Mendy", "pos": "ArG", "grp": "DEF", "age": 31, "val": 4.0, "stats": {"m": 9, "s": 6, "g": 0, "a": 0, "min": 452}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Trent Alexander-Arnold", "pos": "ArD", "grp": "DEF", "age": 27, "val": 60.0, "stats": {"m": 30, "s": 22, "g": 0, "a": 5, "min": 1794}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Denzel Dumfries", "pos": "ArD", "grp": "DEF", "age": 30, "val": 25.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Aurélien Tchouaméni", "pos": "MDC", "grp": "MID", "age": 26, "val": 70.0, "stats": {"m": 49, "s": 46, "g": 2, "a": 2, "min": 3941}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Federico Valverde", "pos": "MC", "grp": "MID", "age": 28, "val": 90.0, "stats": {"m": 49, "s": 47, "g": 9, "a": 13, "min": 4158}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Eduardo Camavinga", "pos": "MC", "grp": "MID", "age": 23, "val": 50.0, "stats": {"m": 43, "s": 23, "g": 2, "a": 1, "min": 2199}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "27", "p": "Thiago Pitarch", "pos": "MC", "grp": "MID", "age": 19, "val": 20.0, "stats": {"m": 16, "s": 11, "g": 0, "a": 2, "min": 817}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Jude Bellingham", "pos": "MO", "grp": "MID", "age": 23, "val": 160.0, "stats": {"m": 40, "s": 30, "g": 8, "a": 5, "min": 2718}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Arda Güler", "pos": "MO", "grp": "MID", "age": 21, "val": 90.0, "stats": {"m": 51, "s": 40, "g": 6, "a": 14, "min": 3255}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Bernardo Silva", "pos": "MO", "grp": "MID", "age": 32, "val": 22.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Vinicius Junior", "pos": "AiG", "grp": "ATT", "age": 26, "val": 140.0, "stats": {"m": 53, "s": 48, "g": 22, "a": 14, "min": 4249}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "25", "p": "Yan Diomande", "pos": "AiD", "grp": "ATT", "age": 19, "val": 90.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Rodrygo", "pos": "AiD", "grp": "ATT", "age": 25, "val": 45.0, "stats": {"m": 27, "s": 10, "g": 3, "a": 6, "min": 1106}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Brahim Díaz", "pos": "AiD", "grp": "ATT", "age": 27, "val": 35.0, "stats": {"m": 42, "s": 17, "g": 2, "a": 9, "min": 1666}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Kylian Mbappé", "pos": "AC", "grp": "ATT", "age": 27, "val": 200.0, "stats": {"m": 44, "s": 40, "g": 42, "a": 7, "min": 3622}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Endrick", "pos": "AC", "grp": "ATT", "age": 20, "val": 40.0, "stats": {"m": 3, "s": 1, "g": 0, "a": 0, "min": 99}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Carlos Espí", "pos": "AC", "grp": "ATT", "age": 21, "val": 20.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}], "ATM": [{"n": "13", "p": "Jan Oblak", "pos": "GdB", "grp": "GK", "age": 33, "val": 15.0, "stats": {"m": 43, "s": 43, "g": 0, "a": 1, "min": 3870}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Juan Musso", "pos": "GdB", "grp": "GK", "age": 32, "val": 3.0, "stats": {"m": 18, "s": 18, "g": 0, "a": 0, "min": 1650}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Cristian Romero", "pos": "DC", "grp": "DEF", "age": 28, "val": 50.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Dávid Hancko", "pos": "DC", "grp": "DEF", "age": 28, "val": 35.0, "stats": {"m": 49, "s": 45, "g": 3, "a": 3, "min": 4074}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Marc Pubill", "pos": "DC", "grp": "DEF", "age": 23, "val": 35.0, "stats": {"m": 36, "s": 29, "g": 1, "a": 1, "min": 2775}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Robin Le Normand", "pos": "DC", "grp": "DEF", "age": 29, "val": 20.0, "stats": {"m": 46, "s": 28, "g": 3, "a": 1, "min": 2845}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "José María Giménez", "pos": "DC", "grp": "DEF", "age": 31, "val": 9.0, "stats": {"m": 25, "s": 16, "g": 1, "a": 1, "min": 1521}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Matteo Ruggeri", "pos": "ArG", "grp": "DEF", "age": 24, "val": 28.0, "stats": {"m": 47, "s": 39, "g": 0, "a": 7, "min": 3485}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Alejandro Grimaldo", "pos": "ArG", "grp": "DEF", "age": 30, "val": 20.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Marcos Llorente", "pos": "ArD", "grp": "DEF", "age": 31, "val": 20.0, "stats": {"m": 49, "s": 44, "g": 4, "a": 6, "min": 3861}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Morten Hjulmand", "pos": "MDC", "grp": "MID", "age": 27, "val": 45.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Pablo Barrios", "pos": "MC", "grp": "MID", "age": 23, "val": 55.0, "stats": {"m": 35, "s": 29, "g": 1, "a": 3, "min": 2452}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Rodrigo Mendoza", "pos": "MC", "grp": "MID", "age": 21, "val": 20.0, "stats": {"m": 10, "s": 8, "g": 0, "a": 1, "min": 471}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Johnny Cardoso", "pos": "MC", "grp": "MID", "age": 24, "val": 20.0, "stats": {"m": 30, "s": 20, "g": 1, "a": 0, "min": 1715}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Obed Vargas", "pos": "MC", "grp": "MID", "age": 21, "val": 10.0, "stats": {"m": 13, "s": 8, "g": 0, "a": 1, "min": 750}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Koke", "pos": "MC", "grp": "MID", "age": 34, "val": 5.0, "stats": {"m": 56, "s": 40, "g": 2, "a": 3, "min": 3610}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Kang-in Lee", "pos": "MO", "grp": "MID", "age": 25, "val": 28.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Thomas Lemar", "pos": "MO", "grp": "MID", "age": 30, "val": 1.8, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Álex Baena", "pos": "AiG", "grp": "ATT", "age": 25, "val": 40.0, "stats": {"m": 46, "s": 28, "g": 2, "a": 3, "min": 2305}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Ademola Lookman", "pos": "AiG", "grp": "ATT", "age": 28, "val": 40.0, "stats": {"m": 24, "s": 20, "g": 9, "a": 4, "min": 1381}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Carlos Martín", "pos": "AiG", "grp": "ATT", "age": 24, "val": 1.5, "stats": {"m": 2, "s": 1, "g": 0, "a": 0, "min": 66}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "Arnau Ortiz", "pos": "AiG", "grp": "ATT", "age": 24, "val": 1.2, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Giuliano Simeone", "pos": "AiD", "grp": "ATT", "age": 23, "val": 40.0, "stats": {"m": 53, "s": 46, "g": 7, "a": 8, "min": 3803}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Julián Alvarez", "pos": "AC", "grp": "ATT", "age": 26, "val": 120.0, "stats": {"m": 49, "s": 42, "g": 20, "a": 9, "min": 3549}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Alexander Sørloth", "pos": "AC", "grp": "ATT", "age": 30, "val": 18.0, "stats": {"m": 54, "s": 26, "g": 20, "a": 1, "min": 2816}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "MCI": [{"n": "1", "p": "Gianluigi Donnarumma", "pos": "GdB", "grp": "GK", "age": 27, "val": 45.0, "stats": {"m": 43, "s": 43, "g": 0, "a": 0, "min": 3870}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Gerónimo Rulli", "pos": "GdB", "grp": "GK", "age": 34, "val": 6.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Marcus Bettinelli", "pos": "GdB", "grp": "GK", "age": 34, "val": 0.3, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Marc Guéhi", "pos": "DC", "grp": "DEF", "age": 26, "val": 70.0, "stats": {"m": 20, "s": 18, "g": 2, "a": 1, "min": 1690}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Josko Gvardiol", "pos": "DC", "grp": "DEF", "age": 24, "val": 70.0, "stats": {"m": 25, "s": 21, "g": 2, "a": 5, "min": 1866}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Rúben Dias", "pos": "DC", "grp": "DEF", "age": 29, "val": 55.0, "stats": {"m": 33, "s": 30, "g": 2, "a": 0, "min": 2646}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "45", "p": "Abdukodir Khusanov", "pos": "DC", "grp": "DEF", "age": 22, "val": 50.0, "stats": {"m": 37, "s": 31, "g": 0, "a": 0, "min": 2817}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Vitor Reis", "pos": "DC", "grp": "DEF", "age": 20, "val": 30.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Juma Bah", "pos": "DC", "grp": "DEF", "age": 20, "val": 10.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "33", "p": "Nico O'Reilly", "pos": "ArG", "grp": "DEF", "age": 21, "val": 70.0, "stats": {"m": 53, "s": 44, "g": 9, "a": 6, "min": 4044}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Rayan Aït-Nouri", "pos": "ArG", "grp": "DEF", "age": 25, "val": 40.0, "stats": {"m": 28, "s": 20, "g": 0, "a": 5, "min": 1605}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "97", "p": "Josh Wilson-Esbrand", "pos": "ArG", "grp": "DEF", "age": 23, "val": 2.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "27", "p": "Matheus Nunes", "pos": "ArD", "grp": "DEF", "age": 27, "val": 50.0, "stats": {"m": 49, "s": 45, "g": 1, "a": 9, "min": 4015}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "82", "p": "Rico Lewis", "pos": "ArD", "grp": "DEF", "age": 21, "val": 28.0, "stats": {"m": 22, "s": 12, "g": 2, "a": 3, "min": 1105}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "78", "p": "Issa Kaboré", "pos": "ArD", "grp": "DEF", "age": 25, "val": 4.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Nico González", "pos": "MDC", "grp": "MID", "age": 24, "val": 40.0, "stats": {"m": 41, "s": 28, "g": 2, "a": 0, "min": 2582}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Elliot Anderson", "pos": "MC", "grp": "MID", "age": 23, "val": 110.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Tijjani Reijnders", "pos": "MC", "grp": "MID", "age": 28, "val": 50.0, "stats": {"m": 47, "s": 31, "g": 7, "a": 8, "min": 2810}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Mateo Kovacic", "pos": "MC", "grp": "MID", "age": 32, "val": 10.0, "stats": {"m": 9, "s": 2, "g": 0, "a": 1, "min": 242}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Rayan Cherki", "pos": "MO", "grp": "MID", "age": 23, "val": 90.0, "stats": {"m": 52, "s": 30, "g": 10, "a": 15, "min": 2854}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "47", "p": "Phil Foden", "pos": "MO", "grp": "MID", "age": 26, "val": 70.0, "stats": {"m": 50, "s": 33, "g": 10, "a": 7, "min": 3048}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Claudio Echeverri", "pos": "MO", "grp": "MID", "age": 20, "val": 15.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Jérémy Doku", "pos": "AiG", "grp": "ATT", "age": 24, "val": 75.0, "stats": {"m": 47, "s": 33, "g": 8, "a": 14, "min": 2962}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Savinho", "pos": "AiG", "grp": "ATT", "age": 22, "val": 35.0, "stats": {"m": 36, "s": 14, "g": 4, "a": 3, "min": 1502}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Jack Grealish", "pos": "AiG", "grp": "ATT", "age": 30, "val": 20.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "40", "p": "Jeremy Monga", "pos": "AiG", "grp": "ATT", "age": 17, "val": 15.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "42", "p": "Antoine Semenyo", "pos": "AiD", "grp": "ATT", "age": 26, "val": 80.0, "stats": {"m": 27, "s": 24, "g": 11, "a": 3, "min": 2025}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "56", "p": "Ryan McAidoo", "pos": "AiD", "grp": "ATT", "age": 18, "val": 0.0, "stats": {"m": 2, "s": 1, "g": 1, "a": 0, "min": 158}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Erling Haaland", "pos": "AC", "grp": "ATT", "age": 26, "val": 220.0, "stats": {"m": 52, "s": 48, "g": 38, "a": 9, "min": 4144}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Omar Marmoush", "pos": "AC", "grp": "ATT", "age": 27, "val": 50.0, "stats": {"m": 36, "s": 16, "g": 8, "a": 3, "min": 1393}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "ARS": [{"n": "1", "p": "David Raya", "pos": "GdB", "grp": "GK", "age": 30, "val": 30.0, "stats": {"m": 51, "s": 51, "g": 0, "a": 0, "min": 4620}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Illan Meslier", "pos": "GdB", "grp": "GK", "age": 26, "val": 8.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Kepa Arrizabalaga", "pos": "GdB", "grp": "GK", "age": 31, "val": 5.0, "stats": {"m": 12, "s": 12, "g": 0, "a": 0, "min": 1077}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "35", "p": "Tommy Setford", "pos": "GdB", "grp": "GK", "age": 20, "val": 0.5, "stats": {"m": 1, "s": 0, "g": 0, "a": 0, "min": 3}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "William Saliba", "pos": "DC", "grp": "DEF", "age": 25, "val": 100.0, "stats": {"m": 50, "s": 48, "g": 1, "a": 1, "min": 4254}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Gabriel", "pos": "DC", "grp": "DEF", "age": 28, "val": 75.0, "stats": {"m": 51, "s": 46, "g": 4, "a": 5, "min": 4210}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Piero Hincapié", "pos": "DC", "grp": "DEF", "age": 24, "val": 50.0, "stats": {"m": 39, "s": 30, "g": 1, "a": 2, "min": 2763}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Cristhian Mosquera", "pos": "DC", "grp": "DEF", "age": 22, "val": 40.0, "stats": {"m": 35, "s": 20, "g": 0, "a": 0, "min": 1998}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "33", "p": "Riccardo Calafiori", "pos": "ArG", "grp": "DEF", "age": 24, "val": 55.0, "stats": {"m": 36, "s": 28, "g": 1, "a": 3, "min": 2261}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "49", "p": "Myles Lewis-Skelly", "pos": "ArG", "grp": "DEF", "age": 19, "val": 45.0, "stats": {"m": 36, "s": 19, "g": 0, "a": 4, "min": 1908}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Jurriën Timber", "pos": "ArD", "grp": "DEF", "age": 25, "val": 70.0, "stats": {"m": 44, "s": 37, "g": 4, "a": 7, "min": 3363}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Ben White", "pos": "ArD", "grp": "DEF", "age": 28, "val": 30.0, "stats": {"m": 30, "s": 23, "g": 1, "a": 2, "min": 1880}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "36", "p": "Martín Zubimendi", "pos": "MDC", "grp": "MID", "age": 27, "val": 75.0, "stats": {"m": 57, "s": 48, "g": 6, "a": 3, "min": 4300}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "41", "p": "Declan Rice", "pos": "MC", "grp": "MID", "age": 27, "val": 120.0, "stats": {"m": 55, "s": 49, "g": 5, "a": 11, "min": 4456}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "39", "p": "Bruno Guimarães", "pos": "MC", "grp": "MID", "age": 28, "val": 70.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Mikel Merino", "pos": "MC", "grp": "MID", "age": 30, "val": 25.0, "stats": {"m": 34, "s": 20, "g": 6, "a": 3, "min": 1906}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Martin Ødegaard", "pos": "MO", "grp": "MID", "age": 27, "val": 70.0, "stats": {"m": 36, "s": 23, "g": 1, "a": 8, "min": 1984}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Eberechi Eze", "pos": "MO", "grp": "MID", "age": 28, "val": 65.0, "stats": {"m": 52, "s": 36, "g": 10, "a": 6, "min": 3118}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Ethan Nwaneri", "pos": "MO", "grp": "MID", "age": 19, "val": 35.0, "stats": {"m": 12, "s": 4, "g": 1, "a": 0, "min": 515}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Fábio Vieira", "pos": "MO", "grp": "MID", "age": 26, "val": 18.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Gabriel Martinelli", "pos": "AiG", "grp": "ATT", "age": 25, "val": 45.0, "stats": {"m": 53, "s": 25, "g": 11, "a": 7, "min": 2384}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Christos Tzolis", "pos": "AiG", "grp": "ATT", "age": 24, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Reiss Nelson", "pos": "AiG", "grp": "ATT", "age": 26, "val": 8.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Bukayo Saka", "pos": "AiD", "grp": "ATT", "age": 24, "val": 110.0, "stats": {"m": 49, "s": 37, "g": 11, "a": 9, "min": 3256}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Noni Madueke", "pos": "AiD", "grp": "ATT", "age": 24, "val": 50.0, "stats": {"m": 43, "s": 27, "g": 8, "a": 4, "min": 2257}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "56", "p": "Max Dowman", "pos": "AiD", "grp": "ATT", "age": 16, "val": 30.0, "stats": {"m": 13, "s": 4, "g": 1, "a": 1, "min": 477}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Viktor Gyökeres", "pos": "AC", "grp": "ATT", "age": 28, "val": 65.0, "stats": {"m": 55, "s": 40, "g": 21, "a": 3, "min": 3482}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "29", "p": "Kai Havertz", "pos": "AC", "grp": "ATT", "age": 27, "val": 55.0, "stats": {"m": 24, "s": 12, "g": 7, "a": 5, "min": 1066}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Gabriel Jesus", "pos": "AC", "grp": "ATT", "age": 29, "val": 17.0, "stats": {"m": 27, "s": 9, "g": 6, "a": 2, "min": 988}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "LIV": [{"n": "25", "p": "Giorgi Mamardashvili", "pos": "GdB", "grp": "GK", "age": 25, "val": 28.0, "stats": {"m": 20, "s": 19, "g": 0, "a": 0, "min": 1712}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Alisson", "pos": "GdB", "grp": "GK", "age": 33, "val": 15.0, "stats": {"m": 35, "s": 35, "g": 0, "a": 0, "min": 3116}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "56", "p": "Vitezslav Jaros", "pos": "GdB", "grp": "GK", "age": 25, "val": 5.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Freddie Woodman", "pos": "GdB", "grp": "GK", "age": 29, "val": 3.0, "stats": {"m": 4, "s": 3, "g": 0, "a": 0, "min": 302}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "95", "p": "Harvey Davies", "pos": "GdB", "grp": "GK", "age": 22, "val": 0.5, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Jérémy Jacquet", "pos": "DC", "grp": "DEF", "age": 21, "val": 55.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Giovanni Leoni", "pos": "DC", "grp": "DEF", "age": 19, "val": 25.0, "stats": {"m": 1, "s": 1, "g": 0, "a": 0, "min": 81}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "33", "p": "Ronald Araujo", "pos": "DC", "grp": "DEF", "age": 27, "val": 20.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Virgil van Dijk", "pos": "DC", "grp": "DEF", "age": 35, "val": 15.0, "stats": {"m": 55, "s": 55, "g": 8, "a": 3, "min": 4941}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Joe Gomez", "pos": "DC", "grp": "DEF", "age": 29, "val": 13.0, "stats": {"m": 33, "s": 16, "g": 0, "a": 2, "min": 1386}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Milos Kerkez", "pos": "ArG", "grp": "DEF", "age": 22, "val": 35.0, "stats": {"m": 48, "s": 38, "g": 2, "a": 2, "min": 3218}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Konstantinos Tsimikas", "pos": "ArG", "grp": "DEF", "age": 30, "val": 4.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Jeremie Frimpong", "pos": "ArD", "grp": "DEF", "age": 25, "val": 35.0, "stats": {"m": 35, "s": 23, "g": 2, "a": 2, "min": 1794}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Conor Bradley", "pos": "ArD", "grp": "DEF", "age": 23, "val": 25.0, "stats": {"m": 21, "s": 13, "g": 0, "a": 2, "min": 1209}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "47", "p": "Calvin Ramsay", "pos": "ArD", "grp": "DEF", "age": 23, "val": 1.5, "stats": {"m": 2, "s": 1, "g": 0, "a": 0, "min": 91}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "38", "p": "Ryan Gravenberch", "pos": "MDC", "grp": "MID", "age": 24, "val": 80.0, "stats": {"m": 50, "s": 47, "g": 6, "a": 6, "min": 4131}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Wataru Endo", "pos": "MDC", "grp": "MID", "age": 33, "val": 4.0, "stats": {"m": 12, "s": 3, "g": 0, "a": 1, "min": 455}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "43", "p": "Stefan Bajcetic", "pos": "MDC", "grp": "MID", "age": 21, "val": 4.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Alexis Mac Allister", "pos": "MC", "grp": "MID", "age": 27, "val": 70.0, "stats": {"m": 55, "s": 44, "g": 5, "a": 7, "min": 3885}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Curtis Jones", "pos": "MC", "grp": "MID", "age": 25, "val": 35.0, "stats": {"m": 49, "s": 28, "g": 3, "a": 3, "min": 2850}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "42", "p": "Trey Nyoni", "pos": "MC", "grp": "MID", "age": 19, "val": 8.0, "stats": {"m": 14, "s": 2, "g": 0, "a": 0, "min": 237}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Florian Wirtz", "pos": "MO", "grp": "MID", "age": 23, "val": 100.0, "stats": {"m": 49, "s": 40, "g": 7, "a": 10, "min": 3504}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Dominik Szoboszlai", "pos": "MO", "grp": "MID", "age": 25, "val": 100.0, "stats": {"m": 53, "s": 53, "g": 13, "a": 12, "min": 4736}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Harvey Elliott", "pos": "MO", "grp": "MID", "age": 23, "val": 20.0, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 7}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Cody Gakpo", "pos": "AiG", "grp": "ATT", "age": 27, "val": 60.0, "stats": {"m": 52, "s": 41, "g": 9, "a": 6, "min": 3596}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Víctor Muñoz", "pos": "AiG", "grp": "ATT", "age": 23, "val": 30.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "73", "p": "Rio Ngumoha", "pos": "AiG", "grp": "ATT", "age": 17, "val": 30.0, "stats": {"m": 29, "s": 9, "g": 2, "a": 1, "min": 952}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Federico Chiesa", "pos": "AiD", "grp": "ATT", "age": 28, "val": 13.0, "stats": {"m": 36, "s": 5, "g": 3, "a": 3, "min": 726}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Alexander Isak", "pos": "AC", "grp": "ATT", "age": 26, "val": 85.0, "stats": {"m": 22, "s": 13, "g": 4, "a": 1, "min": 1033}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Hugo Ekitiké", "pos": "AC", "grp": "ATT", "age": 24, "val": 80.0, "stats": {"m": 45, "s": 34, "g": 17, "a": 6, "min": 2872}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "CHE": [{"n": "39", "p": "Mike Penders", "pos": "GdB", "grp": "GK", "age": 21, "val": 25.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Robert Sánchez", "pos": "GdB", "grp": "GK", "age": 28, "val": 22.0, "stats": {"m": 50, "s": 49, "g": 0, "a": 1, "min": 4376}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "44", "p": "Gabriel Slonina", "pos": "GdB", "grp": "GK", "age": 22, "val": 3.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Teddy Sharman-Lowe", "pos": "GdB", "grp": "GK", "age": 23, "val": 0.5, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Maxence Lacroix", "pos": "DC", "grp": "DEF", "age": 26, "val": 50.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Levi Colwill", "pos": "DC", "grp": "DEF", "age": 23, "val": 50.0, "stats": {"m": 4, "s": 3, "g": 0, "a": 0, "min": 315}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Wesley Fofana", "pos": "DC", "grp": "DEF", "age": 25, "val": 28.0, "stats": {"m": 38, "s": 31, "g": 0, "a": 2, "min": 2724}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Mamadou Sarr", "pos": "DC", "grp": "DEF", "age": 20, "val": 22.0, "stats": {"m": 6, "s": 4, "g": 0, "a": 0, "min": 294}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Tosin Adarabioyo", "pos": "DC", "grp": "DEF", "age": 28, "val": 16.0, "stats": {"m": 29, "s": 17, "g": 2, "a": 0, "min": 1639}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Axel Disasi", "pos": "DC", "grp": "DEF", "age": 28, "val": 15.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Benoît Badiashile", "pos": "DC", "grp": "DEF", "age": 25, "val": 15.0, "stats": {"m": 16, "s": 12, "g": 0, "a": 0, "min": 1071}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Aarón Anselmino", "pos": "DC", "grp": "DEF", "age": 21, "val": 10.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Jorrel Hato", "pos": "ArG", "grp": "DEF", "age": 20, "val": 40.0, "stats": {"m": 36, "s": 25, "g": 2, "a": 1, "min": 2248}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "29", "p": "Pep Chavarría", "pos": "ArG", "grp": "DEF", "age": 28, "val": 10.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Caleb Wiley", "pos": "ArG", "grp": "DEF", "age": 21, "val": 8.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Denner", "pos": "ArG", "grp": "DEF", "age": 18, "val": 0.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Reece James", "pos": "ArD", "grp": "DEF", "age": 26, "val": 60.0, "stats": {"m": 39, "s": 29, "g": 2, "a": 7, "min": 2667}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Marco Palestra", "pos": "ArD", "grp": "DEF", "age": 21, "val": 35.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "27", "p": "Malo Gusto", "pos": "ArD", "grp": "DEF", "age": 23, "val": 35.0, "stats": {"m": 49, "s": 38, "g": 3, "a": 5, "min": 3305}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "34", "p": "Josh Acheampong", "pos": "ArD", "grp": "DEF", "age": 20, "val": 25.0, "stats": {"m": 30, "s": 14, "g": 2, "a": 0, "min": 1295}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "25", "p": "Moisés Caicedo", "pos": "MDC", "grp": "MID", "age": 24, "val": 100.0, "stats": {"m": 50, "s": 47, "g": 5, "a": 1, "min": 4169}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "45", "p": "Roméo Lavia", "pos": "MDC", "grp": "MID", "age": 22, "val": 22.0, "stats": {"m": 20, "s": 10, "g": 0, "a": 0, "min": 758}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Dário Essugo", "pos": "MDC", "grp": "MID", "age": 21, "val": 15.0, "stats": {"m": 5, "s": 0, "g": 0, "a": 2, "min": 109}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Enzo Fernández", "pos": "MC", "grp": "MID", "age": 25, "val": 100.0, "stats": {"m": 54, "s": 49, "g": 15, "a": 7, "min": 4379}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Valentín Barco", "pos": "MC", "grp": "MID", "age": 22, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Jordan Henderson", "pos": "MC", "grp": "MID", "age": 36, "val": 1.2, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Morgan Rogers", "pos": "MO", "grp": "MID", "age": 24, "val": 110.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Cole Palmer", "pos": "MO", "grp": "MID", "age": 24, "val": 100.0, "stats": {"m": 34, "s": 29, "g": 11, "a": 3, "min": 2443}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Jamie Gittens", "pos": "AiG", "grp": "ATT", "age": 22, "val": 30.0, "stats": {"m": 27, "s": 12, "g": 1, "a": 5, "min": 1102}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "43", "p": "Mykhaylo Mudryk", "pos": "AiG", "grp": "ATT", "age": 25, "val": 0.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "41", "p": "Estêvão", "pos": "AiD", "grp": "ATT", "age": 19, "val": 80.0, "stats": {"m": 36, "s": 20, "g": 8, "a": 4, "min": 1676}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Pedro Neto", "pos": "AiD", "grp": "ATT", "age": 26, "val": 60.0, "stats": {"m": 52, "s": 43, "g": 10, "a": 10, "min": 3767}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "47", "p": "Geovany Quenda", "pos": "AiD", "grp": "ATT", "age": 19, "val": 42.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "João Pedro", "pos": "AC", "grp": "ATT", "age": 24, "val": 80.0, "stats": {"m": 50, "s": 42, "g": 20, "a": 9, "min": 3694}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Nicolas Jackson", "pos": "AC", "grp": "ATT", "age": 25, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Liam Delap", "pos": "AC", "grp": "ATT", "age": 23, "val": 28.0, "stats": {"m": 41, "s": 16, "g": 2, "a": 4, "min": 1601}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Emmanuel Emegha", "pos": "AC", "grp": "ATT", "age": 23, "val": 25.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "38", "p": "Marc Guiu", "pos": "AC", "grp": "ATT", "age": 20, "val": 12.0, "stats": {"m": 13, "s": 5, "g": 2, "a": 2, "min": 527}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "David Datro Fofana", "pos": "AC", "grp": "ATT", "age": 23, "val": 4.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Danny Welbeck", "pos": "AC", "grp": "ATT", "age": 35, "val": 3.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}], "MUN": [{"n": "1", "p": "Senne Lammens", "pos": "GdB", "grp": "GK", "age": 24, "val": 35.0, "stats": {"m": 33, "s": 33, "g": 0, "a": 0, "min": 2970}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Karl Darlow", "pos": "GdB", "grp": "GK", "age": 35, "val": 0.2, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Tom Heaton", "pos": "GdB", "grp": "GK", "age": 40, "val": 0.1, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "45", "p": "Dermot Mee", "pos": "GdB", "grp": "GK", "age": 23, "val": 0.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Leny Yoro", "pos": "DC", "grp": "DEF", "age": 20, "val": 50.0, "stats": {"m": 33, "s": 19, "g": 0, "a": 2, "min": 1829}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Lisandro Martínez", "pos": "DC", "grp": "DEF", "age": 28, "val": 45.0, "stats": {"m": 19, "s": 14, "g": 0, "a": 0, "min": 1310}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Matthijs de Ligt", "pos": "DC", "grp": "DEF", "age": 27, "val": 30.0, "stats": {"m": 14, "s": 13, "g": 1, "a": 0, "min": 1215}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Ayden Heaven", "pos": "DC", "grp": "DEF", "age": 19, "val": 30.0, "stats": {"m": 18, "s": 12, "g": 0, "a": 1, "min": 987}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Harry Maguire", "pos": "DC", "grp": "DEF", "age": 33, "val": 8.0, "stats": {"m": 25, "s": 20, "g": 2, "a": 2, "min": 1756}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Patrick Dorgu", "pos": "ArG", "grp": "DEF", "age": 21, "val": 35.0, "stats": {"m": 28, "s": 17, "g": 4, "a": 4, "min": 1580}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Luke Shaw", "pos": "ArG", "grp": "DEF", "age": 31, "val": 8.0, "stats": {"m": 38, "s": 38, "g": 1, "a": 1, "min": 3233}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "41", "p": "Harry Amass", "pos": "ArG", "grp": "DEF", "age": 19, "val": 7.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Diogo Dalot", "pos": "ArD", "grp": "DEF", "age": 27, "val": 30.0, "stats": {"m": 36, "s": 31, "g": 1, "a": 3, "min": 2796}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Noussair Mazraoui", "pos": "ArD", "grp": "DEF", "age": 28, "val": 18.0, "stats": {"m": 20, "s": 11, "g": 0, "a": 0, "min": 984}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Andrey Santos", "pos": "MDC", "grp": "MID", "age": 22, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "25", "p": "Manuel Ugarte", "pos": "MDC", "grp": "MID", "age": 25, "val": 25.0, "stats": {"m": 24, "s": 10, "g": 0, "a": 0, "min": 1005}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "43", "p": "Toby Collyer", "pos": "MDC", "grp": "MID", "age": 22, "val": 5.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "37", "p": "Kobbie Mainoo", "pos": "MC", "grp": "MID", "age": 21, "val": 70.0, "stats": {"m": 30, "s": 18, "g": 1, "a": 3, "min": 1806}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Youri Tielemans", "pos": "MC", "grp": "MID", "age": 29, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "39", "p": "Tyler Fletcher", "pos": "MC", "grp": "MID", "age": 19, "val": 1.5, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 17}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Bruno Fernandes", "pos": "MO", "grp": "MID", "age": 31, "val": 35.0, "stats": {"m": 37, "s": 36, "g": 9, "a": 22, "min": 3203}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Mason Mount", "pos": "MO", "grp": "MID", "age": 27, "val": 25.0, "stats": {"m": 25, "s": 13, "g": 3, "a": 1, "min": 1105}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "38", "p": "Jack Fletcher", "pos": "MO", "grp": "MID", "age": 19, "val": 1.5, "stats": {"m": 3, "s": 0, "g": 0, "a": 0, "min": 107}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Marcus Rashford", "pos": "AiG", "grp": "ATT", "age": 28, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Bryan Mbeumo", "pos": "AiD", "grp": "ATT", "age": 27, "val": 75.0, "stats": {"m": 34, "s": 31, "g": 12, "a": 3, "min": 2670}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "Amad Diallo", "pos": "AiD", "grp": "ATT", "age": 24, "val": 45.0, "stats": {"m": 33, "s": 28, "g": 2, "a": 4, "min": 2428}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "46", "p": "Shea Lacey", "pos": "AiD", "grp": "ATT", "age": 19, "val": 5.0, "stats": {"m": 4, "s": 0, "g": 0, "a": 0, "min": 67}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Matheus Cunha", "pos": "AC", "grp": "ATT", "age": 27, "val": 75.0, "stats": {"m": 35, "s": 31, "g": 10, "a": 4, "min": 2683}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Benjamin Sesko", "pos": "AC", "grp": "ATT", "age": 23, "val": 75.0, "stats": {"m": 32, "s": 19, "g": 12, "a": 1, "min": 1817}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Joshua Zirkzee", "pos": "AC", "grp": "ATT", "age": 25, "val": 20.0, "stats": {"m": 26, "s": 5, "g": 2, "a": 1, "min": 645}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "TOT": [{"n": "31", "p": "Antonín Kinský", "pos": "GdB", "grp": "GK", "age": 23, "val": 15.0, "stats": {"m": 10, "s": 10, "g": 0, "a": 0, "min": 827}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "39", "p": "Martin Dúbravka", "pos": "GdB", "grp": "GK", "age": 37, "val": 0.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "40", "p": "Brandon Austin", "pos": "GdB", "grp": "GK", "age": 27, "val": 0.5, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Jan Paul van Hecke", "pos": "DC", "grp": "DEF", "age": 26, "val": 60.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "37", "p": "Micky van de Ven", "pos": "DC", "grp": "DEF", "age": 25, "val": 50.0, "stats": {"m": 45, "s": 45, "g": 7, "a": 1, "min": 3943}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Marcos Senesi", "pos": "DC", "grp": "DEF", "age": 29, "val": 25.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Kevin Danso", "pos": "DC", "grp": "DEF", "age": 27, "val": 20.0, "stats": {"m": 36, "s": 26, "g": 0, "a": 0, "min": 2328}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "25", "p": "Kota Takai", "pos": "DC", "grp": "DEF", "age": 21, "val": 5.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "33", "p": "Ben Davies", "pos": "DC", "grp": "DEF", "age": 33, "val": 3.0, "stats": {"m": 5, "s": 3, "g": 1, "a": 0, "min": 250}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Destiny Udogie", "pos": "ArG", "grp": "DEF", "age": 23, "val": 30.0, "stats": {"m": 28, "s": 17, "g": 0, "a": 1, "min": 1673}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "38", "p": "Souza", "pos": "ArG", "grp": "DEF", "age": 20, "val": 12.0, "stats": {"m": 4, "s": 2, "g": 0, "a": 0, "min": 144}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Andrew Robertson", "pos": "ArG", "grp": "DEF", "age": 32, "val": 7.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Pedro Porro", "pos": "ArD", "grp": "DEF", "age": 26, "val": 45.0, "stats": {"m": 47, "s": 45, "g": 2, "a": 6, "min": 3923}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "Sandro Tonali", "pos": "MDC", "grp": "MID", "age": 26, "val": 80.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Archie Gray", "pos": "MDC", "grp": "MID", "age": 20, "val": 35.0, "stats": {"m": 35, "s": 27, "g": 2, "a": 3, "min": 2262}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Rodrigo Bentancur", "pos": "MDC", "grp": "MID", "age": 29, "val": 20.0, "stats": {"m": 34, "s": 31, "g": 1, "a": 1, "min": 2549}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Mateus Fernandes", "pos": "MC", "grp": "MID", "age": 22, "val": 50.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Lucas Bergvall", "pos": "MC", "grp": "MID", "age": 20, "val": 35.0, "stats": {"m": 33, "s": 17, "g": 1, "a": 5, "min": 1465}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Conor Gallagher", "pos": "MC", "grp": "MID", "age": 26, "val": 32.0, "stats": {"m": 18, "s": 14, "g": 1, "a": 1, "min": 1246}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "29", "p": "Pape Matar Sarr", "pos": "MC", "grp": "MID", "age": 23, "val": 30.0, "stats": {"m": 37, "s": 22, "g": 2, "a": 4, "min": 2212}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Xavi Simons", "pos": "MO", "grp": "MID", "age": 23, "val": 40.0, "stats": {"m": 41, "s": 28, "g": 5, "a": 6, "min": 2569}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "James Maddison", "pos": "MO", "grp": "MID", "age": 29, "val": 20.0, "stats": {"m": 3, "s": 0, "g": 0, "a": 0, "min": 34}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Dejan Kulusevski", "pos": "MO", "grp": "MID", "age": 26, "val": 17.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Mathys Tel", "pos": "AiG", "grp": "ATT", "age": 21, "val": 22.0, "stats": {"m": 38, "s": 17, "g": 4, "a": 2, "min": 1688}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Wilson Odobert", "pos": "AiG", "grp": "ATT", "age": 21, "val": 18.0, "stats": {"m": 33, "s": 18, "g": 2, "a": 5, "min": 1609}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "47", "p": "Mikey Moore", "pos": "AiG", "grp": "ATT", "age": 19, "val": 18.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Mohammed Kudus", "pos": "AiD", "grp": "ATT", "age": 26, "val": 50.0, "stats": {"m": 26, "s": 23, "g": 3, "a": 6, "min": 1921}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Dominic Solanke", "pos": "AC", "grp": "ATT", "age": 28, "val": 28.0, "stats": {"m": 20, "s": 12, "g": 6, "a": 0, "min": 1160}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Richarlison", "pos": "AC", "grp": "ATT", "age": 29, "val": 25.0, "stats": {"m": 43, "s": 29, "g": 12, "a": 5, "min": 2651}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "44", "p": "Dane Scarlett", "pos": "AC", "grp": "ATT", "age": 22, "val": 1.5, "stats": {"m": 5, "s": 0, "g": 0, "a": 0, "min": 35}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "AVL": [{"n": "23", "p": "Emiliano Martínez", "pos": "GdB", "grp": "GK", "age": 33, "val": 12.0, "stats": {"m": 44, "s": 43, "g": 0, "a": 1, "min": 3870}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "40", "p": "Marco Bizot", "pos": "GdB", "grp": "GK", "age": 35, "val": 1.5, "stats": {"m": 14, "s": 13, "g": 0, "a": 0, "min": 1170}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Ezri Konsa", "pos": "DC", "grp": "DEF", "age": 28, "val": 45.0, "stats": {"m": 48, "s": 46, "g": 2, "a": 1, "min": 4170}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Pau Torres", "pos": "DC", "grp": "DEF", "age": 29, "val": 20.0, "stats": {"m": 36, "s": 33, "g": 0, "a": 1, "min": 2968}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "48", "p": "Modou Kéba Cissé", "pos": "DC", "grp": "DEF", "age": 21, "val": 6.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Victor Lindelöf", "pos": "DC", "grp": "DEF", "age": 32, "val": 5.0, "stats": {"m": 28, "s": 21, "g": 0, "a": 1, "min": 1784}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Tyrone Mings", "pos": "DC", "grp": "DEF", "age": 33, "val": 3.0, "stats": {"m": 22, "s": 18, "g": 1, "a": 1, "min": 1596}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Ian Maatsen", "pos": "ArG", "grp": "DEF", "age": 24, "val": 30.0, "stats": {"m": 44, "s": 25, "g": 1, "a": 2, "min": 2336}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Matty Cash", "pos": "ArD", "grp": "DEF", "age": 29, "val": 22.0, "stats": {"m": 49, "s": 45, "g": 3, "a": 5, "min": 4022}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "32", "p": "Kosta Nedeljkovic", "pos": "ArD", "grp": "DEF", "age": 20, "val": 6.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Amadou Onana", "pos": "MDC", "grp": "MID", "age": 25, "val": 45.0, "stats": {"m": 38, "s": 32, "g": 2, "a": 0, "min": 2637}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Boubacar Kamara", "pos": "MDC", "grp": "MID", "age": 26, "val": 40.0, "stats": {"m": 26, "s": 20, "g": 1, "a": 4, "min": 1714}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Lamare Bogarde", "pos": "MDC", "grp": "MID", "age": 22, "val": 18.0, "stats": {"m": 44, "s": 22, "g": 0, "a": 0, "min": 2084}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "35", "p": "João Gomes", "pos": "MC", "grp": "MID", "age": 25, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "John McGinn", "pos": "MC", "grp": "MID", "age": 31, "val": 13.0, "stats": {"m": 44, "s": 38, "g": 10, "a": 8, "min": 3029}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Ross Barkley", "pos": "MC", "grp": "MID", "age": 32, "val": 4.0, "stats": {"m": 23, "s": 8, "g": 3, "a": 1, "min": 948}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "53", "p": "George Hemmings", "pos": "MC", "grp": "MID", "age": 19, "val": 0.8, "stats": {"m": 4, "s": 1, "g": 0, "a": 0, "min": 71}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "44", "p": "Johan Manzambi", "pos": "MO", "grp": "MID", "age": 20, "val": 65.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Alejandro Garnacho", "pos": "AiG", "grp": "ATT", "age": 22, "val": 28.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Emiliano Buendía", "pos": "AiG", "grp": "ATT", "age": 29, "val": 16.0, "stats": {"m": 54, "s": 34, "g": 11, "a": 9, "min": 2885}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "31", "p": "Leon Bailey", "pos": "AiD", "grp": "ATT", "age": 29, "val": 14.0, "stats": {"m": 19, "s": 4, "g": 1, "a": 1, "min": 539}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "47", "p": "Alysson", "pos": "AiD", "grp": "ATT", "age": 20, "val": 10.0, "stats": {"m": 3, "s": 0, "g": 0, "a": 0, "min": 47}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Ollie Watkins", "pos": "AC", "grp": "ATT", "age": 30, "val": 25.0, "stats": {"m": 55, "s": 43, "g": 21, "a": 5, "min": 3839}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Tammy Abraham", "pos": "AC", "grp": "ATT", "age": 28, "val": 18.0, "stats": {"m": 16, "s": 4, "g": 3, "a": 1, "min": 437}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "39", "p": "Brian Madjo", "pos": "AC", "grp": "ATT", "age": 17, "val": 12.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}], "BAY": [{"n": "40", "p": "Jonas Urbig", "pos": "GdB", "grp": "GK", "age": 23, "val": 18.0, "stats": {"m": 20, "s": 17, "g": 0, "a": 0, "min": 1650}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Manuel Neuer", "pos": "GdB", "grp": "GK", "age": 40, "val": 4.0, "stats": {"m": 37, "s": 37, "g": 0, "a": 0, "min": 3210}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Sven Ulreich", "pos": "GdB", "grp": "GK", "age": 38, "val": 0.5, "stats": {"m": 1, "s": 1, "g": 0, "a": 0, "min": 90}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Dayot Upamecano", "pos": "DC", "grp": "DEF", "age": 27, "val": 75.0, "stats": {"m": 42, "s": 39, "g": 2, "a": 3, "min": 3341}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Jonathan Tah", "pos": "DC", "grp": "DEF", "age": 30, "val": 28.0, "stats": {"m": 49, "s": 43, "g": 3, "a": 2, "min": 3769}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Min-jae Kim", "pos": "DC", "grp": "DEF", "age": 29, "val": 20.0, "stats": {"m": 37, "s": 23, "g": 1, "a": 1, "min": 2051}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Hiroki Ito", "pos": "DC", "grp": "DEF", "age": 27, "val": 18.0, "stats": {"m": 23, "s": 11, "g": 1, "a": 2, "min": 1049}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Nathaniel Brown", "pos": "ArG", "grp": "DEF", "age": 23, "val": 50.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Alphonso Davies", "pos": "ArG", "grp": "DEF", "age": 25, "val": 40.0, "stats": {"m": 23, "s": 8, "g": 1, "a": 5, "min": 842}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "44", "p": "Josip Stanisic", "pos": "ArD", "grp": "DEF", "age": 26, "val": 40.0, "stats": {"m": 43, "s": 35, "g": 3, "a": 7, "min": 3153}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "27", "p": "Konrad Laimer", "pos": "ArD", "grp": "DEF", "age": 29, "val": 32.0, "stats": {"m": 47, "s": 37, "g": 3, "a": 13, "min": 3297}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Sacha Boey", "pos": "ArD", "grp": "DEF", "age": 25, "val": 10.0, "stats": {"m": 15, "s": 6, "g": 0, "a": 1, "min": 630}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "45", "p": "Aleksandar Pavlovic", "pos": "MDC", "grp": "MID", "age": 22, "val": 90.0, "stats": {"m": 44, "s": 36, "g": 4, "a": 2, "min": 3086}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Joshua Kimmich", "pos": "MDC", "grp": "MID", "age": 31, "val": 35.0, "stats": {"m": 49, "s": 44, "g": 2, "a": 13, "min": 4073}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "João Palhinha", "pos": "MDC", "grp": "MID", "age": 31, "val": 15.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "47", "p": "David Santos Daiber", "pos": "MDC", "grp": "MID", "age": 19, "val": 3.0, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 27}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Tom Bischof", "pos": "MC", "grp": "MID", "age": 21, "val": 40.0, "stats": {"m": 38, "s": 17, "g": 3, "a": 3, "min": 1655}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Felipe Chávez", "pos": "MC", "grp": "MID", "age": 19, "val": 4.0, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 12}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "39", "p": "Bara Sapoko Ndiaye", "pos": "MC", "grp": "MID", "age": 18, "val": 4.0, "stats": {"m": 4, "s": 2, "g": 0, "a": 0, "min": 142}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Jamal Musiala", "pos": "MO", "grp": "MID", "age": 23, "val": 100.0, "stats": {"m": 24, "s": 12, "g": 5, "a": 6, "min": 1175}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "42", "p": "Lennart Karl", "pos": "MO", "grp": "MID", "age": 18, "val": 60.0, "stats": {"m": 39, "s": 24, "g": 9, "a": 8, "min": 1918}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "34", "p": "Ismael Saibari", "pos": "MO", "grp": "MID", "age": 25, "val": 55.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Luis Díaz", "pos": "AiG", "grp": "ATT", "age": 29, "val": 70.0, "stats": {"m": 51, "s": 46, "g": 26, "a": 23, "min": 4060}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Arijon Ibrahimovic", "pos": "AiG", "grp": "ATT", "age": 20, "val": 10.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Bryan Zaragoza", "pos": "AiG", "grp": "ATT", "age": 24, "val": 8.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Michael Olise", "pos": "AiD", "grp": "ATT", "age": 24, "val": 170.0, "stats": {"m": 52, "s": 42, "g": 22, "a": 31, "min": 4015}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Serge Gnabry", "pos": "DA", "grp": "MID", "age": 31, "val": 18.0, "stats": {"m": 37, "s": 26, "g": 10, "a": 11, "min": 2041}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Harry Kane", "pos": "AC", "grp": "ATT", "age": 33, "val": 60.0, "stats": {"m": 51, "s": 44, "g": 61, "a": 7, "min": 4050}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "BVB": [{"n": "1", "p": "Gregor Kobel", "pos": "GdB", "grp": "GK", "age": 28, "val": 40.0, "stats": {"m": 47, "s": 47, "g": 0, "a": 0, "min": 4260}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "33", "p": "Alexander Meyer", "pos": "GdB", "grp": "GK", "age": 35, "val": 0.5, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Patrick Drewes", "pos": "GdB", "grp": "GK", "age": 33, "val": 0.3, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "31", "p": "Silas Ostrzinski", "pos": "GdB", "grp": "GK", "age": 22, "val": 0.2, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Nico Schlotterbeck", "pos": "DC", "grp": "DEF", "age": 26, "val": 55.0, "stats": {"m": 37, "s": 36, "g": 5, "a": 2, "min": 3290}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Joane Gadou", "pos": "DC", "grp": "DEF", "age": 19, "val": 20.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Waldemar Anton", "pos": "DC", "grp": "DEF", "age": 30, "val": 18.0, "stats": {"m": 44, "s": 44, "g": 3, "a": 0, "min": 3927}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "49", "p": "Luca Reggiani", "pos": "DC", "grp": "DEF", "age": 18, "val": 10.0, "stats": {"m": 9, "s": 7, "g": 1, "a": 0, "min": 603}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Ramy Bensebaini", "pos": "DC", "grp": "DEF", "age": 31, "val": 7.0, "stats": {"m": 32, "s": 25, "g": 7, "a": 3, "min": 2396}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Emre Can", "pos": "DC", "grp": "DEF", "age": 32, "val": 3.0, "stats": {"m": 16, "s": 10, "g": 3, "a": 0, "min": 980}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "39", "p": "Filippo Mane", "pos": "DC", "grp": "DEF", "age": 21, "val": 2.5, "stats": {"m": 6, "s": 4, "g": 0, "a": 0, "min": 311}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Daniel Svensson", "pos": "ArG", "grp": "DEF", "age": 24, "val": 22.0, "stats": {"m": 45, "s": 38, "g": 4, "a": 2, "min": 3462}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "36", "p": "Kauã Prates", "pos": "ArG", "grp": "DEF", "age": 18, "val": 10.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Julian Ryerson", "pos": "ArD", "grp": "DEF", "age": 28, "val": 25.0, "stats": {"m": 42, "s": 34, "g": 0, "a": 18, "min": 3067}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "48", "p": "Mussa Kaba", "pos": "MDC", "grp": "MID", "age": 17, "val": 0.2, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Felix Nmecha", "pos": "MC", "grp": "MID", "age": 25, "val": 55.0, "stats": {"m": 42, "s": 36, "g": 5, "a": 3, "min": 3137}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Jobe Bellingham", "pos": "MC", "grp": "MID", "age": 20, "val": 40.0, "stats": {"m": 45, "s": 29, "g": 0, "a": 4, "min": 2665}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "25", "p": "Joey Veerman", "pos": "MC", "grp": "MID", "age": 27, "val": 25.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Carney Chukwuemeka", "pos": "MC", "grp": "MID", "age": 22, "val": 20.0, "stats": {"m": 38, "s": 10, "g": 3, "a": 2, "min": 1225}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Marcel Sabitzer", "pos": "MC", "grp": "MID", "age": 32, "val": 6.0, "stats": {"m": 34, "s": 27, "g": 1, "a": 4, "min": 2347}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Konstantinos Karetsas", "pos": "MO", "grp": "MID", "age": 18, "val": 35.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "45", "p": "Giannis Konstantelias", "pos": "MO", "grp": "MID", "age": 23, "val": 22.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Justin Lerma", "pos": "MO", "grp": "MID", "age": 18, "val": 3.2, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "41", "p": "Mathis Albert", "pos": "AiG", "grp": "ATT", "age": 17, "val": 0.3, "stats": {"m": 1, "s": 0, "g": 0, "a": 0, "min": 2}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "40", "p": "Samuele Inácio", "pos": "DA", "grp": "MID", "age": 18, "val": 15.0, "stats": {"m": 7, "s": 4, "g": 1, "a": 0, "min": 383}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Maximilian Beier", "pos": "AC", "grp": "ATT", "age": 23, "val": 40.0, "stats": {"m": 44, "s": 33, "g": 10, "a": 10, "min": 2736}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Serhou Guirassy", "pos": "AC", "grp": "ATT", "age": 30, "val": 32.0, "stats": {"m": 46, "s": 37, "g": 22, "a": 6, "min": 3222}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Fábio Silva", "pos": "AC", "grp": "ATT", "age": 24, "val": 22.0, "stats": {"m": 39, "s": 10, "g": 3, "a": 7, "min": 1181}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "JUV": [{"n": "25", "p": "Guglielmo Vicario", "pos": "GdB", "grp": "GK", "age": 29, "val": 18.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "Michele Di Gregorio", "pos": "GdB", "grp": "GK", "age": 29, "val": 10.0, "stats": {"m": 37, "s": 36, "g": 0, "a": 0, "min": 3285}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Mattia Perin", "pos": "GdB", "grp": "GK", "age": 33, "val": 2.0, "stats": {"m": 14, "s": 14, "g": 0, "a": 0, "min": 1245}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Carlo Pinsoglio", "pos": "GdB", "grp": "GK", "age": 36, "val": 0.2, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "3", "p": "Bremer", "pos": "DC", "grp": "DEF", "age": 29, "val": 35.0, "stats": {"m": 31, "s": 30, "g": 4, "a": 3, "min": 2569}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Pierre Kalulu", "pos": "DC", "grp": "DEF", "age": 26, "val": 32.0, "stats": {"m": 49, "s": 49, "g": 2, "a": 7, "min": 4381}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Lloyd Kelly", "pos": "DC", "grp": "DEF", "age": 27, "val": 23.0, "stats": {"m": 46, "s": 44, "g": 2, "a": 2, "min": 3947}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Jhon Lucumí", "pos": "DC", "grp": "DEF", "age": 28, "val": 22.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Federico Gatti", "pos": "DC", "grp": "DEF", "age": 28, "val": 14.0, "stats": {"m": 28, "s": 18, "g": 4, "a": 0, "min": 1656}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Daniele Rugani", "pos": "DC", "grp": "DEF", "age": 32, "val": 2.0, "stats": {"m": 8, "s": 4, "g": 0, "a": 0, "min": 350}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Andrea Cambiaso", "pos": "ArG", "grp": "DEF", "age": 26, "val": 20.0, "stats": {"m": 47, "s": 45, "g": 3, "a": 5, "min": 3609}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "32", "p": "Juan Cabal", "pos": "ArG", "grp": "DEF", "age": 25, "val": 7.0, "stats": {"m": 19, "s": 5, "g": 2, "a": 1, "min": 514}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Zeki Çelik", "pos": "ArD", "grp": "DEF", "age": 29, "val": 14.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Manuel Locatelli", "pos": "MDC", "grp": "MID", "age": 28, "val": 25.0, "stats": {"m": 47, "s": 44, "g": 3, "a": 2, "min": 3762}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Teun Koopmeiners", "pos": "MDC", "grp": "MID", "age": 28, "val": 14.0, "stats": {"m": 45, "s": 28, "g": 2, "a": 1, "min": 2672}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "29", "p": "Arthur Melo", "pos": "MDC", "grp": "MID", "age": 30, "val": 4.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Khéphren Thuram", "pos": "MC", "grp": "MID", "age": 25, "val": 38.0, "stats": {"m": 45, "s": 38, "g": 4, "a": 5, "min": 3136}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Weston McKennie", "pos": "MC", "grp": "MID", "age": 27, "val": 30.0, "stats": {"m": 48, "s": 44, "g": 9, "a": 8, "min": 3921}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Douglas Luiz", "pos": "MC", "grp": "MID", "age": 28, "val": 18.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Fabio Miretti", "pos": "MC", "grp": "MID", "age": 23, "val": 15.0, "stats": {"m": 31, "s": 10, "g": 1, "a": 3, "min": 945}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Kenan Yıldız", "pos": "AiG", "grp": "ATT", "age": 21, "val": 75.0, "stats": {"m": 47, "s": 42, "g": 11, "a": 10, "min": 3696}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Kerim Alajbegovic", "pos": "AiG", "grp": "ATT", "age": 18, "val": 25.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Nico González", "pos": "AiG", "grp": "ATT", "age": 28, "val": 22.0, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 17}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Jérémie Boga", "pos": "AiG", "grp": "ATT", "age": 29, "val": 8.0, "stats": {"m": 17, "s": 6, "g": 4, "a": 1, "min": 756}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Francisco Conceição", "pos": "AiD", "grp": "ATT", "age": 23, "val": 30.0, "stats": {"m": 42, "s": 33, "g": 4, "a": 5, "min": 2694}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Edon Zhegrova", "pos": "AiD", "grp": "ATT", "age": 27, "val": 10.0, "stats": {"m": 27, "s": 1, "g": 0, "a": 0, "min": 525}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Jonathan David", "pos": "AC", "grp": "ATT", "age": 26, "val": 30.0, "stats": {"m": 46, "s": 27, "g": 8, "a": 5, "min": 2329}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Randal Kolo Muani", "pos": "AC", "grp": "ATT", "age": 27, "val": 20.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Jeff Ekhator", "pos": "AC", "grp": "ATT", "age": 19, "val": 18.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Arkadiusz Milik", "pos": "AC", "grp": "ATT", "age": 32, "val": 1.5, "stats": {"m": 2, "s": 0, "g": 0, "a": 0, "min": 34}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "INT": [{"n": "1", "p": "Josep Martínez", "pos": "GdB", "grp": "GK", "age": 28, "val": 10.0, "stats": {"m": 11, "s": 11, "g": 0, "a": 0, "min": 990}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "49", "p": "Ivan Provedel", "pos": "GdB", "grp": "GK", "age": 32, "val": 3.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Raffaele Di Gennaro", "pos": "GdB", "grp": "GK", "age": 32, "val": 0.3, "stats": {"m": 1, "s": 0, "g": 0, "a": 0, "min": 9}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "95", "p": "Alessandro Bastoni", "pos": "DC", "grp": "DEF", "age": 27, "val": 65.0, "stats": {"m": 40, "s": 39, "g": 2, "a": 6, "min": 3197}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "31", "p": "Yann Bisseck", "pos": "DC", "grp": "DEF", "age": 25, "val": 50.0, "stats": {"m": 36, "s": 31, "g": 3, "a": 3, "min": 2872}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "25", "p": "Manuel Akanji", "pos": "DC", "grp": "DEF", "age": 31, "val": 17.0, "stats": {"m": 45, "s": 40, "g": 2, "a": 0, "min": 3707}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "John Stones", "pos": "DC", "grp": "DEF", "age": 32, "val": 12.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Benjamin Pavard", "pos": "DC", "grp": "DEF", "age": 30, "val": 12.0, "stats": {"m": 1, "s": 1, "g": 0, "a": 0, "min": 90}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "32", "p": "Federico Dimarco", "pos": "ArG", "grp": "DEF", "age": 28, "val": 50.0, "stats": {"m": 47, "s": 41, "g": 8, "a": 18, "min": 3659}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Carlos Augusto", "pos": "ArG", "grp": "DEF", "age": 27, "val": 23.0, "stats": {"m": 46, "s": 26, "g": 2, "a": 2, "min": 2512}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Djed Spence", "pos": "ArD", "grp": "DEF", "age": 26, "val": 40.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Aleksandar Stanković", "pos": "MDC", "grp": "MID", "age": 21, "val": 32.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Hakan Çalhanoğlu", "pos": "MDC", "grp": "MID", "age": 32, "val": 16.0, "stats": {"m": 30, "s": 27, "g": 12, "a": 7, "min": 2137}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Kristjan Asllani", "pos": "MDC", "grp": "MID", "age": 24, "val": 12.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Nicolò Barella", "pos": "MC", "grp": "MID", "age": 29, "val": 50.0, "stats": {"m": 45, "s": 41, "g": 3, "a": 9, "min": 3400}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Petar Sučić", "pos": "MC", "grp": "MID", "age": 22, "val": 45.0, "stats": {"m": 50, "s": 28, "g": 4, "a": 4, "min": 2549}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Andy Diouf", "pos": "MC", "grp": "MID", "age": 23, "val": 20.0, "stats": {"m": 29, "s": 7, "g": 4, "a": 0, "min": 823}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Piotr Zielinski", "pos": "MC", "grp": "MID", "age": 32, "val": 10.0, "stats": {"m": 49, "s": 33, "g": 7, "a": 4, "min": 2991}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Henrikh Mkhitaryan", "pos": "MC", "grp": "MID", "age": 37, "val": 3.0, "stats": {"m": 39, "s": 22, "g": 4, "a": 3, "min": 2070}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Luis Henrique", "pos": "MD", "grp": "MID", "age": 24, "val": 22.0, "stats": {"m": 43, "s": 25, "g": 1, "a": 3, "min": 2253}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Yanis Massolin", "pos": "MO", "grp": "MID", "age": 23, "val": 4.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Lautaro Martínez", "pos": "AC", "grp": "ATT", "age": 28, "val": 85.0, "stats": {"m": 41, "s": 35, "g": 22, "a": 6, "min": 2767}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Marcus Thuram", "pos": "AC", "grp": "ATT", "age": 29, "val": 50.0, "stats": {"m": 44, "s": 35, "g": 18, "a": 9, "min": 2884}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "94", "p": "Pio Esposito", "pos": "AC", "grp": "ATT", "age": 21, "val": 45.0, "stats": {"m": 48, "s": 22, "g": 10, "a": 6, "min": 2265}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Ange-Yoan Bonny", "pos": "AC", "grp": "ATT", "age": 22, "val": 35.0, "stats": {"m": 48, "s": 15, "g": 7, "a": 9, "min": 1675}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}], "MIL": [{"n": "16", "p": "Mike Maignan", "pos": "GdB", "grp": "GK", "age": 31, "val": 20.0, "stats": {"m": 41, "s": 41, "g": 0, "a": 0, "min": 3656}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Pietro Terracciano", "pos": "GdB", "grp": "GK", "age": 36, "val": 0.9, "stats": {"m": 2, "s": 1, "g": 0, "a": 0, "min": 124}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "96", "p": "Lorenzo Torriani", "pos": "GdB", "grp": "GK", "age": 21, "val": 0.8, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "31", "p": "Strahinja Pavlović", "pos": "DC", "grp": "DEF", "age": 25, "val": 40.0, "stats": {"m": 38, "s": 37, "g": 5, "a": 1, "min": 3219}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "34", "p": "Mario Gila", "pos": "DC", "grp": "DEF", "age": 25, "val": 30.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Koni De Winter", "pos": "DC", "grp": "DEF", "age": 24, "val": 23.0, "stats": {"m": 29, "s": 22, "g": 1, "a": 1, "min": 2047}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Fikayo Tomori", "pos": "DC", "grp": "DEF", "age": 28, "val": 17.0, "stats": {"m": 37, "s": 35, "g": 0, "a": 3, "min": 2923}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "46", "p": "Matteo Gabbia", "pos": "DC", "grp": "DEF", "age": 26, "val": 17.0, "stats": {"m": 31, "s": 29, "g": 0, "a": 0, "min": 2621}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "42", "p": "Filippo Terracciano", "pos": "DC", "grp": "DEF", "age": 23, "val": 4.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Sankhoun Diawara", "pos": "DC", "grp": "DEF", "age": 20, "val": 2.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "33", "p": "Davide Bartesaghi", "pos": "ArG", "grp": "DEF", "age": 20, "val": 22.0, "stats": {"m": 33, "s": 28, "g": 2, "a": 1, "min": 2536}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "2", "p": "Pervis Estupiñán", "pos": "ArG", "grp": "DEF", "age": 28, "val": 12.0, "stats": {"m": 22, "s": 16, "g": 1, "a": 1, "min": 1303}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Ardon Jashari", "pos": "MDC", "grp": "MID", "age": 24, "val": 25.0, "stats": {"m": 17, "s": 9, "g": 0, "a": 1, "min": 880}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Youssouf Fofana", "pos": "MDC", "grp": "MID", "age": 27, "val": 23.0, "stats": {"m": 36, "s": 29, "g": 2, "a": 4, "min": 2373}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Samuele Ricci", "pos": "MDC", "grp": "MID", "age": 24, "val": 22.0, "stats": {"m": 34, "s": 14, "g": 1, "a": 4, "min": 1499}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "12", "p": "Adrien Rabiot", "pos": "MC", "grp": "MID", "age": 31, "val": 18.0, "stats": {"m": 32, "s": 31, "g": 6, "a": 5, "min": 2820}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "80", "p": "Yunus Musah", "pos": "MC", "grp": "MID", "age": 23, "val": 14.0, "stats": {"m": 2, "s": 1, "g": 0, "a": 0, "min": 114}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Ruben Loftus-Cheek", "pos": "MC", "grp": "MID", "age": 30, "val": 8.5, "stats": {"m": 32, "s": 16, "g": 3, "a": 1, "min": 1453}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Warren Bondo", "pos": "MC", "grp": "MID", "age": 22, "val": 6.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Christian Comotto", "pos": "MC", "grp": "MID", "age": 18, "val": 5.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Luka Modrić", "pos": "MC", "grp": "MID", "age": 40, "val": 3.5, "stats": {"m": 37, "s": 32, "g": 2, "a": 3, "min": 2864}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "56", "p": "Alexis Saelemaekers", "pos": "MD", "grp": "MID", "age": 27, "val": 20.0, "stats": {"m": 39, "s": 37, "g": 3, "a": 5, "min": 3077}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "70", "p": "Alphadjo Cissè", "pos": "MO", "grp": "MID", "age": 19, "val": 7.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "10", "p": "Rafael Leão", "pos": "AiG", "grp": "ATT", "age": 27, "val": 50.0, "stats": {"m": 31, "s": 25, "g": 10, "a": 3, "min": 1968}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Christian Pulisic", "pos": "AiD", "grp": "ATT", "age": 27, "val": 40.0, "stats": {"m": 34, "s": 20, "g": 10, "a": 4, "min": 1806}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Samuel Chukwueze", "pos": "AiD", "grp": "ATT", "age": 27, "val": 18.0, "stats": {"m": 1, "s": 0, "g": 0, "a": 0, "min": 25}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "9", "p": "Gonçalo Ramos", "pos": "AC", "grp": "ATT", "age": 25, "val": 50.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "18", "p": "Christopher Nkunku", "pos": "AC", "grp": "ATT", "age": 28, "val": 25.0, "stats": {"m": 35, "s": 17, "g": 8, "a": 3, "min": 1528}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "Santiago Gimenez", "pos": "AC", "grp": "ATT", "age": 25, "val": 18.0, "stats": {"m": 18, "s": 12, "g": 1, "a": 3, "min": 1037}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "73", "p": "Francesco Camarda", "pos": "AC", "grp": "ATT", "age": 18, "val": 15.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Andrej Kostić", "pos": "AC", "grp": "ATT", "age": 19, "val": 5.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}], "NAP": [{"n": "32", "p": "Vanja Milinković-Savić", "pos": "GdB", "grp": "GK", "age": 29, "val": 20.0, "stats": {"m": 38, "s": 38, "g": 0, "a": 1, "min": 3420}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "1", "p": "Alex Meret", "pos": "GdB", "grp": "GK", "age": 29, "val": 8.0, "stats": {"m": 12, "s": 12, "g": 0, "a": 1, "min": 1070}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "14", "p": "Nikita Contini", "pos": "GdB", "grp": "GK", "age": 30, "val": 0.4, "stats": {"m": 1, "s": 0, "g": 0, "a": 0, "min": 10}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "4", "p": "Alessandro Buongiorno", "pos": "DC", "grp": "DEF", "age": 27, "val": 30.0, "stats": {"m": 42, "s": 35, "g": 0, "a": 1, "min": 3149}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "31", "p": "Sam Beukema", "pos": "DC", "grp": "DEF", "age": 27, "val": 22.0, "stats": {"m": 32, "s": 25, "g": 2, "a": 0, "min": 2214}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "16", "p": "Rafa Marín", "pos": "DC", "grp": "DEF", "age": 24, "val": 12.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "13", "p": "Amir Rrahmani", "pos": "DC", "grp": "DEF", "age": 32, "val": 10.0, "stats": {"m": 27, "s": 27, "g": 2, "a": 1, "min": 2340}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "5", "p": "Luca Marianucci", "pos": "DC", "grp": "DEF", "age": 22, "val": 7.0, "stats": {"m": 2, "s": 1, "g": 0, "a": 1, "min": 118}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "28", "p": "Nosa Edward Obaretin", "pos": "DC", "grp": "DEF", "age": 23, "val": 1.5, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Christian Garofalo", "pos": "DC", "grp": "DEF", "age": 19, "val": 0.25, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "17", "p": "Mathías Olivera", "pos": "ArG", "grp": "DEF", "age": 28, "val": 15.0, "stats": {"m": 33, "s": 20, "g": 0, "a": 2, "min": 1827}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "37", "p": "Leonardo Spinazzola", "pos": "ArG", "grp": "DEF", "age": 33, "val": 3.5, "stats": {"m": 42, "s": 30, "g": 3, "a": 5, "min": 2599}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "22", "p": "Giovanni Di Lorenzo", "pos": "ArD", "grp": "DEF", "age": 33, "val": 7.5, "stats": {"m": 35, "s": 35, "g": 2, "a": 3, "min": 3019}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "30", "p": "Pasquale Mazzocchi", "pos": "ArD", "grp": "DEF", "age": 31, "val": 1.5, "stats": {"m": 20, "s": 4, "g": 0, "a": 1, "min": 452}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "6", "p": "Billy Gilmour", "pos": "MDC", "grp": "MID", "age": 25, "val": 20.0, "stats": {"m": 20, "s": 9, "g": 1, "a": 0, "min": 887}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "68", "p": "Stanislav Lobotka", "pos": "MDC", "grp": "MID", "age": 31, "val": 10.0, "stats": {"m": 41, "s": 38, "g": 1, "a": 1, "min": 3213}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Jens Cajuste", "pos": "MDC", "grp": "MID", "age": 27, "val": 7.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "8", "p": "Scott McTominay", "pos": "MC", "grp": "MID", "age": 29, "val": 40.0, "stats": {"m": 44, "s": 41, "g": 14, "a": 4, "min": 3701}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "99", "p": "Frank Anguissa", "pos": "MC", "grp": "MID", "age": 30, "val": 15.0, "stats": {"m": 22, "s": 18, "g": 4, "a": 2, "min": 1597}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "24", "p": "Michael Folorunsho", "pos": "MC", "grp": "MID", "age": 28, "val": 5.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "26", "p": "Antonio Vergara", "pos": "MO", "grp": "MID", "age": 23, "val": 15.0, "stats": {"m": 19, "s": 12, "g": 3, "a": 4, "min": 926}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "11", "p": "Kevin De Bruyne", "pos": "MO", "grp": "MID", "age": 35, "val": 8.0, "stats": {"m": 21, "s": 16, "g": 5, "a": 4, "min": 1360}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "27", "p": "Alisson Santos", "pos": "AiG", "grp": "ATT", "age": 23, "val": 28.0, "stats": {"m": 15, "s": 9, "g": 4, "a": 0, "min": 866}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "70", "p": "Noa Lang", "pos": "AiG", "grp": "ATT", "age": 27, "val": 22.0, "stats": {"m": 27, "s": 9, "g": 1, "a": 2, "min": 977}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "7", "p": "David Neres", "pos": "AiD", "grp": "ATT", "age": 29, "val": 23.0, "stats": {"m": 25, "s": 14, "g": 6, "a": 4, "min": 1368}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "", "p": "Cyril Ngonge", "pos": "AiD", "grp": "ATT", "age": 26, "val": 7.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "21", "p": "Matteo Politano", "pos": "AiD", "grp": "ATT", "age": 33, "val": 5.0, "stats": {"m": 44, "s": 33, "g": 2, "a": 6, "min": 2835}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "29", "p": "Jesper Lindstrøm", "pos": "AiD", "grp": "ATT", "age": 26, "val": 4.0, "stats": null, "statsClub": null, "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "19", "p": "Rasmus Højlund", "pos": "AC", "grp": "ATT", "age": 23, "val": 60.0, "stats": {"m": 44, "s": 42, "g": 16, "a": 8, "min": 3627}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "20", "p": "Lorenzo Lucca", "pos": "AC", "grp": "ATT", "age": 25, "val": 20.0, "stats": {"m": 23, "s": 6, "g": 2, "a": 0, "min": 595}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "23", "p": "Giovane", "pos": "AC", "grp": "ATT", "age": 22, "val": 12.0, "stats": {"m": 13, "s": 3, "g": 0, "a": 2, "min": 392}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}, {"n": "15", "p": "Walid Cheddira", "pos": "AC", "grp": "ATT", "age": 28, "val": 2.0, "stats": {"m": 0, "s": 0, "g": 0, "a": 0, "min": 0}, "statsClub": "", "valDelta": 0.0, "valSince": "18/08/2026"}]};
+const CLUBMETA={"FCB": {"name": "FC Barcelone", "bg": "#a50044", "fg": "#ffed02"}, "RMA": {"name": "Real Madrid", "bg": "#fefefe", "fg": "#febe10"}, "ATM": {"name": "Atlético de Madrid", "bg": "#ce3524", "fg": "#fff"}, "MCI": {"name": "Manchester City", "bg": "#6cabdd", "fg": "#1c2c5b"}, "ARS": {"name": "Arsenal FC", "bg": "#ef0107", "fg": "#fff"}, "LIV": {"name": "FC Liverpool", "bg": "#c8102e", "fg": "#fff"}, "CHE": {"name": "Chelsea FC", "bg": "#034694", "fg": "#fff"}, "MUN": {"name": "Manchester United", "bg": "#da291c", "fg": "#fff"}, "TOT": {"name": "Tottenham Hotspur", "bg": "#132257", "fg": "#fff"}, "AVL": {"name": "Aston Villa", "bg": "#670e36", "fg": "#95bfe5"}, "BAY": {"name": "Bayern Munich", "bg": "#dc052d", "fg": "#fff"}, "BVB": {"name": "Borussia Dortmund", "bg": "#fde100", "fg": "#000"}, "JUV": {"name": "Juventus Turin", "bg": "#000", "fg": "#fff"}, "INT": {"name": "Inter Milan", "bg": "#010e80", "fg": "#f7b900"}, "MIL": {"name": "AC Milan", "bg": "#fb090b", "fg": "#000"}, "NAP": {"name": "SSC Napoli", "bg": "#12a2d4", "fg": "#fff"}};
+const LOGO_CODES=["L2"];
+const ORDER=["FCB", "RMA", "ATM", "MCI", "ARS", "LIV", "CHE", "MUN", "TOT", "AVL", "BAY", "BVB", "JUV", "INT", "MIL", "NAP"];
+
+const FORMATIONS={
+ "4-3-3":[["GB",50,86],["DG",15,66],["DC",38,66],["DC",62,66],["DD",85,66],["MC",28,44],["MC",50,46],["MC",72,44],["AIG",18,22],["BU",50,8],["AID",82,22]],
+ "4-4-2":[["GB",50,86],["DG",15,66],["DC",38,66],["DC",62,66],["DD",85,66],["MG",15,44],["MC",38,46],["MC",62,46],["MD",85,44],["BU",38,10],["BU",62,10]],
+ "4-2-3-1":[["GB",50,86],["DG",15,66],["DC",38,66],["DC",62,66],["DD",85,66],["MDC",35,44],["MDC",65,44],["MG",18,24],["MO",50,26],["MD",82,24],["BU",50,8]],
+ "3-5-2":[["GB",50,86],["DC",28,66],["DC",50,66],["DC",72,66],["MG",8,44],["MC",32,44],["MO",50,26],["MC",68,44],["MD",92,44],["BU",38,8],["BU",62,8]],
+ "3-4-3":[["GB",50,86],["DC",28,66],["DC",50,66],["DC",72,66],["MG",12,44],["MC",35,44],["MC",65,44],["MD",88,44],["AIG",20,22],["BU",50,8],["AID",80,22]]
+};
+const GRPCLS={GK:'gk',DEF:'def',MID:'mid',ATT:'att'};
+const GRPLAB={GK:'Gardiens',DEF:'Défenseurs',MID:'Milieux',ATT:'Attaquants'};
+// poste précis (recrue) -> groupe (GK/DEF/MID/ATT), même convention que les joueurs scrapés
+const POS_GRP={GdB:'GK',ArD:'DEF',ArG:'DEF',DC:'DEF',MDC:'MID',MC:'MID',MO:'MID',MD:'MID',MG:'MID',AiD:'ATT',AiG:'ATT',AC:'ATT',SA:'ATT'};
+
+let club=null, formation="4-3-3";
+let slots=[];              // {role,x,y,starter,sub}
+let recruits=[];           // {id,p,pos,grp,type,val}
+let departures={};         // key -> {type,val}
+let active=null;           // {kind:'player',k} | {kind:'seat',i,seat}
+let recId=1;
+
+function money(v,type){if(type==='loan')return 'Prêt';if(!v)return '—';if(v<1)return Math.round(v*1000)+' K€';const s=Number.isInteger(v)?v:(Math.round(v*10)/10).toString().replace('.',',');return s+' M€';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function crest(code,cls){const has=LOGO_CODES.indexOf(code)>=0;const m=CLUBMETA[code]||{};
+  const st=has?'':`background:${m.bg};color:${m.fg}`;
+  return `<span class="crest ${cls||''}${has?' has-logo l-'+code:''}" style="${st}">${esc(code).slice(0,4)}</span>`;}
+function short(name){const p=name.trim().split(' ');return p.length>1?p[p.length-1]:name;}
+function pkey(pl){return (pl.n||'')+'|'+pl.p;}
+
+function pool(){ // joueurs dispo à placer : effectif (hors départs) + recrues
+  const sq=(SQUADS[club]||[]).filter(p=>!departures[pkey(p)]);
+  return sq.concat(recruits);
+}
+function getPlayer(k){
+  if(k&&k.indexOf('REC:')===0)return recruits.find(r=>('REC:'+r.id)===k);
+  return (SQUADS[club]||[]).find(p=>pkey(p)===k);
+}
+function keyOf(p){return p.id!=null?'REC:'+p.id:pkey(p);}
+function placedKeys(){const s=new Set();slots.forEach(sl=>{if(sl.starter)s.add(sl.starter);if(sl.sub)s.add(sl.sub);});return s;}
+function isPlaced(k){return placedKeys().has(k);}
+
+function initClubSelect(){
+  const sel=document.getElementById('clubsel');
+  sel.innerHTML=ORDER.map(c=>`<option value="${c}">${esc(CLUBMETA[c].name)}</option>`).join('');
+  sel.onchange=()=>loadClub(sel.value);
+}
+
+/* ---------- onglets mobiles (Effectif / Terrain) ---------- */
+function isMobile(){return window.matchMedia('(max-width:900px)').matches;}
+function setMobileTab(t){
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  document.getElementById('layout').classList.toggle('tab-squad',t==='squad');
+  document.getElementById('layout').classList.toggle('tab-pitch',t==='pitch');
+}
+document.querySelectorAll('.mtab').forEach(b=>b.onclick=()=>setMobileTab(b.dataset.tab));
+
+function updateHint(){
+  const el=document.querySelector('.pitch-hint');
+  if(active&&active.kind==='player'){
+    const p=getPlayer(active.k);
+    el.innerHTML=`Sélection : <b>${esc(p?p.p:'')}</b> — clique un poste sur le terrain pour le placer.`;
+    el.classList.add('active-sel');
+  } else if(active&&active.kind==='seat'){
+    el.innerHTML=`Poste sélectionné (<b>${esc(slots[active.i].role)}</b>) — clique un joueur dans l'effectif pour le placer ici.`;
+    el.classList.add('active-sel');
+  } else {
+    el.innerHTML=`Clique un poste vide puis un joueur (ou glisse-le depuis la liste) pour le placer. Clique un joueur déjà placé pour le retirer. Glisse un titulaire sur le terrain pour ajuster sa position.`;
+    el.classList.remove('active-sel');
+  }
+}
+function setFormation(f,keep){
+  const prevStarters=keep&&slots.length?slots.map(s=>s.starter):[];
+  const prevSubs=keep&&slots.length?slots.map(s=>s.sub):[];
+  formation=f;
+  slots=FORMATIONS[f].map(([role,x,y],idx)=>({role,x,y,starter:prevStarters[idx]||null,sub:prevSubs[idx]||null}));
+}
+function compoKey(code){return 'compo:'+code;}
+function saveCompo(){
+  if(!club)return;
+  try{localStorage.setItem(compoKey(club),JSON.stringify({formation,slots,recruits,departures,recId}));}catch(e){}
+}
+function loadCompo(code){
+  try{const raw=localStorage.getItem(compoKey(code));return raw?JSON.parse(raw):null;}catch(e){return null;}
+}
+function loadClub(code){
+  club=code; active=null;
+  const saved=loadCompo(code);
+  if(saved){
+    formation=saved.formation||formation;
+    slots=saved.slots||[];
+    recruits=saved.recruits||[];
+    departures=saved.departures||{};
+    recId=saved.recId||1;
+  } else {
+    recruits=[]; departures={}; recId=1;
+    setFormation(formation,false);
+  }
+  const m=CLUBMETA[code];
+  document.documentElement.style.setProperty('--club',m.bg);
+  document.getElementById('topcrestbox').innerHTML=crest(code);
+  document.getElementById('topname').textContent=m.name;
+  document.getElementById('clubsel').value=code;
+  document.title=m.name+' · Effectif & Compo';
+  history.replaceState(null,'','?c='+code);
+  document.getElementById('recruitModal').classList.add('hidden');
+  setMobileTab('squad');
+  renderFormations(); renderAll();
+  preloadShareAssets();   // prépare logo + polices à l'avance (voir plus bas)
+}
+function renderFormations(){
+  document.getElementById('formations').innerHTML=
+    Object.keys(FORMATIONS).map(f=>`<button class="fbtn${f===formation?' active':''}" data-f="${f}">${f}</button>`).join('')
+    +`<button class="fbtn share" id="shareBtn">⇧ Partager</button>`
+    +`<button class="fbtn reset" id="resetBtn">Réinitialiser</button>`;
+  document.querySelectorAll('.fbtn[data-f]').forEach(b=>b.onclick=()=>{setFormation(b.dataset.f,true);active=null;renderFormations();renderAll();});
+  document.getElementById('resetBtn').onclick=()=>{setFormation(formation,false);active=null;renderAll();};
+  document.getElementById('shareBtn').onclick=shareImage;
+}
+
+/* ---------- image de partage (canvas) ---------- */
+function loadImage(src){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=reject;
+    img.src=src;
+  });
+}
+function getCrestDataUri(){
+  const el=document.querySelector('#topcrestbox .crest');
+  if(!el)return null;
+  const bg=getComputedStyle(el).backgroundImage;
+  const m=/url\(["']?(.+?)["']?\)/.exec(bg);
+  return (m&&m[1]!=='none')?m[1]:null;
+}
+
+/* Préchargement (logo + polices) déclenché à chaque changement de club,
+   pour que shareImage() n'ait (quasi) plus rien à attendre au moment du clic :
+   Safari exige que navigator.share() suive le clic sans délai notable. */
+let shareFontsWarmed=false;
+let currentCrestImgPromise=Promise.resolve(null);
+function warmShareFonts(){
+  if(shareFontsWarmed)return;
+  shareFontsWarmed=true;
+  Promise.all([
+    document.fonts.load('400 46px Tanker'),
+    document.fonts.load('800 22px Inter'),
+    document.fonts.load('700 22px Inter'),
+  ]).catch(()=>{});
+}
+function preloadShareAssets(){
+  warmShareFonts();
+  const dataUri=getCrestDataUri();
+  currentCrestImgPromise=dataUri?loadImage(dataUri).catch(()=>null):Promise.resolve(null);
+}
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+function fitText(ctx,text,x,y,maxW,size,family,weight){
+  weight=weight||'400';let s=size;
+  ctx.font=`${weight} ${s}px ${family}, sans-serif`;
+  while(ctx.measureText(text).width>maxW && s>16){s-=2;ctx.font=`${weight} ${s}px ${family}, sans-serif`;}
+  ctx.fillText(text,x,y);
+}
+function drawPitch(ctx,x,y,w,h){
+  const stripes=10;
+  for(let i=0;i<stripes;i++){
+    ctx.fillStyle=i%2===0?'#1a7a43':'#178040';
+    ctx.fillRect(x,y+(h/stripes)*i,w,h/stripes+1);
+  }
+  ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=3;
+  ctx.strokeRect(x,y,w,h);
+  ctx.beginPath();ctx.moveTo(x,y+h/2);ctx.lineTo(x+w,y+h/2);ctx.stroke();
+  ctx.beginPath();ctx.arc(x+w/2,y+h/2,w*0.135,0,Math.PI*2);ctx.stroke();
+  const boxW=w*0.48,boxH=h*0.14;
+  ctx.strokeRect(x+(w-boxW)/2,y,boxW,boxH);
+  ctx.strokeRect(x+(w-boxW)/2,y+h-boxH,boxW,boxH);
+}
+async function shareOrDownload(blob,filename,text){
+  const file=new File([blob],filename,{type:'image/png'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try{
+      await navigator.share({files:[file],title:text,text});
+      return;                              // partagé avec succès
+    }catch(err){
+      if(err && err.name==='AbortError')return;   // l'utilisateur a annulé -> ne rien faire
+      // sinon (pas supporté / échec) -> on tombe sur le téléchargement classique ci-dessous
+    }
+  }
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+}
+async function shareImage(){
+  const btn=document.getElementById('shareBtn');
+  const original=btn.textContent;
+  btn.disabled=true;btn.textContent='Génération…';
+  try{
+    // polices déjà préchargées (preloadShareAssets) -> on n'attend que si vraiment nécessaire, et borné
+    if(document.fonts.status!=='loaded'){
+      await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,120))]);
+    }
+    const crestImg=await currentCrestImgPromise;   // déjà résolu dans l'immense majorité des cas
+
+    const W=1080,H=1350;
+    const canvas=document.createElement('canvas');
+    canvas.width=W;canvas.height=H;
+    const ctx=canvas.getContext('2d');
+    const m=CLUBMETA[club];
+
+    ctx.fillStyle='#0a0a0a';ctx.fillRect(0,0,W,H);
+    const grad=ctx.createLinearGradient(0,0,W,0);
+    grad.addColorStop(0,'#34c77b');grad.addColorStop(.4,'#4a8cff');grad.addColorStop(.7,'#ff4d6d');grad.addColorStop(1,'#34c77b');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,W,10);
+
+    const crestSize=104,crestX=56,crestY=56;
+    function drawMonogram(){
+      roundRect(ctx,crestX,crestY,crestSize,crestSize,22);
+      ctx.fillStyle=m.bg;ctx.fill();
+      ctx.fillStyle=m.fg;ctx.font='400 34px Tanker, sans-serif';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(club.slice(0,4),crestX+crestSize/2,crestY+crestSize/2+2);
+    }
+    if(crestImg){
+      roundRect(ctx,crestX,crestY,crestSize,crestSize,22);
+      ctx.fillStyle='#fff';ctx.fill();
+      ctx.save();roundRect(ctx,crestX,crestY,crestSize,crestSize,22);ctx.clip();
+      const pad=8;
+      ctx.drawImage(crestImg,crestX+pad,crestY+pad,crestSize-pad*2,crestSize-pad*2);
+      ctx.restore();
+    } else drawMonogram();
+
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#fff';
+    fitText(ctx,m.name.toUpperCase(),crestX+crestSize+24,crestY+46,W-crestX-crestSize-24-190,46,'Tanker','400');
+    ctx.fillStyle='#9a9a9a';
+    ctx.font='700 20px Inter, sans-serif';
+    ctx.fillText('COMPOSITION · LIGUE 1 2026/27',crestX+crestSize+24,crestY+crestSize-6);
+
+    const chipW=150,chipH=42,chipX=W-56-chipW,chipY=crestY+(crestSize-chipH)/2;
+    roundRect(ctx,chipX,chipY,chipW,chipH,10);
+    ctx.fillStyle='#4a8cff';ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='800 22px Inter, sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(formation,chipX+chipW/2,chipY+chipH/2+1);
+
+    const pitchX=56,pitchY=200,pitchW=W-112,pitchH=860;
+    drawPitch(ctx,pitchX,pitchY,pitchW,pitchH);
+
+    slots.forEach(sl=>{
+      const cx=pitchX+(sl.x/100)*pitchW, cy=pitchY+(sl.y/100)*pitchH;
+      const p=sl.starter?getPlayer(sl.starter):null;
+      const r=46;
+      if(p){
+        ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+        ctx.fillStyle=m.bg;ctx.fill();
+        ctx.lineWidth=4;ctx.strokeStyle='#fff';ctx.stroke();
+        ctx.fillStyle='#fff';ctx.font='800 34px Inter, sans-serif';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(p.n||short(p.p).slice(0,3).toUpperCase(),cx,cy+2);
+        ctx.font='700 22px Inter, sans-serif';ctx.lineJoin='round';
+        ctx.lineWidth=4;ctx.strokeStyle='rgba(0,0,0,.9)';
+        ctx.strokeText(short(p.p),cx,cy+r+30);
+        ctx.fillStyle='#fff';
+        ctx.fillText(short(p.p),cx,cy+r+30);
+      } else {
+        ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+        ctx.setLineDash([6,6]);ctx.lineWidth=3;ctx.strokeStyle='rgba(255,255,255,.45)';ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='800 20px Inter, sans-serif';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(sl.role,cx,cy);
+      }
+    });
+
+    const subs=slots.filter(s=>s.sub).map(s=>getPlayer(s.sub)).filter(Boolean);
+    let subY=pitchY+pitchH+56;
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#9a9a9a';ctx.font='800 20px Inter, sans-serif';
+    ctx.fillText('REMPLAÇANTS',56,subY);
+    subY+=24;
+    if(subs.length){
+      let cx2=56;const chipHh=40,chipGap=10;
+      ctx.font='700 22px Inter, sans-serif';ctx.textBaseline='middle';
+      subs.forEach(p=>{
+        const label=short(p.p);
+        const cw=ctx.measureText(label).width+34;
+        if(cx2+cw>W-56){cx2=56;subY+=chipHh+10;}
+        roundRect(ctx,cx2,subY,cw,chipHh,20);
+        ctx.fillStyle='#161618';ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,.14)';ctx.lineWidth=1;ctx.stroke();
+        ctx.fillStyle='#fff';
+        ctx.fillText(label,cx2+17,subY+chipHh/2+1);
+        cx2+=cw+chipGap;
+      });
+    } else {
+      ctx.font='italic 20px Inter, sans-serif';ctx.fillStyle='#5a5a5a';
+      ctx.fillText('Aucun remplaçant placé',56,subY+20);
+    }
+
+    ctx.textAlign='center';ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#5a5a5a';ctx.font='700 20px Inter, sans-serif';
+    ctx.fillText('350 · Mercato Ligue 1',W/2,H-30);
+
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    const filename=`compo-${club}-${formation}.png`.toLowerCase();
+    await shareOrDownload(blob,filename,`Ma compo ${m.name}`);
+  } finally {
+    btn.disabled=false;btn.textContent=original;
+  }
+}
+
+/* ---------- actions ---------- */
+function clickPlayer(k){
+  if(isPlaced(k))return;
+  if(active&&active.kind==='seat'){
+    assignSeat(active.i,active.seat,k);active=null;
+    if(isMobile())setMobileTab('pitch');           // montre le résultat sur le terrain
+  }
+  else if(active&&active.kind==='player'&&active.k===k){active=null;}
+  else {
+    active={kind:'player',k};
+    if(isMobile())setMobileTab('pitch');           // choisir où le placer
+  }
+  renderAll();
+}
+function seatClick(i,seat){
+  const cur=slots[i][seat];
+  if(cur){ slots[i][seat]=null; active=null; renderAll(); return; }   // vider
+  if(active&&active.kind==='player'){
+    assignSeat(i,seat,active.k);active=null;
+    if(isMobile())setMobileTab('squad');           // enchaîne avec le joueur suivant
+  }
+  else if(active&&active.kind==='seat'&&active.i===i&&active.seat===seat){active=null;}
+  else active={kind:'seat',i,seat};
+  renderAll();
+}
+function assignSeat(i,seat,k){
+  slots.forEach(sl=>{if(sl.starter===k)sl.starter=null;if(sl.sub===k)sl.sub=null;});
+  slots[i][seat]=k;
+}
+function addRecruit(){
+  const name=document.getElementById('rName').value.trim();
+  if(!name){document.getElementById('rName').focus();return;}
+  const pos=document.getElementById('rPos').value;
+  const grp=POS_GRP[pos]||'MID';
+  const loan=document.getElementById('rLoan').checked;
+  const val=parseFloat(document.getElementById('rFee').value)||0;
+  recruits.push({id:recId++,p:name,pos,grp,type:loan?'loan':'paid',val:loan?0:val});
+  document.getElementById('rName').value='';document.getElementById('rFee').value='';document.getElementById('rLoan').checked=false;
+  document.getElementById('recruitModal').classList.add('hidden');
+  renderAll();
+}
+function removeRecruit(id){
+  const k='REC:'+id;
+  slots.forEach(sl=>{if(sl.starter===k)sl.starter=null;if(sl.sub===k)sl.sub=null;});
+  recruits=recruits.filter(r=>r.id!==id);
+  renderAll();
+}
+function undoDepart(k){delete departures[k];renderAll();}
+
+/* modal départ */
+let modalCb=null;
+function openModal(title,sub,cb){
+  modalCb=cb;
+  document.getElementById('modalT').textContent=title;
+  document.getElementById('modalSub').textContent=sub||'';
+  document.getElementById('mFee').value='';document.getElementById('mLoan').checked=false;
+  document.getElementById('modal').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('mFee').focus(),0);
+}
+function closeModal(){document.getElementById('modal').classList.add('hidden');modalCb=null;}
+document.getElementById('mCancel').onclick=closeModal;
+document.getElementById('mOk').onclick=()=>{
+  const loan=document.getElementById('mLoan').checked;
+  const val=parseFloat(document.getElementById('mFee').value)||0;
+  if(modalCb)modalCb({type:loan?'loan':'paid',val:loan?0:val});
+  closeModal();
+};
+function departPlayer(k){
+  const p=getPlayer(k); if(!p)return;
+  openModal('Faire partir '+short(p.p),'Montant de la vente ou prêt',fee=>{
+    departures[k]=fee;
+    slots.forEach(sl=>{if(sl.starter===k)sl.starter=null;if(sl.sub===k)sl.sub=null;});
+    renderAll();
+  });
+}
+
+/* ---------- rendu ---------- */
+function renderAll(){renderSquad();renderRecruits();renderDeparts();renderPitch();updateHint();saveCompo();}
+
+function renderSquad(){
+  const sq=(SQUADS[club]||[]).filter(p=>!departures[pkey(p)]);
+  const pset=placedKeys();
+  let html='';
+  ['GK','DEF','MID','ATT'].forEach(g=>{
+    const list=sq.filter(p=>p.grp===g); if(!list.length)return;
+    const gl={GK:'gk',DEF:'df',MID:'md',ATT:'at'}[g];
+    html+=`<div class="grp"><div class="grp-lab ${gl}"><span class="pt"></span>${GRPLAB[g]}</div>`;
+    list.forEach(p=>{const k=pkey(p),used=pset.has(k),sel=active&&active.kind==='player'&&active.k===k;
+      html+=`<div class="pl${used?' used':''}${sel?' sel':''}" draggable="${!used}" data-k="${esc(k)}">
+        <span class="num">${esc(p.n||'–')}</span>
+        <span class="pos ${GRPCLS[p.grp]}">${esc(p.pos)}</span>
+        <span class="nm">${esc(p.p)}<span class="ag">${p.age||''}</span></span>
+        <span class="val">${money(p.val,'paid')}</span>
+        <span class="act out" data-out="${esc(k)}" title="Faire partir">→</span></div>`;});
+    html+='</div>';
+  });
+  document.getElementById('squadList').innerHTML=html;
+  const total=sq.length,used=sq.filter(p=>pset.has(pkey(p))).length;
+  document.getElementById('squadCount').textContent=`${used}/${total} placés`;
+  document.querySelectorAll('#squadList .pl').forEach(el=>{
+    const k=el.dataset.k;
+    el.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',k));
+    el.onclick=e=>{if(e.target.classList.contains('act'))return;clickPlayer(k);};
+  });
+  document.querySelectorAll('#squadList .act.out').forEach(el=>el.onclick=e=>{e.stopPropagation();departPlayer(el.dataset.out);});
+}
+function renderRecruits(){
+  const pset=placedKeys();
+  document.getElementById('recruitList').innerHTML= recruits.length? recruits.map(r=>{
+    const k='REC:'+r.id,used=pset.has(k),sel=active&&active.kind==='player'&&active.k===k;
+    return `<div class="pl${used?' used':''}${sel?' sel':''}" draggable="${!used}" data-k="${k}">
+      <span class="num">+</span>
+      <span class="pos ${GRPCLS[r.grp]}">${esc(r.pos)}</span>
+      <span class="nm">${esc(r.p)}</span>
+      <span class="fee ${r.type}">${money(r.val,r.type)}</span>
+      <span class="act rm" data-rm="${r.id}" title="Retirer">✕</span></div>`;}).join('')
+    : '<div class="empty-s">Aucune recrue ajoutée.</div>';
+  document.querySelectorAll('#recruitList .pl').forEach(el=>{
+    const k=el.dataset.k;
+    el.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',k));
+    el.onclick=e=>{if(e.target.classList.contains('act'))return;clickPlayer(k);};
+  });
+  document.querySelectorAll('#recruitList .act.rm').forEach(el=>el.onclick=e=>{e.stopPropagation();removeRecruit(+el.dataset.rm);});
+}
+function renderDeparts(){
+  const keys=Object.keys(departures);
+  document.getElementById('departList').innerHTML= keys.length? keys.map(k=>{
+    const p=getPlayer(k)||{p:k.split('|')[1]||k,pos:''};const f=departures[k];
+    return `<div class="pl">
+      <span class="num">–</span>
+      <span class="pos ${GRPCLS[p.grp]||'mid'}">${esc(p.pos||'')}</span>
+      <span class="nm">${esc(p.p)}</span>
+      <span class="fee ${f.type}">${money(f.val,f.type)}</span>
+      <span class="act rm" data-undo="${esc(k)}" title="Annuler">↩</span></div>`;}).join('')
+    : '<div class="empty-s">Aucun départ.</div>';
+  document.querySelectorAll('#departList .act.rm').forEach(el=>el.onclick=()=>undoDepart(el.dataset.undo));
+}
+
+function discContent(k){const p=k?getPlayer(k):null;return p?esc(p.n||short(p.p).slice(0,3)):'';}
+function renderPitch(){
+  const pitch=document.getElementById('pitch');
+  pitch.querySelectorAll('.slot').forEach(s=>s.remove());
+  slots.forEach((sl,i)=>{
+    const div=document.createElement('div');
+    div.className='slot'+(sl.starter?' filled':'');
+    div.dataset.i=i;
+    div.style.left=sl.x+'%';div.style.top=sl.y+'%';
+    const stP=sl.starter?getPlayer(sl.starter):null, sbP=sl.sub?getPlayer(sl.sub):null;
+    const stActive=active&&active.kind==='seat'&&active.i===i&&active.seat==='starter';
+    const sbActive=active&&active.kind==='seat'&&active.i===i&&active.seat==='sub';
+    div.innerHTML=
+      `<div class="seat starter${stActive?' active':''}" data-seat="starter">
+         <div class="disc">${stP?discContent(sl.starter):sl.role}</div>
+         <div class="lab">${sl.role}</div>${stP?`<div class="who">${esc(short(stP.p))}</div>`:''}
+       </div>
+       <div class="sub seat${sbP?' filled':''}${sbActive?' active':''}" data-seat="sub">
+         <div class="subbox">${sbP?esc(short(sbP.p)):'Remp.'}</div>
+       </div>`;
+    wireSlot(div,i);
+    pitch.appendChild(div);
+  });
+}
+function wireSlot(div,i){
+  div.querySelectorAll('.seat').forEach(seatEl=>{
+    const seat=seatEl.dataset.seat;
+    const filled=!!slots[i][seat];
+    // native DnD : recevoir un joueur venant de l'effectif / des recrues (remplace l'occupant éventuel)
+    seatEl.addEventListener('dragover',e=>{e.preventDefault();seatEl.classList.add('dragover');});
+    seatEl.addEventListener('dragleave',()=>seatEl.classList.remove('dragover'));
+    seatEl.addEventListener('drop',e=>{e.preventDefault();seatEl.classList.remove('dragover');
+      const k=e.dataTransfer.getData('text/plain');if(k){assignSeat(i,seat,k);active=null;renderAll();}});
+    const target=seatEl.querySelector(seat==='starter'?'.disc':'.subbox');
+    if(!filled){
+      // poste vide : clic = placer le joueur sélectionné dans la liste
+      target.addEventListener('click',()=>seatClick(i,seat));
+    } else if(seat==='starter'){
+      // titulaire placé : clic = le retirer ; glisser = repositionner sur le terrain (jamais changer de poste)
+      target.addEventListener('pointerdown',e=>startStarterDrag(e,div,i));
+    } else {
+      // remplaçant placé : pas de position propre, seul le clic a un sens (le retirer)
+      target.addEventListener('click',()=>{slots[i].sub=null;active=null;renderAll();});
+    }
+  });
+}
+
+function startStarterDrag(e,div,i){
+  e.preventDefault();
+  active=null;
+  const pitch=document.getElementById('pitch');const rect=pitch.getBoundingClientRect();
+  const sx=e.clientX,sy=e.clientY;let moved=false;
+  function move(ev){
+    if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
+    moved=true;div.classList.add('dragging');
+    slots[i].x=Math.max(5,Math.min(95,((ev.clientX-rect.left)/rect.width)*100));
+    slots[i].y=Math.max(6,Math.min(95,((ev.clientY-rect.top)/rect.height)*100));
+    div.style.left=slots[i].x+'%';div.style.top=slots[i].y+'%';
+  }
+  function up(){
+    document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',up);
+    if(!moved){ slots[i].starter=null; renderAll(); return; }   // simple clic -> retirer le titulaire
+    renderAll();   // sinon : position déjà mise à jour en direct pendant le glisser
+  }
+  document.addEventListener('pointermove',move);document.addEventListener('pointerup',up);
+}
+
+/* boutons formulaire recrue */
+document.getElementById('addRecruit').onclick=()=>{
+  document.getElementById('recruitModal').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('rName').focus(),50);
+};
+document.getElementById('rOk').onclick=addRecruit;
+document.getElementById('rCancel').onclick=()=>document.getElementById('recruitModal').classList.add('hidden');
+document.getElementById('rName').addEventListener('keydown',e=>{if(e.key==='Enter')addRecruit();});
+
+initClubSelect();
+const start=(new URLSearchParams(location.search).get('c')||'').toUpperCase();
+loadClub(ORDER.includes(start)?start:ORDER[0]);
+</script>
+</body>
+</html>
