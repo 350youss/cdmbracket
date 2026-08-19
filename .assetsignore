@@ -1,5 +1,6 @@
 scripts/
 data/
+.github/
 *.bat
 *.vbs
 .claude/
