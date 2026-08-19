@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-19T15:01:07",
- "sig": "f8dd1883cca234c7547b46f07eb48601",
+ "updated": "2026-08-19T18:00:53",
+ "sig": "15385e13e76a2188ff12995e5c44a75f",
  "squads": {
   "FCB": [
    {
@@ -1620,24 +1620,6 @@
     "val": 110.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "19/08/2026"
-   },
-   {
-    "n": "4",
-    "p": "Tijjani Reijnders",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 28,
-    "val": 50.0,
-    "stats": {
-     "m": 47,
-     "s": 31,
-     "g": 7,
-     "a": 8,
-     "min": 2810
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "19/08/2026"
    },
@@ -5788,6 +5770,18 @@
      "min": 2347
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "19/08/2026"
+   },
+   {
+    "n": "44",
+    "p": "Enzo dos Santos",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 17,
+    "val": 0.25,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "19/08/2026"
    },
