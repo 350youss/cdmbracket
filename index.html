@@ -60,7 +60,7 @@ nav{position:sticky;top:14px;z-index:20;padding:0 16px;transition:padding .5s va
 .navbar.scrolled{background:rgba(19,20,23,.62);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
   border-color:rgba(255,255,255,.1);padding:9px 10px 9px 22px;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);}
 .brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.brand .word{font-family:var(--disp);font-size:18px;letter-spacing:.02em;text-transform:uppercase;color:#fff;line-height:1;}
+.brand .logo{height:20px;width:auto;display:block;}
 .brand svg{flex-shrink:0;display:block;}
 .nav-links{display:flex;align-items:center;justify-content:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
 .nav-links::-webkit-scrollbar{display:none;}
@@ -124,7 +124,7 @@ section{padding:64px 0;}
 footer{border-top:1px solid var(--line);padding:56px 0 44px;position:relative;z-index:10;}
 .foot-top{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;}
 .foot-brand{max-width:340px;}
-.foot-brand .word{font-family:var(--disp);font-size:19px;text-transform:uppercase;color:#fff;letter-spacing:.02em;}
+.foot-brand .logo{height:24px;width:auto;display:block;}
 .foot-brand p{margin-top:14px;font-size:13px;line-height:1.6;color:var(--muted);}
 .foot-links{display:flex;gap:56px;flex-wrap:wrap;}
 .foot-links .h{display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
@@ -147,7 +147,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 44px;position:relative;z-
 
 @media(max-width:1020px){
   .navbar{padding:8px 8px 8px 18px;}
-  .brand .word{display:none;}
+  .brand .logo{height:17px;}
 }
 @media(max-width:640px){
   .nav-link{font-size:12px;padding:8px 10px;}
@@ -175,7 +175,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 44px;position:relative;z-
 <nav>
   <div class="navbar">
     <a class="brand" href="#top">
-      <span class="word">Kooradex</span>
+      <img class="logo" src="images/kooradex-logo.png" alt="Kooradex">
     </a>
     <div class="nav-links">
       <a class="nav-link" href="mercato.html">Mercato</a>
@@ -273,7 +273,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 44px;position:relative;z-
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <span class="word">Kooradex</span>
+        <img class="logo" src="images/kooradex-logo.png" alt="Kooradex">
         <p>Le fourre-tout du foot, rang&eacute; au m&ecirc;me endroit&nbsp;: mercato, compos, budget et pronostics OM &amp; Ligue 1.</p>
       </div>
       <div class="foot-links">
