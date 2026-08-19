@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-19T18:00:53",
- "sig": "15385e13e76a2188ff12995e5c44a75f",
+ "updated": "2026-08-19T21:00:56",
+ "sig": "f1a65b7ff6dea39dab3b88e1b4f07a7a",
  "squads": {
   "FCB": [
    {
@@ -124,7 +124,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "26",
     "p": "Álvaro Cortés",
     "pos": "DC",
     "grp": "DEF",
@@ -196,7 +196,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "36",
     "p": "Xavi Espart",
     "pos": "ArD",
     "grp": "DEF",
@@ -352,7 +352,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "28",
     "p": "Brian Fariñas",
     "pos": "MC",
     "grp": "MID",
@@ -418,7 +418,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "25",
     "p": "Anthony Gordon",
     "pos": "AiG",
     "grp": "ATT",
@@ -448,7 +448,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "27",
     "p": "Jesse Bisiwu",
     "pos": "AiG",
     "grp": "ATT",
@@ -2986,7 +2986,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "4",
+    "n": "38",
     "p": "Tosin Adarabioyo",
     "pos": "DC",
     "grp": "DEF",
@@ -3220,7 +3220,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "14",
+    "n": "16",
     "p": "Dário Essugo",
     "pos": "MDC",
     "grp": "MID",
@@ -3268,7 +3268,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "14",
     "p": "Jordan Henderson",
     "pos": "MC",
     "grp": "MID",
@@ -3328,7 +3328,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "43",
+    "n": "33",
     "p": "Mykhaylo Mudryk",
     "pos": "AiG",
     "grp": "ATT",
@@ -3382,7 +3382,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "47",
+    "n": "23",
     "p": "Geovany Quenda",
     "pos": "AiD",
     "grp": "ATT",
@@ -3394,7 +3394,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "20",
+    "n": "9",
     "p": "João Pedro",
     "pos": "AC",
     "grp": "ATT",
@@ -3430,7 +3430,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "9",
+    "n": "12",
     "p": "Liam Delap",
     "pos": "AC",
     "grp": "ATT",
@@ -3448,7 +3448,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "",
+    "n": "22",
     "p": "Emmanuel Emegha",
     "pos": "AC",
     "grp": "ATT",
@@ -3460,7 +3460,7 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "38",
+    "n": "",
     "p": "Marc Guiu",
     "pos": "AC",
     "grp": "ATT",
@@ -5770,18 +5770,6 @@
      "min": 2347
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "19/08/2026"
-   },
-   {
-    "n": "44",
-    "p": "Enzo dos Santos",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 17,
-    "val": 0.25,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "19/08/2026"
    },
