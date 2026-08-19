@@ -7,8 +7,8 @@
 <meta name="description" content="Place les 18 clubs de Ligue 1 sur leur ligne de classement, du sacre à la descente.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0a0b0d; --panel:#131417; --panel2:#191a1e; --panel3:#1f2025;
@@ -24,8 +24,8 @@
   --danger:#e2496a; --danger-dim:rgba(226,73,106,.16);
   --mid:#7d808a; --mid-dim:rgba(125,128,138,.12);
 
-  --body:'Space Grotesk',sans-serif;
-  --disp:'Tanker',sans-serif;
+  --body:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --disp:'General Sans',-apple-system,'Segoe UI',sans-serif;
   --ease:cubic-bezier(.19,1,.22,1);
   --shadow:0 20px 50px -24px rgba(0,0,0,.6);
 }
@@ -45,19 +45,13 @@ body::before{
 .wrap{position:relative;max-width:1180px;margin:0 auto;padding:0 32px 110px;}
 @media (max-width:640px){.wrap{padding:0 16px 90px;}}
 
-/* ---------------- masthead ---------------- */
-.masthead{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.masthead .brand{font-family:var(--disp);font-size:20px;letter-spacing:.01em;
-  text-transform:uppercase;line-height:1;color:#fff;}
-.masthead .season{font-family:var(--body);font-weight:600;font-size:11.5px;color:var(--sub);
-  text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line-strong);
-  border-radius:999px;padding:7px 14px;white-space:nowrap;}
-
 /* ---------------- hero ---------------- */
-.hero{border-top:1px solid var(--line);padding:36px 0 8px;}
-.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(34px,5.4vw,58px);
-  line-height:.98;letter-spacing:-.005em;color:#fff;text-transform:uppercase;text-wrap:balance;max-width:14ch;}
-.hero h1 em{font-style:italic;font-family:var(--body);font-weight:600;text-transform:none;color:var(--champion);}
+.hero{padding:20px 0 8px;}
+.eyebrow{font-family:var(--body);font-weight:600;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--champion);}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(34px,5.4vw,58px);
+  line-height:1;letter-spacing:-.015em;color:#fff;margin-top:14px;text-wrap:balance;max-width:14ch;}
+.hero h1 em{font-style:normal;font-weight:700;color:var(--champion);}
 .hero .sub{margin-top:16px;font-family:var(--body);font-size:16px;color:var(--sub);max-width:46ch;line-height:1.55;}
 .hero .sub b{color:var(--ink);font-weight:600;}
 
@@ -74,8 +68,8 @@ body::before{
    jurer avec le reste (pas de coin coupé qui tranchait trop). */
 .quick-actions{display:flex;flex-wrap:wrap;gap:8px;}
 .qbtn{font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--sub);background:var(--panel);border:1px solid var(--line);border-radius:6px;
-  padding:7px 11px;cursor:pointer;
+  color:var(--sub);background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:7px 13px;cursor:pointer;
   display:inline-flex;align-items:center;gap:5px;transition:border-color .18s var(--ease),color .18s var(--ease),background .18s var(--ease),opacity .18s var(--ease);}
 .qbtn svg{width:10px;height:10px;flex-shrink:0;}
 .qbtn:hover{border-color:var(--line-strong);color:#fff;}
@@ -90,7 +84,7 @@ body::before{
 .bench-hint{font-family:var(--body);font-weight:600;font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;}
 .bench-count{font-family:var(--body);font-size:11px;color:var(--muted);white-space:nowrap;}
 .bench-slots{min-height:78px;display:flex;flex-wrap:wrap;gap:12px;padding:18px;background:var(--panel);
-  border:1px solid var(--line);}
+  border:1px solid var(--line);border-radius:18px;}
 .bench-empty{font-family:var(--body);font-size:12.5px;color:var(--muted);font-style:italic;padding:6px 2px;}
 /* sur mobile, la grille du banc encombre pour rien : on place uniquement via le + des cases */
 @media (max-width:640px){ .bench-slots{display:none;} .bench-top{margin-bottom:0;} }
@@ -118,7 +112,7 @@ body::before{
    sur le visuel de partage (même source de données : BOARD_GROUPS). Le
    fond de la case peut recevoir une image en faible opacité liée au sujet
    (--bgimg), posée plus tard. ---------------- */
-.board{margin-top:38px;border:1px solid var(--line);}
+.board{margin-top:38px;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
 .tier{display:flex;background:var(--panel);}
 .tier + .tier{border-top:1px solid var(--line);}
 .tier-label{width:190px;flex-shrink:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;
@@ -165,7 +159,7 @@ body::before{
 .credit .sub{display:block;margin-top:4px;text-transform:none;letter-spacing:0;font-size:11px;color:var(--faint);}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--panel3);
-  color:var(--ink);border:1px solid var(--line-strong);padding:13px 22px;font-family:var(--body);font-weight:500;
+  color:var(--ink);border:1px solid var(--line-strong);border-radius:999px;padding:13px 22px;font-family:var(--body);font-weight:500;
   font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:90;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
@@ -175,8 +169,9 @@ body::before{
 .picker-overlay.show{opacity:1;pointer-events:auto;}
 @media (min-width:640px){.picker-overlay{align-items:center;}}
 .picker-sheet{background:var(--panel2);border:1px solid var(--line-strong);border-top:3px solid var(--champion);
-  width:100%;max-width:480px;max-height:76vh;display:flex;flex-direction:column;
+  border-radius:18px 18px 0 0;width:100%;max-width:480px;max-height:76vh;display:flex;flex-direction:column;overflow:hidden;
   transform:translateY(16px);transition:transform .2s var(--ease);}
+@media (min-width:640px){.picker-sheet{border-radius:18px;}}
 .picker-overlay.show .picker-sheet{transform:translateY(0);}
 .picker-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;
   border-bottom:1px solid var(--line);}
@@ -221,13 +216,9 @@ body::before{
   </div>
 </div></nav>
 <div class="wrap">
-  <div class="masthead">
-    <div class="brand">Predictions Ligue 1</div>
-    <div class="season">Saison 2026/27</div>
-  </div>
-
   <div class="hero">
-    <h1>C'est le moment<br>de les<br><em>porter.</em></h1>
+    <div class="eyebrow">Ligue 1 &middot; Saison 2026/27</div>
+    <h1>C'est le moment<br>de les <em>porter.</em></h1>
     <p class="sub" id="hero-sub">Fais ta tier-list du classement de L1 en mettant les clubs à leur place.</p>
   </div>
 
@@ -579,9 +570,9 @@ function warmFonts(){
   if (fontsWarmed) return;
   fontsWarmed = true;
   Promise.all([
-    document.fonts.load('400 46px Tanker'),
-    document.fonts.load('600 22px "Space Grotesk"'),
-    document.fonts.load('400 16px "Space Grotesk"'),
+    document.fonts.load('600 30px "General Sans"'),
+    document.fonts.load('600 22px "Inter"'),
+    document.fonts.load('400 16px "Inter"'),
   ]).catch(() => {});
 }
 warmFonts();
@@ -683,16 +674,16 @@ async function shareImage(){
     ctx.beginPath(); ctx.moveTo(0,HEADH); ctx.lineTo(W,HEADH); ctx.stroke();
 
     ctx.fillStyle = '#fff';
-    ctx.font = '400 34px Tanker, sans-serif';
+    ctx.font = '700 30px "General Sans", sans-serif';
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
     ctx.fillText('PREDIS', 24, 46);
     ctx.fillStyle = '#98999e';
-    ctx.font = '600 12px "Space Grotesk", sans-serif';
+    ctx.font = '600 12px "Inter", sans-serif';
     ctx.fillText('LIGUE 1 · SAISON 2026/27', 24, 66);
 
     ctx.textAlign = 'right';
     ctx.fillStyle = '#98999e';
-    ctx.font = '700 20px "Space Grotesk", sans-serif';
+    ctx.font = '700 18px "Inter", sans-serif';
     ctx.fillText('BY 350', W-24, 50);
     ctx.textAlign = 'left';
 
@@ -746,15 +737,15 @@ async function shareImage(){
       /* bloc nom (gros titre) + rang en dessous, centré verticalement
          dans la case ; la colonne de gauche prend toute la hauteur
          disponible */
-      const lblFont = '400 26px Tanker, sans-serif';
-      const rankFont = '600 14px "Space Grotesk", sans-serif';
+      const lblFont = '700 21px "General Sans", sans-serif';
+      const rankFont = '600 14px "Inter", sans-serif';
       const lblLines = wrapLabel(row.group.label.toUpperCase(), LABELW-40, lblFont);
-      const blockH = lblLines.length*26 + 22;
-      let ly = rowCenterY - blockH/2 + 22;
+      const blockH = lblLines.length*24 + 22;
+      let ly = rowCenterY - blockH/2 + 20;
       ctx.fillStyle = tOn;
       ctx.font = lblFont;
       ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      lblLines.forEach(line => { ctx.fillText(line, 20, ly); ly += 26; });
+      lblLines.forEach(line => { ctx.fillText(line, 20, ly); ly += 24; });
       ctx.font = rankFont;
       ctx.globalAlpha = .8;
       ctx.fillText(row.group.rank, 20, ly+2);
