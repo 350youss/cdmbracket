@@ -101,10 +101,34 @@ footer b{color:var(--sub);}
 <style>/*__LOGOCSS__*/</style>
 </head>
 <body>
+<style>
+@font-face{font-family:'ToyBox';src:url('fonts/ToyBox.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+.kdx-nav{position:sticky;top:14px;z-index:9999;padding:0 16px;margin-bottom:20px;}
+.kdx-navbar{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:rgba(19,20,23,.92);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:9px 10px 9px 22px;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.5);font-family:-apple-system,'Segoe UI',Arial,sans-serif;}
+.kdx-navbar a{text-decoration:none;}
+.kdx-brand{font-family:'ToyBox','Tanker',sans-serif;font-size:18px;letter-spacing:.02em;text-transform:uppercase;color:#fff;flex-shrink:0;}
+.kdx-links{display:flex;align-items:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.kdx-links::-webkit-scrollbar{display:none;}
+.kdx-links a{font-weight:500;font-size:13px;color:#98999e;white-space:nowrap;flex-shrink:0;
+  padding:9px 13px;border-radius:999px;transition:color .2s,background .2s;}
+.kdx-links a:hover{color:#fff;background:rgba(255,255,255,.06);}
+.kdx-links a.active{color:#fff;background:rgba(255,255,255,.1);}
+@media(max-width:640px){.kdx-links a{font-size:12px;padding:8px 10px;}}
+</style>
+<nav class="kdx-nav"><div class="kdx-navbar">
+  <a class="kdx-brand" href="index.html">Kooradex</a>
+  <div class="kdx-links">
+    <a href="mercato.html" class="active">Mercato</a>
+    <a href="pronostics-l1.html">Pr&eacute;dis</a>
+    <a href="squad-cost.html">Sant&eacute; OM</a>
+  </div>
+</div></nav>
 <div class="bleed-bar"></div>
 <div class="wrap">
   <header>
-    <a href="index.html" style="display:inline-block;margin-bottom:14px;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--sub);text-decoration:none;letter-spacing:.02em;">&larr; Kooradex</a>
     <div class="kicker">Compos & Effectifs · Saison 2026/27</div>
     <div class="hero"><h1>Grands club<span class="accent">s</span></h1></div>
     <p class="note">Effectif à jour et terrain interactif pour composer ta compo, club par club. Choisis un championnat ou un grand club européen ci-dessous.</p>
