@@ -59,14 +59,12 @@ nav{position:sticky;top:14px;z-index:9999;padding:0 16px;}
   box-shadow:0 12px 30px -8px rgba(0,0,0,.5);}
 .brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .brand .word{font-family:var(--disp);font-size:18px;letter-spacing:.02em;text-transform:uppercase;color:#fff;line-height:1;}
-.nav-links{display:flex;align-items:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
 .nav-links::-webkit-scrollbar{display:none;}
 .nav-link{font-family:var(--body);font-weight:500;font-size:13px;color:var(--sub);white-space:nowrap;flex-shrink:0;
   padding:9px 13px;border-radius:var(--r-pill);transition:color .2s var(--ease),background .2s var(--ease);}
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.06);}
 .nav-link.active{color:#fff;background:rgba(255,255,255,.1);}
-.season{font-family:var(--mono);font-weight:600;font-size:10.5px;color:var(--bg);background:#fff;
-  text-transform:uppercase;letter-spacing:.06em;border-radius:var(--r-pill);padding:8px 15px;white-space:nowrap;flex-shrink:0;}
 
 /* ---- hero ---- */
 .hero{position:relative;padding:76px 0 40px;}
@@ -128,7 +126,6 @@ footer{border-top:1px solid var(--line);padding:40px 0 44px;position:relative;z-
 }
 @media(max-width:640px){
   .nav-link{font-size:12px;padding:8px 10px;}
-  .season{display:none;}
 }
 @media(max-width:860px){
   .card.feature{grid-column:span 12;grid-row:span 1;}
@@ -155,7 +152,6 @@ footer{border-top:1px solid var(--line);padding:40px 0 44px;position:relative;z-
       <a class="nav-link" href="pronostics-l1.html">Pr&eacute;dis</a>
       <a class="nav-link" href="squad-cost.html">Sant&eacute; OM</a>
     </div>
-    <span class="season">2026/27</span>
   </div>
 </nav>
 
