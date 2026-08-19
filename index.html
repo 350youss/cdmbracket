@@ -45,7 +45,7 @@ body::after{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.wrap{position:relative;z-index:10;max-width:1240px;margin:0 auto;padding:0 40px;}
+.wrap{position:relative;z-index:10;max-width:1240px;margin:0 auto;padding-left:40px;padding-right:40px;}
 
 .bleed-bar{height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));
   background-size:220% 100%;animation:bar 14s var(--ease) infinite;position:relative;z-index:30;}
@@ -157,7 +157,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 44px;position:relative;z-
   .card.b,.card.c,.card.d,.card.e{grid-column:span 6;}
 }
 @media(max-width:700px){
-  .wrap{padding:0 18px;}
+  .wrap{padding-left:18px;padding-right:18px;}
   .hero-shell{margin:14px 12px 32px;border-radius:20px;}
   .hero{padding:64px 22px 56px;}
   .hero .sub{font-size:14.5px;}
