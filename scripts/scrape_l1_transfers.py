@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Scrape des transferts Ligue 1 (Transfermarkt) -> régénère mercato-l1-2026.html
+Scrape des transferts Ligue 1 (Transfermarkt) -> régénère index.html (+ equipe.html)
 
 - Arrivées à gauche, départs à droite, montants inclus.
 - Retire les RETOURS DE PRÊT ("Fin du prêt ...").
@@ -31,13 +31,27 @@ ROOT   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE  = os.path.join(ROOT, "scripts", ".cache")
 DATA   = os.path.join(ROOT, "data")
 TPL    = os.path.join(ROOT, "scripts", "mercato_template.html")
-OUT    = os.path.join(ROOT, "mercato-l1-2026.html")
+OUT    = os.path.join(ROOT, "mercato-l1.html")
+TPL_TEAM = os.path.join(ROOT, "scripts", "equipe_template.html")
+OUT_TEAM = os.path.join(ROOT, "equipe.html")
 STATE  = os.path.join(DATA, "transfers_l1.json")   # snapshot + historique des dates
 SEASON = 2026
 LATEST_DAYS = 7      # fenêtre "dernières arrivées"
 LATEST_MAX  = 10     # nb de cases max
 os.makedirs(CACHE, exist_ok=True)
 os.makedirs(DATA,  exist_ok=True)
+
+TODAY_STR = datetime.now().strftime("%d/%m/%Y")
+VALHIST = {}   # pid -> [{"d":"dd/mm/yyyy","v":val}, ...] — historique de valeur marchande, construit au fil des scrapes
+def track_value(pid, val, today_str):
+    """enregistre un point si la valeur a changé depuis le dernier scrape, renvoie (delta, date de départ)
+       par rapport au tout premier point suivi pour ce joueur."""
+    if not pid:
+        return None, None
+    hist = VALHIST.setdefault(pid, [])
+    if not hist or hist[-1]["v"] != val:
+        hist.append({"d": today_str, "v": val})
+    return round(val - hist[0]["v"], 3), hist[0]["d"]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -79,6 +93,18 @@ def pos_short(full):
     if full in POS: return POS[full]
     # fallback : initiales des mots
     return "".join(w[0] for w in full.split()[:3]).upper()[:4] or "?"
+
+# groupe de poste pour l'effectif (GK / DEF / MID / ATT)
+GRP = {
+    "Gardien de but": "GK",
+    "Arrière droit": "DEF", "Arrière gauche": "DEF", "Défenseur central": "DEF", "Défenseur": "DEF",
+    "Milieu défensif": "MID", "Milieu central": "MID", "Milieu offensif": "MID",
+    "Milieu droit": "MID", "Milieu gauche": "MID", "Milieu": "MID",
+    "Ailier droit": "ATT", "Ailier gauche": "ATT", "Avant-centre": "ATT",
+    "Second attaquant": "ATT", "Attaquant": "ATT",
+}
+def pos_group(full):
+    return GRP.get(full.strip(), "MID")
 
 # --- détection équipe B / réserve / jeunes ---
 RESERVE_RE = re.compile(
@@ -179,9 +205,8 @@ def fetch_latest(offline=False):
         inner = tds[0].find_all("tr")
         pos_full = inner[-1].get_text(" ", strip=True) if inner else ""
         age = re.sub(r"\D", "", tds[1].get_text(strip=True))[:2]
-        fa  = tds[3].find("a")
         frm_full = tds[3].get_text(" ", strip=True)     # inclut "U19"/"B" -> filtrage réserve
-        frm = (fa.get_text(strip=True) if fa else frm_full) or "?"
+        frm = club_name_from_cell(tds[3])               # nom du club (le 1er <a> est le logo, vide)
         typ, val, loan_ret = parse_fee(tds[5].get_text(" ", strip=True))
         if loan_ret:
             continue
@@ -223,11 +248,12 @@ def parse_side(rt):
             pos_full = inner_rows[-1].get_text(" ", strip=True)
         age  = re.sub(r"\D", "", tds[2].get_text(strip=True))[:2]
         club = club_name_from_cell(tds[4])
+        club_id = vid(tds[4])   # id Transfermarkt du club d'origine -> stats saison précédente
         # nettoie le nom de club (retire compétition collée si présente)
         fee_raw = tds[5].get_text(" ", strip=True)
         out.append({
             "p": name, "age": int(age) if age else 0,
-            "pos": pos_short(pos_full), "club": club, "feeRaw": fee_raw,
+            "pos": pos_short(pos_full), "club": club, "club_id": club_id, "feeRaw": fee_raw,
         })
     return out
 
@@ -241,7 +267,7 @@ def clean(rows):
         if is_reserve(t["club"]) and typ in ("free", "none", "loan"):
             continue                                   # promu équipe B / jeune sans transfert
         res.append({
-            "p": t["p"], "age": t["age"], "pos": t["pos"], "club": t["club"],
+            "p": t["p"], "age": t["age"], "pos": t["pos"], "club": t["club"], "club_id": t.get("club_id"),
             "type": typ, "val": round(val, 3),
         })
     return res
@@ -265,6 +291,121 @@ def scrape(offline=False):
         if not offline:
             time.sleep(1.2)
     return clubs_data
+
+# ---------- effectifs (kader) ----------
+STATS_TABLE_CACHE = {}   # cid -> {nom: {m,s,g,a,min}} — partagé pour ne jamais refetch un club deux fois
+def scrape_stats_table(cid, offline=False):
+    """stats de la saison PRÉCÉDENTE de TOUS les joueurs d'un club (par id, peu importe le slug) —
+       alimente le panneau détaillé (bouton "i") de la liste de l'effectif, y compris pour les
+       recrues via leur ancien club (voir scrape_squad)."""
+    if cid in STATS_TABLE_CACHE:
+        return STATS_TABLE_CACHE[cid]
+    fn  = os.path.join(CACHE, f"leistung_{cid}.html")
+    url = f"https://www.transfermarkt.fr/x/leistungsdaten/verein/{cid}/saison_id/{SEASON-1}/plus/1"
+    raw = fetch_url(fn, url, offline, f"leistungsdaten {cid}")
+    if not offline:
+        time.sleep(0.5)
+    if not raw:
+        STATS_TABLE_CACHE[cid] = {}
+        return {}
+    soup = BeautifulSoup(raw, "lxml", from_encoding="utf-8")
+    t = soup.select_one("table.items")
+    def num(td):
+        v = td.get_text(strip=True).replace("'", "").replace(".", "")
+        return int(v) if v.isdigit() else 0
+    out = {}
+    for tr in (t.select("tbody > tr.odd, tbody > tr.even") if t else []):
+        tds = tr.find_all("td", recursive=False)
+        if len(tds) < 15:
+            continue
+        nm = tds[1].select_one(".hauptlink a")
+        if not nm:
+            continue
+        name = (nm.get("title") or nm.get_text(strip=True)).strip()
+        matches, goals, assists, sub_in, minutes = num(tds[5]), num(tds[6]), num(tds[7]), num(tds[11]), num(tds[14])
+        out[name] = {"m": matches, "s": max(0, matches - sub_in), "g": goals, "a": assists, "min": minutes}
+    STATS_TABLE_CACHE[cid] = out
+    return out
+
+def scrape_squad(slug, cid, offline=False, club_name="", origin_map=None):
+    """origin_map : {nom_joueur: (club_id_origine, nom_club_origine)} pour les arrivées de l'été —
+       permet d'aller chercher les stats saison précédente au bon club quand le joueur n'était
+       pas encore ici (nouvelles recrues)."""
+    origin_map = origin_map or {}
+    fn  = os.path.join(CACHE, f"kader_{cid}.html")
+    url = f"https://www.transfermarkt.fr/{slug}/kader/verein/{cid}/saison_id/{SEASON}/plus/1"
+    raw = fetch_url(fn, url, offline, slug + " kader")
+    if not raw:
+        return []
+    soup = BeautifulSoup(raw, "lxml", from_encoding="utf-8")
+    t = soup.select_one("table.items")
+    stats = scrape_stats_table(cid, offline)
+    players = []
+    for tr in (t.select("tbody > tr.odd, tbody > tr.even") if t else []):
+        tds = tr.find_all("td", recursive=False)
+        if len(tds) < 3:
+            continue
+        nm = tds[1].select_one(".hauptlink a")
+        if not nm:
+            continue
+        name = (nm.get("title") or nm.get_text(strip=True)).strip()
+        pid_m = re.search(r"/spieler/(\d+)", nm.get("href") or "")
+        pid = pid_m.group(1) if pid_m else None
+        inner = tds[1].select("tr")
+        pos_full = inner[-1].get_text(" ", strip=True) if inner else ""
+        num = tds[0].get_text(strip=True)
+        num = "" if num in ("-", "") else num
+        m = re.search(r"\((\d+)\)", tds[2].get_text())
+        age = int(m.group(1)) if m else 0
+        _, val, _ = parse_fee(tds[-1].get_text(" ", strip=True))
+        val = round(val, 2)
+        p_stats, stats_club = stats.get(name), club_name
+        if not p_stats and name in origin_map:
+            origin_id, origin_name = origin_map[name]
+            if origin_id:
+                p_stats = scrape_stats_table(origin_id, offline).get(name)
+                if p_stats:
+                    stats_club = origin_name
+        val_delta, val_since = track_value(pid, val, TODAY_STR)
+        players.append({"n": num, "p": name, "pos": pos_short(pos_full),
+                        "grp": pos_group(pos_full), "age": age, "val": val,
+                        "stats": p_stats, "statsClub": stats_club if p_stats else None,
+                        "valDelta": val_delta, "valSince": val_since})
+    return players
+
+def scrape_squads(offline=False, old=None, clubs_data=None):
+    """clubs_data : sortie de scrape() (arrivées de l'été, avec club_id d'origine) —
+       permet de retrouver les stats des recrues via leur ancien club."""
+    arrivals_by_code = {c["code"]: c["arr"] for c in (clubs_data or []) if not c.get("failed")}
+    squads = {}
+    old_sq = (old or {}).get("squads", {})
+    for code, name, slug, cid, bg, fg in CLUBS:
+        print(f"· effectif {name} …")
+        origin_map = {a["p"]: (a.get("club_id"), a.get("club")) for a in arrivals_by_code.get(code, [])}
+        pl = scrape_squad(slug, cid, offline, club_name=name, origin_map=origin_map)
+        if not pl and code in old_sq:               # échec -> dernière version connue
+            print(f"  ↻ {name} : effectif précédent réutilisé")
+            pl = old_sq[code]
+        squads[code] = pl
+        if not offline:
+            time.sleep(1.0)
+    return squads
+
+def generate_teams(squads):
+    tpl = open(TPL_TEAM, encoding="utf-8").read()
+    meta = {code: {"name": name, "bg": bg, "fg": fg}
+            for code, name, slug, cid, bg, fg in CLUBS}
+    order = [code for code, *_ in CLUBS]
+    logocss, logocodes = logo_assets()
+    out = (tpl
+           .replace("/*__SQUADS__*/{}", json.dumps(squads, ensure_ascii=False))
+           .replace("/*__CLUBMETA__*/{}", json.dumps(meta, ensure_ascii=False))
+           .replace("/*__ORDER__*/[]", json.dumps(order))
+           .replace("/*__LOGOCODES__*/[]", json.dumps(sorted(logocodes)))
+           .replace("/*__LOGOCSS__*/", logocss))
+    open(OUT_TEAM, "w", encoding="utf-8").write(out)
+    n = sum(len(v) for v in squads.values())
+    print(f"✓ {OUT_TEAM} régénéré — {n} joueurs sur {len(squads)} effectifs")
 
 # ---------- diff / dates ----------
 def key(club_code, direction, t):
@@ -314,7 +455,8 @@ def apply_history(clubs_data, old):
                 t["fs"] = fs
     sig = signature(clubs_data)
     json.dump({"updated": datetime.now().isoformat(timespec="seconds"),
-               "sig": sig, "seen": seen, "clubs": clubs_data},
+               "sig": sig, "seen": seen, "clubs": clubs_data,
+               "squads": SQUADS_CACHE, "valhist": VALHIST},
               open(STATE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return seen, sig
 
@@ -355,13 +497,26 @@ def generate(clubs_data, latest):
 def codes_sorted(codes):
     return sorted(codes)
 
+SQUADS_CACHE = {}
+
 def main():
+    global SQUADS_CACHE, VALHIST
     offline = "--offline" in sys.argv
+    teams_only = "--teams-only" in sys.argv     # ne régénère que la page effectifs
     print(f"Scrape Ligue 1 {SEASON}/{SEASON+1} {'(cache)' if offline else '(en ligne)'}\n")
     old = load_state()
     old_sig = old.get("sig")
+    VALHIST = old.get("valhist", {})
+
     clubs_data = scrape(offline)
     restore_failed(clubs_data, old)
+
+    SQUADS_CACHE = scrape_squads(offline, old, clubs_data)
+    generate_teams(SQUADS_CACHE)
+    if teams_only:
+        # on garde les effectifs déjà en base + snapshot inchangé
+        return
+
     print("· Dernières arrivées …")
     recent_arr = fetch_latest(offline)
     seen, sig = apply_history(clubs_data, old)
