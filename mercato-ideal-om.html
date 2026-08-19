@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon mercato idéal · OM 2026/27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d;--s1:#131417;--s2:#191a1e;--s3:#1f2025;
+  --in:#33c07a;--accent:#5b8fef;--gold:#d1a94e;--out:#f04d68;
+  --txt:#f2f2f0;--sub:#98999e;--muted:#5c5d63;--faint:#38393e;--line:rgba(255,255,255,.08);
+  --gk:#e0a23e;--def:#5b8fef;--mid:#33c07a;--att:#f0705f;
+  --mono:'JetBrains Mono',ui-monospace,monospace;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow:hidden;}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.tanker{font-family:'Tanker',sans-serif;letter-spacing:.1em;text-transform:uppercase;}
+
+/* ---- shell ---- */
+.deck{position:fixed;inset:0;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:min(6vh,48px) min(8vw,80px);opacity:0;transform:translateY(24px) scale(.985);
+  pointer-events:none;transition:opacity .55s var(--ease),transform .55s var(--ease);}
+.slide.active{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+
+.brand{position:fixed;top:22px;left:26px;z-index:20;display:flex;align-items:center;gap:9px;font-size:12px;color:var(--sub);font-weight:600;letter-spacing:.04em;}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
+.tag{position:fixed;top:22px;right:26px;z-index:20;font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  border:1px solid var(--line);padding:5px 10px;border-radius:20px;letter-spacing:.08em;text-transform:uppercase;}
+
+.progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--s2);z-index:30;}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));
+  width:0%;transition:width .5s var(--ease);}
+
+.nav{position:fixed;bottom:24px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:18px;z-index:20;}
+.navbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--s1);color:var(--txt);
+  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease);}
+.navbtn:hover{background:var(--s2);border-color:var(--accent);}
+.navbtn:disabled{opacity:.25;cursor:default;}
+.navbtn:disabled:hover{background:var(--s1);border-color:var(--line);}
+.count{font-family:var(--mono);font-size:12px;color:var(--sub);min-width:64px;text-align:center;letter-spacing:.05em;}
+
+/* ---- generic reveal ---- */
+@keyframes riseUp{from{opacity:0;transform:translateY(22px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes popIn{from{opacity:0;transform:scale(.78);}to{opacity:1;transform:scale(1);}}
+@keyframes growX{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@keyframes pulseArrow{0%,100%{opacity:.45;transform:translateX(0);}50%{opacity:1;transform:translateX(5px);}}
+@keyframes slotPop{from{opacity:0;transform:translate(-50%,-50%) scale(.5);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+.pitch-box .slot.r{animation-name:slotPop;animation-timing-function:cubic-bezier(.34,1.56,.64,1);}
+.r{opacity:0;animation:riseUp .5s var(--ease) forwards;animation-delay:var(--d,0s);}
+.r.pop{animation-name:popIn;animation-timing-function:cubic-bezier(.34,1.56,.64,1);}
+.div-line{transform-origin:center;animation-name:growX;animation-timing-function:var(--ease);}
+
+/* ---- cover ---- */
+.cover-kicker{font-family:var(--mono);font-size:13px;color:var(--gold);letter-spacing:.25em;margin-bottom:18px;}
+.cover-title{font-size:clamp(40px,8vw,104px);line-height:.96;text-align:center;}
+.cover-title span{display:block;}
+.cover-sub{margin-top:22px;color:var(--sub);font-size:16px;font-weight:500;}
+.cover-hint{position:absolute;bottom:100px;font-family:var(--mono);font-size:11px;color:var(--muted);
+  letter-spacing:.1em;display:flex;align-items:center;gap:8px;animation:pulseArrow 1.8s ease-in-out infinite;}
+.cover-pitch-lines{position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background:
+   radial-gradient(circle at 50% 50%, transparent 0 130px, rgba(255,255,255,.5) 131px 133px, transparent 134px),
+   linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.5)) center/2px 100% no-repeat;
+}
+
+/* ---- divider (chapter) ---- */
+.div-num{font-family:var(--mono);font-size:15px;color:var(--accent);margin-bottom:16px;letter-spacing:.2em;}
+.div-title{font-size:clamp(30px,6vw,64px);text-align:center;}
+.div-line{width:64px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));margin-top:24px;border-radius:2px;}
+
+/* ---- section head ---- */
+.section-head{text-align:center;margin-bottom:20px;}
+.section-head h2{font-size:clamp(24px,4vw,38px);}
+.section-head p{color:var(--sub);font-size:13px;margin-top:6px;}
+
+/* ---- divider subtitle ---- */
+.div-sub{margin-top:14px;font-size:15px;color:var(--sub);text-align:center;letter-spacing:.02em;}
+.hl{color:var(--gold);font-weight:800;}
+
+/* ---- contexte / KPI placeholder ---- */
+.ctx-list{display:flex;flex-direction:column;gap:16px;max-width:720px;width:100%;}
+.ctx-item{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:24px 30px;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;}
+.ctx-item.center{justify-content:center;text-align:center;}
+.ctx-item .lbl{font-size:22px;font-weight:800;}
+.ctx-item .status{font-family:var(--mono);font-size:15px;color:var(--muted);letter-spacing:.06em;
+  text-transform:uppercase;border:1px dashed var(--line);padding:8px 16px;border-radius:24px;white-space:nowrap;}
+
+.stamp-wrap{position:relative;}
+.stamp-phrase{position:absolute;left:50%;top:50%;width:88%;
+  transform:translate(-50%,-50%) rotate(-6deg) scale(.92);
+  background:var(--s2);border:2px solid var(--gold);border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);padding:22px 30px;text-align:center;
+  font-size:19px;font-weight:700;line-height:1.4;color:var(--txt);
+  opacity:0;pointer-events:none;
+  transition:opacity .4s var(--ease),transform .4s var(--ease);z-index:5;}
+.stamp-phrase.show{opacity:1;transform:translate(-50%,-50%) rotate(-6deg) scale(1);}
+.ctx-item .status.filled{border-style:solid;text-transform:none;white-space:normal;text-align:right;font-weight:700;}
+.ctx-item .status.filled.good{border-color:var(--in);color:var(--in);}
+.ctx-item .status.filled.info{border-color:var(--accent);color:var(--accent);}
+.ctx-note{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;margin-top:16px;letter-spacing:.04em;}
+
+/* ---- KPI (squad-cost.html) ---- */
+.kpi-grid{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;max-width:820px;}
+.kpi-card{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:22px 26px;min-width:210px;text-align:center;}
+.kpi-card .k{font-family:var(--mono);font-size:10.5px;color:var(--sub);letter-spacing:.09em;text-transform:uppercase;margin-bottom:10px;}
+.kpi-card .v{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--txt);}
+.kpi-card .note{margin-top:8px;font-size:10.5px;color:var(--muted);line-height:1.4;max-width:24ch;margin-left:auto;margin-right:auto;}
+.kpi-card.good{border-color:var(--in);} .kpi-card.good .v{color:var(--in);}
+.kpi-card.warning{border-color:var(--gold);} .kpi-card.warning .v{color:var(--gold);}
+.kpi-card.critical{border-color:var(--out);} .kpi-card.critical .v{color:var(--out);}
+.kpi-card.net{border-color:var(--gold);} .kpi-card.net .v{color:var(--gold);}
+.detail-panel .dh.section{color:var(--accent);font-size:11px;margin-top:14px;}
+.detail-panel .dh.section:first-child{margin-top:0;}
+
+/* ---- triage (3 zones) ---- */
+.triage-pool{width:100%;max-width:660px;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:14px;}
+.triage{display:flex;gap:18px;width:100%;max-width:660px;flex-wrap:wrap;justify-content:center;}
+.triage-col{flex:1;min-width:230px;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:14px;}
+.triage-h{font-family:'Tanker',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:14px;
+  margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.triage-h.pool{color:var(--sub);} .triage-h.in{color:var(--in);} .triage-h.out{color:var(--out);}
+.triage-h .n{font-family:var(--mono);font-size:11px;color:var(--sub);}
+.triage-drop{display:flex;flex-direction:column;gap:6px;min-height:130px;border-radius:10px;padding:4px;transition:background .15s;}
+.triage-drop.pool-drop{flex-direction:row;flex-wrap:wrap;min-height:44px;align-items:flex-start;}
+.triage-drop.hover{background:rgba(255,255,255,.04);}
+.chip{background:var(--s2);border:1px solid var(--line);border-radius:9px;padding:6px 10px;
+  display:flex;align-items:center;gap:7px;cursor:grab;user-select:none;transition:border-color .15s,opacity .15s;}
+.chip:hover{border-color:var(--accent);}
+.chip:active{cursor:grabbing;}
+.chip.dragging{opacity:.35;}
+.chip .pos{font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.06em;width:22px;flex-shrink:0;}
+.chip .nm{font-size:12px;font-weight:700;white-space:nowrap;}
+.chip.static{cursor:default;}
+.triage-hint{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;margin-top:12px;letter-spacing:.04em;}
+
+/* ---- player card grid (départs / arrivées) ---- */
+.pcard-grid{display:grid;grid-template-columns:repeat(4,172px);gap:16px;justify-content:center;}
+.pcard{width:172px;background:var(--s1);border:1px solid var(--line);border-radius:15px;overflow:hidden;}
+.pcard-photo{position:relative;height:170px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:linear-gradient(160deg,var(--s2),var(--s3));}
+.pcard-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;}
+.pcard-photo::after{content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,11,13,0) 55%,rgba(10,11,13,.9) 100%);}
+.pcard-photo svg{width:50px;height:50px;color:var(--muted);opacity:.5;position:relative;z-index:1;}
+.pcard-pos{position:absolute;top:9px;left:9px;z-index:2;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:20px;}
+.pos-gk{background:rgba(224,162,62,.22);color:var(--gk);}
+.pos-def{background:rgba(91,143,239,.22);color:var(--def);}
+.pos-mil{background:rgba(51,192,122,.22);color:var(--mid);}
+.pos-att{background:rgba(240,112,95,.22);color:var(--att);}
+.pos-inc{background:rgba(255,255,255,.1);color:var(--sub);}
+.pcard-status{position:absolute;top:9px;right:9px;z-index:2;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.08em;
+  padding:3px 8px;border-radius:20px;text-transform:uppercase;}
+.st-out{background:rgba(240,77,104,.22);color:var(--out);}
+.st-new{background:rgba(91,143,239,.22);color:var(--accent);}
+.pcard-hint{position:absolute;bottom:7px;left:0;right:0;z-index:2;text-align:center;font-family:var(--mono);font-size:8px;
+  letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.pcard-body{padding:11px 12px 12px;border-top:1px solid var(--line);}
+.pcard-name{font-size:14.5px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pcard-info{margin-top:9px;display:flex;border-top:1px solid var(--line);padding-top:9px;}
+.pcard-info.single{justify-content:center;}
+.pcard-info.single .pcard-info-col{flex:none;min-width:70px;text-align:center;}
+.pcard-info-col{flex:1;min-width:0;}
+.pcard-info-col+.pcard-info-col{border-left:1px solid var(--line);padding-left:9px;}
+.pcard-info-col .lb{font-family:var(--mono);font-size:7.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;}
+.pcard-info-col .val{font-size:11.5px;font-weight:700;outline:none;border-bottom:1px dashed transparent;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pcard-info-col .val:focus{white-space:normal;overflow:visible;text-overflow:clip;}
+.pcard-info-col .val:hover,.pcard-info-col .val:focus{border-bottom-color:var(--muted);}
+.pcard-info-col.price .val{font-family:var(--mono);color:var(--gold);}
+.pcard-empty{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center;padding:30px 10px;max-width:420px;}
+
+/* ---- reveal (arrivée individuelle) ---- */
+.reveal-why{font-family:var(--mono);font-size:15px;color:var(--gold);letter-spacing:.05em;margin-bottom:22px;font-style:italic;text-align:center;max-width:400px;}
+.reveal{display:flex;flex-direction:column;align-items:center;}
+.reveal-card{width:220px;margin:0 auto;background:var(--s1);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.4);}
+.reveal-photo{position:relative;height:230px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:linear-gradient(160deg,var(--s2),var(--s3));}
+.reveal-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;}
+.reveal-photo::after{content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,11,13,0) 55%,rgba(10,11,13,.9) 100%);}
+.reveal-photo svg{width:64px;height:64px;color:var(--muted);opacity:.5;position:relative;z-index:1;}
+.reveal-photo .pcard-pos{z-index:2;}
+.reveal-body{padding:16px 18px 18px;border-top:1px solid var(--line);text-align:center;}
+.reveal-name{font-size:21px;}
+.reveal-info{margin-top:12px;display:flex;border-top:1px solid var(--line);padding-top:12px;}
+.reveal-info-col{flex:1;}
+.reveal-info-col+.reveal-info-col{border-left:1px solid var(--line);}
+.reveal-info-col .lb{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.reveal-info-col .val{font-size:13px;font-weight:700;}
+.reveal-info-col.price .val{font-family:var(--mono);color:var(--gold);}
+
+/* ---- pitch ---- */
+.pitch-box{position:relative;width:min(78vw,320px);aspect-ratio:68/98;border-radius:14px;overflow:hidden;
+  background:
+   radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.06), transparent 60%),
+   repeating-linear-gradient(180deg,#1c3d29 0 40px,#193526 40px 80px);
+  border:1px solid var(--line);}
+.pitch-box::before{content:'';position:absolute;left:6%;right:6%;top:50%;height:2px;background:rgba(255,255,255,.18);}
+.pitch-box::after{content:'';position:absolute;left:34%;right:34%;top:calc(50% - 42px);height:84px;border:2px solid rgba(255,255,255,.16);border-radius:50%;}
+.slot{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;}
+.disc{width:32px;height:32px;border-radius:50%;background:var(--s1);border:2px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:11px;box-shadow:0 3px 10px rgba(0,0,0,.4);}
+.slot.gk .disc{border-color:var(--gold);}
+.slot.recruit .disc{border-color:var(--gold);color:var(--gold);}
+.slot.empty .disc{border-style:dashed;border-color:var(--muted);background:transparent;color:var(--muted);font-size:8px;}
+.slot.empty .lbl{color:var(--muted);}
+.slot.empty.selected .disc{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px rgba(91,143,239,.25);}
+.slot.empty.selected .lbl{color:var(--accent);}
+.pitch-box .slot{cursor:pointer;}
+.slot .lbl{font-size:9px;font-weight:700;color:var(--txt);background:rgba(10,11,13,.75);padding:2px 6px;border-radius:6px;white-space:nowrap;}
+.pitch-wrap{display:flex;align-items:center;gap:36px;flex-wrap:wrap;justify-content:center;}
+.pitch-side{font-family:var(--mono);font-size:11.5px;color:var(--sub);max-width:220px;}
+.pitch-side b{color:var(--txt);display:block;font-size:14px;font-family:'Inter',sans-serif;font-weight:800;margin-bottom:2px;}
+.pitch-side .row{margin-bottom:10px;}
+
+/* ---- detail panel (calcul, listes) ---- */
+.detail-grid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:20px;max-width:600px;width:100%;}
+.detail-panel{background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:16px 20px;flex:none;min-width:220px;}
+.detail-grid .detail-panel{flex:1;}
+.detail-panel .dh{font-family:var(--mono);font-size:10px;color:var(--sub);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
+.drow{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:12.5px;}
+.drow:last-child{border-bottom:none;}
+.drow .val{font-family:var(--mono);font-weight:700;color:var(--gold);flex-shrink:0;}
+.drow.main{border-top:1px solid var(--line);margin-top:4px;padding-top:10px;}
+.drow.main .val{color:var(--txt);font-weight:800;}
+.drow.empty{color:var(--muted);justify-content:center;border-bottom:none;}
+
+/* ---- bilan ---- */
+.bilan-grid{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;}
+.bilan-card{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:26px 34px;min-width:180px;text-align:center;}
+.bilan-card .k{font-family:var(--mono);font-size:11px;color:var(--sub);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;}
+.bilan-card .v{font-family:var(--mono);font-size:30px;font-weight:700;}
+.bilan-card.out .v{color:var(--out);} .bilan-card.in .v{color:var(--in);} .bilan-card.net .v{color:var(--gold);}
+.bilan-card.net{border-color:var(--gold);}
+
+/* ---- outro ---- */
+.outro-title{font-size:clamp(32px,6vw,58px);text-align:center;}
+.outro-sub{margin-top:16px;color:var(--sub);font-size:15px;}
+
+.example-badge{position:fixed;bottom:24px;right:26px;z-index:20;font-family:var(--mono);font-size:10px;
+  color:var(--muted);letter-spacing:.1em;text-align:right;}
+</style>
+</head>
+<body>
+
+<div class="progress"><i id="progressFill"></i></div>
+<a class="brand" href="index.html" style="text-decoration:none;cursor:pointer;"><span class="dot"></span> MON MERCATO IDÉAL · OM</a>
+<div class="tag">Saison 2026/27</div>
+<div class="example-badge">effectif réel · transferts d'exemple</div>
+
+<div class="deck" id="deck">
+
+  <section class="slide" data-title="Cover">
+    <div class="cover-pitch-lines"></div>
+    <div class="cover-kicker r" style="--d:0s">ÉDITION PERSONNELLE</div>
+    <h1 class="tanker cover-title"><span class="r" style="--d:.08s">Mon mercato</span><span class="r" style="--d:.18s">idéal</span></h1>
+    <p class="cover-sub r" style="--d:.34s">Olympique de Marseille — saison 2026/27</p>
+    <div class="cover-hint">→ appuie sur une flèche pour commencer</div>
+  </section>
+
+  <section class="slide" data-title="Contexte">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Le contexte</h2><p>Contraintes à respecter pour que ce mercato idéal reste crédible</p></div>
+    <div class="ctx-list">
+      <div class="ctx-item r" style="--d:.08s"><span class="lbl">Plafond squad cost ratio</span><span class="status filled good">≤ 70 %</span></div>
+      <div class="ctx-item r" style="--d:.14s"><span class="lbl">Situation actuelle</span><span class="status filled good">69,9 % — sous le plafond</span></div>
+      <div class="ctx-item r" style="--d:.2s"><span class="lbl">Ventes promises d'ici le 30 juin 2027</span><span class="status filled info">80 M€</span></div>
+      <div class="ctx-item r" style="--d:.26s"><span class="lbl">Masse salariale (source Richard)</span><span class="status filled info">≤ 100 M€</span></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Chapitre 1">
+    <div class="div-num r pop" style="--d:0s">01</div>
+    <h2 class="tanker div-title r" style="--d:.1s">L'effectif conservé</h2>
+    <div class="div-line r" style="--d:.26s"></div>
+  </section>
+
+  <section class="slide" data-title="Effectif">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Effectif actuel</h2><p>Glisse un joueur dans "Je garde" ou "Je vends" (ou clique dessus pour le faire tourner)</p></div>
+    <div class="triage-pool">
+      <div class="triage-h pool">Effectif à trier <span class="n" id="cntPool">0</span></div>
+      <div class="triage-drop pool-drop" id="dropPool" data-cat="pool"></div>
+    </div>
+    <div class="triage">
+      <div class="triage-col">
+        <div class="triage-h in">Je garde <span class="n" id="cntIn">0</span></div>
+        <div class="triage-drop" id="dropIn" data-cat="in"></div>
+      </div>
+      <div class="triage-col">
+        <div class="triage-h out">Je vends <span class="n" id="cntOut">0</span></div>
+        <div class="triage-drop" id="dropOut" data-cat="out"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Chapitre 2">
+    <div class="div-num r pop" style="--d:0s">02</div>
+    <h2 class="tanker div-title r" style="--d:.1s">Les départs</h2>
+    <div class="div-line r" style="--d:.26s"></div>
+  </section>
+
+  <section class="slide" data-title="Départs">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Les départs</h2><p>Correspond aux joueurs placés dans "Je vends"</p></div>
+    <div class="pcard-grid" id="departGrid"></div>
+    <div class="triage-hint">clique sur « prix » pour éditer en direct</div>
+  </section>
+
+  <section class="slide" data-title="Etat effectif">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Où sont les trous ?</h2><p>Clique un poste vide puis un joueur pour le placer. Clique un joueur placé pour le retirer.</p></div>
+    <div class="pitch-wrap">
+      <div class="pitch-box" id="gapPitchBox"></div>
+      <div class="pitch-side r" style="--d:.5s;max-width:240px">
+        <div class="row"><b>Remplaçants</b></div>
+        <div class="triage-drop pool-drop" id="gapAvail" style="min-height:40px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Chapitre 3">
+    <div class="div-num r pop" style="--d:0s">03</div>
+    <h2 class="tanker div-title r" style="--d:.1s">Les arrivées</h2>
+    <div class="div-line r" style="--d:.26s"></div>
+    <p class="div-sub r" style="--d:.34s">Créer de la <span class="hl">VALEUR</span> tant bien que mal</p>
+  </section>
+
+  <section class="slide" data-title="Rajeunir">
+    <div class="section-head r" style="--d:0s">
+      <h2 class="tanker">Saison <span class="hl">2025/2026</span></h2>
+      <div class="div-line r" style="--d:.08s;margin:8px auto 0"></div>
+    </div>
+    <div class="stamp-wrap" style="max-width:640px">
+      <div class="ctx-list">
+        <div class="ctx-item center r" style="--d:.14s"><span class="lbl">Apologie de l'<span class="hl">expérience</span></span></div>
+        <div class="ctx-item center r" style="--d:.22s"><span class="lbl">Plus grosse <span class="hl">masse salariale</span> de l'histoire du championnat hors QSI</span></div>
+        <div class="ctx-item center r" style="--d:.3s"><span class="lbl"><span class="hl">2<sup>e</sup></span> effectif le plus âgé de L1</span></div>
+      </div>
+      <p id="rajeunirPhrase" class="stamp-phrase">Il est <span class="hl">ESSENTIEL</span> de rafraîchir et rajeunir <span class="hl">TOUT ÇA</span></p>
+    </div>
+  </section>
+
+  <div id="arriveRevealSlot"></div>
+
+  <section class="slide" data-title="Arrivées">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Les arrivées</h2><p>Recrues du mercato idéal</p></div>
+    <div class="pcard-grid" id="arriveGrid"></div>
+  </section>
+
+  <section class="slide" data-title="Chapitre 4">
+    <div class="div-num r pop" style="--d:0s">04</div>
+    <h2 class="tanker div-title r" style="--d:.1s">La compo finale</h2>
+    <div class="div-line r" style="--d:.26s"></div>
+  </section>
+
+  <section class="slide" data-title="Compo">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">4-2-3-1</h2><p>Le onze idéal — <span class="hl">en gold</span>, les recrues</p></div>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="pitch-box" id="pitchBox"></div>
+      <div class="pitch-side r" style="--d:.65s;max-width:560px;text-align:center;margin-top:20px;">
+        <div class="row"><b>Remplaçants</b>de Lange · Cornelius · Garcia · Nnadi · Abdelli · Harit · Mmadi · Bezahaf · <span class="hl">Coulibaly</span> · <span class="hl">Versini</span> · <span class="hl">Meïté</span></div>
+      </div>
+    </div>
+    <div class="ctx-note r" style="--d:.8s">6 recrues + des jeunes qui auront faim</div>
+  </section>
+
+  <section class="slide" data-title="Chapitre 5">
+    <div class="div-num r pop" style="--d:0s">05</div>
+    <h2 class="tanker div-title r" style="--d:.1s">Le bilan</h2>
+    <div class="div-line r" style="--d:.26s"></div>
+  </section>
+
+  <section class="slide" data-title="Bilan">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Bilan chiffré</h2><p>Dépenses, ventes et solde du mercato</p></div>
+    <div class="bilan-grid">
+      <div class="bilan-card out r" style="--d:.12s"><div class="k">Dépensé</div><div class="v" data-target="0">0 M€</div></div>
+      <div class="bilan-card in r" style="--d:.2s"><div class="k">Vendu</div><div class="v" data-target="0">0 M€</div></div>
+      <div class="bilan-card net r" style="--d:.28s"><div class="k">Solde net</div><div class="v" data-target="0">0 M€</div></div>
+    </div>
+    <div class="detail-grid r" style="--d:.4s">
+      <div class="detail-panel"><div class="dh">Détail — vendu (départs)</div><div id="bilanOutList"></div></div>
+      <div class="detail-panel"><div class="dh">Détail — dépensé (arrivées)</div><div id="bilanInList"></div></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Aller plus loin">
+    <div class="section-head r" style="--d:0s"><h2 class="tanker">Pour aller plus loin</h2><p>Tout le calcul, du salaire au résultat net</p></div>
+    <div class="kpi-grid">
+      <div class="kpi-card r" style="--d:.05s"><div class="k">Masse salariale</div><div class="v" id="kpiMs">— M€</div></div>
+      <div class="kpi-card r" style="--d:.1s"><div class="k">Opérations de mutation</div><div class="v" id="kpiTrade">— M€</div></div>
+      <div class="kpi-card r" id="kpiRatioCard" style="--d:.15s"><div class="k">Squad cost ratio</div><div class="v" id="kpiRatio">— %</div><div class="note" id="kpiRatioNote"></div></div>
+      <div class="kpi-card net r" style="--d:.2s"><div class="k">Résultat net avant impôts</div><div class="v" id="projNet" data-target="0">0 M€</div></div>
+    </div>
+    <div class="detail-grid r" style="--d:.3s;max-width:900px">
+      <div class="detail-panel" id="calcLeft"></div>
+      <div class="detail-panel" id="calcRight"></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="Outro">
+    <h2 class="tanker outro-title r pop" style="--d:0s">Merci d'avoir suivi<br>mon mercato idéal</h2>
+    <p class="outro-sub r" style="--d:.2s">Le tien est différent ? Dis-le en commentaire.</p>
+  </section>
+
+</div>
+
+<div class="nav">
+  <button class="navbtn" id="prevBtn">‹</button>
+  <div class="count" id="countLbl">01 / 01</div>
+  <button class="navbtn" id="nextBtn">›</button>
+</div>
+
+<script>
+function shortName(full){
+  const parts=full.split(' ');
+  if(parts.length===1) return full;
+  const first=parts[0], rest=parts.slice(1).join(' ');
+  return (first.length<=2?first:first[0]+'.')+' '+rest;
+}
+function parseFee(text){
+  if(!text) return 0;
+  const m=String(text).match(/-?\d+(?:[.,]\d+)?/);
+  return m?parseFloat(m[0].replace(',','.')):0;
+}
+function posClass(p){ return 'pos-'+(p==='MIL'?'mil':p.toLowerCase()); }
+function pcardPhoto(pl){
+  if(pl.pic) return `<img src="${pl.pic}" alt="">`;
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>`;
+}
+
+/* effectif réel OM 2026/27 (photos officielles om.fr) — postes approximatifs, à corriger si besoin */
+const SQUAD=[
+  {n:'Jeffrey de Lange',p:'GK',pic:'photos/om/jeffrey-de-lange.jpg'},
+  {n:'Jelle Van Neck',p:'GK',pic:'photos/om/jelle-van-neck.jpg'},
+  {n:'Leonardo Balerdi',p:'DEF',pic:'photos/om/leonardo-balerdi.jpg'},
+  {n:'Nayef Aguerd',p:'DEF',pic:'photos/om/nayef-aguerd.jpg'},
+  {n:'CJ Egan-Riley',p:'DEF',pic:'photos/om/cj-egan-riley.jpg'},
+  {n:'Bamo Meïté',p:'DEF',pic:'photos/om/bamo-meite.jpg'},
+  {n:'Derek Cornelius',p:'DEF',pic:'photos/om/derek-cornelius.jpg'},
+  {n:'Emerson',p:'DEF',pic:'photos/om/emerson.jpg'},
+  {n:'Ulisses Garcia',p:'DEF',pic:'photos/om/ulisses-garcia.jpg'},
+  {n:'Pierre-Emile Højbjerg',p:'MIL',pic:'photos/om/pierre-emile-hojbjerg.jpg'},
+  {n:'Tochukwu Nnadi',p:'MIL',pic:'photos/om/tochukwu-nnadi.jpg'},
+  {n:'Geoffrey Kondogbia',p:'MIL',pic:'photos/om/geoffrey-kondogbia.jpg'},
+  {n:'Quinten Timber',p:'MIL',pic:'photos/om/quinten-timber.jpg'},
+  {n:'Angel Gomes',p:'MIL',pic:'photos/om/angel-gomes.jpg'},
+  {n:'Himad Abdelli',p:'MIL',pic:'photos/om/himad-abdelli.jpg'},
+  {n:'Amine Harit',p:'MIL',pic:'photos/om/amine-harit.jpg'},
+  {n:'Timothy Weah',p:'ATT',pic:'photos/om/timothy-weah.jpg'},
+  {n:'Igor Paixão',p:'ATT',pic:'photos/om/igor-paixao.jpg'},
+  {n:'Amine Gouiri',p:'ATT',pic:'photos/om/amine-gouiri.jpg'},
+  {n:'Neal Maupay',p:'ATT',pic:'photos/om/neal-maupay.jpg'},
+  {n:'Faris Moumbagna',p:'ATT',pic:'photos/om/faris-moumbagna.jpg'},
+  {n:'Tadjidine Mmadi',p:'ATT',pic:'photos/om/tadjidine-mmadi.jpg'},
+  {n:'Kelyann Bezahaf',p:'DEF',pic:'photos/om/kelyann-bezahaf.jpg'},
+].map(p=>({...p,cat:'pool',club:null,fee:null}));
+/* Hamed Traoré retiré : déjà parti (prêt à Genoa). Rulli/Vermot/Medina/Sellami/Abdallah non retenus (demande user). */
+
+/* départs choisis par le user (2026-08-12) — prix donnés en chat, club "on s'en fout" */
+const DEPARTS_CHOISIS={
+  'Jelle Van Neck':'0 M€',
+  'Nayef Aguerd':'Prêt 4 M€',
+  'CJ Egan-Riley':'8 M€',
+  'Pierre-Emile Højbjerg':'13 M€',
+  'Geoffrey Kondogbia':'0 M€',
+  'Neal Maupay':'4 M€',
+  'Faris Moumbagna':'Prêt 0 M€',
+};
+/* prix pré-rempli mais catégorie laissée à "pool" : le user place lui-même les joueurs dans "Je vends" en direct */
+SQUAD.forEach(p=>{ if(DEPARTS_CHOISIS[p.n]){ p.fee=DEPARTS_CHOISIS[p.n]; } });
+
+/* ventes déjà réalisées cet été (source : Transfermarkt / data/squad_cost.json "players", direction out, type paid) — total 51,4 M€, identique au sales_total de squad-cost.html */
+const REAL_SALES=[
+  {n:'Mason Greenwood',p:'ATT',club:'Fenerbahçe',fee:'23.4 M€'},
+  {n:'Facundo Medina',p:'DEF',club:'—',fee:'23 M€'},
+  {n:'Gerónimo Rulli',p:'GK',club:'—',fee:'3.5 M€'},
+  {n:'Pierre-Emerick Aubameyang',p:'ATT',club:'Dep. La Corogne',fee:'1.5 M€'},
+];
+
+/* arrivées : uniquement les recrues du mercato idéal (choix du user, 2026-08-12 — les vraies arrivées de l'été retirées, il s'en fout)
+   wage/years présents = compté dans la masse salariale/amortissement de "Pour aller plus loin" ; prêt (years=0) = pas d'amortissement, que le salaire */
+const ARRIVALS=[
+  {n:'Marcin Bulka',p:'GK',club:'Neom',fee:'Prêt sec',wage:3,years:0,pic:'photos/recruits/bulka.jpg'},
+  {n:'Soumaila Coulibaly',p:'DEF',club:'Strasbourg',fee:'Prêt avec OA',wage:1.5,years:0,pic:'photos/recruits/coulibaly.jpg'},
+  {n:'Pape Demba Diop',p:'MIL',club:'Strasbourg',fee:'8 M€',wage:1.5,years:5,pic:'photos/recruits/diop.jpg'},
+  {n:'Dilane Bakwa',p:'ATT',club:'Nottingham',fee:'Prêt sec',wage:4.5,years:0,pic:'photos/recruits/bakwa.jpg'},
+  {n:'Kader Meïté',p:'ATT',club:'Al Hilal',fee:'Prêt avec OA',wage:3,years:0,pic:'photos/recruits/meite.jpg'},
+  {n:'Giovani Versini',p:'ATT',club:'Pau',fee:'5 M€',wage:1,years:5,pic:'photos/recruits/versini.jpg'},
+];
+function fantasyRecruitsImpact(){
+  let wage=0, amort=0;
+  ARRIVALS.forEach(p=>{ if(p.wage!=null){ wage+=p.wage; if(p.years>0) amort+=parseFee(p.fee)/p.years; } });
+  return {wage,amort};
+}
+
+/* ---- génération des slides individuelles d'arrivée (une par recrue, avant le récap) ---- */
+function revealSlideHTML(pl,i){
+  return `<section class="slide" data-title="Arrivée ${i+1}">
+    <div class="reveal">
+      <div class="reveal-card r pop" style="--d:0s">
+        <div class="reveal-photo">
+          ${pcardPhoto(pl)}
+          <div class="pcard-pos ${posClass(pl.p)}">${pl.p}</div>
+        </div>
+        <div class="reveal-body">
+          <div class="tanker reveal-name">${pl.n}</div>
+          <div class="reveal-info">
+            <div class="reveal-info-col"><div class="lb">Provenance</div><div class="val">${pl.club||'—'}</div></div>
+            <div class="reveal-info-col price"><div class="lb">Prix</div><div class="val">${pl.fee||'—'}</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+document.getElementById('arriveRevealSlot').outerHTML = ARRIVALS.map(revealSlideHTML).join('');
+
+const slides=[...document.querySelectorAll('.slide')];
+const total=slides.length;
+let idx=0;
+
+/* ---- triage 3 zones ---- */
+const dropPool=document.getElementById('dropPool'), dropIn=document.getElementById('dropIn'), dropOut=document.getElementById('dropOut');
+const CYCLE=['pool','in','out'];
+
+function renderTriage(){
+  dropPool.innerHTML=''; dropIn.innerHTML=''; dropOut.innerHTML='';
+  let iP=0,iI=0,iO=0;
+  SQUAD.forEach((pl,i)=>{
+    const chip=document.createElement('div');
+    chip.className='chip r'; chip.draggable=true; chip.dataset.i=i;
+    chip.style.setProperty('--d',(pl.cat==='pool'?iP++:pl.cat==='in'?iI++:iO++)*0.035+'s');
+    chip.innerHTML=`<span class="pos">${pl.p}</span><span class="nm">${shortName(pl.n)}</span>`;
+    chip.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain',i); chip.classList.add('dragging'); });
+    chip.addEventListener('dragend',()=>chip.classList.remove('dragging'));
+    chip.addEventListener('click',()=>{ pl.cat=CYCLE[(CYCLE.indexOf(pl.cat)+1)%3]; renderTriage(); });
+    (pl.cat==='pool'?dropPool:pl.cat==='in'?dropIn:dropOut).appendChild(chip);
+  });
+  document.getElementById('cntPool').textContent=SQUAD.filter(p=>p.cat==='pool').length;
+  document.getElementById('cntIn').textContent=SQUAD.filter(p=>p.cat==='in').length;
+  document.getElementById('cntOut').textContent=SQUAD.filter(p=>p.cat==='out').length;
+}
+[dropPool,dropIn,dropOut].forEach(zone=>{
+  zone.addEventListener('dragover',e=>{ e.preventDefault(); zone.classList.add('hover'); });
+  zone.addEventListener('dragleave',()=>zone.classList.remove('hover'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault(); zone.classList.remove('hover');
+    const i=+e.dataTransfer.getData('text/plain');
+    SQUAD[i].cat=zone.dataset.cat;
+    renderTriage();
+  });
+});
+
+/* ---- cartes joueur (départs / arrivées) ---- */
+function pcardHTML(pl,kind,dataI,stagger){
+  const statusCls=kind==='out'?'st-out':'st-new';
+  const statusLbl=kind==='out'?'Part':'Arrivée';
+  const feeVal=pl.fee||'—';
+  const infoHTML = kind==='out'
+    ? `<div class="pcard-info single">
+        <div class="pcard-info-col price"><div class="lb">Prix</div><div class="val" contenteditable="true" spellcheck="false" data-field="fee" data-kind="out" data-i="${dataI}">${feeVal}</div></div>
+      </div>`
+    : `<div class="pcard-info">
+        <div class="pcard-info-col"><div class="lb">Provenance</div><div class="val">${pl.club||'—'}</div></div>
+        <div class="pcard-info-col price"><div class="lb">Prix</div><div class="val">${feeVal}</div></div>
+      </div>`;
+  return `<div class="pcard r" style="--d:${stagger*0.07}s">
+    <div class="pcard-photo">
+      ${pcardPhoto(pl)}
+      <div class="pcard-pos ${posClass(pl.p)}">${pl.p}</div>
+      <div class="pcard-status ${statusCls}">${statusLbl}</div>
+      ${pl.pic?'':'<div class="pcard-hint">photo à venir</div>'}
+    </div>
+    <div class="pcard-body">
+      <div class="tanker pcard-name" title="${pl.n}">${shortName(pl.n)}</div>
+      ${infoHTML}
+    </div>
+  </div>`;
+}
+function renderGrids(){
+  const outList=SQUAD.map((p,i)=>({...p,_i:i})).filter(p=>p.cat==='out');
+  document.getElementById('departGrid').innerHTML = outList.length
+    ? outList.map((p,k)=>pcardHTML(p,'out',p._i,k)).join('')
+    : `<div class="pcard-empty r">Aucun départ pour l'instant — trie l'effectif à l'étape précédente ("Je vends")</div>`;
+  document.getElementById('arriveGrid').innerHTML = ARRIVALS.map((p,i)=>pcardHTML(p,'in',i,i)).join('');
+}
+document.addEventListener('blur',e=>{
+  const el=e.target;
+  if(!(el.matches && el.matches('.pcard .val[contenteditable]'))) return;
+  const {field,kind,i}=el.dataset, ix=+i, text=el.textContent.trim();
+  (kind==='out'?SQUAD[ix]:ARRIVALS[ix])[field]=text;
+},true);
+
+/* ---- état de l'effectif : où sont les trous — terrain éditable à la main (clique poste vide puis joueur) ---- */
+const GAP_TEMPLATE=[
+  {pos:'GK',x:50,y:91},
+  {pos:'DG',x:15,y:73},{pos:'DC',x:38,y:76},{pos:'DC',x:62,y:76},{pos:'DD',x:85,y:73},
+  {pos:'MDC',x:30,y:50},{pos:'MOC',x:50,y:45},{pos:'MDC',x:70,y:50},
+  {pos:'AG',x:20,y:20},{pos:'BU',x:50,y:14},{pos:'AD',x:80,y:20},
+];
+/* état par défaut posé par le user (2026-08-12) — plus besoin de le refaire à chaque ouverture */
+const GAP_DEFAULT_NAMES=['','Emerson','Leonardo Balerdi','Bamo Meïté','Timothy Weah','Quinten Timber','Angel Gomes','','Igor Paixão','Amine Gouiri',''];
+let gapAssign=GAP_DEFAULT_NAMES.map(n=>n?SQUAD.find(p=>p.n===n):null);
+let gapSelected=null;
+function renderGapPitch(){
+  const box=document.getElementById('gapPitchBox');
+  box.innerHTML=GAP_TEMPLATE.map((s,i)=>{
+    const pl=gapAssign[i], gkCls=s.pos==='GK'?'gk':'';
+    if(pl) return `<div class="slot ${gkCls} r pop" data-i="${i}" style="left:${s.x}%;top:${s.y}%;--d:${i*0.05}s"><div class="disc" style="font-size:9px">${s.pos}</div><div class="lbl">${shortName(pl.n)}</div></div>`;
+    const selCls=gapSelected===i?'selected':'';
+    return `<div class="slot empty ${gkCls} ${selCls} r pop" data-i="${i}" style="left:${s.x}%;top:${s.y}%;--d:${i*0.05}s"><div class="disc">${s.pos}</div><div class="lbl">${gapSelected===i?'choisis':'manque'}</div></div>`;
+  }).join('');
+  box.querySelectorAll('.slot').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const i=+el.dataset.i;
+      if(gapAssign[i]){ gapAssign[i]=null; gapSelected=null; }
+      else { gapSelected=(gapSelected===i)?null:i; }
+      renderGapPitch();
+    });
+  });
+  const avail=document.getElementById('gapAvail');
+  const placed=new Set(gapAssign.filter(Boolean));
+  const list=SQUAD.filter(p=>p.cat!=='out' && !placed.has(p));
+  avail.innerHTML=list.length ? list.map((p,i)=>`<div class="chip r" data-n="${p.n}" style="--d:${i*0.02}s"><span class="pos">${p.p}</span><span class="nm">${shortName(p.n)}</span></div>`).join('')
+    : '<div class="drow empty">tous placés ou partis</div>';
+  avail.querySelectorAll('.chip').forEach(el=>{
+    el.addEventListener('click',()=>{
+      if(gapSelected===null) return;
+      gapAssign[gapSelected]=SQUAD.find(p=>p.n===el.dataset.n);
+      gapSelected=null;
+      renderGapPitch();
+    });
+  });
+}
+
+/* ---- terrain (compo finale) : 4-2-3-1, arrivées comprises — plus de trous, ceux-ci sont sur la slide "Où sont les trous ?" (avant les arrivées) ---- */
+const pitchBox=document.getElementById('pitchBox');
+const FORMATION_4231=[
+  {c:'gk recruit',x:50,y:91,l:'Bulka',pos:'GK'},
+  {c:'',x:15,y:73,l:'Emerson',pos:'DG'},{c:'',x:38,y:76,l:'Balerdi',pos:'DC'},{c:'',x:62,y:76,l:'Meïté',pos:'DC'},{c:'',x:85,y:73,l:'Weah',pos:'DD'},
+  {c:'',x:35,y:54,l:'Timber',pos:'MDC'},{c:'recruit',x:65,y:54,l:'Diop',pos:'MDC'},
+  {c:'',x:20,y:30,l:'Paixão',pos:'AG'},{c:'',x:50,y:26,l:'Gomes',pos:'MOC'},{c:'recruit',x:80,y:30,l:'Bakwa',pos:'AD'},
+  {c:'',x:50,y:10,l:'Gouiri',pos:'BU'},
+];
+pitchBox.innerHTML=FORMATION_4231.map((p,i)=>{
+  const isEmpty=p.c.includes('empty');
+  return `<div class="slot ${p.c} r pop" style="left:${p.x}%;top:${p.y}%;--d:${i*0.07}s">
+    <div class="disc" style="font-size:9px">${isEmpty?'X':p.pos}</div>
+    <div class="lbl">${isEmpty?'manque':p.l}</div>
+  </div>`;
+}).join('');
+
+/* ---- KPI financiers (repris de squad-cost.html / data/squad_cost.json, état du 2026-08-11) ---- */
+const FIN_BASE={ wageTotal:98.775, amortTotal:37.415, agentFees:10, produitsEstimes:200, resultatTradingEte:9.027 };
+/* impact départ par joueur (wage, amortization annuelle, plus-value à la valeur marchande TM) — cf. departure_impact dans squad_cost.json */
+const FIN_IMPACT={
+  'Leonardo Balerdi':{wage:6.54,amort:1.1,cg:15.8},
+  'Nayef Aguerd':{wage:7.365,amort:4.6,cg:-3.4},
+  'CJ Egan-Riley':{wage:2.73,amort:0,cg:9.0},
+  'Bamo Meïté':{wage:6.27,amort:2.625,cg:1.75},
+  'Derek Cornelius':{wage:1.095,amort:1.0,cg:0.5},
+  'Emerson':{wage:5.46,amort:0.35,cg:8.65},
+  'Ulisses Garcia':{wage:2.73,amort:0.8,cg:1.4},
+  'Pierre-Emile Højbjerg':{wage:9.54,amort:4.5,cg:6.0},
+  'Tochukwu Nnadi':{wage:0.825,amort:1.2,cg:-0.3},
+  'Geoffrey Kondogbia':{wage:8.175,amort:2.0,cg:1.0},
+  'Quinten Timber':{wage:6.825,amort:0.9,cg:21.4},
+  'Angel Gomes':{wage:6.0,amort:0,cg:10.0},
+  'Himad Abdelli':{wage:1.365,amort:0.55,cg:2.8},
+  'Amine Harit':{wage:4.65,amort:1.25,cg:3.75},
+  'Timothy Weah':{wage:6.825,amort:3.6,cg:5.6},
+  'Igor Paixão':{wage:7.635,amort:6.0,cg:11.0},
+  'Amine Gouiri':{wage:6.825,amort:3.8,cg:16.6},
+  'Neal Maupay':{wage:4.5,amort:1.333,cg:1.333},
+  'Faris Moumbagna':{wage:1.65,amort:1.6,cg:0.3},
+  'Jeffrey de Lange':{wage:1.365,amort:0.667,cg:1.833},
+  'Jelle Van Neck':{wage:0.405,amort:0,cg:0},
+};
+/* KPI dynamiques — base réelle squad-cost.html, ajustée selon les départs choisis (FIN_IMPACT) et les recrues (fantasyRecruitsImpact) */
+function fmt1(n){ return Math.round(n*10)/10; }
+
+/* compte de résultat réel OM (source club, capture 2026-08) — postes fixes / à ne pas modifier sauf dit autrement */
+const NET_RESULT_BASE={
+  droitsTV:40, sponsor:71.712, recettesMatch:40, autresProduits:60,
+  indemniteAgents:10, autresCharges:90,
+  resultatFinancier:-2.890, resultatExceptionnel:-1.657,
+};
+/* tout le calcul financier réuni sur une seule slide : masse salariale, amortissements, squad cost ratio,
+   résultat des opérations de mutation et résultat net — chaque étape est détaillée pour être compréhensible */
+function renderResultSlide(){
+  const departed=SQUAD.filter(p=>p.cat==='out');
+  let wageOut=0,amortOut=0,cgFantasy=0,unknownCount=0;
+  departed.forEach(p=>{
+    const fin=FIN_IMPACT[p.n];
+    if(fin){ wageOut+=fin.wage; amortOut+=fin.amort; cgFantasy+=fin.cg; }
+    else unknownCount++;
+  });
+  const fr=fantasyRecruitsImpact();
+  const ms=Math.max(0,FIN_BASE.wageTotal-wageOut+fr.wage);
+  const amort=FIN_BASE.amortTotal-amortOut+fr.amort;
+  const resultatMutation=FIN_BASE.resultatTradingEte+cgFantasy;
+
+  const numerator=ms+amort+FIN_BASE.agentFees;
+  const denominator=FIN_BASE.produitsEstimes+resultatMutation;
+  const ratio=numerator/denominator;
+  const pct=Math.round(ratio*1000)/10;
+
+  const produits=NET_RESULT_BASE.droitsTV+NET_RESULT_BASE.sponsor+NET_RESULT_BASE.recettesMatch+NET_RESULT_BASE.autresProduits;
+  const charges=ms+amort+NET_RESULT_BASE.indemniteAgents+NET_RESULT_BASE.autresCharges;
+  const resHorsMutation=produits-charges;
+  const resAvantImpot=resHorsMutation+resultatMutation+NET_RESULT_BASE.resultatFinancier+NET_RESULT_BASE.resultatExceptionnel;
+  const resNet=resAvantImpot;
+
+  document.getElementById('kpiMs').textContent=fmt1(ms)+' M€';
+  document.getElementById('kpiTrade').textContent=fmt1(resultatMutation)+' M€';
+  document.getElementById('kpiRatio').textContent=pct.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
+  const status=pct<=70?'good':pct<=85?'warning':'critical';
+  const card=document.getElementById('kpiRatioCard');
+  card.classList.remove('good','warning','critical');
+  card.classList.add(status);
+  document.getElementById('kpiRatioNote').textContent=status==='good'?'Sous le plafond UEFA (70 %)':status==='warning'?'Zone de vigilance (70–85 %)':'Au-dessus du plafond';
+  document.getElementById('projNet').dataset.target=resNet;
+
+  document.getElementById('calcLeft').innerHTML=`
+    <div class="dh section">Masse salariale</div>
+    <div class="drow"><span>Effectif réel (squad-cost.html)</span><span class="val">${fmt1(FIN_BASE.wageTotal)} M€</span></div>
+    <div class="drow"><span>− salaires des joueurs vendus</span><span class="val">− ${fmt1(wageOut)} M€</span></div>
+    <div class="drow"><span>+ salaires des recrues</span><span class="val">+ ${fmt1(fr.wage)} M€</span></div>
+    <div class="drow main"><span>= Masse salariale</span><span class="val">${fmt1(ms)} M€</span></div>
+
+    <div class="dh section">Amortissements</div>
+    <div class="drow"><span>Effectif réel (squad-cost.html)</span><span class="val">${fmt1(FIN_BASE.amortTotal)} M€</span></div>
+    <div class="drow"><span>− amort. des joueurs vendus</span><span class="val">− ${fmt1(amortOut)} M€</span></div>
+    <div class="drow"><span>+ amort. des recrues (transferts fermes)</span><span class="val">+ ${fmt1(fr.amort)} M€</span></div>
+    <div class="drow main"><span>= Amortissements</span><span class="val">${fmt1(amort)} M€</span></div>
+
+    <div class="dh section">Squad cost ratio (plafond UEFA/DNCG : 70 %)</div>
+    <div class="drow"><span>Numérateur = MS + amort. + agents</span><span class="val">${fmt1(numerator)} M€</span></div>
+    <div class="drow"><span>Dénominateur = produits estimés + mutation</span><span class="val">${fmt1(denominator)} M€</span></div>
+    <div class="drow main"><span>= Squad cost ratio</span><span class="val">${pct.toLocaleString('fr-FR',{maximumFractionDigits:1})} %</span></div>`;
+
+  document.getElementById('calcRight').innerHTML=`
+    <div class="dh section">Résultat des opérations de mutation</div>
+    <div class="drow"><span>Déjà réalisé cet été (Greenwood, Aubameyang, Medina, Rulli)</span><span class="val">${fmt1(FIN_BASE.resultatTradingEte)} M€</span></div>
+    <div class="drow"><span>+ plus-value sur tes départs choisis</span><span class="val">${cgFantasy>=0?'+':''}${fmt1(cgFantasy)} M€</span></div>
+    <div class="drow main"><span>= Résultat des opérations de mutation</span><span class="val">${fmt1(resultatMutation)} M€</span></div>
+
+    <div class="dh section">Résultat net avant impôts (compte de résultat)</div>
+    <div class="drow"><span>Produits (TV, sponsors, billetterie, autres)</span><span class="val">${fmt1(produits)} M€</span></div>
+    <div class="drow"><span>− charges (MS + amort. + agents + autres charges)</span><span class="val">− ${fmt1(charges)} M€</span></div>
+    <div class="drow main"><span>= Résultat hors mutation</span><span class="val">${fmt1(resHorsMutation)} M€</span></div>
+    <div class="drow"><span>+ résultat des opérations de mutation</span><span class="val">${fmt1(resultatMutation)} M€</span></div>
+    <div class="drow main"><span>= Résultat net avant impôts</span><span class="val">${fmt1(resNet)} M€</span></div>
+    ${unknownCount?`<div class="drow empty" style="font-size:10px">${unknownCount} départ(s) sans donnée financière non compté(s)</div>`:''}`;
+}
+
+/* ---- bilan dynamique ---- */
+function calcBilan(){
+  const venduFantasy=SQUAD.filter(p=>p.cat==='out').reduce((s,p)=>s+parseFee(p.fee),0);
+  const venduReel=REAL_SALES.reduce((s,p)=>s+parseFee(p.fee),0);
+  const depense=ARRIVALS.reduce((s,p)=>s+parseFee(p.fee),0);
+  return {vendu:venduFantasy+venduReel,depense,solde:venduFantasy+venduReel-depense};
+}
+function renderBilanDetail(){
+  const outs=SQUAD.filter(p=>p.cat==='out');
+  const rows=REAL_SALES.map(p=>`<div class="drow"><span>${p.n} <span style="color:var(--muted);font-size:9.5px">réel</span></span><span class="val">${p.fee}</span></div>`)
+    .concat(outs.map(p=>`<div class="drow"><span>${p.n}</span><span class="val">${p.fee||'—'}</span></div>`));
+  document.getElementById('bilanOutList').innerHTML = rows.length ? rows.join('') : '<div class="drow empty">aucun</div>';
+  document.getElementById('bilanInList').innerHTML = ARRIVALS.length
+    ? ARRIVALS.map(p=>`<div class="drow"><span>${p.n}${p.real?' <span style="color:var(--muted);font-size:9.5px">réel</span>':''}</span><span class="val">${p.fee||'—'}</span></div>`).join('')
+    : '<div class="drow empty">aucune</div>';
+}
+function animateCount(el){
+  const target=+el.dataset.target;
+  const start=performance.now(), dur=700;
+  function tick(now){
+    const t=Math.min(1,(now-start)/dur);
+    const eased=1-Math.pow(1-t,3);
+    const val=Math.round(target*eased);
+    el.textContent=(val<0?'− '+Math.abs(val):val)+' M€';
+    if(t<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function render(){
+  renderTriage();
+  renderGrids();
+  renderGapPitch();
+  renderResultSlide();
+  const b=calcBilan();
+  const elDep=document.querySelector('.bilan-card.out .v'), elVen=document.querySelector('.bilan-card.in .v'), elSol=document.querySelector('.bilan-card.net .v');
+  elDep.dataset.target=b.depense; elVen.dataset.target=b.vendu; elSol.dataset.target=b.solde;
+  renderBilanDetail();
+
+  slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+  document.getElementById('progressFill').style.width=((idx+1)/total*100)+'%';
+  document.getElementById('countLbl').textContent=String(idx+1).padStart(2,'0')+' / '+total;
+  document.getElementById('prevBtn').disabled=idx===0;
+  document.getElementById('nextBtn').disabled=idx===total-1;
+  const active=slides[idx];
+  active.querySelectorAll('.r').forEach(el=>{
+    el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+  });
+  active.querySelectorAll('.v[data-target]').forEach(animateCount);
+  if(active.dataset.title!=='Rajeunir'){
+    const phrase=document.getElementById('rajeunirPhrase');
+    if(phrase) phrase.classList.remove('show');
+  }
+}
+function go(n){ idx=Math.min(total-1,Math.max(0,n)); render(); }
+function goNext(){
+  const cur=slides[idx];
+  if(cur && cur.dataset.title==='Rajeunir'){
+    const phrase=document.getElementById('rajeunirPhrase');
+    if(phrase && !phrase.classList.contains('show')){ phrase.classList.add('show'); return; }
+  }
+  go(idx+1);
+}
+
+document.getElementById('prevBtn').onclick=()=>go(idx-1);
+document.getElementById('nextBtn').onclick=()=>goNext();
+window.addEventListener('keydown',e=>{
+  if(document.activeElement && document.activeElement.isContentEditable) return;
+  if(e.key==='ArrowRight'||e.key===' ') goNext();
+  if(e.key==='ArrowLeft') go(idx-1);
+});
+let tx=0;
+window.addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+window.addEventListener('touchend',e=>{
+  if(document.activeElement && document.activeElement.isContentEditable) return;
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){ if(dx<0) goNext(); else go(idx-1); }
+});
+
+render();
+</script>
+</body>
+</html>

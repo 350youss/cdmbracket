@@ -1,0 +1,17 @@
+scripts/
+data/
+*.bat
+*.vbs
+.claude/
+overlays/
+photos/
+scratch_*.json
+transcript_*.txt
+latest_check.html
+mercato-l1-2026.html
+transitions video genesio/
+node_modules/
+.git/
+.gitattributes
+.gitignore
+wrangler.jsonc

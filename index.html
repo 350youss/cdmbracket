@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kooradex &middot; Football, d&eacute;cortiqu&eacute;</title>
+<meta name="description" content="Mercato, compos, budget DNCG et pronostics de l'OM et de la Ligue 1, r&eacute;unis au m&ecirc;me endroit.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'%3E%3Crect x='0' y='0' width='100' height='130' rx='22' fill='%230a0b0d'/%3E%3Crect x='16' y='14' width='68' height='90' rx='14' fill='none' stroke='%23fff' stroke-width='6' opacity='.85'/%3E%3Crect x='30' y='28' width='40' height='28' rx='2' fill='%23fff' opacity='.85'/%3E%3Crect x='33' y='72' width='8' height='20' rx='2' fill='%23fff' opacity='.85'/%3E%3Crect x='27' y='78' width='20' height='8' rx='2' fill='%23fff' opacity='.85'/%3E%3Ccircle cx='68' cy='80' r='6' fill='none' stroke='%23fff' stroke-width='4' opacity='.85'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&f[]=tanker@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d; --s1:#131417; --s2:#191a1e; --s3:#1f2025;
+  --accent:#5b8fef; --gold:#d1a94e; --in:#33c07a; --out:#f04d68;
+  --txt:#f2f2f0; --sub:#98999e; --muted:#5c5d63; --faint:#38393e;
+  --line:rgba(255,255,255,.07); --line-soft:rgba(255,255,255,.14);
+  --disp:'Tanker','Arial Narrow',sans-serif;
+  --title:'General Sans',-apple-system,'Segoe UI',sans-serif;
+  --body:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r-card:18px; --r-pill:999px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);overflow-x:hidden;}
+body{background:var(--bg);color:var(--txt);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+a{color:inherit;text-decoration:none;}
+::selection{background:rgba(91,143,239,.22);color:#fff;}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--s3);border-radius:6px;border:2px solid var(--bg);}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.025;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap{position:relative;z-index:10;max-width:1240px;margin:0 auto;padding:0 40px;}
+
+.bleed-bar{height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));
+  background-size:220% 100%;animation:bar 14s var(--ease) infinite;position:relative;z-index:30;}
+@keyframes bar{50%{background-position:100% 0;}100%{background-position:220% 0;}}
+
+/* ---- nav ---- */
+nav{position:sticky;top:14px;z-index:20;padding:0 16px;transition:padding .5s var(--ease);}
+.navbar{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;background:rgba(19,20,23,.1);backdrop-filter:blur(0px) saturate(140%);-webkit-backdrop-filter:blur(0px) saturate(140%);
+  border:1px solid rgba(255,255,255,.03);border-radius:var(--r-pill);padding:14px 10px 14px 22px;
+  transition:background-color .5s var(--ease),border-color .5s var(--ease),backdrop-filter .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease);}
+.navbar.scrolled{background:rgba(19,20,23,.85);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-color:rgba(255,255,255,.1);padding:9px 10px 9px 22px;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.brand .word{font-family:var(--disp);font-size:18px;letter-spacing:.02em;text-transform:uppercase;color:#fff;line-height:1;}
+.brand svg{flex-shrink:0;display:block;}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
+.nav-links::-webkit-scrollbar{display:none;}
+.nav-link{font-family:var(--body);font-weight:500;font-size:13px;color:var(--sub);white-space:nowrap;flex-shrink:0;
+  padding:9px 13px;border-radius:var(--r-pill);transition:color .2s var(--ease),background .2s var(--ease);}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.06);}
+.season{font-family:var(--mono);font-weight:600;font-size:10.5px;color:var(--bg);background:#fff;
+  text-transform:uppercase;letter-spacing:.06em;border-radius:var(--r-pill);padding:8px 15px;white-space:nowrap;flex-shrink:0;}
+
+/* ---- hero ---- */
+.hero-shell{position:relative;margin:18px 16px 0;border-radius:28px;overflow:hidden;
+  background:#000 url('images/hero.jpg') center/cover no-repeat;}
+.hero-shell::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 55%,rgba(0,0,0,.92) 100%);
+}
+.hero{position:relative;padding:96px 40px 100px;max-width:1240px;margin:0 auto;}
+.eyebrow{position:relative;font-family:var(--mono);font-weight:600;font-size:11.5px;
+  letter-spacing:.22em;text-transform:uppercase;color:#fff;opacity:.72;}
+.hero h1{position:relative;font-family:var(--title);font-weight:700;
+  font-size:clamp(42px,7.4vw,98px);line-height:.98;letter-spacing:-.015em;color:#fff;margin-top:18px;}
+.hero .sub{position:relative;margin-top:22px;font-size:16px;line-height:1.6;color:rgba(255,255,255,.68);max-width:560px;}
+.cta-row{position:relative;margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn{font-family:var(--body);font-weight:700;font-size:14px;padding:14px 26px;border-radius:var(--r-pill);
+  white-space:nowrap;transition:transform .22s var(--ease),box-shadow .22s var(--ease),border-color .22s var(--ease);display:inline-block;}
+.btn:active{transform:scale(.98);}
+.btn.primary{background:#fff;color:#0a0b0d;}
+.btn.primary:hover{box-shadow:0 14px 30px -12px rgba(255,255,255,.35);transform:translateY(-2px);}
+.btn.ghost{border:1px solid rgba(255,255,255,.32);color:#fff;}
+.btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);transform:translateY(-2px);}
+
+/* ---- section shell ---- */
+main{position:relative;z-index:10;}
+section{padding:64px 0;}
+.section-title{font-family:var(--title);font-weight:600;font-size:clamp(26px,3.6vw,38px);
+  letter-spacing:-.01em;color:#fff;margin-bottom:32px;}
+
+/* ---- bento ---- */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;}
+.card{position:relative;background:#000;border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-card);padding:28px;display:flex;flex-direction:column;justify-content:space-between;
+  overflow:hidden;transition:transform .28s var(--ease),border-color .28s var(--ease),box-shadow .28s var(--ease),background .28s var(--ease);}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(480px 220px at 100% 0%,rgba(255,255,255,.05),transparent 70%);}
+.card:hover{transform:translateY(-4px);background:#0e0f11;border-color:rgba(255,255,255,.28);
+  box-shadow:0 20px 40px -22px rgba(255,255,255,.12);}
+.card .tag{position:relative;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);}
+.card .ctitle{position:relative;font-family:var(--title);font-weight:600;color:#fff;margin-top:12px;letter-spacing:-.005em;}
+.card .cbody{position:relative;font-size:13.5px;line-height:1.55;color:var(--sub);margin-top:10px;max-width:46ch;}
+.card .go{position:relative;margin-top:20px;font-family:var(--mono);font-size:12px;font-weight:600;
+  color:#fff;display:inline-flex;align-items:center;gap:6px;transition:gap .2s var(--ease);}
+.card:hover .go{gap:10px;}
+
+.card.feature{grid-column:span 7;grid-row:span 2;padding:34px;}
+.card.feature .ctitle{font-size:30px;margin-top:16px;}
+.card.feature .cbody{font-size:14.5px;max-width:38ch;}
+.card.b,.card.c{grid-column:span 5;}
+.card.d{grid-column:span 4;}
+.card.full{grid-column:span 12;flex-direction:row;align-items:center;justify-content:space-between;gap:24px;}
+.card.full .ctitle{margin-top:0;}
+.card.full .left{max-width:60ch;}
+
+/* ---- manifesto ---- */
+.manifesto{border-top:1px solid var(--line);}
+.manifesto h2{font-family:var(--title);font-weight:600;font-size:clamp(28px,4.4vw,46px);
+  letter-spacing:-.01em;color:#fff;line-height:1.12;max-width:16ch;}
+.manifesto p{margin-top:20px;font-size:15px;line-height:1.65;color:var(--sub);max-width:56ch;}
+
+/* ---- footer ---- */
+footer{border-top:1px solid var(--line);padding:56px 0 44px;position:relative;z-index:10;}
+.foot-top{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;}
+.foot-brand{max-width:340px;}
+.foot-brand .word{font-family:var(--disp);font-size:19px;text-transform:uppercase;color:#fff;letter-spacing:.02em;}
+.foot-brand p{margin-top:14px;font-size:13px;line-height:1.6;color:var(--muted);}
+.foot-links{display:flex;gap:56px;flex-wrap:wrap;}
+.foot-links .h{display:block;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.foot-links a{display:block;font-size:13.5px;color:var(--sub);margin-bottom:11px;transition:color .2s var(--ease);}
+.foot-links a:hover{color:var(--txt);}
+.foot-bottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;color:var(--muted);}
+.foot-bottom b{color:var(--sub);}
+
+/* ---- reveal on scroll ---- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+  .bleed-bar{animation:none;background-position:0 0;}
+  .card,.btn{transition:none!important;}
+}
+
+@media(max-width:1020px){
+  .navbar{padding:8px 8px 8px 18px;}
+  .brand .word{display:none;}
+}
+@media(max-width:640px){
+  .nav-link{font-size:12px;padding:8px 10px;}
+  .season{display:none;}
+}
+@media(max-width:860px){
+  .card.feature{grid-column:span 12;grid-row:span 1;}
+  .card.b,.card.c,.card.d{grid-column:span 6;}
+}
+@media(max-width:700px){
+  .wrap{padding:0 18px;}
+  .hero-shell{margin:14px 12px 0;border-radius:20px;}
+  .hero{padding:64px 22px 56px;}
+  .hero .sub{font-size:14.5px;}
+  section{padding:44px 0;}
+  .bento{gap:12px;}
+  .card.feature,.card.b,.card.c,.card.d,.card.full{grid-column:span 12;}
+  .card.full{flex-direction:column;align-items:flex-start;}
+  .foot-top{gap:32px;}
+  .foot-links{gap:36px;}
+}
+</style>
+</head>
+<body>
+<div id="nav-sentinel" aria-hidden="true" style="position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;"></div>
+<div class="bleed-bar"></div>
+<nav>
+  <div class="navbar">
+    <a class="brand" href="#top">
+      <svg width="22" height="28" viewBox="0 0 100 130" aria-hidden="true">
+        <rect x="6" y="6" width="88" height="118" rx="16" fill="none" stroke="#fff" stroke-width="5" opacity=".85"/>
+        <rect x="24" y="22" width="52" height="36" rx="2" fill="#fff" opacity=".85"/>
+        <rect x="27" y="79" width="9" height="25" rx="2" fill="#fff" opacity=".85"/>
+        <rect x="19.5" y="86.5" width="24" height="9" rx="2" fill="#fff" opacity=".85"/>
+        <circle cx="71" cy="97" r="6.5" fill="none" stroke="#fff" stroke-width="4" opacity=".85"/>
+        <circle cx="58" cy="108" r="5.5" fill="none" stroke="#fff" stroke-width="4" opacity=".85"/>
+      </svg>
+      <span class="word">Kooradex</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="mercato-l1.html">Mercato</a>
+      <a class="nav-link" href="equipe.html">Compos</a>
+      <a class="nav-link" href="squad-cost.html">Budget OM</a>
+      <a class="nav-link" href="mercato-ideal-om.html">Id&eacute;al OM</a>
+      <a class="nav-link" href="pronostics-l1.html">Classement</a>
+      <a class="nav-link" href="predis-indiv.html">Awards</a>
+      <a class="nav-link" href="mercato-l2.html">Mercato L2</a>
+      <a class="nav-link" href="equipe-l2.html">Compos L2</a>
+      <a class="nav-link" href="grands-clubs.html">Europe</a>
+      <a class="nav-link" href="wc2026-simulator.html">Mondial</a>
+    </div>
+    <span class="season">2026/27</span>
+  </div>
+</nav>
+
+<div class="hero-shell">
+  <header class="hero" id="top">
+    <div class="eyebrow reveal">Football &middot; Saison 2026/27</div>
+    <h1 class="reveal" style="transition-delay:.08s">Le fourre-tout du foot.<br>Mais utile.</h1>
+    <p class="sub reveal" style="transition-delay:.16s">Mercato, budget, compos et pronostics de la Ligue 1, de la Ligue 2 et des grands clubs europ&eacute;ens. Dix outils, un seul endroit.</p>
+    <div class="cta-row reveal" style="transition-delay:.24s">
+      <a class="btn primary" href="#outils">Voir les outils</a>
+      <a class="btn ghost" href="mercato-l1.html">Ouvrir le mercato</a>
+    </div>
+  </header>
+</div>
+
+<main>
+  <section class="wrap" id="outils">
+    <h2 class="section-title reveal">Les outils</h2>
+    <div class="bento">
+      <a class="card feature reveal" style="transition-delay:0ms" href="mercato-l1.html">
+        <div>
+          <span class="tag">Ligue 1 &middot; 2026/27</span>
+          <div class="ctitle">Mercato Ligue&nbsp;1</div>
+          <p class="cbody">Toutes les arriv&eacute;es et tous les d&eacute;parts des 18 clubs, mis &agrave; jour en continu tout au long du mercato.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card b reveal" style="transition-delay:70ms" href="equipe.html">
+        <div>
+          <span class="tag">Ligue 1 &middot; Terrain interactif</span>
+          <div class="ctitle">Effectifs &amp; Compos</div>
+          <p class="cbody">L&rsquo;effectif &agrave; jour de chaque club, avec un terrain interactif pour composer ta propre &eacute;quipe.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card c reveal" style="transition-delay:140ms" href="squad-cost.html">
+        <div>
+          <span class="tag">DNCG &middot; Squad cost ratio</span>
+          <div class="ctitle">Sant&eacute; financi&egrave;re OM</div>
+          <p class="cbody">Masse salariale, ventes et ratio DNCG de l&rsquo;OM, recalcul&eacute;s en direct &agrave; partir de l&rsquo;effectif actuel.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card d reveal" style="transition-delay:210ms" href="mercato-ideal-om.html">
+        <div>
+          <span class="tag">Diaporama interactif</span>
+          <div class="ctitle">Mercato id&eacute;al OM</div>
+          <p class="cbody">L&rsquo;effectif r&eacute;el tri&eacute; en trois zones, avec les arriv&eacute;es et d&eacute;parts qui feraient l&rsquo;&eacute;quipe r&ecirc;v&eacute;e.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card d reveal" style="transition-delay:280ms" href="pronostics-l1.html">
+        <div>
+          <span class="tag">Ligue 1 &middot; Simulateur</span>
+          <div class="ctitle">Pronostics classement</div>
+          <p class="cbody">Place les 18 clubs de Ligue 1 sur leur ligne de classement, du sacre &agrave; la descente.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card d reveal" style="transition-delay:350ms" href="predis-indiv.html">
+        <div>
+          <span class="tag">Ligue 1 &middot; Awards</span>
+          <div class="ctitle">Pronostics individuels</div>
+          <p class="cbody">Ballon d&rsquo;or, meilleur buteur, r&eacute;v&eacute;lation de la saison&nbsp;: tes pronostics pour 2026/27.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card d reveal" style="transition-delay:420ms" href="mercato-l2.html">
+        <div>
+          <span class="tag">Ligue 2 &middot; 2026/27</span>
+          <div class="ctitle">Mercato Ligue&nbsp;2</div>
+          <p class="cbody">Les arriv&eacute;es et d&eacute;parts des 18 clubs de Ligue 2, mis &agrave; jour en continu.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card d reveal" style="transition-delay:490ms" href="equipe-l2.html">
+        <div>
+          <span class="tag">Ligue 2 &middot; Terrain interactif</span>
+          <div class="ctitle">Effectifs &amp; Compos L2</div>
+          <p class="cbody">L&rsquo;effectif &agrave; jour de chaque club de Ligue 2, avec un terrain interactif.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card d reveal" style="transition-delay:560ms" href="grands-clubs.html">
+        <div>
+          <span class="tag">Europe &middot; Effectif uniquement</span>
+          <div class="ctitle">Grands clubs europ&eacute;ens</div>
+          <p class="cbody">Les effectifs &agrave; jour des grands clubs hors Ligue 1&nbsp;: Barcelone, Real, Bayern, Man City et les autres.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+      <a class="card full reveal" style="transition-delay:630ms" href="wc2026-simulator.html">
+        <div class="left">
+          <span class="tag">Coupe du monde 2026</span>
+          <div class="ctitle">World Cup 2026 &middot; Simulator</div>
+          <p class="cbody">Simule le tableau final de la Coupe du monde, du premier tour jusqu&rsquo;&agrave; la finale.</p>
+        </div>
+        <span class="go">Ouvrir &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="manifesto wrap reveal">
+    <h2>Construit pour suivre le foot. Pas pour vendre du clic.</h2>
+    <p>Dix outils qui tournent sans bruit en arri&egrave;re-plan, pour ouvrir une seule page au lieu de dix onglets le jour du mercato.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="word">Kooradex</span>
+        <p>Le fourre-tout du foot, rang&eacute; au m&ecirc;me endroit&nbsp;: mercato, compos, budget et pronostics OM &amp; Ligue 1.</p>
+      </div>
+      <div class="foot-links">
+        <div>
+          <span class="h">Outils</span>
+          <a href="mercato-l1.html">Mercato Ligue 1</a>
+          <a href="equipe.html">Effectifs &amp; Compos</a>
+          <a href="squad-cost.html">Sant&eacute; financi&egrave;re OM</a>
+          <a href="mercato-ideal-om.html">Mercato id&eacute;al OM</a>
+        </div>
+        <div>
+          <span class="h">Pronostics</span>
+          <a href="pronostics-l1.html">Classement L1</a>
+          <a href="predis-indiv.html">Individuels</a>
+          <a href="wc2026-simulator.html">World Cup 2026</a>
+        </div>
+        <div>
+          <span class="h">Ligue 2 &amp; Europe</span>
+          <a href="mercato-l2.html">Mercato Ligue 2</a>
+          <a href="equipe-l2.html">Effectifs L2</a>
+          <a href="grands-clubs.html">Grands clubs europ&eacute;ens</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Un projet <b>350</b>. Donn&eacute;es indicatives, actualis&eacute;es automatiquement.</span>
+      <span>&copy; 2026 Kooradex</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  function revealAll(){
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    revealAll();
+  }
+  /* filet de s&eacute;curit&eacute; : si l'observer ne se d&eacute;clenche pas (navigateur capricieux,
+     onglet ouvert en arri&egrave;re-plan...), rien ne doit rester invisible ind&eacute;finiment */
+  setTimeout(revealAll, 2000);
+
+  /* menu : transparent en haut de page, redevient un bandeau plein au scroll (comme Floria) */
+  var navbar = document.querySelector('.navbar');
+  var sentinel = document.getElementById('nav-sentinel');
+  if(navbar && sentinel && 'IntersectionObserver' in window){
+    var navIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        navbar.classList.toggle('scrolled', !entry.isIntersecting);
+      });
+    }, {rootMargin:'-40px 0px 0px 0px', threshold:0});
+    navIO.observe(sentinel);
+  } else if(navbar){
+    navbar.classList.add('scrolled');
+  }
+})();
+</script>
+</body>
+</html>

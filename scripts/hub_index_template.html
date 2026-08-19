@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compos & Effectifs · 350</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=tanker@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d; --s1:#131417; --s2:#191a1e; --s3:#1f2025;
+  --in:#33c07a; --accent:#5b8fef; --gold:#d1a94e; --out:#f04d68;
+  --txt:#f2f2f0; --sub:#98999e; --muted:#5c5d63; --faint:#38393e;--line:rgba(255,255,255,.07);
+  --mono:'JetBrains Mono',ui-monospace,monospace; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+body::before{
+  content:'';position:fixed;inset:-50%;pointer-events:none;z-index:0;opacity:.018;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='72'%3E%3Ctext x='4' y='44' font-family='Inter,Arial' font-size='28' font-weight='800' fill='%23fff'%3E350%3C/text%3E%3C/svg%3E");
+  background-size:150px 90px;transform:rotate(-22deg);width:200%;height:200%;
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap::before{
+  content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:820px;height:460px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at center,rgba(91,143,239,.15),transparent 68%);
+}
+.bleed-bar{height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));
+  background-size:220% 100%;animation:bar 14s var(--ease) infinite;position:relative;z-index:5;}
+@keyframes bar{50%{background-position:100% 0;}100%{background-position:220% 0;}}
+
+.wrap{position:relative;z-index:10;max-width:1160px;margin:0 auto;padding:0 32px;}
+header{padding-top:52px;}
+.kicker{font-weight:600;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);}
+.hero h1{font-family:'Tanker',sans-serif;font-weight:400;font-size:78px;line-height:.85;letter-spacing:-.005em;color:#fff;text-transform:uppercase;margin-top:12px;}
+.hero .accent{color:var(--accent);}
+.note{margin-top:16px;font-size:14px;color:var(--sub);max-width:560px;line-height:1.6;}
+
+main{padding:44px 32px 76px;max-width:1160px;margin:0 auto;position:relative;z-index:10;}
+
+.cat{margin-top:8px;margin-bottom:56px;}
+.cat-h{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;}
+.cat-h .t{font-family:'Tanker',sans-serif;font-size:22px;text-transform:uppercase;color:#fff;letter-spacing:.01em;}
+.cat-h .d{font-size:12px;color:var(--muted);font-family:var(--mono);}
+
+/* CARTE LIGUE (lien externe) */
+.l1-card{display:flex;align-items:center;gap:20px;background:var(--s1);
+  border:1px solid var(--line);border-radius:14px;padding:24px 28px;position:relative;overflow:hidden;
+  transition:transform .25s var(--ease),border-color .25s,box-shadow .25s;}
+.l1-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);}
+.l1-card:hover{transform:translateY(-3px);border-color:rgba(91,143,239,.32);box-shadow:0 16px 32px -14px rgba(91,143,239,.28);}
+.l1-card .badge{width:58px;height:58px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Tanker',sans-serif;font-size:22px;color:var(--accent);flex-shrink:0;
+  background:rgba(91,143,239,.1);border-radius:12px;}
+.l1-card .badge.has-logo{background-color:transparent !important;background-size:78% !important;}
+.l1-card .badge.l-L1{filter:invert(1);}
+.l1-card .badge.l-L2{background-size:84% !important;}
+.l2-card{margin-top:12px;}
+.l2-card::before{background:var(--gold);}
+.l2-card:hover{border-color:rgba(209,169,78,.32);box-shadow:0 16px 32px -14px rgba(209,169,78,.28);}
+.l2-card .badge{color:var(--gold);background:rgba(209,169,78,.12);}
+.l1-card .txt{flex:1;}
+.l1-card .txt .name{font-family:'Tanker',sans-serif;font-size:21px;color:#fff;text-transform:uppercase;letter-spacing:.01em;}
+.l1-card .txt .sub{font-size:12.5px;color:var(--sub);margin-top:5px;line-height:1.4;}
+.l1-card .go{font-size:12px;font-weight:600;color:var(--accent);white-space:nowrap;font-family:var(--mono);}
+
+/* GRILLE GRANDS CLUBS */
+.clubs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px;}
+.club-card{display:flex;flex-direction:column;align-items:center;gap:13px;background:var(--s1);
+  border:1px solid var(--line);border-radius:14px;padding:26px 16px;text-align:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+  transition:transform .25s var(--ease),border-color .25s,box-shadow .25s,background .25s;}
+.club-card:hover{border-color:rgba(91,143,239,.3);transform:translateY(-3px);background:var(--s2);box-shadow:0 14px 28px -14px rgba(91,143,239,.22);}
+.crest{position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;
+  width:60px;height:60px;border-radius:15px;font-family:'Tanker',sans-serif;font-size:19px;letter-spacing:0;}
+.crest.has-logo{background-color:transparent !important;color:transparent !important;background-size:contain !important;
+  background-position:center !important;background-repeat:no-repeat !important;}
+.crest.l-JUV{filter:invert(1);}
+.club-card .cname{font-size:13.5px;font-weight:700;color:#fff;line-height:1.25;}
+.club-card .cleague{font-size:9.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-family:var(--mono);}
+
+footer{max-width:1160px;margin:0 auto;padding:0 32px 56px;color:var(--muted);font-size:11px;line-height:1.7;position:relative;z-index:10;}
+footer b{color:var(--sub);}
+
+@media(max-width:700px){
+  .wrap,main,footer{padding-left:16px;padding-right:16px;}
+  .hero h1{font-size:46px;}
+  .l1-card{flex-wrap:wrap;padding:18px;}
+  .clubs-grid{grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:9px;}
+  .club-card{padding:18px 10px;}
+  .crest{width:50px;height:50px;font-size:15px;}
+}
+</style>
+<style>/*__LOGOCSS__*/</style>
+</head>
+<body>
+<div class="bleed-bar"></div>
+<div class="wrap">
+  <header>
+    <a href="index.html" style="display:inline-block;margin-bottom:14px;font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--sub);text-decoration:none;letter-spacing:.02em;">&larr; Kooradex</a>
+    <div class="kicker">Compos & Effectifs · Saison 2026/27</div>
+    <div class="hero"><h1>Grands club<span class="accent">s</span></h1></div>
+    <p class="note">Effectif à jour et terrain interactif pour composer ta compo, club par club. Choisis un championnat ou un grand club européen ci-dessous.</p>
+  </header>
+</div>
+
+<main>
+  <section class="cat">
+    <div class="cat-h"><span class="t">Championnat</span><span class="d">récap mercato complet</span></div>
+    <a class="l1-card" href="__L1_URL__">
+      <span class="badge crest" id="l1Badge">L1</span>
+      <span class="txt">
+        <span class="name">Ligue 1 · 2026/27</span>
+        <span class="sub">Mercato complet des 18 clubs — arrivées, départs, effectifs & compos</span>
+      </span>
+      <span class="go">Ouvrir →</span>
+    </a>
+    <a class="l1-card l2-card" href="__L2_URL__">
+      <span class="badge crest" id="l2Badge">L2</span>
+      <span class="txt">
+        <span class="name">Ligue 2 · 2026/27</span>
+        <span class="sub">Mercato complet des 18 clubs — arrivées, départs, effectifs & compos</span>
+      </span>
+      <span class="go">Ouvrir →</span>
+    </a>
+  </section>
+
+  <section class="cat">
+    <div class="cat-h"><span class="t">Grands clubs européens</span><span class="d">effectif & compo uniquement</span></div>
+    <div class="clubs-grid" id="clubsGrid"></div>
+  </section>
+</main>
+
+<footer>
+  Récap visuel — <b>350</b>. Effectifs indicatifs, mis à jour automatiquement.
+  <div style="margin-top:8px">Dernière actualisation : <b style="color:var(--in)">__UPDATED__</b></div>
+</footer>
+
+<script>
+const CLUBS=/*__CLUBS__*/[];
+const LOGO_CODES=/*__LOGOCODES__*/[];
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function crest(c){
+  const has=LOGO_CODES.indexOf(c.code)>=0;
+  const style=has?'':`background:${c.bg};color:${c.fg}`;
+  return `<span class="crest${has?' has-logo l-'+c.code:''}" style="${style}">${esc(c.code)}</span>`;
+}
+if(LOGO_CODES.indexOf('L1')>=0){
+  const b=document.getElementById('l1Badge');
+  b.classList.add('has-logo','l-L1');
+  b.textContent='';
+}
+if(LOGO_CODES.indexOf('L2')>=0){
+  const b=document.getElementById('l2Badge');
+  b.classList.add('has-logo','l-L2');
+  b.textContent='';
+}
+document.getElementById('clubsGrid').innerHTML=CLUBS.map(c=>
+  `<a class="club-card" href="equipe-europe.html?c=${esc(c.code)}">
+     ${crest(c)}
+     <span class="cname">${esc(c.name)}</span>
+     <span class="cleague">${esc(c.league)}</span>
+   </a>`).join('');
+</script>
+</body>
+</html>
