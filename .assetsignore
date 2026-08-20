@@ -1,5 +1,6 @@
 scripts/
-data/
+data/*
+!data/players.json
 .github/
 *.bat
 *.vbs
