@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-20T09:00:52",
- "sig": "b9283b74ce696510688a03870cdedbb5",
+ "updated": "2026-08-20T21:00:58",
+ "sig": "a4dfc6f1ec255567ac3e75f9dd7584d3",
  "squads": {
   "FCB": [
    {
@@ -18,18 +18,6 @@
      "min": 4042
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "20/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Áron Yaakobishvili",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 20,
-    "val": 3.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "20/08/2026"
    },
@@ -190,6 +178,24 @@
      "g": 0,
      "a": 0,
      "min": 0
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "20/08/2026"
+   },
+   {
+    "n": "2",
+    "p": "João Cancelo",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 32,
+    "val": 8.0,
+    "stats": {
+     "m": 23,
+     "s": 17,
+     "g": 2,
+     "a": 4,
+     "min": 1432
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -1552,7 +1558,7 @@
     "valSince": "20/08/2026"
    },
    {
-    "n": "97",
+    "n": "59",
     "p": "Josh Wilson-Esbrand",
     "pos": "ArG",
     "grp": "DEF",
@@ -5232,7 +5238,7 @@
     "valSince": "20/08/2026"
    },
    {
-    "n": "16",
+    "n": "",
     "p": "João Palhinha",
     "pos": "MDC",
     "grp": "MID",
@@ -5800,6 +5806,18 @@
      "min": 2347
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "20/08/2026"
+   },
+   {
+    "n": "44",
+    "p": "Enzo dos Santos",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 17,
+    "val": 0.25,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "20/08/2026"
    },
@@ -6600,7 +6618,7 @@
     "valSince": "20/08/2026"
    },
    {
-    "n": "",
+    "n": "99",
     "p": "Djed Spence",
     "pos": "ArD",
     "grp": "DEF",
