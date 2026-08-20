@@ -79,9 +79,9 @@ body::before{
 .qbtn:disabled{opacity:.4;cursor:default;}
 
 /* ---------------- bench ---------------- */
-.bench{margin-top:32px;position:relative;}
-.bench-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;}
-.bench-hint{font-family:var(--body);font-weight:600;font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;}
+.share-row{display:block;width:100%;margin-top:14px;text-align:center;padding:12px 13px;}
+.bench{margin-top:18px;position:relative;}
+.bench-top{display:flex;align-items:baseline;justify-content:flex-end;gap:12px;margin-bottom:10px;}
 .bench-count{font-family:var(--body);font-size:11px;color:var(--muted);white-space:nowrap;}
 .bench-slots{min-height:78px;display:flex;flex-wrap:wrap;gap:12px;padding:18px;background:var(--panel);
   border:1px solid var(--line);border-radius:18px;}
@@ -228,15 +228,15 @@ body::before{
       <a href="predis-indiv.html" class="tab">Predis Indiv</a>
     </div>
     <div class="quick-actions">
-      <button class="qbtn primary" id="btn-share">Partager</button>
       <button class="qbtn" id="btn-random"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="8" cy="16" r="1.2" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1.2" fill="currentColor" stroke="none"/></svg>Hasard</button>
       <button class="qbtn" id="btn-reset">Reset</button>
     </div>
   </div>
 
+  <button class="qbtn primary share-row" id="btn-share">Partager</button>
+
   <div class="bench">
     <div class="bench-top">
-      <div class="bench-hint" id="bench-hint">Le banc</div>
       <div class="bench-count" id="pool-count">0 / 18 placés</div>
     </div>
     <div class="bench-slots" id="pool"></div>
