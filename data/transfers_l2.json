@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-20T00:31:05",
- "sig": "f9de50097b884335df0cfbde02d68f89",
+ "updated": "2026-08-20T21:31:07",
+ "sig": "a0fd28db4866604154aa5072f3c4b45a",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -33,6 +33,7 @@
   "FCN|out|Mathieu Acapandié|Hajduk Split": "2026-08-18",
   "FCN|out|Uros Radakovic|Buriram Utd.": "2026-08-18",
   "FCN|out|Youssef El Arabi|Marko": "2026-08-18",
+  "FCN|out|Ali Youssif|Al-Ittihad": "2026-08-20",
   "FCN|out|Jean-Kévin Duverne|Omonia Nicosie": "2026-08-18",
   "FCN|out|Deiver Machado|Sans club": "2026-08-18",
   "FCN|out|Patrik Carlgren|Sans club": "2026-08-18",
@@ -137,12 +138,12 @@
   "PAU|in|Luan Gadegbeku|Saint-Étienne": "2026-08-18",
   "PAU|in|Axel Dodote|Saint-Étienne": "2026-08-18",
   "PAU|in|Axel Bamba|Sans club": "2026-08-18",
+  "PAU|out|Joseph Kalulu|Angers SCO": "2026-08-19",
   "PAU|out|Rayan Touzghar|Standard Liège": "2026-08-18",
   "PAU|out|Neil Glossoa|Slavia Prague": "2026-08-18",
   "PAU|out|Jean Ruiz|FC Metz": "2026-08-18",
   "PAU|out|Julien Anziani|Manisa FK": "2026-08-18",
   "PAU|out|Setigui Karamoko|Sepsi OSK": "2026-08-18",
-  "PAU|out|Joseph Kalulu|Angers SCO": "2026-08-19",
   "PAU|out|Daylam Meddah|Montpellier": "2026-08-18",
   "PAU|out|Noah Raveyre|Alverca": "2026-08-18",
   "PAU|out|Steeve Beusnard|Turan Tovuz": "2026-08-18",
@@ -599,6 +600,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Ali Youssif",
+     "age": 25,
+     "pos": "DC",
+     "club": "Al-Ittihad",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-20"
     },
     {
      "p": "Jean-Kévin Duverne",
@@ -1607,6 +1617,15 @@
    ],
    "dep": [
     {
+     "p": "Joseph Kalulu",
+     "age": 21,
+     "pos": "ArG",
+     "club": "Angers SCO",
+     "type": "paid",
+     "val": 2.0,
+     "fs": "2026-08-19"
+    },
+    {
      "p": "Rayan Touzghar",
      "age": 22,
      "pos": "MC",
@@ -1650,15 +1669,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Joseph Kalulu",
-     "age": 21,
-     "pos": "ArG",
-     "club": "Angers SCO",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-19"
     },
     {
      "p": "Daylam Meddah",
@@ -3452,14 +3462,6 @@
     "val": 25.0
    },
    {
-    "n": "2",
-    "p": "Ali Youssif",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 25,
-    "val": 2.5
-   },
-   {
     "n": "4",
     "p": "Saïdou Sow",
     "pos": "DC",
@@ -4192,6 +4194,14 @@
     "grp": "MID",
     "age": 22,
     "val": 1.2
+   },
+   {
+    "n": "26",
+    "p": "Yvan Djemba Mbappé",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 21,
+    "val": 0.0
    },
    {
     "n": "44",
