@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-21T18:01:01",
- "sig": "f59738153231486c06d278e9585d2aeb",
+ "updated": "2026-08-21T21:01:08",
+ "sig": "d9d8eca433ae154566ef9baa1cd81009",
  "squads": {
   "FCB": [
    {
@@ -1968,6 +1968,18 @@
     "valSince": "21/08/2026"
    },
    {
+    "n": "15",
+    "p": "Ezri Konsa",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 28,
+    "val": 45.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "21/08/2026"
+   },
+   {
     "n": "3",
     "p": "Cristhian Mosquera",
     "pos": "DC",
@@ -2672,24 +2684,6 @@
      "g": 5,
      "a": 7,
      "min": 3885
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "21/08/2026"
-   },
-   {
-    "n": "17",
-    "p": "Curtis Jones",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 25,
-    "val": 35.0,
-    "stats": {
-     "m": 49,
-     "s": 28,
-     "g": 3,
-     "a": 3,
-     "min": 2850
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -6662,6 +6656,18 @@
      "min": 2549
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "21/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Curtis Jones",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 25,
+    "val": 35.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "21/08/2026"
    },
