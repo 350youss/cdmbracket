@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-21T16:38:06",
- "sig": "a4e7addae32c1e616e14226bd703a04f",
+ "updated": "2026-08-21T18:01:01",
+ "sig": "f59738153231486c06d278e9585d2aeb",
  "squads": {
   "FCB": [
    {
@@ -262,24 +262,6 @@
      "g": 0,
      "a": 1,
      "min": 1397
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "21/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Tommy Marqués",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 19,
-    "val": 3.0,
-    "stats": {
-     "m": 2,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 9
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -4600,24 +4582,6 @@
      "g": 0,
      "a": 0,
      "min": 1170
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "21/08/2026"
-   },
-   {
-    "n": "4",
-    "p": "Ezri Konsa",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 28,
-    "val": 45.0,
-    "stats": {
-     "m": 48,
-     "s": 46,
-     "g": 2,
-     "a": 1,
-     "min": 4170
     },
     "statsClub": "",
     "valDelta": 0.0,
