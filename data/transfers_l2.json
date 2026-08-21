@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-21T16:38:18",
- "sig": "918fbc511e7a400813b271a8de07384a",
+ "updated": "2026-08-21T21:32:44",
+ "sig": "738b9f1c891a6921a1af18fc3c2ae00e",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -24,6 +24,7 @@
   "FCN|in|Mathieu Cafaro|Paris FC": "2026-08-18",
   "FCN|in|Wilitty Younoussa|Rodez AF": "2026-08-18",
   "FCN|in|Maxime Dupé|OGC Nice": "2026-08-18",
+  "FCN|in|Antoine Joujou|Parma": "2026-08-21",
   "FCN|in|Saïdou Sow|R. Strasbourg": "2026-08-18",
   "FCN|out|Matthis Abline|Monaco": "2026-08-18",
   "FCN|out|Alban Lafont|Amed SK": "2026-08-18",
@@ -519,6 +520,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Antoine Joujou",
+     "age": 23,
+     "pos": "AiG",
+     "club": "Parma",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-21"
     },
     {
      "p": "Saïdou Sow",
@@ -3624,6 +3634,14 @@
     "grp": "ATT",
     "age": 19,
     "val": 7.0
+   },
+   {
+    "n": "7",
+    "p": "Antoine Joujou",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 23,
+    "val": 2.0
    },
    {
     "n": "90",
