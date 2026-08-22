@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-22T15:00:56",
- "sig": "5f5ee57e403bc8b39aa93cbea05676e2",
+ "updated": "2026-08-22T18:00:57",
+ "sig": "06382984511c79aefe212facae49baea",
  "squads": {
   "FCB": [
    {
@@ -406,7 +406,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "25",
+    "n": "17",
     "p": "Anthony Gordon",
     "pos": "AiG",
     "grp": "ATT",
@@ -3040,24 +3040,6 @@
      "g": 0,
      "a": 0,
      "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "22/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Benoît Badiashile",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 25,
-    "val": 15.0,
-    "stats": {
-     "m": 16,
-     "s": 12,
-     "g": 0,
-     "a": 0,
-     "min": 1071
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -7438,6 +7420,18 @@
     "valSince": "22/08/2026"
    },
    {
+    "n": "",
+    "p": "Benoît Badiashile",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 25,
+    "val": 15.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "22/08/2026"
+   },
+   {
     "n": "16",
     "p": "Rafa Marín",
     "pos": "DC",
@@ -7468,7 +7462,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "5",
+    "n": "35",
     "p": "Luca Marianucci",
     "pos": "DC",
     "grp": "DEF",
