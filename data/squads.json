@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-22T12:00:54",
- "sig": "98bba6b6ff79e1d57a966db50f1de888",
+ "updated": "2026-08-22T15:00:56",
+ "sig": "5f5ee57e403bc8b39aa93cbea05676e2",
  "squads": {
   "FCB": [
    {
@@ -250,7 +250,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "17",
+    "n": "",
     "p": "Marc Casadó",
     "pos": "MDC",
     "grp": "MID",
@@ -478,7 +478,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "19",
+    "n": "",
     "p": "Roony Bardghji",
     "pos": "AiD",
     "grp": "ATT",
@@ -492,6 +492,18 @@
      "min": 872
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "22/08/2026"
+   },
+   {
+    "n": "29",
+    "p": "Hamza Abdelkarim",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 18,
+    "val": 1.5,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "22/08/2026"
    }
@@ -968,7 +980,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "3",
+    "n": "21",
     "p": "Cristian Romero",
     "pos": "DC",
     "grp": "DEF",
@@ -3894,7 +3906,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "14",
+    "n": "9",
     "p": "Marcus Rashford",
     "pos": "AiG",
     "grp": "ATT",
@@ -3960,7 +3972,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "46",
+    "n": "31",
     "p": "Shea Lacey",
     "pos": "AiD",
     "grp": "ATT",
@@ -4244,22 +4256,10 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "16",
-    "p": "Sandro Tonali",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 26,
-    "val": 80.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "22/08/2026"
-   },
-   {
     "n": "14",
     "p": "Archie Gray",
-    "pos": "MDC",
-    "grp": "MID",
+    "pos": "ArD",
+    "grp": "DEF",
     "age": 20,
     "val": 35.0,
     "stats": {
@@ -4270,6 +4270,18 @@
      "min": 2262
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "22/08/2026"
+   },
+   {
+    "n": "16",
+    "p": "Sandro Tonali",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 26,
+    "val": 80.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "22/08/2026"
    },
