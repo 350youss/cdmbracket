@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-22T15:31:05",
- "sig": "bdca4885d06303d1c1aa99fc1f725269",
+ "updated": "2026-08-23T00:31:06",
+ "sig": "376c0fe06f650c1f7d71c850d7ca525a",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -20,11 +20,11 @@
   "ASSE|out|Jebryl Sahraoui|Aubagne Air Bel": "2026-08-18",
   "ASSE|out|Axel Dodote|Pau FC": "2026-08-18",
   "FCN|in|Killian Corredor|Darmstadt 98": "2026-08-18",
+  "FCN|in|Antoine Joujou|Parma": "2026-08-21",
   "FCN|in|Lucas Perrin|Sporting Gijón": "2026-08-18",
   "FCN|in|Mathieu Cafaro|Paris FC": "2026-08-18",
   "FCN|in|Wilitty Younoussa|Rodez AF": "2026-08-18",
   "FCN|in|Maxime Dupé|OGC Nice": "2026-08-18",
-  "FCN|in|Antoine Joujou|Parma": "2026-08-21",
   "FCN|in|Saïdou Sow|R. Strasbourg": "2026-08-18",
   "FCN|out|Matthis Abline|Monaco": "2026-08-18",
   "FCN|out|Alban Lafont|Amed SK": "2026-08-18",
@@ -487,6 +487,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Antoine Joujou",
+     "age": 23,
+     "pos": "AiG",
+     "club": "Parma",
+     "type": "paid",
+     "val": 1.0,
+     "fs": "2026-08-21"
+    },
+    {
      "p": "Lucas Perrin",
      "age": 27,
      "pos": "DC",
@@ -521,15 +530,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Antoine Joujou",
-     "age": 23,
-     "pos": "AiG",
-     "club": "Parma",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-21"
     },
     {
      "p": "Saïdou Sow",
@@ -4498,7 +4498,7 @@
     "p": "Maïdine Douane",
     "pos": "AiG",
     "grp": "ATT",
-    "age": 23,
+    "age": 24,
     "val": 0.5
    },
    {
@@ -4778,7 +4778,7 @@
     "val": 0.4
    },
    {
-    "n": "21",
+    "n": "17",
     "p": "Dylan Vangi",
     "pos": "DC",
     "grp": "DEF",
@@ -4890,7 +4890,7 @@
     "val": 2.0
    },
    {
-    "n": "9",
+    "n": "7",
     "p": "Kenny Nagera",
     "pos": "AC",
     "grp": "ATT",
