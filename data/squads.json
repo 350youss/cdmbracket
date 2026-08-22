@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-22T18:00:57",
- "sig": "06382984511c79aefe212facae49baea",
+ "updated": "2026-08-22T21:00:53",
+ "sig": "70ea5314e53430f853ba73d3308ee928",
  "squads": {
   "FCB": [
    {
@@ -7420,7 +7420,7 @@
     "valSince": "22/08/2026"
    },
    {
-    "n": "",
+    "n": "5",
     "p": "Benoît Badiashile",
     "pos": "DC",
     "grp": "DEF",
