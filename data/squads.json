@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-23T00:02:55",
- "sig": "4b4285672acc49c6b5b7b754a34372b8",
+ "updated": "2026-08-23T12:03:16",
+ "sig": "a5f2fdb37e7dd851ee8859648df7c97e",
  "squads": {
   "FCB": [
    {
@@ -166,7 +166,7 @@
     "valSince": "23/08/2026"
    },
    {
-    "n": "",
+    "n": "12",
     "p": "Héctor Fort",
     "pos": "ArD",
     "grp": "DEF",
