@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-23T00:31:06",
- "sig": "376c0fe06f650c1f7d71c850d7ca525a",
+ "updated": "2026-08-23T06:31:05",
+ "sig": "3329a2fbda2a9e8cbbab9cd82187d31a",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -101,10 +101,10 @@
   "CF63|out|Habib Keïta|Kocaelispor": "2026-08-18",
   "CF63|out|Abdoul Kader Bamba|FC Granada": "2026-08-18",
   "CF63|out|Famara Diédhiou|Al-Orobah": "2026-08-21",
+  "CF63|out|Amine Saïd|GFA Rumilly Val": "2026-08-23",
   "CF63|out|Maximiliano Caufriez|Sans club": "2026-08-18",
   "CF63|out|Henri Saivet|Sans club": "2026-08-18",
   "CF63|out|Johan Gastien|Fin de carrière": "2026-08-18",
-  "CF63|out|Amine Saïd|Sans club": "2026-08-18",
   "RED|in|Elyaz Zidane|Betis Deportivo": "2026-08-18",
   "RED|in|Leonardo Buta|Udinese": "2026-08-19",
   "RED|out|Rayane Doucouré|Aubagne Air Bel": "2026-08-18",
@@ -1258,6 +1258,15 @@
      "fs": "2026-08-21"
     },
     {
+     "p": "Amine Saïd",
+     "age": 23,
+     "pos": "AC",
+     "club": "GFA Rumilly Val",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-23"
+    },
+    {
      "p": "Maximiliano Caufriez",
      "age": 29,
      "pos": "DC",
@@ -1280,15 +1289,6 @@
      "age": 38,
      "pos": "MDC",
      "club": "Fin de carrière",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Amine Saïd",
-     "age": 23,
-     "pos": "AC",
-     "club": "Sans club",
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
