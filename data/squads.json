@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-23T12:03:16",
- "sig": "a5f2fdb37e7dd851ee8859648df7c97e",
+ "updated": "2026-08-23T15:00:56",
+ "sig": "e6db2fc0ca19d87963d3c7046db74c53",
  "squads": {
   "FCB": [
    {
@@ -4708,7 +4708,7 @@
     "valSince": "23/08/2026"
    },
    {
-    "n": "",
+    "n": "29",
     "p": "Aaron Wan-Bissaka",
     "pos": "ArD",
     "grp": "DEF",
