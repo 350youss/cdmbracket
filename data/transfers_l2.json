@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-23T06:31:05",
- "sig": "3329a2fbda2a9e8cbbab9cd82187d31a",
+ "updated": "2026-08-23T12:31:14",
+ "sig": "7d4ec81caee04ac79c8520131ceb0742",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -173,9 +173,9 @@
   "USLD|out|Eddy Sylvestre|FCV Farul": "2026-08-18",
   "USLD|out|Marcos Lavín|Académico Viseu": "2026-08-18",
   "USLD|out|Vincent Sasso|Le Havre AC": "2026-08-18",
+  "USLD|out|Iñigo Eguaras|Salamanca CF": "2026-08-23",
   "USLD|out|Zaid Seha|Aubagne Air Bel": "2026-08-19",
   "USLD|out|Felipe Abner|Sans club": "2026-08-18",
-  "USLD|out|Iñigo Eguaras|Sans club": "2026-08-18",
   "USLD|out|Malick Diop|Sans club": "2026-08-18",
   "GF38|in|Jean-Guy Akpa Akpro|Pro Vercelli": "2026-08-18",
   "GF38|in|Yohann Magnin|CSKA 1948": "2026-08-18",
@@ -1946,6 +1946,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Iñigo Eguaras",
+     "age": 34,
+     "pos": "MDC",
+     "club": "Salamanca CF",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-23"
+    },
+    {
      "p": "Zaid Seha",
      "age": 19,
      "pos": "AiD",
@@ -1958,15 +1967,6 @@
      "p": "Felipe Abner",
      "age": 30,
      "pos": "ArG",
-     "club": "Sans club",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Iñigo Eguaras",
-     "age": 34,
-     "pos": "MDC",
      "club": "Sans club",
      "type": "none",
      "val": 0.0,
@@ -4988,6 +4988,14 @@
     "val": 0.0
    },
    {
+    "n": "38",
+    "p": "Lucas Rakotozafy",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.0
+   },
+   {
     "n": "",
     "p": "Akim Abdallah",
     "pos": "ArG",
@@ -5698,7 +5706,7 @@
     "val": 1.8
    },
    {
-    "n": "24",
+    "n": "30",
     "p": "Gautier Ott",
     "pos": "AiG",
     "grp": "ATT",
