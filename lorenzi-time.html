@@ -21,7 +21,7 @@
   --shadow:0 20px 50px -20px rgba(0,0,0,.55);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);overflow-x:hidden;}
 html,body{min-height:100vh;}
 body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
@@ -51,10 +51,10 @@ body::after{
 .eyebrow{font-family:var(--mono);font-size:11.5px;color:var(--gold);letter-spacing:.09em;text-transform:uppercase;
   display:flex;align-items:center;gap:8px;margin-bottom:14px;}
 .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(209,169,78,.18);}
-.hero h1{font-family:var(--title);font-weight:700;font-size:clamp(38px,6.4vw,66px);line-height:1;
-  letter-spacing:-.015em;color:#fff;}
+.hero h1{font-family:var(--title);font-weight:700;font-size:clamp(52px,11vw,120px);line-height:.9;
+  letter-spacing:-.025em;color:#fff;}
 .hero h1 span{color:var(--gold);}
-.hero .sub{margin-top:16px;color:var(--sub);font-size:15.5px;max-width:540px;line-height:1.6;}
+.hero .sub{margin-top:18px;color:var(--sub);font-size:16.5px;max-width:540px;line-height:1.6;}
 
 /* ---- countdown ---- */
 .countdown{margin-top:44px;position:relative;z-index:1;}
@@ -63,11 +63,15 @@ body::after{
 .cd-box{background:var(--s1);border:1px solid var(--line);border-radius:18px;padding:24px 8px;text-align:center;
   transition:border-color .3s var(--ease);}
 .cd-box:hover{border-color:var(--line-soft);}
-.cd-box .n{font-family:var(--mono);font-weight:700;font-size:clamp(30px,5.6vw,48px);color:#fff;
+.cd-box .n{font-family:var(--mono);font-weight:700;font-size:clamp(38px,8vw,66px);color:var(--gold);
   font-variant-numeric:tabular-nums;letter-spacing:-.01em;line-height:1;}
 .cd-box .l{margin-top:8px;font-family:var(--mono);font-size:10.5px;color:var(--sub);text-transform:uppercase;letter-spacing:.08em;}
 .cd-meta{margin-top:18px;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);}
 .cd-meta b{color:var(--txt);font-weight:600;}
+.punchline{margin-top:16px;font-family:var(--title);font-weight:700;font-size:clamp(19px,2.6vw,25px);
+  color:#fff;letter-spacing:-.01em;line-height:1.25;}
+.sidestat{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.01em;}
+.sidestat span{color:var(--sub);font-weight:600;}
 .cd-dot{width:7px;height:7px;border-radius:50%;background:var(--in);flex-shrink:0;
   box-shadow:0 0 0 4px rgba(51,192,122,.18);animation:pulse 1.8s ease-in-out infinite;}
 @keyframes pulse{50%{opacity:.4;}}
@@ -153,6 +157,8 @@ body::after{
       <div class="cd-box"><div class="n" id="cd-s">--</div><div class="l">Secondes</div></div>
     </div>
     <div class="cd-meta"><span class="cd-dot"></span><span id="cd-meta-text">Fin du mercato&nbsp;: <b>1er septembre 2026, 20h</b></span></div>
+    <p class="punchline">C&rsquo;est son moment &agrave; lui de cuisiner.</p>
+    <p class="sidestat">En parall&egrave;le&nbsp;: <span id="stat-cig">--</span> cigarettes grill&eacute;es &middot; <span id="stat-call">--</span> appels pass&eacute;s</p>
   </div>
 
   <div class="section reveal">
@@ -198,7 +204,15 @@ var DEADLINE = new Date('2026-09-01T18:00:00Z'); // 1er septembre 2026, 20h heur
 
 function pad(n){ return String(n).padStart(2, '0'); }
 
+var PAGE_LOAD = Date.now();
+function tickStats(){
+  var elapsedSec = (Date.now() - PAGE_LOAD) / 1000;
+  document.getElementById('stat-cig').textContent = 47 + Math.floor(elapsedSec / 40);
+  document.getElementById('stat-call').textContent = 132 + Math.floor(elapsedSec / 15);
+}
+
 function tickCountdown(){
+  tickStats();
   var diff = DEADLINE - new Date();
   var box = document.getElementById('countdown');
   if (diff <= 0){
