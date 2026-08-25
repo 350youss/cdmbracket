@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-25T18:01:01",
- "sig": "6bf817764c7444626901115dea2e2f97",
+ "updated": "2026-08-25T21:01:10",
+ "sig": "6f39c0757e7f57d87a02ace99e044c8e",
  "squads": {
   "FCB": [
    {
@@ -3720,7 +3720,7 @@
     "valSince": "25/08/2026"
    },
    {
-    "n": "",
+    "n": "20",
     "p": "Carlos Baleba",
     "pos": "MDC",
     "grp": "MID",
@@ -5932,6 +5932,18 @@
     "valSince": "25/08/2026"
    },
    {
+    "n": "",
+    "p": "Kamil Grabara",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 27,
+    "val": 12.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "25/08/2026"
+   },
+   {
     "n": "1",
     "p": "Mattia Perin",
     "pos": "GdB",
@@ -7264,24 +7276,6 @@
     "val": 50.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "25/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Christopher Nkunku",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 28,
-    "val": 25.0,
-    "stats": {
-     "m": 35,
-     "s": 17,
-     "g": 8,
-     "a": 3,
-     "min": 1528
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "25/08/2026"
    },
