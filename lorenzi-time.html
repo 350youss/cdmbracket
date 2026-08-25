@@ -135,8 +135,14 @@ body::after{
 /* ---- reveal au scroll ---- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
 .reveal.in{opacity:1;transform:translateY(0);}
+.reveal.pop{transform:scale(.78) rotate(-7deg) translateY(24px);
+  transition:opacity 1s cubic-bezier(.34,1.56,.64,1),transform 1s cubic-bezier(.34,1.56,.64,1);}
+.reveal.pop.in{transform:scale(1) rotate(0deg) translateY(0);}
+.reveal.pop.in img{animation:portrait-float 5s ease-in-out 1s infinite;}
+@keyframes portrait-float{50%{transform:translateY(-10px);}}
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none;}
+  .reveal.pop.in img{animation:none;}
   html{scroll-behavior:auto;}
   .bleed-bar{animation:none;}
   .cd-dot{animation:none;}
@@ -179,8 +185,8 @@ body::after{
     <p class="punchline2">Il nous pr&eacute;parera pas de nourriture asiatique je pense.</p>
   </div>
 
-  <div class="portrait reveal">
-    <img src="images/lorenzi.png" alt="Lorenzi" loading="lazy">
+  <div class="portrait pop reveal">
+    <img src="images/lorenzi.png" alt="Lorenzi" width="1047" height="1024">
   </div>
 
   <div class="countdown reveal" id="countdown">
