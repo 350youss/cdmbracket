@@ -145,7 +145,7 @@ body::after{
   transition:opacity 1s cubic-bezier(.34,1.56,.64,1),transform 1s cubic-bezier(.34,1.56,.64,1);}
 .reveal.pop.in{transform:scale(1) rotate(0deg) translateY(0);}
 .reveal.pop.in img{animation:portrait-float 5s ease-in-out 1s infinite;}
-@keyframes portrait-float{50%{transform:translateY(-10px);}}
+@keyframes portrait-float{0%,100%{transform:translateY(6%);}50%{transform:translateY(9%);}}
 @media (prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none;}
   .reveal.pop.in img{animation:none;}
