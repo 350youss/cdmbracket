@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-25T15:02:16",
- "sig": "8ba70b26ce1aea3ce746cf96ba5f7c7e",
+ "updated": "2026-08-25T18:01:01",
+ "sig": "6bf817764c7444626901115dea2e2f97",
  "squads": {
   "FCB": [
    {
@@ -2612,24 +2612,6 @@
     "valSince": "25/08/2026"
    },
    {
-    "n": "47",
-    "p": "Calvin Ramsay",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 23,
-    "val": 1.5,
-    "stats": {
-     "m": 2,
-     "s": 1,
-     "g": 0,
-     "a": 0,
-     "min": 91
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "25/08/2026"
-   },
-   {
     "n": "38",
     "p": "Ryan Gravenberch",
     "pos": "MDC",
@@ -3734,6 +3716,18 @@
      "min": 984
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "25/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Carlos Baleba",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 22,
+    "val": 55.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "25/08/2026"
    },
