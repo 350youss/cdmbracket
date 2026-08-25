@@ -1,6 +1,7 @@
 scripts/
 data/*
 !data/players.json
+!data/rumeurs.json
 .github/
 *.bat
 *.vbs

@@ -55,6 +55,16 @@ body::after{
   letter-spacing:-.025em;color:#fff;}
 .hero h1 span{color:var(--gold);}
 .hero .punchline{margin:18px auto 0;max-width:540px;}
+.punchline2{margin-top:8px;font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);line-height:1.5;}
+.hero .punchline2{margin-left:auto;margin-right:auto;max-width:480px;}
+
+/* ---- portrait ---- */
+.portrait{position:relative;display:flex;justify-content:center;margin-top:12px;}
+.portrait::before{content:'';position:absolute;top:6%;left:50%;transform:translateX(-50%);width:440px;height:440px;
+  max-width:80vw;background:radial-gradient(ellipse at center,rgba(209,169,78,.24),transparent 70%);
+  pointer-events:none;z-index:0;}
+.portrait img{position:relative;z-index:1;width:44%;max-width:340px;min-width:180px;height:auto;display:block;
+  filter:drop-shadow(0 24px 46px rgba(0,0,0,.55));}
 
 /* ---- countdown ---- */
 .countdown{margin-top:44px;position:relative;z-index:1;}
@@ -89,6 +99,10 @@ body::after{
 .ticker-content{display:inline-flex;align-items:center;white-space:nowrap;font-family:var(--mono);font-size:12px;
   color:var(--sub);padding:13px 0;}
 .ticker-content b{color:#fff;font-weight:600;}
+.ticker-content a{color:inherit;text-decoration:none;transition:color .2s;}
+.ticker-content a:hover b{color:var(--gold);}
+.ticker-content .titem{margin-right:26px;}
+.ticker-content .tsrc{color:var(--muted);font-size:10.5px;margin-left:6px;}
 @keyframes ticker-scroll{to{transform:translateX(-50%);}}
 @media (prefers-reduced-motion:reduce){.ticker-move{animation:none;}}
 
@@ -161,7 +175,12 @@ body::after{
   <div class="hero reveal">
     <div class="eyebrow">OM &middot; Mercato 2026/27</div>
     <h1>Lorenzi <span>Time</span></h1>
-    <p class="punchline">C&rsquo;est son moment &agrave; lui de cuisiner.</p>
+    <p class="punchline">C&rsquo;est son moment, &agrave; lui de cuisiner.</p>
+    <p class="punchline2">Il nous pr&eacute;parera pas de nourriture asiatique je pense.</p>
+  </div>
+
+  <div class="portrait reveal">
+    <img src="images/lorenzi.png" alt="Lorenzi" loading="lazy">
   </div>
 
   <div class="countdown reveal" id="countdown">
@@ -172,15 +191,15 @@ body::after{
       <div class="cd-box"><div class="n" id="cd-s">--</div><div class="l">Secondes</div></div>
     </div>
     <div class="cd-meta"><span class="cd-dot"></span><span id="cd-meta-text">Fin du mercato&nbsp;: <b>1er septembre 2026, 20h</b></span></div>
-    <p class="sidestat">En parall&egrave;le&nbsp;: <span id="stat-cig">--</span> cigarettes grill&eacute;es &middot; <span id="stat-call">--</span> appels pass&eacute;s &middot; <span id="stat-nixa">--</span> appels pass&eacute;s &agrave; Martin Nixa-MER (n&deg;106)</p>
+    <p class="sidestat">En parall&egrave;le&nbsp;: <span id="stat-cig">--</span> cigarettes grill&eacute;es &middot; <span id="stat-call">--</span> appels pass&eacute;s &middot; <span id="stat-nixa">--</span> infos donn&eacute;es &agrave; Martin Nixa-MER (n&deg;106)</p>
   </div>
 
   <div class="ticker reveal">
     <span class="ticker-tag">Rumeurs</span>
     <div class="ticker-track">
       <div class="ticker-move" id="ticker-move">
-        <span class="ticker-content" id="ticker-content"><b>En attente des derni&egrave;res rumeurs</b>&nbsp;&middot;&nbsp;envoie-les moi pour les afficher ici&nbsp;&middot;&nbsp;</span>
-        <span class="ticker-content" aria-hidden="true"><b>En attente des derni&egrave;res rumeurs</b>&nbsp;&middot;&nbsp;envoie-les moi pour les afficher ici&nbsp;&middot;&nbsp;</span>
+        <span class="ticker-content" id="ticker-content">Chargement des rumeurs&hellip;</span>
+        <span class="ticker-content" id="ticker-content-dup" aria-hidden="true">Chargement des rumeurs&hellip;</span>
       </div>
     </div>
   </div>
@@ -261,6 +280,36 @@ function tickCountdown(){
 }
 tickCountdown();
 var timer = setInterval(tickCountdown, 1000);
+
+/* ---- bandeau de rumeurs (data/rumeurs.json, agrégé par scripts/scrape_rumeurs.py) ---- */
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+  });
+}
+async function loadTicker(){
+  var el = document.getElementById('ticker-content');
+  var elDup = document.getElementById('ticker-content-dup');
+  try{
+    var res = await fetch('data/rumeurs.json', {cache:'no-store'});
+    var data = await res.json();
+    var items = (data.items || []).filter(function(it){ return it.title; });
+    if (!items.length){ throw new Error('empty'); }
+    var html = items.map(function(it){
+      var inner = '<b>' + escapeHtml(it.title) + '</b>' +
+        (it.source ? '<span class="tsrc">' + escapeHtml(it.source) + '</span>' : '');
+      return it.link
+        ? '<a class="titem" href="' + escapeHtml(it.link) + '" target="_blank" rel="noopener">' + inner + '</a>'
+        : '<span class="titem">' + inner + '</span>';
+    }).join('');
+    el.innerHTML = html;
+    elDup.innerHTML = html;
+  }catch(e){
+    el.textContent = 'Rumeurs indisponibles pour le moment.';
+    elDup.textContent = 'Rumeurs indisponibles pour le moment.';
+  }
+}
+loadTicker();
 
 (function(){
   var els = document.querySelectorAll('.reveal');

@@ -1,0 +1,37 @@
+name: Update OM rumeurs ticker
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'   # toutes les 15 minutes
+  workflow_dispatch: {}      # déclenchement manuel depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installe les dépendances
+        run: pip install requests
+
+      - name: Agrège les rumeurs OM (RSS)
+        run: python scripts/scrape_rumeurs.py
+
+      - name: Commit et push si les rumeurs ont changé
+        run: |
+          git config user.name "predi-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- data/rumeurs.json; then
+            echo "Aucun changement détecté."
+          else
+            git add data/rumeurs.json
+            git commit -m "MAJ rumeurs OM (auto)"
+            git push
+          fi
