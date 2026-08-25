@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-25T12:00:56",
- "sig": "299a2fc35d1a436f3691d4bd3f945319",
+ "updated": "2026-08-25T15:02:16",
+ "sig": "8ba70b26ce1aea3ce746cf96ba5f7c7e",
  "squads": {
   "FCB": [
    {
@@ -4406,7 +4406,7 @@
     "valSince": "25/08/2026"
    },
    {
-    "n": "",
+    "n": "17",
     "p": "Savinho",
     "pos": "AiG",
     "grp": "ATT",
@@ -5934,24 +5934,6 @@
     "val": 18.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "25/08/2026"
-   },
-   {
-    "n": "16",
-    "p": "Michele Di Gregorio",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 29,
-    "val": 10.0,
-    "stats": {
-     "m": 37,
-     "s": 36,
-     "g": 0,
-     "a": 0,
-     "min": 3285
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "25/08/2026"
    },
@@ -7488,18 +7470,6 @@
      "min": 118
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "25/08/2026"
-   },
-   {
-    "n": "28",
-    "p": "Nosa Edward Obaretin",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 23,
-    "val": 1.5,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "25/08/2026"
    },
