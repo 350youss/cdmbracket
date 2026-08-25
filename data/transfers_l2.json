@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-25T03:31:02",
- "sig": "4f3d31a384f37b3b081ca29e3113a3d4",
+ "updated": "2026-08-25T18:31:09",
+ "sig": "7826303c7d6d9bc77280180c9433b58c",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -10,6 +10,7 @@
   "ASSE|in|Mamour Ndiaye|Sarpsborg 08": "2026-08-18",
   "ASSE|in|Lucas Lavallée|LB Châteauroux": "2026-08-18",
   "ASSE|out|Beres Owusu|Grazer AK": "2026-08-18",
+  "ASSE|out|Ebenezer Annan|FC Rapid 1923": "2026-08-25",
   "ASSE|out|Dennis Appiah|SM Caen": "2026-08-18",
   "ASSE|out|Florian Tardieu|Montpellier": "2026-08-18",
   "ASSE|out|Enzo Mayilla|USL Dunkerque": "2026-08-18",
@@ -388,6 +389,15 @@
      "type": "paid",
      "val": 0.25,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Ebenezer Annan",
+     "age": 24,
+     "pos": "ArG",
+     "club": "FC Rapid 1923",
+     "type": "loan",
+     "val": 0.15,
+     "fs": "2026-08-25"
     },
     {
      "p": "Dennis Appiah",
@@ -3310,14 +3320,6 @@
     "val": 1.8
    },
    {
-    "n": "19",
-    "p": "Ebenezer Annan",
-    "pos": "ArG",
-    "grp": "DEF",
-    "age": 24,
-    "val": 1.8
-   },
-   {
     "n": "34",
     "p": "Lassana Traoré",
     "pos": "ArG",
@@ -3504,6 +3506,14 @@
     "val": 0.05
    },
    {
+    "n": "40",
+    "p": "Yanel Zézé",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 18,
+    "val": 0.0
+   },
+   {
     "n": "78",
     "p": "Tylel Tati",
     "pos": "DC",
@@ -3536,14 +3546,6 @@
     "val": 0.15
    },
    {
-    "n": "",
-    "p": "Louka Gautier",
-    "pos": "ArG",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.0
-   },
-   {
     "n": "98",
     "p": "Kelvin Amian",
     "pos": "ArD",
@@ -3573,7 +3575,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 22,
-    "val": 0.0
+    "val": 0.15
    },
    {
     "n": "8",
@@ -3600,7 +3602,7 @@
     "val": 1.2
    },
    {
-    "n": "",
+    "n": "14",
     "p": "Lamine Diack",
     "pos": "MDC",
     "grp": "MID",
@@ -3680,7 +3682,7 @@
     "val": 1.5
    },
    {
-    "n": "47",
+    "n": "",
     "p": "Moustapha Dabo",
     "pos": "AiD",
     "grp": "ATT",
@@ -3786,6 +3788,22 @@
     "val": 4.0
    },
    {
+    "n": "",
+    "p": "Maël Debondt",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.0
+   },
+   {
+    "n": "21",
+    "p": "Jean Mambuku",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 18,
+    "val": 0.8
+   },
+   {
     "n": "63",
     "p": "Armel Zohouri",
     "pos": "ArD",
@@ -3866,6 +3884,14 @@
     "val": 1.2
    },
    {
+    "n": "",
+    "p": "Lenny Sylla",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 19,
+    "val": 0.0
+   },
+   {
     "n": "17",
     "p": "Keito Nakamura",
     "pos": "AiG",
@@ -3882,20 +3908,12 @@
     "val": 2.5
    },
    {
-    "n": "73",
-    "p": "Ike Orazi",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 19,
-    "val": 0.05
-   },
-   {
     "n": "7",
     "p": "Tidiane Diarrassouba",
     "pos": "AiD",
     "grp": "ATT",
     "age": 17,
-    "val": 0.0
+    "val": 0.5
    },
    {
     "n": "",
@@ -3944,6 +3962,14 @@
     "grp": "ATT",
     "age": 26,
     "val": 0.65
+   },
+   {
+    "n": "48",
+    "p": "Arone Gadou",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 17,
+    "val": 0.3
    }
   ],
   "FCM": [
@@ -4299,7 +4325,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 20,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "7",
@@ -4363,7 +4389,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 20,
-    "val": 0.0
+    "val": 0.1
    }
   ],
   "CF63": [
@@ -4416,20 +4442,20 @@
     "val": 0.2
    },
    {
+    "n": "5",
+    "p": "Jean Grillot",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 0.2
+   },
+   {
     "n": "45",
     "p": "Matys Donavin",
     "pos": "DC",
     "grp": "DEF",
     "age": 19,
     "val": 0.03
-   },
-   {
-    "n": "5",
-    "p": "Jean Grillot",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.0
    },
    {
     "n": "6",
@@ -4552,20 +4578,20 @@
     "val": 0.25
    },
    {
-    "n": "29",
-    "p": "Arthur Saintorens",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 21,
-    "val": 0.0
-   },
-   {
     "n": "90",
     "p": "Christ Okou",
     "pos": "AC",
     "grp": "ATT",
     "age": 20,
-    "val": 0.0
+    "val": 0.15
+   },
+   {
+    "n": "29",
+    "p": "Arthur Saintorens",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 0.1
    }
   ],
   "RED": [
@@ -4679,7 +4705,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 21,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "93",
@@ -5006,20 +5032,20 @@
     "val": 0.35
    },
    {
+    "n": "4",
+    "p": "Axel Dodote",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.3
+   },
+   {
     "n": "22",
     "p": "Rony Mimb Baheng",
     "pos": "DC",
     "grp": "DEF",
     "age": 21,
     "val": 0.3
-   },
-   {
-    "n": "4",
-    "p": "Axel Dodote",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.0
    },
    {
     "n": "38",
@@ -5115,7 +5141,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 21,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "10",
@@ -5277,7 +5303,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 20,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "6",
@@ -5641,7 +5667,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 21,
-    "val": 0.0
+    "val": 0.2
    },
    {
     "n": "2",
@@ -5729,7 +5755,7 @@
     "pos": "MG",
     "grp": "MID",
     "age": 22,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "10",
@@ -5867,7 +5893,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 21,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "25",
@@ -6149,7 +6175,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 19,
-    "val": 0.0
+    "val": 0.3
    },
    {
     "n": "24",
@@ -6295,7 +6321,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 21,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "22",
@@ -6367,7 +6393,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 21,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "5",
@@ -6391,7 +6417,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 25,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "20",
@@ -6492,19 +6518,19 @@
     "val": 0.25
    },
    {
-    "n": "4",
-    "p": "Jonathan Kapenga",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 22,
-    "val": 0.0
-   },
-   {
     "n": "25",
     "p": "Antoine Kerriou",
     "pos": "DC",
     "grp": "DEF",
     "age": 23,
+    "val": 0.15
+   },
+   {
+    "n": "4",
+    "p": "Jonathan Kapenga",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 22,
     "val": 0.0
    },
    {
@@ -6516,20 +6542,20 @@
     "val": 0.6
    },
    {
+    "n": "26",
+    "p": "Oscar Lenne",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.1
+   },
+   {
     "n": "24",
     "p": "Louis Siliadin",
     "pos": "ArG",
     "grp": "DEF",
     "age": 24,
     "val": 0.07
-   },
-   {
-    "n": "26",
-    "p": "Oscar Lenne",
-    "pos": "ArG",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.0
    },
    {
     "n": "97",
@@ -6625,7 +6651,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 21,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "9",
