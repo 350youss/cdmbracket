@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-23T12:31:14",
- "sig": "7d4ec81caee04ac79c8520131ceb0742",
+ "updated": "2026-08-25T03:31:02",
+ "sig": "4f3d31a384f37b3b081ca29e3113a3d4",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -113,6 +113,7 @@
   "RED|out|Abdelsamad Hachem|RE Virton": "2026-08-18",
   "RED|out|Vincent Kany|Sans club": "2026-08-18",
   "RAF|in|Mathis Touho|FC Villefranche": "2026-08-18",
+  "RAF|in|Mohamed Sylla|Bourg-en-Bresse": "2026-08-25",
   "RAF|in|Steven Luyambula|US Orléans": "2026-08-18",
   "RAF|in|Damjan Pavlovic|Kauno Zalgiris": "2026-08-18",
   "RAF|in|Nachon Nsingi|La Louvière": "2026-08-18",
@@ -1384,6 +1385,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Mohamed Sylla",
+     "age": 22,
+     "pos": "DC",
+     "club": "Bourg-en-Bresse",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-25"
+    },
+    {
      "p": "Steven Luyambula",
      "age": 23,
      "pos": "ArD",
@@ -1948,7 +1958,7 @@
     {
      "p": "Iñigo Eguaras",
      "age": 34,
-     "pos": "MDC",
+     "pos": "MC",
      "club": "Salamanca CF",
      "type": "free",
      "val": 0.0,
@@ -4398,6 +4408,14 @@
     "val": 0.6
    },
    {
+    "n": "4",
+    "p": "Ethan Kena Kabeya",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 0.2
+   },
+   {
     "n": "45",
     "p": "Matys Donavin",
     "pos": "DC",
@@ -4520,8 +4538,8 @@
    {
     "n": "19",
     "p": "Mohamed-Amine Bouchenna",
-    "pos": "DA",
-    "grp": "MID",
+    "pos": "AiD",
+    "grp": "ATT",
     "age": 20,
     "val": 0.25
    },
@@ -4656,6 +4674,14 @@
     "val": 0.4
    },
    {
+    "n": "45",
+    "p": "Cheick Konaté",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 21,
+    "val": 0.0
+   },
+   {
     "n": "93",
     "p": "Ryad Hachem",
     "pos": "MC",
@@ -4776,6 +4802,14 @@
     "grp": "DEF",
     "age": 28,
     "val": 0.4
+   },
+   {
+    "n": "",
+    "p": "Mohamed Sylla",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 22,
+    "val": 0.2
    },
    {
     "n": "17",
@@ -5566,7 +5600,7 @@
     "p": "Noah Marec",
     "pos": "GdB",
     "grp": "GK",
-    "age": 21,
+    "age": 22,
     "val": 0.0
    },
    {
@@ -5638,7 +5672,7 @@
     "p": "Tom Ducrocq",
     "pos": "MDC",
     "grp": "MID",
-    "age": 26,
+    "age": 27,
     "val": 0.8
    },
    {
