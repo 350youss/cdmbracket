@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-25T18:31:09",
- "sig": "7826303c7d6d9bc77280180c9433b58c",
+ "updated": "2026-08-25T21:31:04",
+ "sig": "bc407c4d7099fca8b202f0ab6e16b7ce",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -91,6 +91,7 @@
   "MHSC|in|Nordan Mukiele|Stade Rennais": "2026-08-18",
   "MHSC|in|Daryll Benlahlou|Ol. Lyonnais": "2026-08-18",
   "MHSC|out|Modibo Sagnan|C. Rizespor": "2026-08-18",
+  "MHSC|out|Enzo Tchato|Frosinone": "2026-08-25",
   "MHSC|out|Téji Savanier|FC Metz": "2026-08-18",
   "MHSC|out|Alexandre Mendy|Al-Faisaly": "2026-08-18",
   "MHSC|out|Lucas Mincarelli|Estrela Amadora": "2026-08-18",
@@ -1158,6 +1159,15 @@
      "type": "paid",
      "val": 1.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Enzo Tchato",
+     "age": 23,
+     "pos": "ArD",
+     "club": "Frosinone",
+     "type": "paid",
+     "val": 0.8,
+     "fs": "2026-08-25"
     },
     {
      "p": "Téji Savanier",
@@ -3682,14 +3692,6 @@
     "val": 1.5
    },
    {
-    "n": "",
-    "p": "Moustapha Dabo",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 19,
-    "val": 0.3
-   },
-   {
     "n": "31",
     "p": "Mostafa Mohamed",
     "pos": "AC",
@@ -4246,14 +4248,6 @@
     "grp": "DEF",
     "age": 27,
     "val": 1.0
-   },
-   {
-    "n": "29",
-    "p": "Enzo Tchato",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 23,
-    "val": 2.5
    },
    {
     "n": "3",
