@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-26T15:02:47",
- "sig": "572014b2a702dbdbddc692e24a1e0862",
+ "updated": "2026-08-26T18:00:55",
+ "sig": "52a296f5a6067196a9046ac237298aff",
  "squads": {
   "FCB": [
    {
@@ -1082,6 +1082,18 @@
     "valSince": "26/08/2026"
    },
    {
+    "n": "27",
+    "p": "Jorge Domínguez",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 16,
+    "val": 8.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "26/08/2026"
+   },
+   {
     "n": "30",
     "p": "Dani Martinez",
     "pos": "DC",
@@ -1096,18 +1108,6 @@
      "min": 90
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "26/08/2026"
-   },
-   {
-    "n": "27",
-    "p": "Jorge Domínguez",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 16,
-    "val": 0.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "26/08/2026"
    },
