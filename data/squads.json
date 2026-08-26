@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-26T18:00:55",
- "sig": "52a296f5a6067196a9046ac237298aff",
+ "updated": "2026-08-26T21:00:58",
+ "sig": "ef4e8d83745f7e1a7285cf432fa742f0",
  "squads": {
   "FCB": [
    {
@@ -1636,24 +1636,6 @@
      "g": 0,
      "a": 0,
      "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "26/08/2026"
-   },
-   {
-    "n": "14",
-    "p": "Nico González",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 24,
-    "val": 40.0,
-    "stats": {
-     "m": 41,
-     "s": 28,
-     "g": 2,
-     "a": 0,
-     "min": 2582
     },
     "statsClub": "",
     "valDelta": 0.0,
