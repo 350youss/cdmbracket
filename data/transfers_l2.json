@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-25T21:31:04",
- "sig": "bc407c4d7099fca8b202f0ab6e16b7ce",
+ "updated": "2026-08-26T15:31:09",
+ "sig": "ecdbf62d92fd55e03e4899ecd7dbb024",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -126,6 +126,7 @@
   "RAF|out|Wilitty Younoussa|FC Nantes": "2026-08-18",
   "RAF|out|Mohamed Achi|Cherno More": "2026-08-18",
   "RAF|out|Morgan Corredor|Tarbes Pyrénées": "2026-08-18",
+  "RAF|out|Clément Jolibois|Kifisia": "2026-08-26",
   "PAU|in|Babacar Leye|FC Villefranche": "2026-08-18",
   "PAU|in|Jessy Benet|Grenoble": "2026-08-18",
   "PAU|in|Gaëtan Paquiez|Grenoble": "2026-08-18",
@@ -1504,6 +1505,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Clément Jolibois",
+     "age": 28,
+     "pos": "DC",
+     "club": "Kifisia",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-26"
     }
    ]
   },
@@ -4814,14 +4824,6 @@
     "grp": "DEF",
     "age": 25,
     "val": 0.8
-   },
-   {
-    "n": "5",
-    "p": "Clément Jolibois",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 28,
-    "val": 0.4
    },
    {
     "n": "",
