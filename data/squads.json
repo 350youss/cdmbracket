@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-26T12:00:59",
- "sig": "d69c62d8bb84b04bc59f263d7afb6c2a",
+ "updated": "2026-08-26T15:02:47",
+ "sig": "572014b2a702dbdbddc692e24a1e0862",
  "squads": {
   "FCB": [
    {
@@ -1672,6 +1672,18 @@
     "valSince": "26/08/2026"
    },
    {
+    "n": "32",
+    "p": "Ayyoub Bouaddi",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 18,
+    "val": 80.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "26/08/2026"
+   },
+   {
     "n": "8",
     "p": "Mateo Kovacic",
     "pos": "MC",
@@ -3004,24 +3016,6 @@
      "g": 2,
      "a": 0,
      "min": 1639
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "26/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Axel Disasi",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 28,
-    "val": 15.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -4894,6 +4888,24 @@
     "valSince": "26/08/2026"
    },
    {
+    "n": "49",
+    "p": "Bradley Burrowes",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 18,
+    "val": 2.0,
+    "stats": {
+     "m": 1,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 16
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "26/08/2026"
+   },
+   {
     "n": "11",
     "p": "Ollie Watkins",
     "pos": "AC",
@@ -5196,18 +5208,6 @@
     "valSince": "26/08/2026"
    },
    {
-    "n": "",
-    "p": "João Palhinha",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 31,
-    "val": 15.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "26/08/2026"
-   },
-   {
     "n": "47",
     "p": "David Santos Daiber",
     "pos": "MDC",
@@ -5238,24 +5238,6 @@
      "g": 3,
      "a": 3,
      "min": 1655
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "26/08/2026"
-   },
-   {
-    "n": "32",
-    "p": "Felipe Chávez",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 19,
-    "val": 4.0,
-    "stats": {
-     "m": 2,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 12
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -5920,7 +5902,7 @@
     "valSince": "26/08/2026"
    },
    {
-    "n": "",
+    "n": "1",
     "p": "Kamil Grabara",
     "pos": "GdB",
     "grp": "GK",
