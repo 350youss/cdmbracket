@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-26T09:00:52",
- "sig": "f15866b8d9d862e39a45522bc2e26065",
+ "updated": "2026-08-26T12:00:59",
+ "sig": "d69c62d8bb84b04bc59f263d7afb6c2a",
  "squads": {
   "FCB": [
    {
@@ -23,7 +23,7 @@
    },
    {
     "n": "13",
-    "p": "Wojciech Szczęsny",
+    "p": "Wojciech Szczesny",
     "pos": "GdB",
     "grp": "GK",
     "age": 36,
@@ -5928,24 +5928,6 @@
     "val": 12.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "26/08/2026"
-   },
-   {
-    "n": "1",
-    "p": "Mattia Perin",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 33,
-    "val": 2.0,
-    "stats": {
-     "m": 14,
-     "s": 14,
-     "g": 0,
-     "a": 0,
-     "min": 1245
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "26/08/2026"
    },
