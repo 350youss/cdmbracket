@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-27T14:54:57",
- "sig": "98a1b646da4f851d5aa71050f2d4a070",
+ "updated": "2026-08-27T18:02:04",
+ "sig": "e80eb31465ed2dd8d8e613df587cef0e",
  "squads": {
   "FCB": [
    {
@@ -178,7 +178,7 @@
     "valSince": "27/08/2026"
    },
    {
-    "n": "12",
+    "n": "",
     "p": "Héctor Fort",
     "pos": "ArD",
     "grp": "DEF",
@@ -1826,24 +1826,6 @@
     "statsClub": "",
     "valDelta": 0.0,
     "valSince": "27/08/2026"
-   },
-   {
-    "n": "7",
-    "p": "Omar Marmoush",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 27,
-    "val": 50.0,
-    "stats": {
-     "m": 36,
-     "s": 16,
-     "g": 8,
-     "a": 3,
-     "min": 1393
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "27/08/2026"
    }
   ],
   "ARS": [
@@ -2234,24 +2216,6 @@
     "val": 40.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "27/08/2026"
-   },
-   {
-    "n": "24",
-    "p": "Reiss Nelson",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 26,
-    "val": 8.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "27/08/2026"
    },
@@ -4430,6 +4394,18 @@
     "valSince": "27/08/2026"
    },
    {
+    "n": "22",
+    "p": "Omar Marmoush",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 27,
+    "val": 50.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "27/08/2026"
+   },
+   {
     "n": "19",
     "p": "Dominic Solanke",
     "pos": "AC",
@@ -4740,6 +4716,18 @@
      "min": 3029
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "27/08/2026"
+   },
+   {
+    "n": "27",
+    "p": "Leon Goretzka",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 31,
+    "val": 12.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "27/08/2026"
    },
@@ -5304,18 +5292,6 @@
     "grp": "ATT",
     "age": 20,
     "val": 10.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "27/08/2026"
-   },
-   {
-    "n": "28",
-    "p": "Bryan Zaragoza",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 24,
-    "val": 8.0,
     "stats": null,
     "statsClub": null,
     "valDelta": 0.0,
