@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-27T18:31:07",
- "sig": "b4cfdedaf547734e5fe438d250f576e3",
+ "updated": "2026-08-27T21:31:07",
+ "sig": "141147e49e821410b7eaa42729460291",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -298,6 +298,7 @@
   "SOCH|in|Victor Lobry|Amiens SC": "2026-08-18",
   "SOCH|in|Saad Agouzoul|AJ Auxerre": "2026-08-18",
   "SOCH|in|Landry Nomel|StadeLO": "2026-08-18",
+  "SOCH|in|Louicius Deedson|Dallas": "2026-08-27",
   "SOCH|in|Samy Baghdadi|Valenciennes FC": "2026-08-18",
   "SOCH|in|Ethan Cortes|Sans club": "2026-08-18",
   "SOCH|out|Aymen Boutoutaou|FCSB": "2026-08-18",
@@ -3149,6 +3150,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Louicius Deedson",
+     "age": 25,
+     "pos": "AiD",
+     "club": "Dallas",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-27"
     },
     {
      "p": "Samy Baghdadi",
@@ -6876,6 +6886,14 @@
     "val": 0.15
    },
    {
+    "n": "",
+    "p": "Louicius Deedson",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 25,
+    "val": 1.2
+   },
+   {
     "n": "11",
     "p": "Julien Vetro",
     "pos": "AiD",
@@ -6925,6 +6943,14 @@
    }
   ],
   "DFCO": [
+   {
+    "n": "",
+    "p": "Ylann Marie-Rose",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 18,
+    "val": 0.1
+   },
    {
     "n": "16",
     "p": "Paul Delecroix",
