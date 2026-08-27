@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-26T15:31:09",
- "sig": "ecdbf62d92fd55e03e4899ecd7dbb024",
+ "updated": "2026-08-27T02:00:06",
+ "sig": "12be52ecf0b8f7e7a8e03288dc0402e5",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -261,6 +261,7 @@
   "LAVAL|out|Peter Ouaneh|UTA Arad": "2026-08-18",
   "LAVAL|out|Titouan Thomas|FC Fleury 91": "2026-08-18",
   "LAVAL|out|Malik Tchokounté|FC Rouen 1899": "2026-08-18",
+  "LAVAL|out|Malik Sellouki|Rio Ave": "2026-08-27",
   "LAVAL|out|Aymeric Faurand-Tournaire|Ha Noi FC": "2026-08-20",
   "LAVAL|out|Enzo Montet|Thionville Lus.": "2026-08-18",
   "LAVAL|out|Loïs Martins|US Avranches": "2026-08-18",
@@ -2790,6 +2791,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Malik Sellouki",
+     "age": 26,
+     "pos": "MO",
+     "club": "Rio Ave",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-27"
     },
     {
      "p": "Aymeric Faurand-Tournaire",
@@ -6398,14 +6408,6 @@
     "grp": "MID",
     "age": 30,
     "val": 0.3
-   },
-   {
-    "n": "10",
-    "p": "Malik Sellouki",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 26,
-    "val": 0.9
    },
    {
     "n": "7",
