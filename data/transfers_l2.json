@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-27T21:31:07",
- "sig": "141147e49e821410b7eaa42729460291",
+ "updated": "2026-08-28T00:31:05",
+ "sig": "f9d7487477df6508a0909151b2c90c2d",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -59,6 +59,7 @@
   "REIMS|out|Hiroki Sekine|Holstein Kiel": "2026-08-18",
   "REIMS|out|Maxime Busi|Royal Antwerp": "2026-08-18",
   "REIMS|out|Alexandre Olliero|Grenoble": "2026-08-18",
+  "REIMS|out|Reda Khadra|Qarabağ": "2026-08-28",
   "REIMS|out|Antoine Leautey|WH Three Towns": "2026-08-18",
   "REIMS|out|Malcolm Jeng|FC Groningen": "2026-08-18",
   "REIMS|out|Adama Bojang|R Charleroi SC": "2026-08-18",
@@ -861,6 +862,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Reda Khadra",
+     "age": 25,
+     "pos": "MO",
+     "club": "Qarabağ",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-28"
     },
     {
      "p": "Antoine Leautey",
@@ -3971,14 +3981,6 @@
    },
    {
     "n": "",
-    "p": "Reda Khadra",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 25,
-    "val": 1.2
-   },
-   {
-    "n": "",
     "p": "Lenny Sylla",
     "pos": "MO",
     "grp": "MID",
@@ -6886,7 +6888,7 @@
     "val": 0.15
    },
    {
-    "n": "",
+    "n": "11",
     "p": "Louicius Deedson",
     "pos": "AiD",
     "grp": "ATT",
