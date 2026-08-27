@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-27T14:55:10",
- "sig": "45b5f1d30377a8c243d4d0e649a31c8c",
+ "updated": "2026-08-27T18:31:07",
+ "sig": "b4cfdedaf547734e5fe438d250f576e3",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -9,6 +9,7 @@
   "ASSE|in|Áron Csongvai|AIK": "2026-08-18",
   "ASSE|in|Mamour Ndiaye|Sarpsborg 08": "2026-08-18",
   "ASSE|in|Lucas Lavallée|LB Châteauroux": "2026-08-18",
+  "ASSE|out|Mickaël Nadé|United FC": "2026-08-27",
   "ASSE|out|Beres Owusu|Grazer AK": "2026-08-18",
   "ASSE|out|Ebenezer Annan|FC Rapid 1923": "2026-08-25",
   "ASSE|out|Dennis Appiah|SM Caen": "2026-08-18",
@@ -390,6 +391,15 @@
     }
    ],
    "dep": [
+    {
+     "p": "Mickaël Nadé",
+     "age": 27,
+     "pos": "DC",
+     "club": "United FC",
+     "type": "paid",
+     "val": 1.5,
+     "fs": "2026-08-27"
+    },
     {
      "p": "Beres Owusu",
      "age": 22,
@@ -3370,14 +3380,6 @@
     "val": 3.5
    },
    {
-    "n": "3",
-    "p": "Mickaël Nadé",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 27,
-    "val": 3.0
-   },
-   {
     "n": "18",
     "p": "Sohaib Naïr",
     "pos": "DC",
@@ -3474,7 +3476,7 @@
     "val": 2.0
    },
    {
-    "n": "36",
+    "n": "21",
     "p": "Paul Eymard",
     "pos": "MC",
     "grp": "MID",
