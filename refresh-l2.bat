@@ -28,8 +28,13 @@ if not "%CHANGED%"=="1" (
 
 git add mercato-l2.html equipe-l2.html data\transfers_l2.json logos
 git commit -m "MAJ mercato L2 (auto)"
+git pull --no-rebase --no-edit
 git push
-echo Publie sur kooradex.fr.
+if errorlevel 1 (
+  echo ECHEC de la publication ^(push rejete^), a verifier manuellement.
+) else (
+  echo Publie sur kooradex.fr.
+)
 
 :done
 endlocal
