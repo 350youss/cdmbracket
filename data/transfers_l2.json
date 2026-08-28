@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-28T18:32:09",
- "sig": "5e767af3d9ab1b48866adfd179b0a406",
+ "updated": "2026-08-28T21:33:17",
+ "sig": "4f96a66bb080f2600e9b5462d7cb670f",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -91,6 +91,7 @@
   "MHSC|in|Mamadou Camara|Stade Lavallois": "2026-08-18",
   "MHSC|in|Florian Tardieu|Saint-Étienne": "2026-08-18",
   "MHSC|in|Grégory Ayem|Racing CFF": "2026-08-18",
+  "MHSC|in|Yanis Zouaoui|Le Havre AC": "2026-08-28",
   "MHSC|in|Daylam Meddah|Pau FC": "2026-08-18",
   "MHSC|in|Nordan Mukiele|Stade Rennais": "2026-08-18",
   "MHSC|in|Daryll Benlahlou|Ol. Lyonnais": "2026-08-18",
@@ -1168,6 +1169,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Yanis Zouaoui",
+     "age": 28,
+     "pos": "ArG",
+     "club": "Le Havre AC",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-28"
     },
     {
      "p": "Daylam Meddah",
@@ -4334,6 +4344,14 @@
     "grp": "DEF",
     "age": 32,
     "val": 0.8
+   },
+   {
+    "n": "28",
+    "p": "Yanis Zouaoui",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 28,
+    "val": 2.5
    },
    {
     "n": "17",
