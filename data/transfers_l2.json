@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-28T00:31:05",
- "sig": "f9d7487477df6508a0909151b2c90c2d",
+ "updated": "2026-08-28T15:32:10",
+ "sig": "dc01a223706a962de3fa8cba179e7357",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -56,10 +56,10 @@
   "REIMS|out|Ewen Jaouen|Newcastle": "2026-08-18",
   "REIMS|out|Cédric Kipré|Ipswich Town": "2026-08-18",
   "REIMS|out|Thiemoko Diarra|Kasimpasa": "2026-08-18",
+  "REIMS|out|Reda Khadra|Qarabağ": "2026-08-28",
   "REIMS|out|Hiroki Sekine|Holstein Kiel": "2026-08-18",
   "REIMS|out|Maxime Busi|Royal Antwerp": "2026-08-18",
   "REIMS|out|Alexandre Olliero|Grenoble": "2026-08-18",
-  "REIMS|out|Reda Khadra|Qarabağ": "2026-08-28",
   "REIMS|out|Antoine Leautey|WH Three Towns": "2026-08-18",
   "REIMS|out|Malcolm Jeng|FC Groningen": "2026-08-18",
   "REIMS|out|Adama Bojang|R Charleroi SC": "2026-08-18",
@@ -837,6 +837,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Reda Khadra",
+     "age": 25,
+     "pos": "MO",
+     "club": "Qarabağ",
+     "type": "paid",
+     "val": 1.0,
+     "fs": "2026-08-28"
+    },
+    {
      "p": "Hiroki Sekine",
      "age": 23,
      "pos": "ArD",
@@ -862,15 +871,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Reda Khadra",
-     "age": 25,
-     "pos": "MO",
-     "club": "Qarabağ",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-28"
     },
     {
      "p": "Antoine Leautey",
