@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-28T00:00:55",
- "sig": "aac445a6ef48e057bacab32b80135f80",
+ "updated": "2026-08-28T15:04:54",
+ "sig": "fa361b56a3e6f028eb4f3f7e2d18b940",
  "squads": {
   "FCB": [
    {
@@ -2920,24 +2920,6 @@
      "g": 0,
      "a": 2,
      "min": 2724
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "28/08/2026"
-   },
-   {
-    "n": "19",
-    "p": "Mamadou Sarr",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 22.0,
-    "stats": {
-     "m": 6,
-     "s": 4,
-     "g": 0,
-     "a": 0,
-     "min": 294
     },
     "statsClub": "",
     "valDelta": 0.0,
