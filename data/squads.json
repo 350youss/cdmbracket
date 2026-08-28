@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-28T18:02:16",
- "sig": "5aebf47444a1fd26ee02d5f771bf66ac",
+ "updated": "2026-08-28T21:01:01",
+ "sig": "af46dc1b1ada72e17cb2d10e4256c6c8",
  "squads": {
   "FCB": [
    {
@@ -3286,24 +3286,6 @@
     "valSince": "28/08/2026"
    },
    {
-    "n": "15",
-    "p": "Nicolas Jackson",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 25,
-    "val": 40.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "28/08/2026"
-   },
-   {
     "n": "22",
     "p": "Emmanuel Emegha",
     "pos": "AC",
@@ -4816,6 +4798,18 @@
     "valSince": "28/08/2026"
    },
    {
+    "n": "",
+    "p": "Nicolas Jackson",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 25,
+    "val": 40.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "28/08/2026"
+   },
+   {
     "n": "11",
     "p": "Ollie Watkins",
     "pos": "AC",
@@ -6060,24 +6054,6 @@
     "val": 18.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "28/08/2026"
-   },
-   {
-    "n": "21",
-    "p": "Fabio Miretti",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 23,
-    "val": 15.0,
-    "stats": {
-     "m": 31,
-     "s": 10,
-     "g": 1,
-     "a": 3,
-     "min": 945
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "28/08/2026"
    },
