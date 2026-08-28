@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-28T15:32:10",
- "sig": "dc01a223706a962de3fa8cba179e7357",
+ "updated": "2026-08-28T18:32:09",
+ "sig": "5e767af3d9ab1b48866adfd179b0a406",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -295,11 +295,11 @@
   "BOUL|out|Lilian Raillot|US Orléans": "2026-08-18",
   "BOUL|out|Luka Boiteau|Valenciennes FC": "2026-08-18",
   "BOUL|out|Exaucé Mpembele Boula|Bourg-en-Bresse": "2026-08-18",
+  "SOCH|in|Louicius Deedson|Dallas": "2026-08-27",
   "SOCH|in|Mathis Clairicia|VfL Bochum": "2026-08-18",
   "SOCH|in|Victor Lobry|Amiens SC": "2026-08-18",
   "SOCH|in|Saad Agouzoul|AJ Auxerre": "2026-08-18",
   "SOCH|in|Landry Nomel|StadeLO": "2026-08-18",
-  "SOCH|in|Louicius Deedson|Dallas": "2026-08-27",
   "SOCH|in|Samy Baghdadi|Valenciennes FC": "2026-08-18",
   "SOCH|in|Ethan Cortes|Sans club": "2026-08-18",
   "SOCH|out|Aymen Boutoutaou|FCSB": "2026-08-18",
@@ -3126,6 +3126,15 @@
    "fg": "#002f6c",
    "arr": [
     {
+     "p": "Louicius Deedson",
+     "age": 25,
+     "pos": "AiD",
+     "club": "Dallas",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-27"
+    },
+    {
      "p": "Mathis Clairicia",
      "age": 23,
      "pos": "AC",
@@ -3160,15 +3169,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Louicius Deedson",
-     "age": 25,
-     "pos": "AiD",
-     "club": "Dallas",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-27"
     },
     {
      "p": "Samy Baghdadi",
