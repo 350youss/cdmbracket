@@ -1,6 +1,6 @@
 {
  "season": "2026-27",
- "updated": "2026-08-19T13:00:17",
+ "updated": "2026-08-29T00:53:17",
  "base": {
   "agent_fees_base": 10.0,
   "note": "On ne se base plus sur l'exercice 2024-25 : le numérateur est recalculé à partir de l'effectif actuel (squad_finances). Seuls les honoraires d'agents restent une estimation fixe."
@@ -269,6 +269,14 @@
    "ratio": 0.6994,
    "sales_total": 51.4,
    "trigger": "Recalcul"
+  },
+  {
+   "date": "2026-08-29",
+   "numerator": 141.825,
+   "denominator": 209.027,
+   "ratio": 0.6785,
+   "sales_total": 51.4,
+   "trigger": "Recalcul"
   }
  ],
  "squad_finances": {
@@ -338,8 +346,8 @@
    "contract_years_basis": "signée",
    "contract_end_year": 2028,
    "amortization_annual": 2.625,
-   "wage_capology_gross": 4.18,
-   "wage_estimated_loaded": 6.27,
+   "wage_capology_gross": 1.27,
+   "wage_estimated_loaded": 1.905,
    "arrival_season": 2024,
    "market_value_fallback": 7.0,
    "fee_lookup_done": true
@@ -629,8 +637,8 @@
    "amortization": 3.8,
    "book_value": 11.4,
    "capital_gain": 16.6,
-   "new_ratio": 0.6008,
-   "delta_points": -9.86
+   "new_ratio": 0.5815,
+   "delta_points": -9.7
   },
   {
    "name": "Quinten Timber",
@@ -639,8 +647,8 @@
    "amortization": 0.9,
    "book_value": 3.6,
    "capital_gain": 21.4,
-   "new_ratio": 0.6009,
-   "delta_points": -9.85
+   "new_ratio": 0.582,
+   "delta_points": -9.65
   },
   {
    "name": "Igor Paixão",
@@ -649,8 +657,8 @@
    "amortization": 6.0,
    "book_value": 24.0,
    "capital_gain": 11.0,
-   "new_ratio": 0.6024,
-   "delta_points": -9.7
+   "new_ratio": 0.5826,
+   "delta_points": -9.59
   },
   {
    "name": "Pierre-Emile Højbjerg",
@@ -659,8 +667,8 @@
    "amortization": 4.5,
    "book_value": 9.0,
    "capital_gain": 6.0,
-   "new_ratio": 0.6146,
-   "delta_points": -8.48
+   "new_ratio": 0.5943,
+   "delta_points": -8.42
   },
   {
    "name": "Leonardo Balerdi",
@@ -669,8 +677,8 @@
    "amortization": 1.1,
    "book_value": 2.2,
    "capital_gain": 15.8,
-   "new_ratio": 0.6163,
-   "delta_points": -8.31
+   "new_ratio": 0.5968,
+   "delta_points": -8.17
   },
   {
    "name": "Timothy Weah",
@@ -679,8 +687,8 @@
    "amortization": 3.6,
    "book_value": 14.4,
    "capital_gain": 5.6,
-   "new_ratio": 0.6326,
-   "delta_points": -6.68
+   "new_ratio": 0.6122,
+   "delta_points": -6.63
   },
   {
    "name": "Angel Gomes",
@@ -689,8 +697,8 @@
    "amortization": 0.0,
    "book_value": 0.0,
    "capital_gain": 10.0,
-   "new_ratio": 0.6401,
-   "delta_points": -5.93
+   "new_ratio": 0.6201,
+   "delta_points": -5.84
   },
   {
    "name": "Emerson",
@@ -699,8 +707,8 @@
    "amortization": 0.35,
    "book_value": 0.35,
    "capital_gain": 8.65,
-   "new_ratio": 0.6449,
-   "delta_points": -5.45
+   "new_ratio": 0.6248,
+   "delta_points": -5.37
   },
   {
    "name": "Geoffrey Kondogbia",
@@ -709,18 +717,8 @@
    "amortization": 2.0,
    "book_value": 2.0,
    "capital_gain": 1.0,
-   "new_ratio": 0.6476,
-   "delta_points": -5.18
-  },
-  {
-   "name": "Bamo Meïté",
-   "market_value": 7.0,
-   "wage": 6.27,
-   "amortization": 2.625,
-   "book_value": 5.25,
-   "capital_gain": 1.75,
-   "new_ratio": 0.6514,
-   "delta_points": -4.8
+   "new_ratio": 0.6268,
+   "delta_points": -5.17
   },
   {
    "name": "Nayef Aguerd",
@@ -729,8 +727,8 @@
    "amortization": 4.6,
    "book_value": 18.4,
    "capital_gain": -3.4,
-   "new_ratio": 0.6528,
-   "delta_points": -4.66
+   "new_ratio": 0.6315,
+   "delta_points": -4.7
   },
   {
    "name": "CJ Egan-Riley",
@@ -739,8 +737,8 @@
    "amortization": 0.0,
    "book_value": 0.0,
    "capital_gain": 9.0,
-   "new_ratio": 0.658,
-   "delta_points": -4.14
+   "new_ratio": 0.638,
+   "delta_points": -4.05
   },
   {
    "name": "Amine Harit",
@@ -749,8 +747,8 @@
    "amortization": 1.25,
    "book_value": 1.25,
    "capital_gain": 3.75,
-   "new_ratio": 0.6593,
-   "delta_points": -4.01
+   "new_ratio": 0.6388,
+   "delta_points": -3.97
   },
   {
    "name": "Neal Maupay",
@@ -759,8 +757,18 @@
    "amortization": 1.333,
    "book_value": 2.667,
    "capital_gain": 1.333,
-   "new_ratio": 0.6672,
-   "delta_points": -3.22
+   "new_ratio": 0.6465,
+   "delta_points": -3.2
+  },
+  {
+   "name": "Bamo Meïté",
+   "market_value": 7.0,
+   "wage": 1.905,
+   "amortization": 2.625,
+   "book_value": 5.25,
+   "capital_gain": 1.75,
+   "new_ratio": 0.6514,
+   "delta_points": -2.71
   },
   {
    "name": "Ulisses Garcia",
@@ -769,8 +777,8 @@
    "amortization": 0.8,
    "book_value": 1.6,
    "capital_gain": 1.4,
-   "new_ratio": 0.678,
-   "delta_points": -2.14
+   "new_ratio": 0.6572,
+   "delta_points": -2.13
   },
   {
    "name": "Himad Abdelli",
@@ -779,8 +787,8 @@
    "amortization": 0.55,
    "book_value": 2.2,
    "capital_gain": 2.8,
-   "new_ratio": 0.6811,
-   "delta_points": -1.83
+   "new_ratio": 0.6605,
+   "delta_points": -1.8
   },
   {
    "name": "Faris Moumbagna",
@@ -789,7 +797,7 @@
    "amortization": 1.6,
    "book_value": 3.2,
    "capital_gain": 0.3,
-   "new_ratio": 0.6829,
+   "new_ratio": 0.662,
    "delta_points": -1.65
   },
   {
@@ -799,8 +807,8 @@
    "amortization": 0.667,
    "book_value": 0.667,
    "capital_gain": 1.833,
-   "new_ratio": 0.6837,
-   "delta_points": -1.57
+   "new_ratio": 0.663,
+   "delta_points": -1.55
   },
   {
    "name": "Derek Cornelius",
@@ -809,8 +817,8 @@
    "amortization": 1.0,
    "book_value": 2.0,
    "capital_gain": 0.5,
-   "new_ratio": 0.6877,
-   "delta_points": -1.17
+   "new_ratio": 0.6669,
+   "delta_points": -1.16
   },
   {
    "name": "Tochukwu Nnadi",
@@ -819,7 +827,7 @@
    "amortization": 1.2,
    "book_value": 4.8,
    "capital_gain": -0.3,
-   "new_ratio": 0.6907,
+   "new_ratio": 0.6698,
    "delta_points": -0.87
   },
   {
@@ -829,8 +837,8 @@
    "amortization": 0.0,
    "book_value": 0.0,
    "capital_gain": 0.8,
-   "new_ratio": 0.6967,
-   "delta_points": -0.27
+   "new_ratio": 0.6759,
+   "delta_points": -0.26
   },
   {
    "name": "Jelle Van Neck",
@@ -839,8 +847,8 @@
    "amortization": 0.0,
    "book_value": 0.0,
    "capital_gain": 0.0,
-   "new_ratio": 0.6974,
-   "delta_points": -0.2
+   "new_ratio": 0.6766,
+   "delta_points": -0.19
   },
   {
    "name": "Keyliane Abdallah",
@@ -849,7 +857,7 @@
    "amortization": 0.0,
    "book_value": 0.0,
    "capital_gain": 0.05,
-   "new_ratio": 0.6992,
+   "new_ratio": 0.6783,
    "delta_points": -0.02
   },
   {
@@ -859,7 +867,7 @@
    "amortization": 0.0,
    "book_value": 0.0,
    "capital_gain": 0.0,
-   "new_ratio": 0.6994,
+   "new_ratio": 0.6785,
    "delta_points": 0.0
   }
  ]
