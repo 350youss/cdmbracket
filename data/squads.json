@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-29T00:01:11",
- "sig": "105ddf8c96beb99b75570676f98f380f",
+ "updated": "2026-08-29T12:10:06",
+ "sig": "5f8db74f8934779813425aa416620a5d",
  "squads": {
   "FCB": [
    {
@@ -4251,7 +4251,7 @@
    },
    {
     "n": "17",
-    "p": "Savinho",
+    "p": "Sávio",
     "pos": "AiG",
     "grp": "ATT",
     "age": 22,
@@ -6564,7 +6564,7 @@
     "valSince": "29/08/2026"
    },
    {
-    "n": "",
+    "n": "34",
     "p": "Yanis Massolin",
     "pos": "MO",
     "grp": "MID",
