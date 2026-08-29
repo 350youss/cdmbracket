@@ -23,7 +23,7 @@
   --good:#28c76f; --warning:#f0b429; --serious:#ec835a; --critical:#f0455c;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);overflow-x:hidden;}
 html,body{min-height:100vh;}
 body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
@@ -180,13 +180,14 @@ body::after{
 .amt-field{display:inline-flex;align-items:stretch;background:var(--s2);border:1px solid var(--line-soft);
   border-radius:7px;overflow:hidden;transition:border-color .2s;}
 .amt-field:focus-within{border-color:var(--om);}
-.amt-step{background:transparent;border:none;color:var(--muted);font-family:var(--mono);font-size:13px;
+.amt-step,.ext-step{background:transparent;border:none;color:var(--muted);font-family:var(--mono);font-size:13px;
   font-weight:700;width:22px;flex-shrink:0;cursor:pointer;line-height:1;transition:background .15s,color .15s;
   -webkit-tap-highlight-color:transparent;}
-.amt-step:hover{background:var(--om-dim);color:var(--om);}
-.amt-step:active{background:rgba(47,174,224,.28);}
-.amt-step.down{border-right:1px solid var(--line-soft);}
-.amt-step.up{border-left:1px solid var(--line-soft);}
+.amt-step:hover,.ext-step:hover{background:var(--om-dim);color:var(--om);}
+.amt-step:active,.ext-step:active{background:rgba(47,174,224,.28);}
+.amt-step.down,.ext-step.down{border-right:1px solid var(--line-soft);}
+.amt-step.up,.ext-step.up{border-left:1px solid var(--line-soft);}
+.ext-preview{font-family:var(--mono);font-weight:700;color:#fff;}
 .sim-amount{background:transparent;border:none;color:#fff;font-family:var(--mono);
   font-size:12.5px;font-weight:600;padding:6px 4px;width:50px;text-align:right;}
 .sim-amount:focus{outline:none;}
@@ -409,6 +410,28 @@ body::after{
 
   <div class="section reveal">
     <span class="snum">05</span>
+    <h2>Prolonger un joueur</h2>
+    <p class="shint">Ajoute des ann&eacute;es de contrat et ajuste le salaire si n&eacute;goci&eacute; &agrave; la hausse. L'amortissement restant est redivis&eacute; sur la nouvelle dur&eacute;e totale (ann&eacute;es restantes actuelles + prolongation). Simulation locale, ne modifie rien sur la page.</p>
+    <div class="tblwrap">
+      <table class="impact-table sim-table">
+        <thead><tr><th>Joueur</th><th>Ann&eacute;es restantes</th><th>Prolongation</th><th>Salaire brut <span class="th-hint">&eacute;ditable</span></th><th>Nouvel amort.</th><th></th></tr></thead>
+        <tbody id="ext-rows"></tbody>
+      </table>
+    </div>
+
+    <div class="sim-cart" id="ext-cart">
+      <div class="ptitle">Prolongations simul&eacute;es <span class="badge b-est" id="ext-count">0 joueur</span>
+        <button class="sim-reset" id="ext-reset" type="button">R&eacute;initialiser</button></div>
+      <div id="ext-cart-rows"><div class="empty">Aucune prolongation simul&eacute;e pour l'instant.</div></div>
+      <div class="sim-result">
+        <div class="sim-result-row"><span>Nouveau num&eacute;rateur</span><span id="ext-num">—</span></div>
+        <div class="sim-result-row main"><span>Nouveau ratio</span><span id="ext-ratio">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section reveal">
+    <span class="snum">06</span>
     <h2>Mouvements pris en compte</h2>
     <div class="tl" id="timeline"></div>
   </div>
@@ -547,6 +570,8 @@ function render(){
   simBase.denominator = c.denominator;
   buildSimTable();
   renderSimCart();
+  buildExtTable();
+  renderExtCart();
 
   // ---- timeline verticale ----
   const tl = document.getElementById('timeline');
@@ -694,7 +719,149 @@ function renderSimCart(){
   }
 }
 
+// ---- simulateur de prolongation : l'amortissement restant (VNC) est redivisé
+//      sur la nouvelle durée totale (années restantes actuelles + prolongation) ----
+const extMeta = {};   // nom -> {remYears, bookValue, oldAmort, oldWageGross, oldWageLoaded}
+const extState = {};  // nom -> {extYears, newAmort, newWageGross, newWageLoaded, oldAmort, oldWageLoaded}
+
+function buildExtTable(){
+  const rows = document.getElementById('ext-rows');
+  const baseYear = parseInt((DATA.season || '2026-27').split('-')[0], 10);
+  const sf = Object.entries(DATA.squad_finances || {})
+    .map(([name, v]) => ({name, ...v}))
+    .filter(p => !p.on_loan && p.contract_end_year)
+    .sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+  Object.keys(extMeta).forEach(k => delete extMeta[k]);
+  rows.innerHTML = sf.length ? sf.map(p => {
+    const remYears = Math.max(0, p.contract_end_year - baseYear);
+    const oldAmort = p.amortization_annual || 0;
+    const bookValue = oldAmort * remYears;
+    const oldWageGross = p.wage_capology_gross || 0;
+    const oldWageLoaded = (p.wage_estimated_loaded !== undefined && p.wage_estimated_loaded !== null) ? p.wage_estimated_loaded : oldWageGross * 1.5;
+    extMeta[p.name] = {remYears, bookValue, oldAmort, oldWageGross, oldWageLoaded};
+    const initNewAmort = (remYears + 2) > 0 ? bookValue / (remYears + 2) : 0;
+    return `<tr class="reveal${extState[p.name] ? ' sim-row-out' : ''}" data-extrow="${p.name}">
+      <td>${p.name}</td>
+      <td>${remYears} an${remYears !== 1 ? 's' : ''}</td>
+      <td><div class="amt-field">
+        <button class="ext-step down" type="button" data-dir="-1" tabindex="-1">−</button>
+        <input class="sim-amount ext-years" type="number" step="1" min="1" max="8" data-name="${p.name}" data-field="years" value="2">
+        <button class="ext-step up" type="button" data-dir="1" tabindex="-1">+</button>
+      </div> ans</td>
+      <td><div class="amt-field">
+        <button class="ext-step down" type="button" data-dir="-0.1" tabindex="-1">−</button>
+        <input class="sim-amount ext-wage" type="number" step="0.1" min="0" data-name="${p.name}" data-field="wage" value="${oldWageGross}">
+        <button class="ext-step up" type="button" data-dir="0.1" tabindex="-1">+</button>
+      </div> M€</td>
+      <td class="ext-preview" data-preview="${p.name}">${fmt(Math.round(initNewAmort * 100) / 100)} M€</td>
+      <td><button class="sim-btn ext-add-btn" type="button" data-name="${p.name}">Valider</button></td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="6" class="empty">Effectif non chargé.</td></tr>';
+}
+
+function updateExtPreview(name){
+  const meta = extMeta[name];
+  if (!meta) return null;
+  const yearsInput = document.querySelector(`.ext-years[data-name="${CSS.escape(name)}"]`);
+  const wageInput = document.querySelector(`.ext-wage[data-name="${CSS.escape(name)}"]`);
+  const extYears = Math.max(1, parseInt(yearsInput ? yearsInput.value : '2', 10) || 1);
+  const newTotalYears = meta.remYears + extYears;
+  const newAmort = newTotalYears > 0 ? meta.bookValue / newTotalYears : 0;
+  const newWageGross = Math.max(0, parseFloat(wageInput ? wageInput.value : meta.oldWageGross) || 0);
+  const preview = document.querySelector(`.ext-preview[data-preview="${CSS.escape(name)}"]`);
+  if (preview) preview.textContent = fmt(Math.round(newAmort * 100) / 100) + ' M€';
+  return {extYears, newAmort, newWageGross};
+}
+
+function addToExt(name){
+  const meta = extMeta[name];
+  const row = document.querySelector(`tr[data-extrow="${CSS.escape(name)}"]`);
+  if (!meta || !row) return;
+  const p = updateExtPreview(name);
+  if (!p) return;
+  extState[name] = {
+    extYears: p.extYears,
+    newAmort: p.newAmort,
+    newWageGross: p.newWageGross,
+    newWageLoaded: p.newWageGross * 1.5,
+    oldAmort: meta.oldAmort,
+    oldWageLoaded: meta.oldWageLoaded,
+  };
+  row.classList.add('sim-row-out');
+  renderExtCart();
+}
+
+function removeFromExt(name){
+  delete extState[name];
+  const row = document.querySelector(`tr[data-extrow="${CSS.escape(name)}"]`);
+  if (row) row.classList.remove('sim-row-out');
+  renderExtCart();
+}
+
+function renderExtCart(){
+  const names = Object.keys(extState);
+  document.getElementById('ext-count').textContent = names.length + (names.length > 1 ? ' joueurs' : ' joueur');
+
+  const cartRows = document.getElementById('ext-cart-rows');
+  cartRows.innerHTML = names.length ? names.map(name => {
+    const s = extState[name];
+    return `<div class="cart-row">
+      <span class="cname">${name}</span>
+      <span class="cmod transfert">+${s.extYears} an${s.extYears !== 1 ? 's' : ''} &middot; ${fmt(s.newWageGross)} M€ brut</span>
+      <span class="cimpact">${fmtSigned(s.newAmort - s.oldAmort)} M€ amort.</span>
+      <button class="sim-btn undo ext-undo-btn" type="button" data-name="${name}">Retirer</button>
+    </div>`;
+  }).join('') : '<div class="empty">Aucune prolongation simulée pour l\'instant.</div>';
+
+  let numDelta = 0;
+  names.forEach(name => {
+    const s = extState[name];
+    numDelta += (s.newWageLoaded - s.oldWageLoaded) + (s.newAmort - s.oldAmort);
+  });
+  const newNum = simBase.numerator + numDelta;
+  const newRatio = simBase.denominator ? newNum / simBase.denominator : null;
+
+  document.getElementById('ext-num').textContent = fmt(Math.round(newNum * 100) / 100) + ' M€';
+  const extRatioEl = document.getElementById('ext-ratio');
+  const extCart = document.getElementById('ext-cart');
+  if (newRatio !== null){
+    const pct = Math.round(newRatio * 1000) / 10;
+    extRatioEl.textContent = fmt(pct) + ' %';
+    const status = pct <= 70 ? 'good' : pct <= 85 ? 'warning' : 'critical';
+    extCart.style.setProperty('--tile-status', {good:'var(--good)',warning:'var(--warning)',critical:'var(--critical)'}[status]);
+  } else {
+    extRatioEl.textContent = '—';
+  }
+}
+
+document.addEventListener('input', (e) => {
+  if (e.target.classList.contains('ext-years') || e.target.classList.contains('ext-wage')){
+    updateExtPreview(e.target.dataset.name);
+  }
+});
+
 document.addEventListener('click', (e) => {
+  const extStep = e.target.closest('.ext-step');
+  if (extStep){
+    const wrap = extStep.closest('.amt-field');
+    const input = wrap ? wrap.querySelector('input') : null;
+    if (input){
+      const dir = parseFloat(extStep.dataset.dir) || 1;
+      const step = parseFloat(input.step) || 1;
+      const min = parseFloat(input.min) || 0;
+      const max = input.max !== '' ? parseFloat(input.max) : Infinity;
+      let next = Math.max(min, Math.min(max, (parseFloat(input.value) || 0) + dir * step));
+      input.value = input.dataset.field === 'wage' ? Math.round(next * 10) / 10 : Math.round(next);
+      updateExtPreview(input.dataset.name);
+    }
+    return;
+  }
+  const extAddBtn = e.target.closest('.ext-add-btn');
+  if (extAddBtn && extAddBtn.dataset.name){ addToExt(extAddBtn.dataset.name); return; }
+  const extUndoBtn = e.target.closest('.ext-undo-btn');
+  if (extUndoBtn && extUndoBtn.dataset.name){ removeFromExt(extUndoBtn.dataset.name); return; }
+  if (e.target.id === 'ext-reset'){ Object.keys(extState).forEach(removeFromExt); return; }
+
   const stepBtn = e.target.closest('.amt-step');
   if (stepBtn && stepBtn.dataset.name){
     const input = document.querySelector(`.sim-amount[data-name="${CSS.escape(stepBtn.dataset.name)}"]`);
