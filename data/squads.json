@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-29T12:10:06",
- "sig": "5f8db74f8934779813425aa416620a5d",
+ "updated": "2026-08-29T15:00:59",
+ "sig": "d04cb0cba86daaadcd31b53c52d96f25",
  "squads": {
   "FCB": [
    {
@@ -6884,24 +6884,6 @@
     "valSince": "29/08/2026"
    },
    {
-    "n": "4",
-    "p": "Samuele Ricci",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 25,
-    "val": 22.0,
-    "stats": {
-     "m": 34,
-     "s": 14,
-     "g": 1,
-     "a": 4,
-     "min": 1499
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "29/08/2026"
-   },
-   {
     "n": "12",
     "p": "Adrien Rabiot",
     "pos": "MC",
@@ -7036,24 +7018,6 @@
     "val": 7.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "29/08/2026"
-   },
-   {
-    "n": "10",
-    "p": "Rafael Leão",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 27,
-    "val": 50.0,
-    "stats": {
-     "m": 31,
-     "s": 25,
-     "g": 10,
-     "a": 3,
-     "min": 1968
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "29/08/2026"
    },
