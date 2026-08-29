@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-29T15:00:59",
- "sig": "d04cb0cba86daaadcd31b53c52d96f25",
+ "updated": "2026-08-29T18:13:34",
+ "sig": "1b49fe577aa9eda4aba047f97649eb6e",
  "squads": {
   "FCB": [
    {
@@ -4316,18 +4316,6 @@
     "valSince": "29/08/2026"
    },
    {
-    "n": "47",
-    "p": "Mikey Moore",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 19,
-    "val": 18.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "29/08/2026"
-   },
-   {
     "n": "22",
     "p": "Omar Marmoush",
     "pos": "AC",
@@ -6428,18 +6416,6 @@
      "min": 2137
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "29/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Kristjan Asllani",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 24,
-    "val": 12.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "29/08/2026"
    },
