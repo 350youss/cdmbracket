@@ -401,6 +401,7 @@ body::after{
         <button class="sim-reset" id="sim-reset" type="button">Réinitialiser</button></div>
       <div id="sim-cart-rows"><div class="empty">Aucun joueur sélectionné pour l'instant.</div></div>
       <div class="sim-result">
+        <div class="sim-result-row"><span>Nouvelle masse salariale</span><span id="sim-wage">—</span></div>
         <div class="sim-result-row"><span>Nouveau numérateur</span><span id="sim-num">—</span></div>
         <div class="sim-result-row"><span>Nouveau dénominateur</span><span id="sim-den">—</span></div>
         <div class="sim-result-row main"><span>Nouveau ratio</span><span id="sim-ratio">—</span></div>
@@ -424,6 +425,7 @@ body::after{
         <button class="sim-reset" id="ext-reset" type="button">R&eacute;initialiser</button></div>
       <div id="ext-cart-rows"><div class="empty">Aucune prolongation simul&eacute;e pour l'instant.</div></div>
       <div class="sim-result">
+        <div class="sim-result-row"><span>Nouvelle masse salariale</span><span id="ext-wage-total">—</span></div>
         <div class="sim-result-row"><span>Nouveau num&eacute;rateur</span><span id="ext-num">—</span></div>
         <div class="sim-result-row main"><span>Nouveau ratio</span><span id="ext-ratio">—</span></div>
       </div>
@@ -568,10 +570,10 @@ function render(){
   // ---- simulateur d'effectif : base de calcul pour les scénarios cumulés ----
   simBase.numerator = c.numerator;
   simBase.denominator = c.denominator;
+  simBase.wageTotal = c.wageTotal;
   buildSimTable();
-  renderSimCart();
   buildExtTable();
-  renderExtCart();
+  renderAll();
 
   // ---- timeline verticale ----
   const tl = document.getElementById('timeline');
@@ -632,7 +634,7 @@ function render(){
 // ---- simulateur d'effectif : transfert (vente, capte la plus-value) vs prêt
 //      (le club garde le joueur, l'amortissement continue, seul le salaire sort
 //      du numérateur — pas de plus-value puisqu'il n'y a pas de cession) ----
-let simBase = {numerator: 0, denominator: 0};
+let simBase = {numerator: 0, denominator: 0, wageTotal: 0};
 const simState = {}; // nom -> {modality, amount, wage, amortization, bookValue}
 
 function buildSimTable(){
@@ -656,6 +658,16 @@ function buildSimTable(){
     </tr>`).join('') : '<tr><td colspan="6" class="empty">Effectif non chargé.</td></tr>';
 }
 
+// ---- un joueur ne peut pas être à la fois vendu (04) et prolongé (05) :
+//      sa ligne reste masquée dans l'autre simulateur tant qu'il y est actif ----
+function syncCrossRow(name){
+  const active = !!simState[name] || !!extState[name];
+  const sellRow = document.querySelector(`#sim-rows tr[data-name="${CSS.escape(name)}"]`);
+  if (sellRow && !simState[name]) sellRow.classList.toggle('sim-row-out', active);
+  const extRow = document.querySelector(`tr[data-extrow="${CSS.escape(name)}"]`);
+  if (extRow && !extState[name]) extRow.classList.toggle('sim-row-out', active);
+}
+
 function addToSim(name){
   const p = (DATA.departure_impact || []).find(x => x.name === name);
   const row = document.querySelector(`#sim-rows tr[data-name="${CSS.escape(name)}"]`);
@@ -666,17 +678,19 @@ function addToSim(name){
   simState[name] = {modality, amount: isNaN(amount) ? 0 : amount, wage: p.wage,
                      amortization: p.amortization, bookValue: p.book_value};
   row.classList.add('sim-row-out');
-  renderSimCart();
+  syncCrossRow(name);
+  renderAll();
 }
 
 function removeFromSim(name){
   delete simState[name];
   const row = document.querySelector(`#sim-rows tr[data-name="${CSS.escape(name)}"]`);
   if (row) row.classList.remove('sim-row-out');
-  renderSimCart();
+  syncCrossRow(name);
+  renderAll();
 }
 
-function renderSimCart(){
+function renderSimCartRows(){
   const names = Object.keys(simState);
   document.getElementById('sim-count').textContent = names.length + (names.length > 1 ? ' joueurs' : ' joueur');
 
@@ -693,30 +707,51 @@ function renderSimCart(){
       <button class="sim-btn undo" type="button" data-name="${name}">Retirer</button>
     </div>`;
   }).join('') : '<div class="empty">Aucun joueur sélectionné pour l’instant.</div>';
+}
 
-  let numDelta = 0, denDelta = 0;
-  names.forEach(name => {
-    const s = simState[name];
+// ---- résultat combiné : ventes/prêts (04) ET prolongations (05) s'appliquent
+//      ensemble sur la même base, les deux panneaux affichent le même scénario ----
+function computeCombined(){
+  let wageDelta = 0, numDelta = 0, denDelta = 0;
+  Object.values(simState).forEach(s => {
+    wageDelta -= s.wage;
     numDelta -= s.wage;
     if (s.modality === 'transfert'){ numDelta -= s.amortization; denDelta += (s.amount - s.bookValue); }
     else { numDelta -= (s.amortization - s.amount); }   // prêt : l'indemnité vient réduire l'amortissement net
   });
+  Object.values(extState).forEach(s => {
+    const wDelta = s.newWageLoaded - s.oldWageLoaded;
+    wageDelta += wDelta;
+    numDelta += wDelta + (s.newAmort - s.oldAmort);
+  });
+  const newWage = simBase.wageTotal + wageDelta;
   const newNum = simBase.numerator + numDelta;
   const newDen = simBase.denominator + denDelta;
   const newRatio = newDen ? newNum / newDen : null;
+  return {newWage, newNum, newDen, newRatio};
+}
 
+function renderAll(){
+  renderSimCartRows();
+  renderExtCartRows();
+
+  const {newWage, newNum, newDen, newRatio} = computeCombined();
+  const pct = newRatio !== null ? Math.round(newRatio*1000)/10 : null;
+  const status = pct === null ? null : pct <= 70 ? 'good' : pct <= 85 ? 'warning' : 'critical';
+  const statusColor = status ? {good:'var(--good)',warning:'var(--warning)',critical:'var(--critical)'}[status] : null;
+
+  document.getElementById('sim-wage').textContent = fmt(Math.round(newWage*100)/100) + ' M€';
   document.getElementById('sim-num').textContent = fmt(Math.round(newNum*100)/100) + ' M€';
   document.getElementById('sim-den').textContent = fmt(Math.round(newDen*100)/100) + ' M€';
-  const ratioEl = document.getElementById('sim-ratio');
-  const cart = document.getElementById('sim-cart');
-  if (newRatio !== null){
-    const pct = Math.round(newRatio*1000)/10;
-    ratioEl.textContent = fmt(pct) + ' %';
-    const status = pct <= 70 ? 'good' : pct <= 85 ? 'warning' : 'critical';
-    cart.style.setProperty('--tile-status', {good:'var(--good)',warning:'var(--warning)',critical:'var(--critical)'}[status]);
-  } else {
-    ratioEl.textContent = '—';
-  }
+  document.getElementById('sim-ratio').textContent = pct !== null ? fmt(pct) + ' %' : '—';
+
+  document.getElementById('ext-wage-total').textContent = fmt(Math.round(newWage*100)/100) + ' M€';
+  document.getElementById('ext-num').textContent = fmt(Math.round(newNum*100)/100) + ' M€';
+  document.getElementById('ext-ratio').textContent = pct !== null ? fmt(pct) + ' %' : '—';
+
+  [document.getElementById('sim-cart'), document.getElementById('ext-cart')].forEach(cart => {
+    if (statusColor) cart.style.setProperty('--tile-status', statusColor);
+  });
 }
 
 // ---- simulateur de prolongation : l'amortissement restant (VNC) est redivisé
@@ -788,17 +823,19 @@ function addToExt(name){
     oldWageLoaded: meta.oldWageLoaded,
   };
   row.classList.add('sim-row-out');
-  renderExtCart();
+  syncCrossRow(name);
+  renderAll();
 }
 
 function removeFromExt(name){
   delete extState[name];
   const row = document.querySelector(`tr[data-extrow="${CSS.escape(name)}"]`);
   if (row) row.classList.remove('sim-row-out');
-  renderExtCart();
+  syncCrossRow(name);
+  renderAll();
 }
 
-function renderExtCart(){
+function renderExtCartRows(){
   const names = Object.keys(extState);
   document.getElementById('ext-count').textContent = names.length + (names.length > 1 ? ' joueurs' : ' joueur');
 
@@ -812,26 +849,6 @@ function renderExtCart(){
       <button class="sim-btn undo ext-undo-btn" type="button" data-name="${name}">Retirer</button>
     </div>`;
   }).join('') : '<div class="empty">Aucune prolongation simulée pour l\'instant.</div>';
-
-  let numDelta = 0;
-  names.forEach(name => {
-    const s = extState[name];
-    numDelta += (s.newWageLoaded - s.oldWageLoaded) + (s.newAmort - s.oldAmort);
-  });
-  const newNum = simBase.numerator + numDelta;
-  const newRatio = simBase.denominator ? newNum / simBase.denominator : null;
-
-  document.getElementById('ext-num').textContent = fmt(Math.round(newNum * 100) / 100) + ' M€';
-  const extRatioEl = document.getElementById('ext-ratio');
-  const extCart = document.getElementById('ext-cart');
-  if (newRatio !== null){
-    const pct = Math.round(newRatio * 1000) / 10;
-    extRatioEl.textContent = fmt(pct) + ' %';
-    const status = pct <= 70 ? 'good' : pct <= 85 ? 'warning' : 'critical';
-    extCart.style.setProperty('--tile-status', {good:'var(--good)',warning:'var(--warning)',critical:'var(--critical)'}[status]);
-  } else {
-    extRatioEl.textContent = '—';
-  }
 }
 
 document.addEventListener('input', (e) => {
