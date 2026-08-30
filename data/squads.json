@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-30T12:01:07",
- "sig": "3a739c42dbd68aff61598043cb3d30fc",
+ "updated": "2026-08-30T15:01:03",
+ "sig": "a32be2d6ef9475188fb02d6c65415793",
  "squads": {
   "FCB": [
    {
@@ -1298,24 +1298,6 @@
     "valSince": "30/08/2026"
    },
    {
-    "n": "12",
-    "p": "Carlos Martín",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 24,
-    "val": 1.5,
-    "stats": {
-     "m": 2,
-     "s": 1,
-     "g": 0,
-     "a": 0,
-     "min": 66
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "30/08/2026"
-   },
-   {
     "n": "16",
     "p": "Arnau Ortiz",
     "pos": "AiG",
@@ -1340,6 +1322,24 @@
      "g": 7,
      "a": 8,
      "min": 3803
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "30/08/2026"
+   },
+   {
+    "n": "12",
+    "p": "Carlos Martín",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 24,
+    "val": 1.5,
+    "stats": {
+     "m": 2,
+     "s": 1,
+     "g": 0,
+     "a": 0,
+     "min": 66
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -2824,7 +2824,7 @@
     "valSince": "30/08/2026"
    },
    {
-    "n": "",
+    "n": "26",
     "p": "Emiliano Martínez",
     "pos": "GdB",
     "grp": "GK",
@@ -3612,24 +3612,6 @@
      "g": 0,
      "a": 0,
      "min": 1005
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "30/08/2026"
-   },
-   {
-    "n": "43",
-    "p": "Toby Collyer",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 22,
-    "val": 5.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
     },
     "statsClub": "",
     "valDelta": 0.0,
