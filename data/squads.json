@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-30T15:01:03",
- "sig": "a32be2d6ef9475188fb02d6c65415793",
+ "updated": "2026-08-30T19:40:05",
+ "sig": "019ece74e9e99a237d4a7af4998a30ac",
  "squads": {
   "FCB": [
    {
@@ -4402,6 +4402,24 @@
     "valSince": "30/08/2026"
    },
    {
+    "n": "42",
+    "p": "James Wright",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 21,
+    "val": 0.2,
+    "stats": {
+     "m": 0,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 0
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "30/08/2026"
+   },
+   {
     "n": "14",
     "p": "Pau Torres",
     "pos": "DC",
@@ -4764,24 +4782,6 @@
     "val": 40.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "30/08/2026"
-   },
-   {
-    "n": "11",
-    "p": "Ollie Watkins",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 30,
-    "val": 25.0,
-    "stats": {
-     "m": 55,
-     "s": 43,
-     "g": 21,
-     "a": 5,
-     "min": 3839
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "30/08/2026"
    },
