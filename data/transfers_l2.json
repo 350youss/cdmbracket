@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-28T21:33:17",
- "sig": "4f96a66bb080f2600e9b5462d7cb670f",
+ "updated": "2026-08-30T19:39:16",
+ "sig": "aef7e26782e38e2b8afb5b2bb9f19400",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -58,6 +58,7 @@
   "REIMS|out|Thiemoko Diarra|Kasimpasa": "2026-08-18",
   "REIMS|out|Reda Khadra|Qarabağ": "2026-08-28",
   "REIMS|out|Hiroki Sekine|Holstein Kiel": "2026-08-18",
+  "REIMS|out|Jordan|Greuther Fürth": "2026-08-30",
   "REIMS|out|Maxime Busi|Royal Antwerp": "2026-08-18",
   "REIMS|out|Alexandre Olliero|Grenoble": "2026-08-18",
   "REIMS|out|Antoine Leautey|WH Three Towns": "2026-08-18",
@@ -854,6 +855,15 @@
      "type": "loan",
      "val": 0.1,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Jordan",
+     "age": 30,
+     "pos": "AC",
+     "club": "Greuther Fürth",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-30"
     },
     {
      "p": "Maxime Busi",
@@ -3474,7 +3484,7 @@
     "val": 0.7
    },
    {
-    "n": "",
+    "n": "16",
     "p": "Tamar Svetlin",
     "pos": "MDC",
     "grp": "MID",
@@ -3582,7 +3592,7 @@
     "p": "Djylian N'Guessan",
     "pos": "AC",
     "grp": "ATT",
-    "age": 17,
+    "age": 18,
     "val": 4.0
    },
    {
@@ -3776,7 +3786,7 @@
     "p": "Herba Guirassy",
     "pos": "AiG",
     "grp": "ATT",
-    "age": 19,
+    "age": 20,
     "val": 7.0
    },
    {
@@ -4018,7 +4028,7 @@
     "p": "Tidiane Diarrassouba",
     "pos": "AiD",
     "grp": "ATT",
-    "age": 17,
+    "age": 18,
     "val": 0.5
    },
    {
@@ -4044,14 +4054,6 @@
     "grp": "ATT",
     "age": 20,
     "val": 3.0
-   },
-   {
-    "n": "",
-    "p": "Jordan",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 30,
-    "val": 1.5
    },
    {
     "n": "",
@@ -4766,7 +4768,7 @@
     "val": 0.2
    },
    {
-    "n": "",
+    "n": "25",
     "p": "Leonardo Buta",
     "pos": "ArG",
     "grp": "DEF",
@@ -5486,7 +5488,7 @@
   ],
   "GF38": [
    {
-    "n": "",
+    "n": "25",
     "p": "Théo Borne",
     "pos": "GdB",
     "grp": "GK",
@@ -5550,6 +5552,14 @@
     "val": 0.3
    },
    {
+    "n": "19",
+    "p": "Nesta Zahui",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 23,
+    "val": 0.7
+   },
+   {
     "n": "48",
     "p": "Sakhalou Niakaté",
     "pos": "ArD",
@@ -5580,6 +5590,14 @@
     "grp": "MID",
     "age": 22,
     "val": 0.4
+   },
+   {
+    "n": "45",
+    "p": "Romain Da Silva",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 22,
+    "val": 0.0
    },
    {
     "n": "8",
@@ -5614,15 +5632,7 @@
     "val": 0.38
    },
    {
-    "n": "19",
-    "p": "Nesta Zahui",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 23,
-    "val": 0.7
-   },
-   {
-    "n": "",
+    "n": "34",
     "p": "Zé Leite",
     "pos": "AiD",
     "grp": "ATT",
@@ -5760,7 +5770,7 @@
     "val": 0.0
    },
    {
-    "n": "",
+    "n": "5",
     "p": "Tuomas Ollila",
     "pos": "ArG",
     "grp": "DEF",
@@ -6834,11 +6844,11 @@
     "val": 0.15
    },
    {
-    "n": "24",
+    "n": "42",
     "p": "Dylan Tavares",
     "pos": "ArG",
     "grp": "DEF",
-    "age": 29,
+    "age": 30,
     "val": 0.25
    },
    {
@@ -6914,7 +6924,7 @@
     "val": 1.2
    },
    {
-    "n": "11",
+    "n": "47",
     "p": "Julien Vetro",
     "pos": "AiD",
     "grp": "ATT",
@@ -6942,7 +6952,7 @@
     "p": "Mathis Clairicia",
     "pos": "AC",
     "grp": "ATT",
-    "age": 23,
+    "age": 24,
     "val": 0.4
    },
    {
@@ -7138,6 +7148,14 @@
     "grp": "ATT",
     "age": 22,
     "val": 0.3
+   },
+   {
+    "n": "",
+    "p": "Ange Lago",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 0.1
    },
    {
     "n": "11",
