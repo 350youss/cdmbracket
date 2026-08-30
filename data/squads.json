@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-30T00:01:58",
- "sig": "838ad871cdda3ab77f50070e25309039",
+ "updated": "2026-08-30T12:01:07",
+ "sig": "3a739c42dbd68aff61598043cb3d30fc",
  "squads": {
   "FCB": [
    {
@@ -2824,6 +2824,18 @@
     "valSince": "30/08/2026"
    },
    {
+    "n": "",
+    "p": "Emiliano Martínez",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 33,
+    "val": 12.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "30/08/2026"
+   },
+   {
     "n": "44",
     "p": "Gabriel Slonina",
     "pos": "GdB",
@@ -3162,6 +3174,18 @@
      "min": 2443
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "30/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Kendry Páez",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 19,
+    "val": 8.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "30/08/2026"
    },
@@ -4374,24 +4398,6 @@
     "val": 30.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "30/08/2026"
-   },
-   {
-    "n": "23",
-    "p": "Emiliano Martínez",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 33,
-    "val": 12.0,
-    "stats": {
-     "m": 44,
-     "s": 43,
-     "g": 0,
-     "a": 1,
-     "min": 3870
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "30/08/2026"
    },
