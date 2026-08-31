@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-31T15:02:08",
- "sig": "900387e618a16aa15e4b1f6888912b55",
+ "updated": "2026-08-31T18:23:46",
+ "sig": "58ddf0424b3a6032355ff45afb79af15",
  "squads": {
   "FCB": [
    {
@@ -2698,6 +2698,18 @@
      "min": 7
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "31/08/2026"
+   },
+   {
+    "n": "29",
+    "p": "Bradley Barcola",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 23,
+    "val": 90.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "31/08/2026"
    },
@@ -7536,6 +7548,18 @@
      "min": 392
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "31/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Dinis Rodrigues",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 0.17,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "31/08/2026"
    }
