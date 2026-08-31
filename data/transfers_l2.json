@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-31T11:59:13",
- "sig": "c9149d910dbc25c5f48eadf35f5b1d39",
+ "updated": "2026-08-31T15:31:33",
+ "sig": "c0e4c237a438d8b870f0bf92be220723",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -18,6 +18,7 @@
   "ASSE|out|Brice Maubleu|Pau FC": "2026-08-18",
   "ASSE|out|Karim Cissé|Aubagne Air Bel": "2026-08-18",
   "ASSE|out|Igor Miladinovic|Partizan": "2026-08-18",
+  "ASSE|out|Aïmen Moueffek|Cádiz CF": "2026-08-31",
   "ASSE|out|Pierre Ekwah|AJ Auxerre": "2026-08-27",
   "ASSE|out|Luan Gadegbeku|Pau FC": "2026-08-18",
   "ASSE|out|Jebryl Sahraoui|Aubagne Air Bel": "2026-08-18",
@@ -219,11 +220,11 @@
   "EAG|out|Sohaib Naïr|Saint-Étienne": "2026-08-18",
   "EAG|out|Kalidou Sidibé|Akhmat Grozny": "2026-08-18",
   "EAG|out|Amadou Sagna|Kiryat Shmona": "2026-08-18",
+  "EAG|out|Youssef Njoya|FC Limonest": "2026-08-31",
   "EAG|out|Louis Mafouta|Le Mans FC": "2026-08-18",
   "EAG|out|Akim Abdallah|Pau FC": "2026-08-21",
   "EAG|out|Eden Gassama|VFC La Roche": "2026-08-18",
   "EAG|out|Alpha Sissoko|Sans club": "2026-08-18",
-  "EAG|out|Youssef Njoya|Sans club": "2026-08-18",
   "NANCY|in|Nordine Kandil|Amiens SC": "2026-08-18",
   "NANCY|in|Thierno Baldé|Troyes": "2026-08-18",
   "NANCY|in|Issam Bouaoune|LB Châteauroux": "2026-08-18",
@@ -477,6 +478,15 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Aïmen Moueffek",
+     "age": 25,
+     "pos": "MC",
+     "club": "Cádiz CF",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-08-31"
     },
     {
      "p": "Pierre Ekwah",
@@ -2398,6 +2408,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Youssef Njoya",
+     "age": 22,
+     "pos": "AiG",
+     "club": "FC Limonest",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Louis Mafouta",
      "age": 32,
      "pos": "AC",
@@ -2428,15 +2447,6 @@
      "p": "Alpha Sissoko",
      "age": 29,
      "pos": "ArD",
-     "club": "Sans club",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Youssef Njoya",
-     "age": 22,
-     "pos": "AiG",
      "club": "Sans club",
      "type": "none",
      "val": 0.0,
@@ -3526,14 +3536,6 @@
     "grp": "MID",
     "age": 25,
     "val": 1.7
-   },
-   {
-    "n": "29",
-    "p": "Aïmen Moueffek",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 25,
-    "val": 2.0
    },
    {
     "n": "21",
