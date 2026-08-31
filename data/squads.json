@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-31T11:59:09",
- "sig": "2c8801a48a4f8e853f01b1f08c7c13a1",
+ "updated": "2026-08-31T15:02:08",
+ "sig": "900387e618a16aa15e4b1f6888912b55",
  "squads": {
   "FCB": [
    {
@@ -1770,6 +1770,18 @@
      "min": 2025
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "31/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Allan",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 22,
+    "val": 20.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "31/08/2026"
    },
@@ -6488,18 +6500,6 @@
      "min": 2253
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "31/08/2026"
-   },
-   {
-    "n": "34",
-    "p": "Yanis Massolin",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 23,
-    "val": 4.5,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "31/08/2026"
    },
