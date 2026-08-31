@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-30T19:39:16",
- "sig": "aef7e26782e38e2b8afb5b2bb9f19400",
+ "updated": "2026-08-31T11:59:13",
+ "sig": "c9149d910dbc25c5f48eadf35f5b1d39",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -206,6 +206,7 @@
   "GF38|out|Maxime Pattier|US Saint-Malo": "2026-08-18",
   "GF38|out|Stone Mambo|FC Noah": "2026-08-18",
   "GF38|out|Shaquil Delos|La Louvière": "2026-08-18",
+  "GF38|out|Evans Maurin|Casa Pia": "2026-08-31",
   "GF38|out|Allan Tchaptchet|RE Virton": "2026-08-18",
   "GF38|out|Alan Kerouedan|AS Cannes": "2026-08-18",
   "EAG|in|Teddy Averlant|Amiens SC": "2026-08-18",
@@ -252,6 +253,7 @@
   "ANNECY|in|David Oduro|Barça Atlètic": "2026-08-22",
   "ANNECY|out|Valentin Jacob|GFA Rumilly Val": "2026-08-18",
   "ANNECY|out|Aymerick Nedelec|Chambéry SF": "2026-08-18",
+  "ANNECY|out|Ben Hamed Touré|Barnsley FC": "2026-08-31",
   "ANNECY|out|Abdel Hbouch|US Boulogne": "2026-08-18",
   "ANNECY|out|Cédric Makutungu|AS Cannes": "2026-08-18",
   "ANNECY|out|Ranjan Neelakandan|FC Vaduz": "2026-08-18",
@@ -2269,6 +2271,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Evans Maurin",
+     "age": 25,
+     "pos": "AC",
+     "club": "Casa Pia",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Allan Tchaptchet",
      "age": 24,
      "pos": "DC",
@@ -2711,6 +2722,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Ben Hamed Touré",
+     "age": 23,
+     "pos": "AC",
+     "club": "Barnsley FC",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-31"
     },
     {
      "p": "Abdel Hbouch",
@@ -5688,14 +5708,6 @@
     "val": 0.4
    },
    {
-    "n": "20",
-    "p": "Evans Maurin",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 25,
-    "val": 0.3
-   },
-   {
     "n": "12",
     "p": "Ugo Bonnet",
     "pos": "AC",
@@ -6358,14 +6370,6 @@
     "val": 0.9
    },
    {
-    "n": "11",
-    "p": "Ben Hamed Touré",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 23,
-    "val": 0.6
-   },
-   {
     "n": "9",
     "p": "Thibault Rambaud",
     "pos": "AC",
@@ -6500,7 +6504,7 @@
     "p": "Hermann Esmel",
     "pos": "MDC",
     "grp": "MID",
-    "age": 26,
+    "age": 27,
     "val": 0.25
    },
    {
