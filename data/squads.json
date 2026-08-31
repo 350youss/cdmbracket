@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-31T18:23:46",
- "sig": "58ddf0424b3a6032355ff45afb79af15",
+ "updated": "2026-08-31T21:01:04",
+ "sig": "6c21ae4f45eb39425cc71c2f65d9629a",
  "squads": {
   "FCB": [
    {
@@ -2594,24 +2594,6 @@
     "valSince": "31/08/2026"
    },
    {
-    "n": "43",
-    "p": "Stefan Bajcetic",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 21,
-    "val": 4.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "31/08/2026"
-   },
-   {
     "n": "10",
     "p": "Alexis Mac Allister",
     "pos": "MC",
@@ -3340,24 +3322,6 @@
      "g": 2,
      "a": 2,
      "min": 527
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "31/08/2026"
-   },
-   {
-    "n": "",
-    "p": "David Datro Fofana",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 23,
-    "val": 4.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -4780,7 +4744,7 @@
     "valSince": "31/08/2026"
    },
    {
-    "n": "",
+    "n": "11",
     "p": "Nicolas Jackson",
     "pos": "AC",
     "grp": "ATT",
@@ -6444,24 +6408,6 @@
     "valSince": "31/08/2026"
    },
    {
-    "n": "17",
-    "p": "Andy Diouf",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 23,
-    "val": 20.0,
-    "stats": {
-     "m": 29,
-     "s": 7,
-     "g": 4,
-     "a": 0,
-     "min": 823
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "31/08/2026"
-   },
-   {
     "n": "7",
     "p": "Piotr Zielinski",
     "pos": "MC",
@@ -6510,6 +6456,24 @@
      "g": 1,
      "a": 3,
      "min": 2253
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "31/08/2026"
+   },
+   {
+    "n": "17",
+    "p": "Andy Diouf",
+    "pos": "MD",
+    "grp": "MID",
+    "age": 23,
+    "val": 20.0,
+    "stats": {
+     "m": 29,
+     "s": 7,
+     "g": 4,
+     "a": 0,
+     "min": 823
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -7006,24 +6970,6 @@
     "val": 50.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "31/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Santiago Gimenez",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 25,
-    "val": 18.0,
-    "stats": {
-     "m": 18,
-     "s": 12,
-     "g": 1,
-     "a": 3,
-     "min": 1037
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "31/08/2026"
    },
