@@ -1,6 +1,6 @@
 {
- "updated": "2026-08-31T15:31:33",
- "sig": "c0e4c237a438d8b870f0bf92be220723",
+ "updated": "2026-08-31T18:31:04",
+ "sig": "768203ca1eedbb73124bf9b13ea297d8",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -32,6 +32,7 @@
   "FCN|in|Ryad Hachem|Red Star FC": "2026-08-27",
   "FCN|in|Saïdou Sow|R. Strasbourg": "2026-08-18",
   "FCN|out|Matthis Abline|Monaco": "2026-08-18",
+  "FCN|out|Herba Guirassy|BSC Young Boys": "2026-08-31",
   "FCN|out|Alban Lafont|Amed SK": "2026-08-18",
   "FCN|out|Chidozie Awaziem|Konyaspor": "2026-08-18",
   "FCN|out|Anthony Lopes|Angers SCO": "2026-08-18",
@@ -91,6 +92,7 @@
   "FCM|out|Fodé Ballo-Touré|Sans club": "2026-08-18",
   "FCM|out|Benjamin Stambouli|Sans club": "2026-08-18",
   "MHSC|in|Mamadou Camara|Stade Lavallois": "2026-08-18",
+  "MHSC|in|Alpha Sissoko|EA Guingamp": "2026-08-31",
   "MHSC|in|Florian Tardieu|Saint-Étienne": "2026-08-18",
   "MHSC|in|Grégory Ayem|Racing CFF": "2026-08-18",
   "MHSC|in|Yanis Zouaoui|Le Havre AC": "2026-08-28",
@@ -146,6 +148,7 @@
   "PAU|in|Royce Openda|G. Bordeaux": "2026-08-18",
   "PAU|in|Tom Saettel|FR Haguenau": "2026-08-18",
   "PAU|in|Maxime Adam|SR Colmar": "2026-08-18",
+  "PAU|in|Bilal Brahimi|Viborg FF": "2026-08-31",
   "PAU|in|Akim Abdallah|EA Guingamp": "2026-08-21",
   "PAU|in|Hacène Benali|Red Star FC": "2026-08-18",
   "PAU|in|Alexis Lefebvre|RFC Liège": "2026-08-18",
@@ -219,12 +222,12 @@
   "EAG|in|Jeovanni Dianganga|KSC Lokeren": "2026-08-18",
   "EAG|out|Sohaib Naïr|Saint-Étienne": "2026-08-18",
   "EAG|out|Kalidou Sidibé|Akhmat Grozny": "2026-08-18",
+  "EAG|out|Alpha Sissoko|Montpellier": "2026-08-31",
   "EAG|out|Amadou Sagna|Kiryat Shmona": "2026-08-18",
   "EAG|out|Youssef Njoya|FC Limonest": "2026-08-31",
   "EAG|out|Louis Mafouta|Le Mans FC": "2026-08-18",
   "EAG|out|Akim Abdallah|Pau FC": "2026-08-21",
   "EAG|out|Eden Gassama|VFC La Roche": "2026-08-18",
-  "EAG|out|Alpha Sissoko|Sans club": "2026-08-18",
   "NANCY|in|Nordine Kandil|Amiens SC": "2026-08-18",
   "NANCY|in|Thierno Baldé|Troyes": "2026-08-18",
   "NANCY|in|Issam Bouaoune|LB Châteauroux": "2026-08-18",
@@ -614,6 +617,15 @@
      "type": "paid",
      "val": 25.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Herba Guirassy",
+     "age": 20,
+     "pos": "AiG",
+     "club": "BSC Young Boys",
+     "type": "paid",
+     "val": 5.0,
+     "fs": "2026-08-31"
     },
     {
      "p": "Alban Lafont",
@@ -1175,6 +1187,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Alpha Sissoko",
+     "age": 29,
+     "pos": "ArD",
+     "club": "EA Guingamp",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Florian Tardieu",
      "age": 34,
      "pos": "MC",
@@ -1708,6 +1729,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Bilal Brahimi",
+     "age": 26,
+     "pos": "AiD",
+     "club": "Viborg FF",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-31"
     },
     {
      "p": "Akim Abdallah",
@@ -2399,6 +2429,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Alpha Sissoko",
+     "age": 29,
+     "pos": "ArD",
+     "club": "Montpellier",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Amadou Sagna",
      "age": 27,
      "pos": "AiD",
@@ -2440,15 +2479,6 @@
      "pos": "DC",
      "club": "VFC La Roche",
      "type": "loan",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Alpha Sissoko",
-     "age": 29,
-     "pos": "ArD",
-     "club": "Sans club",
-     "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
     }
@@ -3804,14 +3834,6 @@
     "val": 10.0
    },
    {
-    "n": "11",
-    "p": "Herba Guirassy",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 20,
-    "val": 7.0
-   },
-   {
     "n": "7",
     "p": "Antoine Joujou",
     "pos": "AiG",
@@ -4392,6 +4414,14 @@
     "grp": "DEF",
     "age": 19,
     "val": 1.5
+   },
+   {
+    "n": "",
+    "p": "Alpha Sissoko",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 29,
+    "val": 1.2
    },
    {
     "n": "25",
@@ -5272,6 +5302,14 @@
     "grp": "ATT",
     "age": 22,
     "val": 5.0
+   },
+   {
+    "n": "17",
+    "p": "Bilal Brahimi",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 26,
+    "val": 1.0
    },
    {
     "n": "11",
