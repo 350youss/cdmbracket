@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-01T15:00:53",
- "sig": "cd19e13257ce38de3943a9bb98b93ac0",
+ "updated": "2026-09-01T18:00:49",
+ "sig": "dee82cc81cf3b523f75dafb6ce6ecf8a",
  "squads": {
   "FCB": [
    {
@@ -490,7 +490,7 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "",
+    "n": "9",
     "p": "Gabriel Jesus",
     "pos": "AC",
     "grp": "ATT",
@@ -5084,18 +5084,6 @@
      "min": 4060
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "22",
-    "p": "Arijon Ibrahimovic",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 20,
-    "val": 10.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
