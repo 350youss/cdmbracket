@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-01T13:06:39",
- "sig": "07f91e464fccdac2f8603775c3f0db6a",
+ "updated": "2026-09-01T15:31:07",
+ "sig": "39ab82430e30a1274405ab2021af1ac1",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -31,6 +31,7 @@
   "FCN|in|Wilitty Younoussa|Rodez AF": "2026-08-18",
   "FCN|in|Maxime Dupé|OGC Nice": "2026-08-18",
   "FCN|in|Ryad Hachem|Red Star FC": "2026-08-27",
+  "FCN|in|Amin Cherni|Göztepe": "2026-09-01",
   "FCN|in|Saïdou Sow|R. Strasbourg": "2026-08-18",
   "FCN|out|Matthis Abline|Monaco": "2026-08-18",
   "FCN|out|Herba Guirassy|BSC Young Boys": "2026-08-31",
@@ -121,6 +122,7 @@
   "RED|in|Ilija Despotovic|Lausanne-Sport": "2026-09-01",
   "RED|in|Elyaz Zidane|Betis Deportivo": "2026-08-18",
   "RED|in|Leonardo Buta|Udinese": "2026-08-19",
+  "RED|in|Mahamadou Diawara|Ol. Lyonnais": "2026-09-01",
   "RED|in|Idrissa Sabaly|R. Strasbourg": "2026-08-27",
   "RED|out|Balthazar Pierret|FC Nantes": "2026-09-01",
   "RED|out|Rayane Doucouré|Aubagne Air Bel": "2026-08-18",
@@ -135,6 +137,7 @@
   "RAF|in|Damjan Pavlovic|Kauno Zalgiris": "2026-08-18",
   "RAF|in|Nachon Nsingi|La Louvière": "2026-08-18",
   "RAF|in|Antonin Cartillier|FC Rouen 1899": "2026-08-18",
+  "RAF|in|Mathis Saka|Toulouse": "2026-09-01",
   "RAF|out|Taïryk Arconte|Millwall": "2026-08-18",
   "RAF|out|Nolan Galves|West Brom": "2026-08-18",
   "RAF|out|Alexis Trouillet|Standard Liège": "2026-08-18",
@@ -255,10 +258,11 @@
   "NANCY|out|Faitout Maouassa|Sans club": "2026-08-18",
   "NANCY|out|Oumar Sidibé|Sans club": "2026-08-18",
   "ANNECY|in|Pascal Mozie|Legia Varsovie": "2026-08-18",
-  "ANNECY|in|Alan Mondesir|Montlouis": "2026-08-18",
   "ANNECY|in|Esteban Marre|Istres FC": "2026-08-18",
+  "ANNECY|in|Alan Mondesir|Montlouis": "2026-08-18",
   "ANNECY|in|Sacha Lima|UF Touraine": "2026-08-18",
   "ANNECY|in|Emmanuel Louisir|Racing CFF": "2026-08-18",
+  "ANNECY|in|Jonathan Do Marcolino|Stade Rennais": "2026-09-01",
   "ANNECY|in|David Oduro|Barça Atlètic": "2026-08-22",
   "ANNECY|out|Valentin Jacob|GFA Rumilly Val": "2026-08-18",
   "ANNECY|out|Aymerick Nedelec|Chambéry SF": "2026-08-18",
@@ -612,6 +616,15 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-27"
+    },
+    {
+     "p": "Amin Cherni",
+     "age": 25,
+     "pos": "MG",
+     "club": "Göztepe",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Saïdou Sow",
@@ -1474,6 +1487,15 @@
      "fs": "2026-08-19"
     },
     {
+     "p": "Mahamadou Diawara",
+     "age": 21,
+     "pos": "MC",
+     "club": "Ol. Lyonnais",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Idrissa Sabaly",
      "age": 18,
      "pos": "MDC",
@@ -1608,6 +1630,15 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Mathis Saka",
+     "age": 19,
+     "pos": "MO",
+     "club": "Toulouse",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     }
    ],
    "dep": [
@@ -2750,19 +2781,19 @@
      "fs": "2026-08-18"
     },
     {
-     "p": "Alan Mondesir",
+     "p": "Esteban Marre",
      "age": 22,
-     "pos": "AiG",
-     "club": "Montlouis",
+     "pos": "ArD",
+     "club": "Istres FC",
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
     },
     {
-     "p": "Esteban Marre",
+     "p": "Alan Mondesir",
      "age": 22,
-     "pos": "ArD",
-     "club": "Istres FC",
+     "pos": "AiG",
+     "club": "Montlouis",
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
@@ -2784,6 +2815,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Jonathan Do Marcolino",
+     "age": 20,
+     "pos": "DC",
+     "club": "Stade Rennais",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "David Oduro",
@@ -3894,6 +3934,14 @@
     "val": 0.9
    },
    {
+    "n": "75",
+    "p": "Amin Cherni",
+    "pos": "MG",
+    "grp": "MID",
+    "age": 25,
+    "val": 3.5
+   },
+   {
     "n": "19",
     "p": "Louis Leroux",
     "pos": "MO",
@@ -4944,6 +4992,14 @@
     "val": 0.1
    },
    {
+    "n": "",
+    "p": "Mahamadou Diawara",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 21,
+    "val": 1.0
+   },
+   {
     "n": "17",
     "p": "Samuel Renel",
     "pos": "MC",
@@ -5144,6 +5200,14 @@
     "grp": "MID",
     "age": 28,
     "val": 0.25
+   },
+   {
+    "n": "",
+    "p": "Mathis Saka",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 19,
+    "val": 0.5
    },
    {
     "n": "13",
@@ -6332,6 +6396,14 @@
     "grp": "DEF",
     "age": 30,
     "val": 0.4
+   },
+   {
+    "n": "",
+    "p": "Jonathan Do Marcolino",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 0.3
    },
    {
     "n": "23",
