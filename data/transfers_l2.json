@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-01T21:31:01",
- "sig": "95f8135836d68555b636a63ae79f880a",
+ "updated": "2026-09-02T00:31:00",
+ "sig": "0d4c270db3e691b89037c9d0f6335693",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -145,6 +145,7 @@
   "RED|out|Vincent Kany|Sans club": "2026-08-18",
   "RAF|in|Mathis Touho|FC Villefranche": "2026-08-18",
   "RAF|in|Mohamed Sylla|Bourg-en-Bresse": "2026-08-25",
+  "RAF|in|Kelian Nsona|Casa Pia": "2026-09-02",
   "RAF|in|Steven Luyambula|US Orléans": "2026-08-18",
   "RAF|in|Damjan Pavlovic|Kauno Zalgiris": "2026-08-18",
   "RAF|in|Nachon Nsingi|La Louvière": "2026-08-18",
@@ -158,6 +159,7 @@
   "RAF|out|Morgan Corredor|Tarbes Pyrénées": "2026-08-18",
   "RAF|out|Samy Benchamma|JS Kabylie": "2026-09-01",
   "RAF|out|Clément Jolibois|Kifisia": "2026-08-26",
+  "RAF|out|Ibrahima Baldé|FC Lorient": "2026-09-02",
   "PAU|in|Babacar Leye|FC Villefranche": "2026-08-18",
   "PAU|in|Jessy Benet|Grenoble": "2026-08-18",
   "PAU|in|Mathys Tourraine|Paris FC": "2026-08-18",
@@ -236,6 +238,7 @@
   "GF38|out|Stone Mambo|FC Noah": "2026-08-18",
   "GF38|out|Shaquil Delos|La Louvière": "2026-08-18",
   "GF38|out|Evans Maurin|Casa Pia": "2026-08-31",
+  "GF38|out|Mathieu Mion|US Boulogne": "2026-09-02",
   "GF38|out|Allan Tchaptchet|RE Virton": "2026-08-18",
   "GF38|out|Alan Kerouedan|AS Cannes": "2026-08-18",
   "EAG|in|Teddy Averlant|Amiens SC": "2026-08-18",
@@ -268,13 +271,13 @@
   "NANCY|out|Jimmy Evans|Uni. Católica": "2026-08-18",
   "NANCY|out|Adrien Julloux|Amiens SC": "2026-08-18",
   "NANCY|out|Cazim Suljic|Amiens SC": "2026-08-18",
+  "NANCY|out|Oumar Sidibé|AS Cannes": "2026-09-02",
   "NANCY|out|Martin Sourzac|Imperia": "2026-08-18",
   "NANCY|out|Bakari Camara|FC Rouen 1899": "2026-08-18",
   "NANCY|out|Patrick Ouotro|Vit. Guimarães": "2026-08-18",
   "NANCY|out|Mattheo Guendez|Paris 13 Atl.": "2026-08-18",
   "NANCY|out|Youssouf Tandia|SAS Épinal": "2026-08-18",
   "NANCY|out|Faitout Maouassa|Sans club": "2026-08-18",
-  "NANCY|out|Oumar Sidibé|Sans club": "2026-08-18",
   "ANNECY|in|Pascal Mozie|Legia Varsovie": "2026-08-18",
   "ANNECY|in|Alan Mondesir|Montlouis": "2026-08-18",
   "ANNECY|in|Esteban Marre|Istres FC": "2026-08-18",
@@ -319,6 +322,7 @@
   "BOUL|in|Oscar Lenne|RC Lens Espoir": "2026-08-18",
   "BOUL|in|Abdel Hbouch|FC Annecy": "2026-08-18",
   "BOUL|in|Benjamin Bešić|Bourg-en-Bresse": "2026-08-18",
+  "BOUL|in|Mathieu Mion|Grenoble": "2026-09-02",
   "BOUL|in|Théo Brusco|Differdange 03": "2026-08-18",
   "BOUL|out|Siad Gourville|La Louvière": "2026-08-18",
   "BOUL|out|Nathan Zohoré|Ferencváros": "2026-08-18",
@@ -666,7 +670,7 @@
     {
      "p": "Amin Cherni",
      "age": 25,
-     "pos": "MG",
+     "pos": "ArG",
      "club": "Göztepe",
      "type": "loan",
      "val": 0.0,
@@ -1723,6 +1727,15 @@
      "fs": "2026-08-25"
     },
     {
+     "p": "Kelian Nsona",
+     "age": 24,
+     "pos": "AiG",
+     "club": "Casa Pia",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-02"
+    },
+    {
      "p": "Steven Luyambula",
      "age": 23,
      "pos": "ArD",
@@ -1840,6 +1853,15 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-26"
+    },
+    {
+     "p": "Ibrahima Baldé",
+     "age": 23,
+     "pos": "AC",
+     "club": "FC Lorient",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-02"
     }
    ]
   },
@@ -2574,6 +2596,15 @@
      "fs": "2026-08-31"
     },
     {
+     "p": "Mathieu Mion",
+     "age": 25,
+     "pos": "ArG",
+     "club": "US Boulogne",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-02"
+    },
+    {
      "p": "Allan Tchaptchet",
      "age": 24,
      "pos": "DC",
@@ -2882,6 +2913,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Oumar Sidibé",
+     "age": 25,
+     "pos": "AiD",
+     "club": "AS Cannes",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-02"
+    },
+    {
      "p": "Martin Sourzac",
      "age": 34,
      "pos": "GdB",
@@ -2930,15 +2970,6 @@
      "p": "Faitout Maouassa",
      "age": 27,
      "pos": "ArG",
-     "club": "Sans club",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Oumar Sidibé",
-     "age": 25,
-     "pos": "AiD",
      "club": "Sans club",
      "type": "none",
      "val": 0.0,
@@ -3367,6 +3398,15 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Mathieu Mion",
+     "age": 25,
+     "pos": "ArG",
+     "club": "Grenoble",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-02"
     },
     {
      "p": "Théo Brusco",
@@ -4004,6 +4044,14 @@
     "val": 0.15
    },
    {
+    "n": "75",
+    "p": "Amin Cherni",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 25,
+    "val": 3.5
+   },
+   {
     "n": "13",
     "p": "Fodé Doucouré",
     "pos": "ArD",
@@ -4114,14 +4162,6 @@
     "grp": "MID",
     "age": 24,
     "val": 0.9
-   },
-   {
-    "n": "75",
-    "p": "Amin Cherni",
-    "pos": "MG",
-    "grp": "MID",
-    "age": 25,
-    "val": 3.5
    },
    {
     "n": "19",
@@ -5158,7 +5198,7 @@
     "val": 0.9
    },
    {
-    "n": "",
+    "n": "80",
     "p": "Côme Bianay Balcot",
     "pos": "ArD",
     "grp": "DEF",
@@ -5190,7 +5230,7 @@
     "val": 0.1
    },
    {
-    "n": "",
+    "n": "14",
     "p": "Mahamadou Diawara",
     "pos": "MC",
     "grp": "MID",
@@ -5424,20 +5464,20 @@
     "val": 0.07
    },
    {
+    "n": "",
+    "p": "Kelian Nsona",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 24,
+    "val": 0.6
+   },
+   {
     "n": "11",
     "p": "Mathis Touho",
     "pos": "AiG",
     "grp": "ATT",
     "age": 21,
     "val": 0.4
-   },
-   {
-    "n": "18",
-    "p": "Ibrahima Baldé",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 23,
-    "val": 2.0
    },
    {
     "n": "7",
@@ -5686,7 +5726,7 @@
     "p": "Babacar Leye",
     "pos": "AC",
     "grp": "ATT",
-    "age": 25,
+    "age": 26,
     "val": 0.35
    },
    {
@@ -5948,14 +5988,6 @@
     "grp": "DEF",
     "age": 24,
     "val": 1.2
-   },
-   {
-    "n": "26",
-    "p": "Mathieu Mion",
-    "pos": "ArG",
-    "grp": "DEF",
-    "age": 25,
-    "val": 0.3
    },
    {
     "n": "21",
@@ -7080,6 +7112,14 @@
     "val": 0.6
    },
    {
+    "n": "",
+    "p": "Mathieu Mion",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 26,
+    "val": 0.3
+   },
+   {
     "n": "26",
     "p": "Oscar Lenne",
     "pos": "ArG",
@@ -7544,7 +7584,7 @@
     "p": "Adel Lembezat",
     "pos": "MO",
     "grp": "MID",
-    "age": 27,
+    "age": 28,
     "val": 0.4
    },
    {
