@@ -1,13 +1,15 @@
 {
- "updated": "2026-08-28T23:05:34",
- "sig": "5b172f65b756aa2af033bcc9ccb7f5d5",
+ "updated": "2026-09-01T20:03:40",
+ "sig": "ac6eb5796371ea327a85f056119791f1",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
   "PSG|in|Mika Godts|Ajax": "2026-08-16",
   "PSG|in|Lucas Digne|Aston Villa": "2026-08-09",
   "PSG|in|Khalil Ayari|Stade Tunisien": "2026-08-09",
+  "PSG|out|Bradley Barcola|Liverpool": "2026-08-31",
   "PSG|out|Gonçalo Ramos|AC Milan": "2026-08-09",
+  "PSG|out|Ibrahim Mbaye|Aston Villa": "2026-09-01",
   "PSG|out|Randal Kolo Muani|Juventus": "2026-08-09",
   "PSG|out|Kang-in Lee|Atlético": "2026-08-09",
   "PSG|out|Noham Kamara|Ol. Lyonnais": "2026-08-09",
@@ -21,7 +23,9 @@
   "RCL|in|Michaël Cuisance|Hertha BSC": "2026-08-09",
   "RCL|in|Franjo Ivanović|Benfica": "2026-08-12",
   "RCL|in|Maik Nawrocki|Celtic Glasgow": "2026-08-09",
+  "RCL|in|Junior Kadile|Servette FC": "2026-09-01",
   "RCL|in|Thorgan Hazard|RSC Anderlecht": "2026-08-09",
+  "RCL|in|Jean-Clair Todibo|West Ham Utd.": "2026-09-01",
   "RCL|out|Mamadou Sangaré|Brentford": "2026-08-09",
   "RCL|out|Facundo Medina|Marseille": "2026-08-09",
   "RCL|out|Anass Zaroury|Panathinaikos": "2026-08-09",
@@ -35,18 +39,22 @@
   "RCL|out|Fodé Sylla|FC Sion": "2026-08-09",
   "RCL|out|Kembo Diliwidi|FCV Dender EH": "2026-08-09",
   "RCL|out|Erawan Garnier|SC Bastia": "2026-08-09",
+  "RCL|out|Rayan Fofana|Le Havre AC": "2026-08-31",
   "RCL|out|Hervé Koffi|Union SG": "2026-08-09",
   "RCL|out|Jeremy Agbonifo|Jagiellonia": "2026-08-09",
   "RCL|out|Goduine Koyalipou|KV Kortrijk": "2026-08-09",
   "RCL|out|Mattia Fortin|Palerme": "2026-08-09",
   "RCL|out|Anthony Bermont|Angers SCO": "2026-08-09",
   "RCL|out|Gabin Capuano|QRM": "2026-08-15",
+  "LOSC|in|Ayase Ueda|Feyenoord": "2026-09-01",
   "LOSC|in|Başar Önal|NEC Nijmegen": "2026-08-09",
+  "LOSC|in|Maurits Kjærgaard|RB Salzbourg": "2026-09-01",
   "LOSC|in|Orlando Gill|San Lorenzo": "2026-08-27",
   "LOSC|in|Loun Srdanovic|Servette FC": "2026-08-09",
   "LOSC|in|Tanguy Nianzou|Séville FC": "2026-08-09",
   "LOSC|in|Dilane Bakwa|Nott'm Forest": "2026-08-26",
   "LOSC|out|Ayyoub Bouaddi|Man City": "2026-08-26",
+  "LOSC|out|Matias Fernandez-Pardo|Newcastle": "2026-09-01",
   "LOSC|out|Ugo Raghouber|Burnley FC": "2026-08-09",
   "LOSC|out|Ichem Ferrah|Pisa": "2026-08-09",
   "LOSC|out|Vincent Burlet|Cracovia": "2026-08-09",
@@ -54,6 +62,7 @@
   "LOSC|out|Thomas Meunier|AFC Sunderland": "2026-08-09",
   "LOSC|out|Aïssa Mandi|UD Levante": "2026-08-09",
   "LOSC|out|Lisandru Olmeta|Torreense": "2026-08-09",
+  "LOSC|out|Félix Correia|Séville FC": "2026-09-01",
   "LOSC|out|Marius Broholm|FC Utrecht": "2026-08-20",
   "LOSC|out|Rafael Fernandes|Marítimo": "2026-08-09",
   "LOSC|out|Ousmane Touré|USL Dunkerque": "2026-08-18",
@@ -68,8 +77,10 @@
   "OL|in|Zachary Athekame|AC Milan": "2026-08-14",
   "OL|out|Afonso Moreira|Leverkusen": "2026-08-09",
   "OL|out|Martín Satriano|FC Getafe": "2026-08-09",
+  "OL|out|Duje Caleta-Car|Sassuolo": "2026-09-01",
   "OL|out|Achraf Laâziri|Ittihad Tanger": "2026-08-09",
   "OL|out|Orel Mangala|FC Getafe": "2026-08-09",
+  "OL|out|Mahamadou Diawara|Red Star FC": "2026-09-01",
   "OL|out|Enzo Molebe|Lausanne-Sport": "2026-08-11",
   "OL|out|Daryll Benlahlou|Montpellier": "2026-08-09",
   "OL|out|Rachid Ghezzal|Sans club": "2026-08-09",
@@ -81,6 +92,7 @@
   "OM|out|Gerónimo Rulli|Man City": "2026-08-12",
   "OM|out|Hamed Traoré|Genoa": "2026-08-09",
   "OM|out|Pierre-Emerick Aubameyang|Dep. La Corogne": "2026-08-09",
+  "OM|out|Leonardo Balerdi|AS Roma": "2026-08-30",
   "OM|out|Bilal Nadir|Hambourg": "2026-08-09",
   "SRFC|in|Eliezer Mayenda|AFC Sunderland": "2026-08-09",
   "SRFC|in|Bryan Reynolds|KVC Westerlo": "2026-08-09",
@@ -92,9 +104,11 @@
   "SRFC|in|Nicolas Lemaître|Troyes": "2026-08-09",
   "SRFC|out|Jérémy Jacquet|Liverpool": "2026-08-09",
   "SRFC|out|Breel Embolo|Atlanta": "2026-08-23",
+  "SRFC|out|Lilian Brassier|Francfort": "2026-09-01",
   "SRFC|out|Albert Grønbaek|Hambourg": "2026-08-09",
   "SRFC|out|Jordan James|Wolverhampton": "2026-08-20",
   "SRFC|out|Mikayil Faye|1.FC Nürnberg": "2026-08-09",
+  "SRFC|out|Jonathan Do Marcolino|FC Annecy": "2026-09-01",
   "SRFC|out|Yassir Zabiri|Racing": "2026-08-09",
   "SRFC|out|Seko Fofana|FC Porto": "2026-08-26",
   "SRFC|out|Glen Kamara|QPR": "2026-08-09",
@@ -118,8 +132,10 @@
   "ASM|out|Krépin Diatta|Sans club": "2026-08-09",
   "ASM|out|Paul Pogba|Sans club": "2026-08-19",
   "RCSA|in|Karim Coulibaly|Werder Brême": "2026-08-21",
+  "RCSA|in|Oso|Séville FC": "2026-08-30",
   "RCSA|in|Diogo Sousa|Vit. Guimarães": "2026-08-09",
   "RCSA|in|Jacobo Ortega|RM Castilla": "2026-08-17",
+  "RCSA|in|Deivid Washington|Chelsea U21": "2026-09-01",
   "RCSA|in|Jeyland Mitchell|Sturm Graz": "2026-08-19",
   "RCSA|in|Fábio Baldé|Hambourg": "2026-08-14",
   "RCSA|in|Omari Kellyman|Chelsea U21": "2026-08-25",
@@ -128,22 +144,26 @@
   "RCSA|in|Mateo Del Blanco|Unión Santa Fe": "2026-08-09",
   "RCSA|in|Benjamin Brantlind|IFK Göteborg": "2026-08-09",
   "RCSA|in|Milosz Piekutowski|Jagiellonia": "2026-08-19",
+  "RCSA|in|Conrad Harder|Leipzig": "2026-09-01",
   "RCSA|in|Filip Jørgensen|Chelsea": "2026-08-11",
   "RCSA|out|Diego Moreira|AC Milan": "2026-08-19",
   "RCSA|out|Valentín Barco|Chelsea": "2026-08-09",
   "RCSA|out|Julio Enciso|Ipswich Town": "2026-08-17",
+  "RCSA|out|Guéla Doué|Leverkusen": "2026-09-01",
   "RCSA|out|Emmanuel Emegha|Chelsea": "2026-08-09",
   "RCSA|out|Abdoul Ouattara|Ipswich Town": "2026-08-17",
   "RCSA|out|Rabby Nzingoula|West Brom": "2026-08-11",
   "RCSA|out|Junior Mwanga|Le Havre AC": "2026-08-09",
   "RCSA|out|Pape Diong|KVC Westerlo": "2026-08-27",
   "RCSA|out|Stefan Bajic|Alem. Aachen": "2026-08-09",
+  "RCSA|out|Óscar Perea|América": "2026-08-09",
+  "RCSA|out|Mathis Amougou|Toulouse": "2026-09-01",
   "RCSA|out|Milos Lukovic|1.FC K'lautern": "2026-08-27",
   "RCSA|out|Rayane Messi|Al-Ettifaq": "2026-08-14",
   "RCSA|out|Saïdou Sow|FC Nantes": "2026-08-09",
-  "RCSA|out|Óscar Perea|América": "2026-08-09",
   "RCSA|out|Idrissa Sabaly|Red Star FC": "2026-08-27",
   "RCSA|out|Karl-Johan Johnsson|Sans club": "2026-08-09",
+  "FCL|in|Srdjan Kuzmic|Viborg FF": "2026-09-01",
   "FCL|in|Gabin Bernardeau|OGC Nice": "2026-08-09",
   "FCL|in|Noah Mbamba|Leverkusen": "2026-08-09",
   "FCL|in|Nosa Edward Obaretin|Naples": "2026-08-25",
@@ -156,13 +176,17 @@
   "FCL|out|Darlin Yongwa|Norwich": "2026-08-09",
   "FCL|out|Sambou Soumano|Stade de Reims": "2026-08-09",
   "FCL|out|Laurent Abergel|OGC Nice": "2026-08-09",
+  "FCL|out|Jérémy Hatchi|Montpellier": "2026-09-01",
   "FCL|out|Enzo Genton|Amiens SC": "2026-08-25",
   "FCL|out|Isaac Monnier|SC Bastia": "2026-08-09",
   "FCL|out|Igor Silva|Sans club": "2026-08-09",
   "TFC|in|Thomas Jørgensen|Viborg FF": "2026-08-19",
+  "TFC|in|Niko Sigur|Hajduk Split": "2026-09-01",
+  "TFC|in|Casper Tengstedt|Feyenoord": "2026-08-31",
   "TFC|in|Sion Oppong|Brommapojkarna": "2026-08-09",
   "TFC|in|Christ Tapé|AC Horsens": "2026-08-09",
   "TFC|in|Ismaïl Diallo|Dijon": "2026-08-09",
+  "TFC|in|Mathis Amougou|R. Strasbourg": "2026-09-01",
   "TFC|in|David Odogu|AC Milan": "2026-08-19",
   "TFC|out|Dayann Méthalie|AFC Sunderland": "2026-08-21",
   "TFC|out|Emersonn|Ipswich Town": "2026-08-09",
@@ -175,6 +199,7 @@
   "TFC|out|Ibrahim Cissoko|PEC Zwolle": "2026-08-09",
   "TFC|out|Edhy Zuliani|VVV-Venlo": "2026-08-09",
   "TFC|out|Mário Sauer|1.FC K'lautern": "2026-08-26",
+  "TFC|out|Mathis Saka|Rodez AF": "2026-09-01",
   "TFC|out|Ylies Aradj|Aubagne Air Bel": "2026-08-26",
   "TFC|out|Aymen Sadi|Aubagne Air Bel": "2026-08-09",
   "TFC|out|Enzo Faty|Francs Borains": "2026-08-27",
@@ -205,6 +230,7 @@
   "SB29|in|Egil Selvik|Watford": "2026-08-13",
   "SB29|in|Romain Cagnon|Sans club": "2026-08-19",
   "SB29|out|Grégoire Coudert|Burnley FC": "2026-08-19",
+  "SB29|out|Romain Del Castillo|CA Osasuna": "2026-09-01",
   "SB29|out|Daouda Guindo|Stade de Reims": "2026-08-09",
   "SB29|out|Noah Jauny|Francs Borains": "2026-08-12",
   "SCO|in|Joseph Kalulu|Pau FC": "2026-08-19",
@@ -216,6 +242,7 @@
   "SCO|out|Sidiki Chérif|Fenerbahçe": "2026-08-09",
   "SCO|out|Jacques Ekomié|Wrexham": "2026-08-27",
   "SCO|out|Florent Hanin|Nea Salamis": "2026-08-09",
+  "SCO|out|Yacine Gaya|QRM": "2026-08-31",
   "SCO|out|Marius Courcoul|La Louvière": "2026-08-14",
   "SCO|out|Lanroy Machine|Heerenveen": "2026-08-09",
   "SCO|out|Dan Sinaté|Amiens SC": "2026-08-09",
@@ -227,6 +254,7 @@
   "HAC|in|Gauthier Gallon|FCV Dender EH": "2026-08-27",
   "HAC|in|Kaito Mizuta|RW Essen": "2026-08-09",
   "HAC|in|Vincent Sasso|USL Dunkerque": "2026-08-09",
+  "HAC|in|Rayan Fofana|RC Lens": "2026-08-31",
   "HAC|in|Elias Jelert|Galatasaray": "2026-08-21",
   "HAC|in|Amir Richardson|Fiorentina": "2026-08-09",
   "HAC|in|Ahmed Touba|Panathinaikos": "2026-08-27",
@@ -238,6 +266,7 @@
   "HAC|out|Kenny Quetant|Werder Brême": "2026-08-09",
   "HAC|out|Loïc Nego|Omonia Nicosie": "2026-08-09",
   "HAC|out|Yanis Zouaoui|Montpellier": "2026-08-28",
+  "HAC|out|Fodé Doucouré|FC Nantes": "2026-09-01",
   "HAC|out|Mory Diaw|Al-Shabab": "2026-08-24",
   "HAC|out|Mokrane Bentoumi|Roda JC": "2026-08-27",
   "HAC|out|Noam Obougou|AS Nancy": "2026-08-12",
@@ -250,8 +279,10 @@
   "AJA|in|Mamadou Diop|Grenoble": "2026-08-09",
   "AJA|in|Rémy Labeau Lascary|RC Lens": "2026-08-09",
   "AJA|in|Sékou Fofana|Lausanne-Sport": "2026-08-09",
+  "AJA|in|Axel Tuanzebe|Burnley FC": "2026-09-01",
   "AJA|in|Paul Nardi|QPR": "2026-08-09",
   "AJA|in|Xiangxin Wei|MZ Hakka": "2026-08-09",
+  "AJA|in|Cameron Archer|Southampton": "2026-09-01",
   "AJA|in|Pierre Ekwah|Saint-Étienne": "2026-08-27",
   "AJA|out|Lassine Sinayoko|Paris FC": "2026-08-09",
   "AJA|out|Paul Joly|1.FC K'lautern": "2026-08-09",
@@ -259,6 +290,7 @@
   "AJA|out|Gideon Mensah|1.FC Köln": "2026-08-09",
   "AJA|out|Donovan Léon|Abha": "2026-08-09",
   "AJA|out|Saad Agouzoul|FC Sochaux": "2026-08-09",
+  "AJA|out|Theo Bair|Bolton": "2026-09-01",
   "AJA|out|Théo De Percin|SC Bastia": "2026-08-09",
   "AJA|out|Tom Negrel|Sans club": "2026-08-09",
   "AJA|out|Nathan Buayi-Kiala|Sans club": "2026-08-09",
@@ -266,7 +298,9 @@
   "OGCN|in|Nathan Ngoumou|Bor. M'gladbach": "2026-08-17",
   "OGCN|in|Laurent Abergel|FC Lorient": "2026-08-09",
   "OGCN|in|Axel Witsel|Girona FC": "2026-08-19",
+  "OGCN|in|Mohamed Amoura|Wolfsburg": "2026-09-01",
   "OGCN|in|Elye Wahi|Francfort": "2026-08-24",
+  "OGCN|in|Niels Nkounkou|Francfort": "2026-09-01",
   "OGCN|in|Zoumana Diallo|Nice Espoir": "2026-08-17",
   "OGCN|out|Mohamed-Ali Cho|Hull City": "2026-08-27",
   "OGCN|out|Kojo Peprah Oppong|Fenerbahçe": "2026-08-28",
@@ -287,7 +321,9 @@
   "ESTAC|in|Patrick Beach|Melbourne City": "2026-08-09",
   "ESTAC|in|Iron Gomis|Zira FK": "2026-08-09",
   "ESTAC|in|Dermane Karim|Lommel SK": "2026-08-21",
+  "ESTAC|in|Jérémy Le Douaron|Palerme": "2026-09-01",
   "ESTAC|in|Hugo Picard|Columbus": "2026-08-17",
+  "ESTAC|in|Timothé Nkada|Standard Liège": "2026-09-01",
   "ESTAC|out|Mathys Detourbet|Man City": "2026-08-09",
   "ESTAC|out|Martin Adeline|Hambourg": "2026-08-09",
   "ESTAC|out|Sankhoun Diawara|AC Milan": "2026-08-09",
@@ -301,6 +337,7 @@
   "LM|in|Yasser Larouci|Troyes": "2026-08-09",
   "LM|in|Djibril Sidibé|Toulouse": "2026-08-18",
   "LM|in|Billal Brahimi|Santos": "2026-08-09",
+  "LM|in|Habib Diallo|FC Metz": "2026-09-01",
   "LM|in|Louis Mafouta|EA Guingamp": "2026-08-09",
   "LM|in|Raúl Torrente|Dinamo Zagreb": "2026-08-19",
   "LM|in|Rayan Bamba|Stade Rennais": "2026-08-09",
@@ -371,6 +408,16 @@
    ],
    "dep": [
     {
+     "p": "Bradley Barcola",
+     "age": 23,
+     "pos": "AiG",
+     "club": "Liverpool",
+     "club_id": 31,
+     "type": "paid",
+     "val": 125.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Gonçalo Ramos",
      "age": 25,
      "pos": "AC",
@@ -379,6 +426,16 @@
      "type": "paid",
      "val": 74.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Ibrahim Mbaye",
+     "age": 18,
+     "pos": "AiD",
+     "club": "Aston Villa",
+     "club_id": 405,
+     "type": "paid",
+     "val": 55.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Randal Kolo Muani",
@@ -519,6 +576,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Junior Kadile",
+     "age": 23,
+     "pos": "AiG",
+     "club": "Servette FC",
+     "club_id": 61,
+     "type": "loan",
+     "val": 1.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Thorgan Hazard",
      "age": 33,
      "pos": "MO",
@@ -527,6 +594,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Jean-Clair Todibo",
+     "age": 26,
+     "pos": "DC",
+     "club": "West Ham Utd.",
+     "club_id": 379,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     }
    ],
    "dep": [
@@ -661,6 +738,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Rayan Fofana",
+     "age": 20,
+     "pos": "AC",
+     "club": "Le Havre AC",
+     "club_id": 738,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Hervé Koffi",
      "age": 29,
      "pos": "GdB",
@@ -729,6 +816,16 @@
    "fg": "#fff",
    "arr": [
     {
+     "p": "Ayase Ueda",
+     "age": 28,
+     "pos": "AC",
+     "club": "Feyenoord",
+     "club_id": 234,
+     "type": "paid",
+     "val": 15.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Başar Önal",
      "age": 22,
      "pos": "AiG",
@@ -737,6 +834,16 @@
      "type": "paid",
      "val": 12.5,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Maurits Kjærgaard",
+     "age": 23,
+     "pos": "MC",
+     "club": "RB Salzbourg",
+     "club_id": 409,
+     "type": "paid",
+     "val": 8.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Orlando Gill",
@@ -789,6 +896,16 @@
      "type": "paid",
      "val": 95.0,
      "fs": "2026-08-26"
+    },
+    {
+     "p": "Matias Fernandez-Pardo",
+     "age": 21,
+     "pos": "AC",
+     "club": "Newcastle",
+     "club_id": 762,
+     "type": "paid",
+     "val": 60.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Ugo Raghouber",
@@ -859,6 +976,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Félix Correia",
+     "age": 25,
+     "pos": "AiG",
+     "club": "Séville FC",
+     "club_id": 368,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Marius Broholm",
@@ -1011,6 +1138,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Duje Caleta-Car",
+     "age": 29,
+     "pos": "DC",
+     "club": "Sassuolo",
+     "club_id": 6574,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Achraf Laâziri",
      "age": 23,
      "pos": "ArG",
@@ -1029,6 +1166,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Mahamadou Diawara",
+     "age": 21,
+     "pos": "MC",
+     "club": "Red Star FC",
+     "club_id": 1154,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Enzo Molebe",
@@ -1151,6 +1298,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Leonardo Balerdi",
+     "age": 27,
+     "pos": "DC",
+     "club": "AS Roma",
+     "club_id": 12,
+     "type": "loan",
+     "val": 1.0,
+     "fs": "2026-08-30"
+    },
+    {
      "p": "Bilal Nadir",
      "age": 22,
      "pos": "MC",
@@ -1271,6 +1428,16 @@
      "fs": "2026-08-23"
     },
     {
+     "p": "Lilian Brassier",
+     "age": 26,
+     "pos": "DC",
+     "club": "Francfort",
+     "club_id": 24,
+     "type": "paid",
+     "val": 9.2,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Albert Grønbaek",
      "age": 25,
      "pos": "MO",
@@ -1299,6 +1466,16 @@
      "type": "loan",
      "val": 0.2,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Jonathan Do Marcolino",
+     "age": 20,
+     "pos": "DC",
+     "club": "FC Annecy",
+     "club_id": 30204,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Yassir Zabiri",
@@ -1549,6 +1726,16 @@
      "fs": "2026-08-21"
     },
     {
+     "p": "Oso",
+     "age": 23,
+     "pos": "AiG",
+     "club": "Séville FC",
+     "club_id": 368,
+     "type": "paid",
+     "val": 10.0,
+     "fs": "2026-08-30"
+    },
+    {
      "p": "Diogo Sousa",
      "age": 20,
      "pos": "MDC",
@@ -1567,6 +1754,16 @@
      "type": "paid",
      "val": 10.0,
      "fs": "2026-08-17"
+    },
+    {
+     "p": "Deivid Washington",
+     "age": 21,
+     "pos": "AC",
+     "club": "Chelsea U21",
+     "club_id": 9250,
+     "type": "paid",
+     "val": 8.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Jeyland Mitchell",
@@ -1649,6 +1846,16 @@
      "fs": "2026-08-19"
     },
     {
+     "p": "Conrad Harder",
+     "age": 21,
+     "pos": "AC",
+     "club": "Leipzig",
+     "club_id": 23826,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Filip Jørgensen",
      "age": 24,
      "pos": "GdB",
@@ -1689,6 +1896,16 @@
      "type": "paid",
      "val": 30.5,
      "fs": "2026-08-17"
+    },
+    {
+     "p": "Guéla Doué",
+     "age": 23,
+     "pos": "ArD",
+     "club": "Leverkusen",
+     "club_id": 15,
+     "type": "paid",
+     "val": 30.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Emmanuel Emegha",
@@ -1751,6 +1968,26 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Óscar Perea",
+     "age": 20,
+     "pos": "AiG",
+     "club": "América",
+     "club_id": 3631,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-09"
+    },
+    {
+     "p": "Mathis Amougou",
+     "age": 20,
+     "pos": "MC",
+     "club": "Toulouse",
+     "club_id": 415,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Milos Lukovic",
      "age": 20,
      "pos": "AC",
@@ -1776,16 +2013,6 @@
      "pos": "DC",
      "club": "FC Nantes",
      "club_id": 995,
-     "type": "loan",
-     "val": 0.0,
-     "fs": "2026-08-09"
-    },
-    {
-     "p": "Óscar Perea",
-     "age": 20,
-     "pos": "AiG",
-     "club": "América",
-     "club_id": 3631,
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-09"
@@ -1818,6 +2045,16 @@
    "bg": "#ee7f00",
    "fg": "#fff",
    "arr": [
+    {
+     "p": "Srdjan Kuzmic",
+     "age": 22,
+     "pos": "ArG",
+     "club": "Viborg FF",
+     "club_id": 1063,
+     "type": "paid",
+     "val": 3.0,
+     "fs": "2026-09-01"
+    },
     {
      "p": "Gabin Bernardeau",
      "age": 20,
@@ -1941,6 +2178,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Jérémy Hatchi",
+     "age": 21,
+     "pos": "AiG",
+     "club": "Montpellier",
+     "club_id": 969,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Enzo Genton",
      "age": 20,
      "pos": "DC",
@@ -1989,6 +2236,26 @@
      "fs": "2026-08-19"
     },
     {
+     "p": "Niko Sigur",
+     "age": 22,
+     "pos": "MDC",
+     "club": "Hajduk Split",
+     "club_id": 447,
+     "type": "paid",
+     "val": 4.0,
+     "fs": "2026-09-01"
+    },
+    {
+     "p": "Casper Tengstedt",
+     "age": 26,
+     "pos": "AC",
+     "club": "Feyenoord",
+     "club_id": 234,
+     "type": "paid",
+     "val": 4.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Sion Oppong",
      "age": 18,
      "pos": "AiG",
@@ -2017,6 +2284,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Mathis Amougou",
+     "age": 20,
+     "pos": "MC",
+     "club": "R. Strasbourg",
+     "club_id": 667,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "David Odogu",
@@ -2139,6 +2416,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-26"
+    },
+    {
+     "p": "Mathis Saka",
+     "age": 19,
+     "pos": "MO",
+     "club": "Rodez AF",
+     "club_id": 11273,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Ylies Aradj",
@@ -2461,6 +2748,16 @@
      "fs": "2026-08-19"
     },
     {
+     "p": "Romain Del Castillo",
+     "age": 30,
+     "pos": "AiD",
+     "club": "CA Osasuna",
+     "club_id": 331,
+     "type": "paid",
+     "val": 1.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Daouda Guindo",
      "age": 23,
      "pos": "ArG",
@@ -2581,6 +2878,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Yacine Gaya",
+     "age": 21,
+     "pos": "DC",
+     "club": "QRM",
+     "club_id": 7124,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Marius Courcoul",
      "age": 19,
      "pos": "MDC",
@@ -2699,6 +3006,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Rayan Fofana",
+     "age": 20,
+     "pos": "AC",
+     "club": "RC Lens",
+     "club_id": 826,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-08-31"
+    },
+    {
      "p": "Elias Jelert",
      "age": 23,
      "pos": "ArD",
@@ -2809,6 +3126,16 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-28"
+    },
+    {
+     "p": "Fodé Doucouré",
+     "age": 25,
+     "pos": "ArD",
+     "club": "FC Nantes",
+     "club_id": 995,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Mory Diaw",
@@ -2939,6 +3266,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Axel Tuanzebe",
+     "age": 28,
+     "pos": "DC",
+     "club": "Burnley FC",
+     "club_id": 1132,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Paul Nardi",
      "age": 32,
      "pos": "GdB",
@@ -2957,6 +3294,16 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Cameron Archer",
+     "age": 24,
+     "pos": "AC",
+     "club": "Southampton",
+     "club_id": 180,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Pierre Ekwah",
@@ -3029,6 +3376,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Theo Bair",
+     "age": 27,
+     "pos": "AC",
+     "club": "Bolton",
+     "club_id": 355,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Théo De Percin",
@@ -3109,6 +3466,16 @@
      "fs": "2026-08-19"
     },
     {
+     "p": "Mohamed Amoura",
+     "age": 26,
+     "pos": "AC",
+     "club": "Wolfsburg",
+     "club_id": 82,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Elye Wahi",
      "age": 23,
      "pos": "AC",
@@ -3117,6 +3484,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-24"
+    },
+    {
+     "p": "Niels Nkounkou",
+     "age": 25,
+     "pos": "ArG",
+     "club": "Francfort",
+     "club_id": 24,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Zoumana Diallo",
@@ -3193,7 +3570,7 @@
     {
      "p": "Tom Louchet",
      "age": 23,
-     "pos": "MD",
+     "pos": "MC",
      "club": "PAOK Saloniki",
      "club_id": 1091,
      "type": "paid",
@@ -3329,6 +3706,16 @@
      "fs": "2026-08-21"
     },
     {
+     "p": "Jérémy Le Douaron",
+     "age": 28,
+     "pos": "AC",
+     "club": "Palerme",
+     "club_id": 458,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Hugo Picard",
      "age": 23,
      "pos": "MG",
@@ -3337,6 +3724,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-17"
+    },
+    {
+     "p": "Timothé Nkada",
+     "age": 27,
+     "pos": "AC",
+     "club": "Standard Liège",
+     "club_id": 3057,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-01"
     }
    ],
    "dep": [
@@ -3477,6 +3874,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Habib Diallo",
+     "age": 31,
+     "pos": "AC",
+     "club": "FC Metz",
+     "club_id": 347,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-01"
     },
     {
      "p": "Louis Mafouta",
@@ -3646,7 +4053,7 @@
     "p": "Ilya Zabarnyi",
     "pos": "DC",
     "grp": "DEF",
-    "age": 23,
+    "age": 24,
     "val": 40.0,
     "stats": {
      "m": 37,
@@ -3894,24 +4301,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "29",
-    "p": "Bradley Barcola",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 23,
-    "val": 90.0,
-    "stats": {
-     "m": 49,
-     "s": 35,
-     "g": 13,
-     "a": 7,
-     "min": 2971
-    },
-    "statsClub": "Paris Saint-Germain",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "22",
     "p": "Mika Godts",
     "pos": "AiG",
@@ -3980,24 +4369,6 @@
      "min": 3425
     },
     "statsClub": "Monaco",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "49",
-    "p": "Ibrahim Mbaye",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 18,
-    "val": 30.0,
-    "stats": {
-     "m": 30,
-     "s": 11,
-     "g": 3,
-     "a": 2,
-     "min": 1153
-    },
-    "statsClub": "Paris Saint-Germain",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -4128,6 +4499,24 @@
     "statsClub": "RC Lens",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "20",
+    "p": "Jean-Clair Todibo",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 26,
+    "val": 22.0,
+    "stats": {
+     "m": 25,
+     "s": 24,
+     "g": 0,
+     "a": 1,
+     "min": 2025
+    },
+    "statsClub": "West Ham Utd.",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "25",
@@ -4448,6 +4837,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "28",
+    "p": "Junior Kadile",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 23,
+    "val": 2.0,
+    "stats": {
+     "m": 13,
+     "s": 12,
+     "g": 6,
+     "a": 10,
+     "min": 1098
+    },
+    "statsClub": "Servette FC",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "10",
     "p": "Florian Thauvin",
     "pos": "AiD",
@@ -4496,24 +4903,6 @@
      "g": 14,
      "a": 3,
      "min": 2130
-    },
-    "statsClub": "RC Lens",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "18",
-    "p": "Rayan Fofana",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 20,
-    "val": 8.0,
-    "stats": {
-     "m": 29,
-     "s": 9,
-     "g": 6,
-     "a": 1,
-     "min": 951
     },
     "statsClub": "RC Lens",
     "valDelta": 0.0,
@@ -4695,7 +5084,7 @@
      "s": 12,
      "g": 0,
      "a": 1,
-     "min": 1245
+     "min": 1243
     },
     "statsClub": "LOSC Lille",
     "valDelta": 0.0,
@@ -4792,6 +5181,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "14",
+    "p": "Maurits Kjærgaard",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 23,
+    "val": 8.0,
+    "stats": {
+     "m": 32,
+     "s": 20,
+     "g": 5,
+     "a": 9,
+     "min": 2007
+    },
+    "statsClub": "RB Salzbourg",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "10",
     "p": "Hákon Arnar Haraldsson",
     "pos": "MO",
@@ -4804,24 +5211,6 @@
      "g": 9,
      "a": 7,
      "min": 3404
-    },
-    "statsClub": "LOSC Lille",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "27",
-    "p": "Félix Correia",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 25,
-    "val": 10.0,
-    "stats": {
-     "m": 48,
-     "s": 37,
-     "g": 5,
-     "a": 6,
-     "min": 2952
     },
     "statsClub": "LOSC Lille",
     "valDelta": 0.0,
@@ -4966,22 +5355,22 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "7",
-    "p": "Matias Fernandez-Pardo",
+    "n": "18",
+    "p": "Ayase Ueda",
     "pos": "AC",
     "grp": "ATT",
-    "age": 21,
-    "val": 35.0,
+    "age": 28,
+    "val": 20.0,
     "stats": {
-     "m": 41,
-     "s": 33,
-     "g": 8,
-     "a": 7,
-     "min": 3101
+     "m": 40,
+     "s": 39,
+     "g": 26,
+     "a": 2,
+     "min": 3226
     },
-    "statsClub": "LOSC Lille",
+    "statsClub": "Feyenoord",
     "valDelta": 0.0,
-    "valSince": "16/08/2026"
+    "valSince": "01/09/2026"
    },
    {
     "n": "29",
@@ -5178,18 +5567,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
-    "p": "Duje Caleta-Car",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 29,
-    "val": 2.8,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "22",
     "p": "Clinton Mata",
     "pos": "DC",
@@ -5230,7 +5607,7 @@
     "p": "Nicolás Tagliafico",
     "pos": "ArG",
     "grp": "DEF",
-    "age": 33,
+    "age": 34,
     "val": 4.0,
     "stats": {
      "m": 30,
@@ -5284,7 +5661,7 @@
     "p": "Ainsley Maitland-Niles",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 28,
+    "age": 29,
     "val": 10.0,
     "stats": {
      "m": 42,
@@ -5436,24 +5813,6 @@
      "g": 15,
      "a": 6,
      "min": 2995
-    },
-    "statsClub": "Olympique Lyonnais",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Mahamadou Diawara",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 21,
-    "val": 1.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
     },
     "statsClub": "Olympique Lyonnais",
     "valDelta": 0.0,
@@ -5678,24 +6037,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "5",
-    "p": "Leonardo Balerdi",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 27,
-    "val": 18.0,
-    "stats": {
-     "m": 36,
-     "s": 30,
-     "g": 1,
-     "a": 1,
-     "min": 2853
-    },
-    "statsClub": "Olympique de Marseille",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "21",
     "p": "Nayef Aguerd",
     "pos": "DC",
@@ -5898,7 +6239,7 @@
     "p": "Angel Gomes",
     "pos": "MO",
     "grp": "MID",
-    "age": 25,
+    "age": 26,
     "val": 10.0,
     "stats": {
      "m": 20,
@@ -6130,24 +6471,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "3",
-    "p": "Lilian Brassier",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 26,
-    "val": 12.0,
-    "stats": {
-     "m": 30,
-     "s": 26,
-     "g": 0,
-     "a": 1,
-     "min": 2369
-    },
-    "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "24",
     "p": "Anthony Rouault",
     "pos": "DC",
@@ -6216,18 +6539,6 @@
      "min": 2131
     },
     "statsClub": "Benfica B",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "64",
-    "p": "Jonathan Do Marcolino",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.3,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -6666,7 +6977,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "3",
+    "n": "15",
     "p": "Eric Dier",
     "pos": "DC",
     "grp": "DEF",
@@ -6774,7 +7085,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "15",
+    "n": "8",
     "p": "Lamine Camara",
     "pos": "MC",
     "grp": "MID",
@@ -6942,7 +7253,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "39",
+    "n": "11",
     "p": "Matthis Abline",
     "pos": "AC",
     "grp": "ATT",
@@ -7208,24 +7519,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "22",
-    "p": "Guéla Doué",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 23,
-    "val": 20.0,
-    "stats": {
-     "m": 34,
-     "s": 31,
-     "g": 2,
-     "a": 7,
-     "min": 2820
-    },
-    "statsClub": "RC Strasbourg",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "16",
     "p": "Genesis Antwi",
     "pos": "ArD",
@@ -7286,24 +7579,6 @@
      "g": 2,
      "a": 3,
      "min": 3228
-    },
-    "statsClub": "RC Strasbourg",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "17",
-    "p": "Mathis Amougou",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 20,
-    "val": 9.0,
-    "stats": {
-     "m": 19,
-     "s": 9,
-     "g": 0,
-     "a": 0,
-     "min": 794
     },
     "statsClub": "RC Strasbourg",
     "valDelta": 0.0,
@@ -7418,6 +7693,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "",
+    "p": "Oso",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 23,
+    "val": 10.0,
+    "stats": {
+     "m": 24,
+     "s": 17,
+     "g": 2,
+     "a": 3,
+     "min": 1648
+    },
+    "statsClub": "Séville FC",
+    "valDelta": 0.0,
+    "valSince": "30/08/2026"
+   },
+   {
     "n": "19",
     "p": "Fábio Baldé",
     "pos": "AiG",
@@ -7508,6 +7801,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "",
+    "p": "Conrad Harder",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 17.0,
+    "stats": {
+     "m": 32,
+     "s": 9,
+     "g": 3,
+     "a": 4,
+     "min": 1048
+    },
+    "statsClub": "Leipzig",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "14",
     "p": "Sékou Mara",
     "pos": "AC",
@@ -7524,6 +7835,24 @@
     "statsClub": "RC Strasbourg",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Deivid Washington",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 3.0,
+    "stats": {
+     "m": 9,
+     "s": 6,
+     "g": 0,
+     "a": 0,
+     "min": 502
+    },
+    "statsClub": "Chelsea U21",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "30",
@@ -7700,6 +8029,24 @@
     "statsClub": "FC Lorient",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "",
+    "p": "Srdjan Kuzmic",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 22,
+    "val": 2.0,
+    "stats": {
+     "m": 32,
+     "s": 29,
+     "g": 4,
+     "a": 1,
+     "min": 2488
+    },
+    "statsClub": "Viborg FF",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "",
@@ -7886,18 +8233,6 @@
     "statsClub": "AZ Alkmaar",
     "valDelta": 0.0,
     "valSince": "25/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Jérémy Hatchi",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 21,
-    "val": 0.7,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
    },
    {
     "n": "19",
@@ -8112,6 +8447,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "14",
+    "p": "Niko Sigur",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 22,
+    "val": 4.0,
+    "stats": {
+     "m": 35,
+     "s": 27,
+     "g": 1,
+     "a": 3,
+     "min": 2529
+    },
+    "statsClub": "Hajduk Split",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "6",
     "p": "Alexis Vossah",
     "pos": "MC",
@@ -8126,6 +8479,24 @@
      "min": 1209
     },
     "statsClub": "Toulouse FC",
+    "valDelta": 0.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "18",
+    "p": "Mathis Amougou",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 20,
+    "val": 9.0,
+    "stats": {
+     "m": 19,
+     "s": 9,
+     "g": 0,
+     "a": 0,
+     "min": 794
+    },
+    "statsClub": "R. Strasbourg",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -8232,24 +8603,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "28",
-    "p": "Mathis Saka",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 19,
-    "val": 0.5,
-    "stats": {
-     "m": 1,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 7
-    },
-    "statsClub": "Toulouse FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "10",
     "p": "Yann Gboho",
     "pos": "AiG",
@@ -8320,6 +8673,24 @@
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "20",
+    "p": "Casper Tengstedt",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 26,
+    "val": 3.5,
+    "stats": {
+     "m": 23,
+     "s": 5,
+     "g": 5,
+     "a": 0,
+     "min": 628
+    },
+    "statsClub": "Feyenoord",
+    "valDelta": 0.0,
+    "valSince": "31/08/2026"
    },
    {
     "n": "13",
@@ -8396,7 +8767,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "42",
     "p": "Diego Coppola",
     "pos": "DC",
     "grp": "DEF",
@@ -8468,7 +8839,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "25",
     "p": "Yoan Koré",
     "pos": "DC",
     "grp": "DEF",
@@ -8522,7 +8893,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "3",
     "p": "Emmanuel Mbemba",
     "pos": "ArG",
     "grp": "DEF",
@@ -8606,7 +8977,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "8",
     "p": "Patrick Zabi",
     "pos": "MC",
     "grp": "MID",
@@ -8660,7 +9031,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "7",
     "p": "Pablo Pagis",
     "pos": "AiG",
     "grp": "ATT",
@@ -8714,7 +9085,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "15",
     "p": "Luca Koleosho",
     "pos": "AiD",
     "grp": "ATT",
@@ -8750,7 +9121,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "9",
     "p": "Lassine Sinayoko",
     "pos": "AC",
     "grp": "ATT",
@@ -8906,7 +9277,7 @@
     "p": "Raphaël Le Guen",
     "pos": "DC",
     "grp": "DEF",
-    "age": 19,
+    "age": 20,
     "val": 0.8,
     "stats": {
      "m": 6,
@@ -9136,29 +9507,11 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "10",
-    "p": "Romain Del Castillo",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 30,
-    "val": 7.0,
-    "stats": {
-     "m": 33,
-     "s": 33,
-     "g": 9,
-     "a": 4,
-     "min": 2736
-    },
-    "statsClub": "Stade Brestois 29",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "",
     "p": "Axel Camblan",
     "pos": "AiD",
     "grp": "ATT",
-    "age": 22,
+    "age": 23,
     "val": 0.6,
     "stats": {
      "m": 1,
@@ -9408,7 +9761,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "8",
     "p": "Branco van den Boomen",
     "pos": "MC",
     "grp": "MID",
@@ -9462,7 +9815,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "36",
     "p": "Bané Diatta",
     "pos": "MO",
     "grp": "MID",
@@ -9534,7 +9887,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "18",
     "p": "Jim Allevinah",
     "pos": "AiD",
     "grp": "ATT",
@@ -9770,24 +10123,6 @@
     "valSince": "21/08/2026"
    },
    {
-    "n": "13",
-    "p": "Fodé Doucouré",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 25,
-    "val": 2.0,
-    "stats": {
-     "m": 26,
-     "s": 15,
-     "g": 3,
-     "a": 1,
-     "min": 1242
-    },
-    "statsClub": "Le Havre AC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "32",
     "p": "Timothée Pembélé",
     "pos": "ArD",
@@ -9986,6 +10321,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "38",
+    "p": "Rayan Fofana",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 20,
+    "val": 8.0,
+    "stats": {
+     "m": 29,
+     "s": 9,
+     "g": 6,
+     "a": 1,
+     "min": 951
+    },
+    "statsClub": "RC Lens",
+    "valDelta": 0.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "9",
     "p": "Josh Maja",
     "pos": "AC",
@@ -10112,7 +10465,7 @@
     "p": "Louis Mezerette",
     "pos": "GdB",
     "grp": "GK",
-    "age": 19,
+    "age": 20,
     "val": 0.0,
     "stats": {
      "m": 0,
@@ -10160,6 +10513,24 @@
     "statsClub": "AJ Auxerre",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "4",
+    "p": "Axel Tuanzebe",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 28,
+    "val": 5.0,
+    "stats": {
+     "m": 16,
+     "s": 15,
+     "g": 1,
+     "a": 0,
+     "min": 1337
+    },
+    "statsClub": "Burnley FC",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "24",
@@ -10402,6 +10773,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "34",
+    "p": "Lamfia Dioubaté",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 19,
+    "val": 0.3,
+    "stats": {
+     "m": 1,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 1
+    },
+    "statsClub": "AJ Auxerre",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "5",
     "p": "Kévin Danois",
     "pos": "MC",
@@ -10552,7 +10941,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "11",
     "p": "Eros Maddy",
     "pos": "AiD",
     "grp": "ATT",
@@ -10570,6 +10959,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "9",
+    "p": "Cameron Archer",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 24,
+    "val": 7.0,
+    "stats": {
+     "m": 36,
+     "s": 16,
+     "g": 6,
+     "a": 4,
+     "min": 1359
+    },
+    "statsClub": "Southampton",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "3",
     "p": "Rémy Labeau Lascary",
     "pos": "AC",
@@ -10578,24 +10985,6 @@
     "val": 4.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "",
-    "p": "Theo Bair",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 27,
-    "val": 1.5,
-    "stats": {
-     "m": 2,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 8
-    },
-    "statsClub": "AJ Auxerre",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -10792,6 +11181,24 @@
     "statsClub": "OGC Nice",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "27",
+    "p": "Niels Nkounkou",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 25,
+    "val": 2.6,
+    "stats": {
+     "m": 1,
+     "s": 1,
+     "g": 0,
+     "a": 0,
+     "min": 90
+    },
+    "statsClub": "Francfort",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "2",
@@ -11080,6 +11487,24 @@
     "statsClub": "Bor. M'gladbach",
     "valDelta": 0.0,
     "valSince": "17/08/2026"
+   },
+   {
+    "n": "9",
+    "p": "Mohamed Amoura",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 26,
+    "val": 20.0,
+    "stats": {
+     "m": 33,
+     "s": 24,
+     "g": 8,
+     "a": 4,
+     "min": 2058
+    },
+    "statsClub": "Wolfsburg",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "11",
@@ -11516,6 +11941,42 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "",
+    "p": "Jérémy Le Douaron",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 28,
+    "val": 3.0,
+    "stats": {
+     "m": 41,
+     "s": 28,
+     "g": 5,
+     "a": 5,
+     "min": 2273
+    },
+    "statsClub": "Palerme",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
+    "n": "",
+    "p": "Timothé Nkada",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 27,
+    "val": 2.0,
+    "stats": {
+     "m": 32,
+     "s": 12,
+     "g": 5,
+     "a": 1,
+     "min": 1346
+    },
+    "statsClub": "Standard Liège",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "20",
     "p": "Renaud Ripart",
     "pos": "AC",
@@ -11942,6 +12403,24 @@
     "statsClub": null,
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "13",
+    "p": "Habib Diallo",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 31,
+    "val": 4.0,
+    "stats": {
+     "m": 25,
+     "s": 21,
+     "g": 4,
+     "a": 2,
+     "min": 1911
+    },
+    "statsClub": "FC Metz",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "14",
@@ -15098,6 +15577,114 @@
    {
     "d": "27/08/2026",
     "v": 2.5
+   }
+  ],
+  "1032280": [
+   {
+    "d": "30/08/2026",
+    "v": 10.0
+   }
+  ],
+  "464598": [
+   {
+    "d": "31/08/2026",
+    "v": 3.5
+   }
+  ],
+  "585958": [
+   {
+    "d": "01/09/2026",
+    "v": 2.0
+   }
+  ],
+  "589128": [
+   {
+    "d": "01/09/2026",
+    "v": 20.0
+   }
+  ],
+  "807386": [
+   {
+    "d": "01/09/2026",
+    "v": 17.0
+   }
+  ],
+  "722375": [
+   {
+    "d": "01/09/2026",
+    "v": 2.0
+   }
+  ],
+  "1291922": [
+   {
+    "d": "01/09/2026",
+    "v": 0.3
+   }
+  ],
+  "746910": [
+   {
+    "d": "01/09/2026",
+    "v": 20.0
+   }
+  ],
+  "737781": [
+   {
+    "d": "01/09/2026",
+    "v": 3.0
+   }
+  ],
+  "610405": [
+   {
+    "d": "01/09/2026",
+    "v": 8.0
+   }
+  ],
+  "522788": [
+   {
+    "d": "01/09/2026",
+    "v": 2.0
+   }
+  ],
+  "605184": [
+   {
+    "d": "01/09/2026",
+    "v": 22.0
+   }
+  ],
+  "1082850": [
+   {
+    "d": "01/09/2026",
+    "v": 3.0
+   }
+  ],
+  "1045375": [
+   {
+    "d": "01/09/2026",
+    "v": 4.0
+   }
+  ],
+  "342046": [
+   {
+    "d": "01/09/2026",
+    "v": 5.0
+   }
+  ],
+  "533662": [
+   {
+    "d": "01/09/2026",
+    "v": 7.0
+   }
+  ],
+  "591193": [
+   {
+    "d": "01/09/2026",
+    "v": 2.6
+   }
+  ],
+  "344888": [
+   {
+    "d": "01/09/2026",
+    "v": 4.0
    }
   ]
  }
