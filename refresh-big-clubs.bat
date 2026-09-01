@@ -26,8 +26,18 @@ if not "%CHANGED%"=="1" (
   goto :done
 )
 
+set "LOCKWAIT=0"
+:waitlock
+if exist ".git\index.lock" if %LOCKWAIT% lss 6 (
+  echo Verrou git detecte ^(autre commit en cours^), nouvelle tentative dans 10s...
+  timeout /t 10 /nobreak >nul
+  set /a LOCKWAIT+=1
+  goto :waitlock
+)
+
 git add grands-clubs.html equipe-europe.html data\squads.json logos
 git commit -m "MAJ grands clubs (auto)"
+if errorlevel 1 echo ECHEC du commit, a verifier manuellement.
 git pull --no-rebase --no-edit
 git push
 if errorlevel 1 (
