@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-01T13:06:43",
- "sig": "229097bea5fe9b22f6fcc682b2249c12",
+ "updated": "2026-09-01T15:00:53",
+ "sig": "cd19e13257ce38de3943a9bb98b93ac0",
  "squads": {
   "FCB": [
    {
@@ -486,6 +486,18 @@
      "min": 872
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
+    "n": "",
+    "p": "Gabriel Jesus",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 29,
+    "val": 17.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
@@ -2284,24 +2296,6 @@
     "statsClub": "",
     "valDelta": 0.0,
     "valSince": "01/09/2026"
-   },
-   {
-    "n": "9",
-    "p": "Gabriel Jesus",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 29,
-    "val": 17.0,
-    "stats": {
-     "m": 27,
-     "s": 9,
-     "g": 6,
-     "a": 2,
-     "min": 988
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
    }
   ],
   "LIV": [
@@ -3920,24 +3914,6 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "25",
-    "p": "Kota Takai",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 21,
-    "val": 5.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
     "n": "33",
     "p": "Ben Davies",
     "pos": "DC",
@@ -4094,24 +4070,6 @@
      "g": 1,
      "a": 1,
      "min": 1246
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "29",
-    "p": "Pape Matar Sarr",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 23,
-    "val": 30.0,
-    "stats": {
-     "m": 37,
-     "s": 22,
-     "g": 2,
-     "a": 4,
-     "min": 2212
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -4332,6 +4290,18 @@
      "min": 1170
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
+    "n": "",
+    "p": "Taylor Harwood-Bellis",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 24,
+    "val": 20.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
@@ -4632,6 +4602,18 @@
      "min": 2885
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
+    "n": "19",
+    "p": "Ibrahim Mbaye",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 18,
+    "val": 30.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
@@ -5916,6 +5898,18 @@
      "min": 3921
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
+    "n": "29",
+    "p": "Pape Matar Sarr",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 23,
+    "val": 30.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
