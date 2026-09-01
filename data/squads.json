@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-01T18:00:49",
- "sig": "dee82cc81cf3b523f75dafb6ce6ecf8a",
+ "updated": "2026-09-01T21:00:49",
+ "sig": "cdbb9d17d73c71738e396b98149b18ee",
  "squads": {
   "FCB": [
    {
@@ -316,24 +316,6 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "",
-    "p": "Guille Fernández",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 18,
-    "val": 3.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
     "n": "28",
     "p": "Brian Fariñas",
     "pos": "MC",
@@ -376,24 +358,6 @@
      "g": 8,
      "a": 10,
      "min": 2838
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "",
-    "p": "Toni Fernández",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 18,
-    "val": 3.0,
-    "stats": {
-     "m": 1,
-     "s": 1,
-     "g": 0,
-     "a": 0,
-     "min": 45
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -1376,6 +1340,18 @@
     "valSince": "01/09/2026"
    },
    {
+    "n": "",
+    "p": "Jonathan David",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 26,
+    "val": 30.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "9",
     "p": "Alexander Sørloth",
     "pos": "AC",
@@ -1522,18 +1498,6 @@
     "grp": "DEF",
     "age": 20,
     "val": 30.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "",
-    "p": "Juma Bah",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 10.0,
     "stats": null,
     "statsClub": null,
     "valDelta": 0.0,
@@ -2160,24 +2124,6 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "22",
-    "p": "Ethan Nwaneri",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 19,
-    "val": 35.0,
-    "stats": {
-     "m": 12,
-     "s": 4,
-     "g": 1,
-     "a": 0,
-     "min": 515
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
     "n": "11",
     "p": "Gabriel Martinelli",
     "pos": "AiG",
@@ -2642,24 +2588,6 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "19",
-    "p": "Harvey Elliott",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 23,
-    "val": 20.0,
-    "stats": {
-     "m": 2,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 7
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
     "n": "29",
     "p": "Bradley Barcola",
     "pos": "AiG",
@@ -2784,24 +2712,6 @@
     "val": 25.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "1",
-    "p": "Robert Sánchez",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 28,
-    "val": 22.0,
-    "stats": {
-     "m": 50,
-     "s": 49,
-     "g": 0,
-     "a": 1,
-     "min": 4376
-    },
-    "statsClub": "",
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
@@ -3064,24 +2974,6 @@
      "g": 0,
      "a": 0,
      "min": 758
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "16",
-    "p": "Dário Essugo",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 21,
-    "val": 15.0,
-    "stats": {
-     "m": 5,
-     "s": 0,
-     "g": 0,
-     "a": 2,
-     "min": 109
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -4294,7 +4186,7 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "",
+    "n": "4",
     "p": "Taylor Harwood-Bellis",
     "pos": "DC",
     "grp": "DEF",
@@ -4576,22 +4468,10 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "17",
-    "p": "Alejandro Garnacho",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 22,
-    "val": 28.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
     "n": "10",
     "p": "Emiliano Buendía",
-    "pos": "AiG",
-    "grp": "ATT",
+    "pos": "MO",
+    "grp": "MID",
     "age": 29,
     "val": 16.0,
     "stats": {
@@ -4602,6 +4482,18 @@
      "min": 2885
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
+    "n": "17",
+    "p": "Alejandro Garnacho",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 22,
+    "val": 28.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
@@ -4648,24 +4540,6 @@
      "g": 0,
      "a": 0,
      "min": 47
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "49",
-    "p": "Bradley Burrowes",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 18,
-    "val": 2.0,
-    "stats": {
-     "m": 1,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 16
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -5498,6 +5372,18 @@
     "valSince": "01/09/2026"
    },
    {
+    "n": "18",
+    "p": "Ethan Nwaneri",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 19,
+    "val": 35.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "19",
     "p": "Konstantinos Karetsas",
     "pos": "MO",
@@ -6016,20 +5902,14 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "30",
-    "p": "Jonathan David",
+    "n": "",
+    "p": "Nick Woltemade",
     "pos": "AC",
     "grp": "ATT",
-    "age": 26,
-    "val": 30.0,
-    "stats": {
-     "m": 46,
-     "s": 27,
-     "g": 8,
-     "a": 5,
-     "min": 2329
-    },
-    "statsClub": "",
+    "age": 24,
+    "val": 55.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
@@ -7078,24 +6958,6 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "47",
-    "p": "Christian Garofalo",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.25,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
     "n": "17",
     "p": "Mathías Olivera",
     "pos": "ArG",
@@ -7350,18 +7212,6 @@
      "min": 2835
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "29",
-    "p": "Jesper Lindstrøm",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 26,
-    "val": 4.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "01/09/2026"
    },
