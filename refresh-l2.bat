@@ -26,13 +26,17 @@ if not "%CHANGED%"=="1" (
   goto :done
 )
 
-set "LOCKWAIT=0"
-:waitlock
-if exist ".git\index.lock" if %LOCKWAIT% lss 6 (
-  echo Verrou git detecte ^(autre commit en cours^), nouvelle tentative dans 10s...
-  timeout /t 10 /nobreak >nul
-  set /a LOCKWAIT+=1
-  goto :waitlock
+if exist ".git\index.lock" (
+  echo Verrou git detecte ^(autre commit en cours^), attente 15s...
+  timeout /t 15 /nobreak >nul
+)
+if exist ".git\index.lock" (
+  echo Verrou git toujours present, nouvelle attente 15s...
+  timeout /t 15 /nobreak >nul
+)
+if exist ".git\index.lock" (
+  echo Verrou git toujours present, nouvelle attente 15s...
+  timeout /t 15 /nobreak >nul
 )
 
 git add mercato-l2.html equipe-l2.html data\transfers_l2.json logos

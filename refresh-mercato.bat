@@ -21,7 +21,7 @@ if errorlevel 1 (
 echo [%date% %time%] Recalcul squad cost ratio OM...
 python "scripts\scrape_squad_cost.py"
 if errorlevel 1 (
-  echo ECHEC du calcul squad cost, on continue quand meme (page precedente conservee).
+  echo ECHEC du calcul squad cost, on continue quand meme ^(page precedente conservee^).
 )
 
 if not "%PUSH%"=="1" goto :done
@@ -37,13 +37,17 @@ if not "%CHANGED%"=="1" (
   goto :done
 )
 
-set "LOCKWAIT=0"
-:waitlock
-if exist ".git\index.lock" if %LOCKWAIT% lss 6 (
-  echo Verrou git detecte ^(autre commit en cours^), nouvelle tentative dans 10s...
-  timeout /t 10 /nobreak >nul
-  set /a LOCKWAIT+=1
-  goto :waitlock
+if exist ".git\index.lock" (
+  echo Verrou git detecte ^(autre commit en cours^), attente 15s...
+  timeout /t 15 /nobreak >nul
+)
+if exist ".git\index.lock" (
+  echo Verrou git toujours present, nouvelle attente 15s...
+  timeout /t 15 /nobreak >nul
+)
+if exist ".git\index.lock" (
+  echo Verrou git toujours present, nouvelle attente 15s...
+  timeout /t 15 /nobreak >nul
 )
 
 git add mercato-l1.html equipe.html squad-cost.html data\transfers_l1.json data\squad_cost.json logos
