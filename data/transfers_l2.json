@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-02T00:31:00",
- "sig": "0d4c270db3e691b89037c9d0f6335693",
+ "updated": "2026-09-02T15:58:40",
+ "sig": "86c7f57e0c26aa3bd651ec2b4cb13843",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -110,9 +110,9 @@
   "MHSC|in|Daryll Benlahlou|Ol. Lyonnais": "2026-08-18",
   "MHSC|out|Modibo Sagnan|C. Rizespor": "2026-08-18",
   "MHSC|out|Enzo Tchato|Frosinone": "2026-08-25",
+  "MHSC|out|Khalil Fayad|Hajduk Split": "2026-09-01",
   "MHSC|out|Téji Savanier|FC Metz": "2026-08-18",
   "MHSC|out|Alexandre Mendy|Al-Faisaly": "2026-08-18",
-  "MHSC|out|Khalil Fayad|Hajduk Split": "2026-09-01",
   "MHSC|out|Lucas Mincarelli|Estrela Amadora": "2026-08-18",
   "MHSC|out|Christopher Jullien|Sans club": "2026-08-18",
   "CF63|in|Rominigue Kouamé|Cádiz CF": "2026-09-01",
@@ -1384,6 +1384,15 @@
      "fs": "2026-08-25"
     },
     {
+     "p": "Khalil Fayad",
+     "age": 22,
+     "pos": "MC",
+     "club": "Hajduk Split",
+     "type": "paid",
+     "val": 0.25,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Téji Savanier",
      "age": 34,
      "pos": "MO",
@@ -1400,15 +1409,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Khalil Fayad",
-     "age": 22,
-     "pos": "MC",
-     "club": "Hajduk Split",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-09-01"
     },
     {
      "p": "Lucas Mincarelli",
@@ -6988,6 +6988,14 @@
     "grp": "MID",
     "age": 25,
     "val": 0.1
+   },
+   {
+    "n": "",
+    "p": "Yanis Court",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 17,
+    "val": 0.0
    },
    {
     "n": "20",
