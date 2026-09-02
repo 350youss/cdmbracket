@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-02T15:58:28",
- "sig": "207c1da2fb04e249f6ac532d2d7e5e88",
+ "updated": "2026-09-02T18:00:51",
+ "sig": "28d3b6c023b9c61b88c569dbc6be3500",
  "squads": {
   "FCB": [
    {
@@ -1028,7 +1028,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "30",
+    "n": "",
     "p": "Dani Martinez",
     "pos": "DC",
     "grp": "DEF",
@@ -1292,7 +1292,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "15",
     "p": "Jonathan David",
     "pos": "AC",
     "grp": "ATT",
@@ -1558,7 +1558,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "17",
     "p": "Enzo Fernández",
     "pos": "MC",
     "grp": "MID",
@@ -1719,7 +1719,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 18,
-    "val": 0.0,
+    "val": 8.0,
     "stats": {
      "m": 2,
      "s": 1,
