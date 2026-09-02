@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-02T15:58:40",
- "sig": "86c7f57e0c26aa3bd651ec2b4cb13843",
+ "updated": "2026-09-02T18:31:01",
+ "sig": "af8d0794d5c94610af0f05ccf372ae5d",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -65,6 +65,7 @@
   "REIMS|out|Ewen Jaouen|Newcastle": "2026-08-18",
   "REIMS|out|Cédric Kipré|Ipswich Town": "2026-08-18",
   "REIMS|out|Thiemoko Diarra|Kasimpasa": "2026-08-18",
+  "REIMS|out|Keito Nakamura|Ol. Lyonnais": "2026-09-02",
   "REIMS|out|Reda Khadra|Qarabağ": "2026-08-28",
   "REIMS|out|Hiroki Sekine|Holstein Kiel": "2026-08-18",
   "REIMS|out|Jordan|Greuther Fürth": "2026-08-30",
@@ -87,10 +88,10 @@
   "FCM|out|Idrissa Gueye|Udinese": "2026-08-18",
   "FCM|out|Terry Yegbe|Lech Poznan": "2026-08-18",
   "FCM|out|Gauthier Hein|OGC Nice": "2026-08-18",
+  "FCM|out|Habib Diallo|Le Mans FC": "2026-09-01",
   "FCM|out|Koffi Kouao|Neftchi": "2026-08-18",
   "FCM|out|Jean-Philippe Gbamin|CSKA Sofia": "2026-08-18",
   "FCM|out|Giorgi Kvilitaia|Holstein Kiel": "2026-08-18",
-  "FCM|out|Habib Diallo|Le Mans FC": "2026-09-01",
   "FCM|out|Kevin Van Den Kerkhof|R Charleroi SC": "2026-08-18",
   "FCM|out|Joel Asoro|Apol. Limassol": "2026-08-18",
   "FCM|out|Joseph Nduquidi|Farense": "2026-08-18",
@@ -99,11 +100,11 @@
   "FCM|out|Cléo Mélières|SC Bastia": "2026-08-18",
   "FCM|out|Fodé Ballo-Touré|Sans club": "2026-08-18",
   "FCM|out|Benjamin Stambouli|Sans club": "2026-08-18",
+  "MHSC|in|Yanis Zouaoui|Le Havre AC": "2026-08-28",
   "MHSC|in|Mamadou Camara|Stade Lavallois": "2026-08-18",
   "MHSC|in|Alpha Sissoko|EA Guingamp": "2026-08-31",
   "MHSC|in|Florian Tardieu|Saint-Étienne": "2026-08-18",
   "MHSC|in|Grégory Ayem|Racing CFF": "2026-08-18",
-  "MHSC|in|Yanis Zouaoui|Le Havre AC": "2026-08-28",
   "MHSC|in|Daylam Meddah|Pau FC": "2026-08-18",
   "MHSC|in|Nordan Mukiele|Stade Rennais": "2026-08-18",
   "MHSC|in|Jérémy Hatchi|FC Lorient": "2026-09-01",
@@ -249,11 +250,11 @@
   "EAG|in|Tom Ducrocq|SC Bastia": "2026-08-18",
   "EAG|in|Jeovanni Dianganga|KSC Lokeren": "2026-08-18",
   "EAG|out|Sohaib Naïr|Saint-Étienne": "2026-08-18",
+  "EAG|out|Louis Mafouta|Le Mans FC": "2026-08-18",
   "EAG|out|Kalidou Sidibé|Akhmat Grozny": "2026-08-18",
   "EAG|out|Alpha Sissoko|Montpellier": "2026-08-31",
   "EAG|out|Amadou Sagna|Kiryat Shmona": "2026-08-18",
   "EAG|out|Youssef Njoya|FC Limonest": "2026-08-31",
-  "EAG|out|Louis Mafouta|Le Mans FC": "2026-08-18",
   "EAG|out|Akim Abdallah|Pau FC": "2026-08-21",
   "EAG|out|Eden Gassama|VFC La Roche": "2026-08-18",
   "NANCY|in|Nordine Kandil|Amiens SC": "2026-08-18",
@@ -959,6 +960,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Keito Nakamura",
+     "age": 26,
+     "pos": "AiG",
+     "club": "Ol. Lyonnais",
+     "type": "paid",
+     "val": 1.0,
+     "fs": "2026-09-02"
+    },
+    {
      "p": "Reda Khadra",
      "age": 25,
      "pos": "MO",
@@ -1167,6 +1177,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Habib Diallo",
+     "age": 31,
+     "pos": "AC",
+     "club": "Le Mans FC",
+     "type": "paid",
+     "val": 0.5,
+     "fs": "2026-09-01"
+    },
+    {
      "p": "Koffi Kouao",
      "age": 28,
      "pos": "ArD",
@@ -1192,15 +1211,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Habib Diallo",
-     "age": 31,
-     "pos": "AC",
-     "club": "Le Mans FC",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-09-01"
     },
     {
      "p": "Kevin Van Den Kerkhof",
@@ -1283,6 +1293,15 @@
    "fg": "#ff6600",
    "arr": [
     {
+     "p": "Yanis Zouaoui",
+     "age": 28,
+     "pos": "ArG",
+     "club": "Le Havre AC",
+     "type": "paid",
+     "val": 1.5,
+     "fs": "2026-08-28"
+    },
+    {
      "p": "Mamadou Camara",
      "age": 25,
      "pos": "AC",
@@ -1317,15 +1336,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Yanis Zouaoui",
-     "age": 28,
-     "pos": "ArG",
-     "club": "Le Havre AC",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-28"
     },
     {
      "p": "Daylam Meddah",
@@ -2705,6 +2715,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Louis Mafouta",
+     "age": 32,
+     "pos": "AC",
+     "club": "Le Mans FC",
+     "type": "paid",
+     "val": 0.5,
+     "fs": "2026-08-18"
+    },
+    {
      "p": "Kalidou Sidibé",
      "age": 27,
      "pos": "MDC",
@@ -2739,15 +2758,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-31"
-    },
-    {
-     "p": "Louis Mafouta",
-     "age": 32,
-     "pos": "AC",
-     "club": "Le Mans FC",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
     },
     {
      "p": "Akim Abdallah",
@@ -4388,14 +4398,6 @@
     "grp": "MID",
     "age": 19,
     "val": 0.0
-   },
-   {
-    "n": "17",
-    "p": "Keito Nakamura",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 26,
-    "val": 12.0
    },
    {
     "n": "9",
