@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-02T00:00:49",
- "sig": "7f99ab851d618772c3e9b84a8f5458e9",
+ "updated": "2026-09-02T15:58:28",
+ "sig": "207c1da2fb04e249f6ac532d2d7e5e88",
  "squads": {
   "FCB": [
    {
@@ -22,7 +22,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "25",
     "p": "Dominik Livakovic",
     "pos": "GdB",
     "grp": "GK",
@@ -226,24 +226,6 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
-    "p": "Marc Casadó",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 22,
-    "val": 18.0,
-    "stats": {
-     "m": 34,
-     "s": 15,
-     "g": 0,
-     "a": 1,
-     "min": 1397
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
     "n": "8",
     "p": "Pedri",
     "pos": "MC",
@@ -298,7 +280,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "28",
+    "n": "4",
     "p": "Brian Fariñas",
     "pos": "MC",
     "grp": "MID",
@@ -418,7 +400,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "19",
     "p": "Roony Bardghji",
     "pos": "AiD",
     "grp": "ATT",
@@ -950,7 +932,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "25",
     "p": "Salvi Esquivel",
     "pos": "GdB",
     "grp": "GK",
@@ -1028,24 +1010,6 @@
      "g": 3,
      "a": 1,
      "min": 2845
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
-    "n": "2",
-    "p": "José María Giménez",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 31,
-    "val": 9.0,
-    "stats": {
-     "m": 25,
-     "s": 16,
-     "g": 1,
-     "a": 1,
-     "min": 1521
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -1594,6 +1558,18 @@
     "valSince": "02/09/2026"
    },
    {
+    "n": "",
+    "p": "Enzo Fernández",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 25,
+    "val": 100.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "02/09/2026"
+   },
+   {
     "n": "32",
     "p": "Ayyoub Bouaddi",
     "pos": "MC",
@@ -1692,18 +1668,6 @@
      "min": 2962
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
-    "n": "40",
-    "p": "Jeremy Monga",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 17,
-    "val": 15.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "02/09/2026"
    },
@@ -2800,24 +2764,6 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "38",
-    "p": "Tosin Adarabioyo",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 28,
-    "val": 16.0,
-    "stats": {
-     "m": 29,
-     "s": 17,
-     "g": 2,
-     "a": 0,
-     "min": 1639
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
     "n": "30",
     "p": "Aarón Anselmino",
     "pos": "DC",
@@ -2944,24 +2890,6 @@
      "g": 0,
      "a": 0,
      "min": 758
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
-    "n": "8",
-    "p": "Enzo Fernández",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 25,
-    "val": 100.0,
-    "stats": {
-     "m": 54,
-     "s": 49,
-     "g": 15,
-     "a": 7,
-     "min": 4379
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -3740,6 +3668,18 @@
     "valSince": "02/09/2026"
    },
    {
+    "n": "4",
+    "p": "Tosin Adarabioyo",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 28,
+    "val": 16.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "02/09/2026"
+   },
+   {
     "n": "33",
     "p": "Ben Davies",
     "pos": "DC",
@@ -4076,24 +4016,6 @@
      "g": 12,
      "a": 5,
      "min": 2651
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
-    "n": "44",
-    "p": "Dane Scarlett",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 22,
-    "val": 1.5,
-    "stats": {
-     "m": 5,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 35
     },
     "statsClub": "",
     "valDelta": 0.0,
@@ -6410,7 +6332,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "23",
     "p": "Fikayo Tomori",
     "pos": "DC",
     "grp": "DEF",
@@ -6518,24 +6440,6 @@
      "g": 0,
      "a": 1,
      "min": 880
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "02/09/2026"
-   },
-   {
-    "n": "",
-    "p": "Youssouf Fofana",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 27,
-    "val": 23.0,
-    "stats": {
-     "m": 36,
-     "s": 29,
-     "g": 2,
-     "a": 4,
-     "min": 2373
     },
     "statsClub": "",
     "valDelta": 0.0,
