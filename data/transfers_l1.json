@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-02T18:11:15",
- "sig": "2aeb64ac0ed1806298a0a3492af12710",
+ "updated": "2026-09-02T23:03:39",
+ "sig": "626e340e959a99dbdf2d4b80a7981ad3",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -167,6 +167,7 @@
   "RCSA|out|Stefan Bajic|Alem. Aachen": "2026-08-09",
   "RCSA|out|Óscar Perea|América": "2026-08-09",
   "RCSA|out|Mathis Amougou|Toulouse": "2026-09-01",
+  "RCSA|out|Andrew Omobamidele|RSC Anderlecht": "2026-09-02",
   "RCSA|out|Soumaïla Coulibaly|Watford": "2026-09-02",
   "RCSA|out|Milos Lukovic|1.FC K'lautern": "2026-08-27",
   "RCSA|out|Rayane Messi|Al-Ettifaq": "2026-08-14",
@@ -237,6 +238,7 @@
   "SB29|in|Gautier Lloris|Le Havre AC": "2026-08-12",
   "SB29|in|Joseph Nonge|Kocaelispor": "2026-08-09",
   "SB29|in|Mathieu Patouillet|Al-Hilal": "2026-08-26",
+  "SB29|in|Giovani Versini|Pau FC": "2026-09-02",
   "SB29|in|Mamady Diambou|RB Salzbourg": "2026-08-13",
   "SB29|in|Noah Edjouma|LOSC Lille": "2026-09-01",
   "SB29|in|Egil Selvik|Watford": "2026-08-13",
@@ -2092,6 +2094,16 @@
      "fs": "2026-09-01"
     },
     {
+     "p": "Andrew Omobamidele",
+     "age": 24,
+     "pos": "DC",
+     "club": "RSC Anderlecht",
+     "club_id": 58,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-02"
+    },
+    {
      "p": "Soumaïla Coulibaly",
      "age": 22,
      "pos": "DC",
@@ -2828,6 +2840,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-26"
+    },
+    {
+     "p": "Giovani Versini",
+     "age": 22,
+     "pos": "AiD",
+     "club": "Pau FC",
+     "club_id": 3166,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-02"
     },
     {
      "p": "Mamady Diambou",
@@ -5973,6 +5995,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "",
+    "p": "Keito Nakamura",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 26,
+    "val": 12.0,
+    "stats": {
+     "m": 32,
+     "s": 29,
+     "g": 14,
+     "a": 3,
+     "min": 2491
+    },
+    "statsClub": "Stade de Reims",
+    "valDelta": 0.0,
+    "valSince": "02/09/2026"
+   },
+   {
     "n": "45",
     "p": "Rémi Himbert",
     "pos": "AiG",
@@ -7475,24 +7515,6 @@
      "g": 0,
      "a": 0,
      "min": 2978
-    },
-    "statsClub": "RC Strasbourg",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "2",
-    "p": "Andrew Omobamidele",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 24,
-    "val": 8.0,
-    "stats": {
-     "m": 41,
-     "s": 25,
-     "g": 1,
-     "a": 0,
-     "min": 2522
     },
     "statsClub": "RC Strasbourg",
     "valDelta": 0.0,
@@ -9607,6 +9629,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "10",
+    "p": "Giovani Versini",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 22,
+    "val": 5.0,
+    "stats": {
+     "m": 32,
+     "s": 28,
+     "g": 9,
+     "a": 4,
+     "min": 2247
+    },
+    "statsClub": "Pau FC",
+    "valDelta": 0.0,
+    "valSince": "02/09/2026"
+   },
+   {
     "n": "",
     "p": "Axel Camblan",
     "pos": "AiD",
@@ -10239,6 +10279,18 @@
     "statsClub": "Le Havre AC",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "20",
+    "p": "Djibril Ouziad",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 17,
+    "val": 0.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "02/09/2026"
    },
    {
     "n": "6",
@@ -15767,6 +15819,24 @@
    {
     "d": "01/09/2026",
     "v": 2.0
+   }
+  ],
+  "405397": [
+   {
+    "d": "02/09/2026",
+    "v": 12.0
+   }
+  ],
+  "922685": [
+   {
+    "d": "02/09/2026",
+    "v": 5.0
+   }
+  ],
+  "1524445": [
+   {
+    "d": "02/09/2026",
+    "v": 0.0
    }
   ]
  }
