@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-02T18:00:51",
- "sig": "28d3b6c023b9c61b88c569dbc6be3500",
+ "updated": "2026-09-02T21:00:54",
+ "sig": "4a9fb84eeb6fb1a164e94634140ed960",
  "squads": {
   "FCB": [
    {
@@ -1028,7 +1028,7 @@
     "valSince": "02/09/2026"
    },
    {
-    "n": "",
+    "n": "30",
     "p": "Dani Martinez",
     "pos": "DC",
     "grp": "DEF",
