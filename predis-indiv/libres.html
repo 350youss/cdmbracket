@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vote Pr&eacute;dictions Libres</title>
+<meta name="description" content="Vote sur les pr&eacute;dictions libres des autres joueurs : possible de fou ou jamais de la vie, en swipe sur mobile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<style>
+:root{
+  --bg:#0a0b0d; --panel:#131417; --panel2:#191a1e; --panel3:#1f2025;
+  --ink:#f2f2f0; --sub:#98999e; --muted:#5c5d63; --faint:#38393e;
+  --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.2);
+  --champion:#e2a53f; --champion-dim:rgba(226,165,63,.14);
+  --like:#40b478; --dislike:#e2496a;
+  --body:'Inter',sans-serif;
+  --disp:'General Sans',-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scrollbar-width:thin;scrollbar-color:var(--panel3) var(--bg);}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;min-height:100vh;
+  display:flex;flex-direction:column;}
+::selection{background:var(--champion-dim);color:#fff;}
+
+.kdx-nav{position:sticky;top:14px;z-index:9999;padding:0 16px;margin-bottom:6px;}
+.kdx-navbar{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:rgba(19,20,23,.62);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:9px 10px 9px 22px;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.5);font-family:-apple-system,'Segoe UI',Arial,sans-serif;}
+.kdx-navbar a{text-decoration:none;}
+.kdx-brand{display:flex;align-items:center;flex-shrink:0;} .kdx-brand img{height:20px;width:auto;display:block;}
+.kdx-links{display:flex;align-items:center;justify-content:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.kdx-links::-webkit-scrollbar{display:none;}
+.kdx-links a{font-weight:500;font-size:13px;color:#98999e;white-space:nowrap;flex-shrink:0;
+  padding:9px 13px;border-radius:999px;transition:color .2s,background .2s;}
+.kdx-links a:hover{color:#fff;background:rgba(255,255,255,.06);}
+.kdx-links a.active{color:#fff;background:rgba(255,255,255,.1);}
+@media(max-width:640px){.kdx-links a{font-size:12px;padding:8px 10px;}}
+.bleed-bar{height:3px;background:linear-gradient(90deg,var(--champion),#eeb457,var(--champion));
+  background-size:220% 100%;animation:bar 14s var(--ease) infinite;position:relative;z-index:5;flex-shrink:0;}
+@keyframes bar{50%{background-position:100% 0;}100%{background-position:220% 0;}}
+@media (prefers-reduced-motion:reduce){.bleed-bar{animation:none;}}
+
+.vl-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 16px 40px;max-width:520px;margin:0 auto;width:100%;}
+.vl-head{text-align:center;margin-bottom:22px;}
+.vl-head h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,5vw,36px);color:#fff;letter-spacing:-.01em;}
+.vl-head p{margin-top:8px;font-family:var(--body);font-size:13.5px;color:var(--sub);}
+
+.vl-stage{position:relative;width:100%;max-width:400px;height:340px;touch-action:pan-y;margin:0 auto;}
+.vl-card{position:absolute;inset:0;background:var(--panel2);border:1px solid var(--line-strong);
+  border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;cursor:grab;user-select:none;box-shadow:0 24px 50px -20px rgba(0,0,0,.6);
+  transform:translateX(0) rotate(0deg);transition:transform .35s var(--ease),opacity .35s var(--ease);}
+.vl-card.dragging{cursor:grabbing;transition:none;}
+.vl-card.fly-like{transform:translateX(600px) rotate(24deg);opacity:0;}
+.vl-card.fly-dislike{transform:translateX(-600px) rotate(-24deg);opacity:0;}
+.vl-card .vl-text{font-family:var(--disp);font-weight:700;font-size:24px;color:#fff;line-height:1.25;letter-spacing:-.01em;}
+.vl-card .vl-author{margin-top:14px;font-family:var(--body);font-size:12px;color:var(--muted);}
+.vl-stamp{position:absolute;top:24px;font-family:var(--disp);font-weight:800;font-size:22px;letter-spacing:.04em;
+  padding:8px 16px;border-radius:8px;border:3px solid;text-transform:uppercase;opacity:0;pointer-events:none;
+  transform:rotate(-14deg);}
+.vl-stamp.like{left:20px;color:var(--like);border-color:var(--like);}
+.vl-stamp.dislike{right:20px;color:var(--dislike);border-color:var(--dislike);transform:rotate(14deg);}
+
+.vl-empty{display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  width:100%;max-width:400px;height:340px;background:var(--panel);border:1.5px dashed var(--line-strong);
+  border-radius:20px;padding:24px;text-align:center;}
+.vl-empty.show{display:flex;}
+.vl-empty .ee{font-size:36px;}
+.vl-empty h3{font-family:var(--disp);font-weight:600;font-size:19px;color:#fff;}
+.vl-empty p{font-family:var(--body);font-size:13px;color:var(--sub);max-width:32ch;line-height:1.5;}
+
+.vl-actions{margin-top:26px;display:flex;gap:16px;}
+.vl-btn{width:64px;height:64px;border-radius:50%;background:var(--panel2);border:1.5px solid var(--line-strong);
+  color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:26px;
+  transition:transform .15s var(--ease),border-color .15s var(--ease),color .15s var(--ease),background .15s var(--ease);}
+.vl-btn:active{transform:scale(.9);}
+.vl-btn:disabled{opacity:.4;cursor:default;}
+.vl-btn.dislike:hover:not(:disabled){border-color:var(--dislike);color:var(--dislike);background:rgba(226,73,106,.12);}
+.vl-btn.like:hover:not(:disabled){border-color:var(--like);color:var(--like);background:rgba(64,180,120,.12);}
+
+.vl-progress{margin-top:18px;font-family:var(--body);font-weight:600;font-size:11px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;}
+.vl-links{margin-top:30px;display:flex;gap:18px;font-family:var(--body);font-size:12.5px;}
+.vl-links a{color:var(--sub);text-decoration:underline;}
+.vl-links a:hover{color:#fff;}
+
+.pseudo-gate{position:fixed;inset:0;background:var(--bg);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
+.pseudo-card{width:100%;max-width:400px;background:var(--panel2);border:1px solid var(--line-strong);
+  border-top:3px solid var(--champion);border-radius:18px;overflow:hidden;padding:28px 26px;}
+.pg-title{font-family:var(--disp);font-weight:700;font-size:23px;color:#fff;line-height:1.1;letter-spacing:-.01em;}
+.pg-sub{margin-top:10px;font-family:var(--body);font-size:13.5px;color:var(--sub);line-height:1.5;}
+.pseudo-input{margin-top:20px;width:100%;background:var(--panel);border:1.5px solid var(--line-strong);border-radius:8px;
+  padding:12px 14px;font-family:var(--body);font-size:15px;color:#fff;}
+.pseudo-input::placeholder{color:var(--muted);}
+.pseudo-input:focus{outline:none;border-color:var(--champion);}
+.pseudo-go{margin-top:12px;width:100%;font-family:var(--body);font-weight:700;font-size:13px;text-transform:uppercase;
+  letter-spacing:.03em;background:var(--champion);color:#241605;border:none;border-radius:8px;padding:13px;cursor:pointer;}
+.pseudo-go:hover{background:#eeb457;}
+.pseudo-err{margin-top:10px;font-family:var(--body);font-size:12px;color:var(--danger,#e2496a);display:none;}
+</style>
+</head>
+<body>
+<nav class="kdx-nav"><div class="kdx-navbar">
+  <a class="kdx-brand" href="/index.html"><img src="/images/kooradex-logo.png" alt="Kooradex"></a>
+  <div class="kdx-links">
+    <a href="/mercato.html">Mercato</a>
+    <a href="/pronostics-l1.html">Pr&eacute;dis</a>
+    <a href="/squad-cost.html">Sant&eacute; OM</a>
+    <a href="/lorenzi-time.html">Lorenzi Time</a>
+    <a href="/predis-indiv/libres" class="active">Vote Libre</a>
+  </div>
+</div></nav>
+<script>document.querySelector('.kdx-links a.active')?.scrollIntoView({inline:'center', block:'nearest'});</script>
+<div class="bleed-bar"></div>
+
+<div class="vl-main">
+  <div class="vl-head">
+    <h1>Possible de fou<br>ou jamais de la vie&nbsp;?</h1>
+    <p>Vote sur les pr&eacute;dictions libres des autres. Swipe &agrave; droite si t'y crois, &agrave; gauche sinon.</p>
+  </div>
+
+  <div class="vl-stage" id="vl-stage">
+    <div class="vl-card" id="vl-card">
+      <div class="vl-stamp like" id="stamp-like">Possible</div>
+      <div class="vl-stamp dislike" id="stamp-dislike">Jamais</div>
+      <div class="vl-text" id="vl-text"></div>
+      <div class="vl-author" id="vl-author"></div>
+    </div>
+  </div>
+  <div class="vl-empty" id="vl-empty">
+    <div class="ee">&#127881;</div>
+    <h3>T'as tout vu</h3>
+    <p>Reviens plus tard, ou lance une nouvelle pr&eacute;diction libre pour que d'autres la jugent.</p>
+  </div>
+
+  <div class="vl-actions">
+    <button class="vl-btn dislike" id="btn-dislike" aria-label="Jamais de la vie">&#10005;</button>
+    <button class="vl-btn like" id="btn-like" aria-label="Possible de fou">&#10003;</button>
+  </div>
+  <div class="vl-progress" id="vl-progress"></div>
+  <div class="vl-links">
+    <a href="/predis-indiv.html">Proposer une pr&eacute;diction</a>
+    <a href="/tendances.html">Voir les classements</a>
+  </div>
+</div>
+
+<div class="pseudo-gate" id="pseudo-gate">
+  <div class="pseudo-card">
+    <div class="pg-title">Avant de voter</div>
+    <p class="pg-sub">Choisis un pseudo (le m&ecirc;me que sur Predis Indiv si tu en as un) pour ne pas revoter deux fois sur la m&ecirc;me pr&eacute;diction.</p>
+    <input type="text" class="pseudo-input" id="pseudo-input" placeholder="Ton pseudo" maxlength="24" autocomplete="off">
+    <div class="pseudo-err" id="pseudo-err">Entre au moins 2 caract&egrave;res.</div>
+    <button class="pseudo-go" id="pseudo-go">C'est parti</button>
+  </div>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB8F5baV8T6qq4gWiz0cbAkhAYli4Lyips",
+  authDomain: "predi-l1.firebaseapp.com",
+  projectId: "predi-l1",
+  storageBucket: "predi-l1.firebasestorage.app",
+  messagingSenderId: "15010416982",
+  appId: "1:15010416982:web:1e2b1834ffac4f2607aef7",
+  measurementId: "G-FV2JC1TZ9Y"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const LIBRES_COLLECTION = 'predis-indiv-2026-27-libres';
+
+function normalizePseudo(p){
+  return p.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+let PSEUDO = '';
+let queue = [];
+let total = 0;
+let voted = 0;
+
+const card = document.getElementById('vl-card');
+const stage = document.getElementById('vl-stage');
+const empty = document.getElementById('vl-empty');
+const btnLike = document.getElementById('btn-like');
+const btnDislike = document.getElementById('btn-dislike');
+const stampLike = document.getElementById('stamp-like');
+const stampDislike = document.getElementById('stamp-dislike');
+
+function enterAsPseudo(p){
+  PSEUDO = p;
+  try{ localStorage.setItem('predis-indiv:pseudo', p); }catch(e){}
+  document.getElementById('pseudo-gate').style.display = 'none';
+  loadQueue();
+}
+document.getElementById('pseudo-go').addEventListener('click', () => {
+  const input = document.getElementById('pseudo-input');
+  const v = input.value.trim();
+  const err = document.getElementById('pseudo-err');
+  if (v.length < 2){ err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  enterAsPseudo(v);
+});
+document.getElementById('pseudo-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('pseudo-go').click();
+});
+(function initPseudo(){
+  let saved = '';
+  try{ saved = localStorage.getItem('predis-indiv:pseudo') || ''; }catch(e){}
+  if (saved){
+    enterAsPseudo(saved);
+  } else {
+    document.getElementById('pseudo-gate').style.display = 'flex';
+    setTimeout(() => document.getElementById('pseudo-input').focus(), 50);
+  }
+})();
+
+async function loadQueue(){
+  const myKey = normalizePseudo(PSEUDO);
+  let snap;
+  try{
+    snap = await db.collection(LIBRES_COLLECTION).get();
+  }catch(e){ console.error(e); return; }
+  queue = snap.docs
+    .map(d => ({id: d.id, ...d.data()}))
+    .filter(p => p.text && p.authorKey !== myKey && !(p.voters && p.voters[myKey]))
+    .sort(() => Math.random() - 0.5);
+  total = queue.length;
+  voted = 0;
+  renderCard();
+}
+
+function renderCard(){
+  updateProgress();
+  if (!queue.length){
+    stage.style.display = 'none';
+    empty.classList.add('show');
+    return;
+  }
+  stage.style.display = '';
+  empty.classList.remove('show');
+  const p = queue[0];
+  document.getElementById('vl-text').textContent = p.text;
+  document.getElementById('vl-author').textContent = 'par ' + (p.authorPseudo || '?');
+  card.style.transform = 'translateX(0) rotate(0deg)';
+  card.style.opacity = '1';
+  card.classList.remove('fly-like','fly-dislike');
+  stampLike.style.opacity = 0;
+  stampDislike.style.opacity = 0;
+}
+function updateProgress(){
+  document.getElementById('vl-progress').textContent = total ? `${voted} vot${voted>1?'es':'e'} · ${queue.length} restante${queue.length>1?'s':''}` : '';
+}
+
+async function castVote(id, dir){
+  const myKey = normalizePseudo(PSEUDO);
+  const ref = db.collection(LIBRES_COLLECTION).doc(id);
+  await db.runTransaction(async (tx) => {
+    const doc = await tx.get(ref);
+    if (!doc.exists) return;
+    const data = doc.data();
+    if (data.voters && data.voters[myKey]) return;
+    const field = dir === 'like' ? 'likes' : 'dislikes';
+    tx.update(ref, {
+      [field]: firebase.firestore.FieldValue.increment(1),
+      ['voters.' + myKey]: dir,
+    });
+  });
+}
+
+let busy = false;
+async function vote(dir){
+  if (busy || !queue.length) return;
+  busy = true;
+  const p = queue[0];
+  btnLike.disabled = true; btnDislike.disabled = true;
+  card.classList.add(dir === 'like' ? 'fly-like' : 'fly-dislike');
+  try{ await castVote(p.id, dir); }catch(e){ console.error(e); }
+  queue.shift();
+  voted++;
+  setTimeout(() => {
+    renderCard();
+    btnLike.disabled = false; btnDislike.disabled = false;
+    busy = false;
+  }, 320);
+}
+btnLike.addEventListener('click', () => vote('like'));
+btnDislike.addEventListener('click', () => vote('dislike'));
+
+/* ---- swipe (pointer events : couvre souris ET tactile) ---- */
+let dragging = false, startX = 0, startY = 0, dx = 0;
+const SWIPE_THRESHOLD = 100;
+
+card.addEventListener('pointerdown', e => {
+  if (busy || !queue.length) return;
+  dragging = true;
+  startX = e.clientX; startY = e.clientY; dx = 0;
+  card.classList.add('dragging');
+  card.setPointerCapture(e.pointerId);
+});
+card.addEventListener('pointermove', e => {
+  if (!dragging) return;
+  dx = e.clientX - startX;
+  const dy = (e.clientY - startY) * 0.4;
+  const rot = dx / 18;
+  card.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+  const t = Math.min(Math.abs(dx) / SWIPE_THRESHOLD, 1);
+  if (dx > 0){ stampLike.style.opacity = t; stampDislike.style.opacity = 0; }
+  else { stampDislike.style.opacity = t; stampLike.style.opacity = 0; }
+});
+function endDrag(){
+  if (!dragging) return;
+  dragging = false;
+  card.classList.remove('dragging');
+  if (Math.abs(dx) > SWIPE_THRESHOLD){
+    vote(dx > 0 ? 'like' : 'dislike');
+  } else {
+    card.style.transform = 'translateX(0) rotate(0deg)';
+    stampLike.style.opacity = 0;
+    stampDislike.style.opacity = 0;
+  }
+  dx = 0;
+}
+card.addEventListener('pointerup', endDrag);
+card.addEventListener('pointercancel', endDrag);
+document.addEventListener('keydown', e => {
+  if (document.getElementById('pseudo-gate').style.display === 'none'){
+    if (e.key === 'ArrowRight') vote('like');
+    if (e.key === 'ArrowLeft') vote('dislike');
+  }
+});
+</script>
+</body>
+</html>
