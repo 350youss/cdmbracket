@@ -172,7 +172,6 @@ body::before{
 .vt-btn.dislike:hover:not(:disabled){background:rgba(226,73,106,.15);border-color:rgba(226,73,106,.4);color:#f0899e;}
 .vt-progress{text-align:center;font-family:var(--body);font-weight:600;font-size:11px;color:var(--muted);
   text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
-.vote-done{padding:14px 16px;border-top:1px solid var(--line);}
 
 .free-list{display:flex;flex-direction:column;gap:8px;width:100%;align-self:stretch;}
 .pick-free{display:flex;gap:8px;width:100%;max-width:420px;}
@@ -283,7 +282,6 @@ body::before{
   <div class="picker-sheet">
     <div class="picker-head"><span class="picker-title">Vote sur les pr&eacute;dictions des autres</span><button class="picker-close" id="vote-close">×</button></div>
     <div class="vote-list" id="vote-list"></div>
-    <div class="vote-done"><button class="pseudo-go" id="vote-finish" type="button">Termin&eacute;</button></div>
   </div>
 </div>
 
@@ -942,9 +940,6 @@ document.getElementById('vote-list').addEventListener('click', async (e) => {
   renderVoteCard();
 });
 document.getElementById('vote-close').addEventListener('click', () => {
-  document.getElementById('vote-overlay').classList.remove('show');
-});
-document.getElementById('vote-finish').addEventListener('click', () => {
   document.getElementById('vote-overlay').classList.remove('show');
 });
 
