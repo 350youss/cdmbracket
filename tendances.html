@@ -46,6 +46,8 @@ h1{margin-top:28px;font-family:var(--disp);font-weight:700;font-size:clamp(28px,
 .bar-label .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .bar-track{flex:1;height:10px;background:var(--panel3);border-radius:5px;overflow:hidden;}
 .bar-fill{height:100%;background:var(--tc,var(--champion));border-radius:5px;}
+.bar-row.others .bar-label .nm{color:var(--muted);}
+.bar-row.others .bar-fill{background:var(--muted);}
 .bar-pct{width:80px;flex-shrink:0;text-align:right;font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;}
 .empty-note{margin-top:14px;font-size:13px;color:var(--muted);}
 
@@ -198,7 +200,10 @@ async function main(){
       counts[key].n++;
     });
     block.innerHTML = `<div class="cat-head" style="--tc:${cat.c}"><span class="ct">${cat.label}</span><span class="cn">${total} réponse${total>1?'s':''}</span></div>`;
-    const entries = Object.values(counts).sort((a,b) => b.n - a.n).slice(0, 10);
+    const sortedEntries = Object.values(counts).sort((a,b) => b.n - a.n);
+    const entries = sortedEntries.slice(0, 5);
+    const others = sortedEntries.slice(5);
+    const othersN = others.reduce((sum, e) => sum + e.n, 0);
     if (entries.length){
       const bars = document.createElement('div');
       bars.className = 'bars';
@@ -210,6 +215,14 @@ async function main(){
             <div class="bar-pct">${pct}% (${n})</div>
           </div>`;
       }).join('');
+      if (othersN > 0){
+        const othersPct = total ? Math.round(othersN/total*100) : 0;
+        bars.innerHTML += `<div class="bar-row others" style="--tc:${cat.c}">
+            <div class="bar-label"><span class="nm">Autres (${others.length})</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:${othersPct}%"></div></div>
+            <div class="bar-pct">${othersPct}% (${othersN})</div>
+          </div>`;
+      }
       block.appendChild(bars);
     } else {
       block.innerHTML += '<p class="empty-note">Personne n\'a encore répondu sur cette catégorie.</p>';
