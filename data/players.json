@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated": "2026-09-04T23:33:55",
+  "updated": "2026-09-04T23:37:59",
   "clubs": [
     {
       "id": "psg",
@@ -3521,6 +3521,180 @@
           "pos": "AC",
           "posGroup": "ATT",
           "squad": "B"
+        },
+        {
+          "name": "Jules Stawiecki",
+          "pos": "GdB",
+          "posGroup": "GK",
+          "squad": "U21"
+        },
+        {
+          "name": "Loïc Tiamuna Lubaki",
+          "pos": "GdB",
+          "posGroup": "GK",
+          "squad": "U21"
+        },
+        {
+          "name": "Axel Decrenisse",
+          "pos": "GdB",
+          "posGroup": "GK",
+          "squad": "U21"
+        },
+        {
+          "name": "Bradel Kiwa",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Daryl Leunga Leunga",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Sirak Bein",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Massiremba Dramé",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Melvin Gomes",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Ismaïl Bamba",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Nick Mokabakila",
+          "pos": "ArG",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Ilane Touré",
+          "pos": "ArD",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Wassim Guerchi",
+          "pos": "ArD",
+          "posGroup": "DEF",
+          "squad": "U21"
+        },
+        {
+          "name": "Matthias Wamu Oyatambwe",
+          "pos": "MDC",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Imrane El Ouaroudi",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Anis Soubeir",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Checkina Dzabatou Ecko",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Aymen Assab",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Yasir Mouh",
+          "pos": "MD",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Najd Ajroud",
+          "pos": "MO",
+          "posGroup": "MID",
+          "squad": "U21"
+        },
+        {
+          "name": "Safouane Benzahra",
+          "pos": "AiG",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Nahël Haddani",
+          "pos": "AiG",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Malick Sylla",
+          "pos": "AiD",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Amal Boura",
+          "pos": "AiD",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Ilies Belmokhtar",
+          "pos": "AiD",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Oumar Konaté",
+          "pos": "AC",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Ekene Chukwuani",
+          "pos": "AC",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Rodion Piazenko",
+          "pos": "AC",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Yannick Dodo",
+          "pos": "AC",
+          "posGroup": "ATT",
+          "squad": "U21"
+        },
+        {
+          "name": "Jassim Djelloul",
+          "pos": "AC",
+          "posGroup": "ATT",
+          "squad": "U21"
         },
         {
           "name": "Théo Hervier-Gisquet",

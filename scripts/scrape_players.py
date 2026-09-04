@@ -62,7 +62,7 @@ CLUBS = [
     ("lm",    "Le Mans FC",           "le-mans-fc",             1164),
 ]
 
-SUB_SQUADS = ["B", "U19", "U17"]
+SUB_SQUADS = ["B", "U21", "U19", "U17"]
 
 POS = {
     "Gardien de but": "GdB", "Arrière droit": "ArD", "Arrière gauche": "ArG",
