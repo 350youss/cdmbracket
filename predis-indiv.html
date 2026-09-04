@@ -389,7 +389,7 @@ function applyLockState(){
   board.classList.toggle('locked', LOCKED);
   document.getElementById('btn-random').style.display = LOCKED ? 'none' : '';
   document.getElementById('btn-reset').style.display = LOCKED ? 'none' : '';
-  document.getElementById('btn-submit').style.display = (LOCKED || !isDev) ? 'none' : '';
+  document.getElementById('btn-submit').style.display = LOCKED ? 'none' : '';
   document.getElementById('lock-badge').style.display = LOCKED ? '' : 'none';
 }
 async function enterAsPseudo(p){
@@ -847,10 +847,9 @@ async function shareImage(){
 }
 document.getElementById('btn-share').addEventListener('click', shareImage);
 
-/* ---------- soumission : caché derrière ?dev=1 pour tester avant public ---------- */
-const isDev = new URLSearchParams(location.search).has('dev');
+/* ---------- soumission ---------- */
 const btnSubmit = document.getElementById('btn-submit');
-if (isDev) btnSubmit.style.display = '';
+btnSubmit.style.display = '';
 
 btnSubmit.addEventListener('click', async () => {
   if (!PSEUDO){ showToast('Choisis d\'abord un pseudo.'); return; }
