@@ -155,6 +155,23 @@ body::before{
 .picker-row .prs{font-size:11px;color:var(--muted);}
 .picker-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13px;}
 
+/* ---------------- vote sur les predictions libres des autres ---------------- */
+.vote-list{overflow-y:auto;padding:12px 16px 16px;flex:1;display:flex;flex-direction:column;gap:10px;}
+.vote-row{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+.vote-row .vt-text{font-family:var(--body);font-size:13.5px;color:#fff;line-height:1.45;}
+.vote-row .vt-author{margin-top:4px;font-family:var(--body);font-size:11px;color:var(--muted);}
+.vote-row .vt-actions{margin-top:10px;display:flex;gap:8px;}
+.vt-btn{flex:1;font-family:var(--body);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.02em;
+  border-radius:8px;padding:9px;cursor:pointer;border:1px solid var(--line-strong);background:var(--panel2);color:var(--sub);
+  transition:background .15s var(--ease),color .15s var(--ease),border-color .15s var(--ease);}
+.vt-btn:disabled{cursor:default;}
+.vt-btn.like:hover:not(:disabled){background:rgba(64,180,120,.15);border-color:rgba(64,180,120,.4);color:#7be3ab;}
+.vt-btn.dislike:hover:not(:disabled){background:rgba(226,73,106,.15);border-color:rgba(226,73,106,.4);color:#f0899e;}
+.vote-row.voted .vt-actions{display:none;}
+.vote-row .vt-voted-tag{margin-top:10px;font-family:var(--body);font-weight:700;font-size:11px;text-transform:uppercase;color:var(--champion);}
+.vote-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13px;}
+.vote-done{padding:14px 16px;border-top:1px solid var(--line);}
+
 .free-list{display:flex;flex-direction:column;gap:8px;width:100%;align-self:stretch;}
 .pick-free{display:flex;gap:8px;width:100%;max-width:420px;}
 .free-input{flex:1;background:var(--panel);border:1.5px dashed var(--line-strong);border-radius:8px;
@@ -257,6 +274,14 @@ body::before{
     <div class="picker-kinds" id="picker-kinds"></div>
     <div class="picker-search-wrap"><input class="picker-search" id="picker-search" type="text" placeholder="Rechercher…" autocomplete="off"></div>
     <div class="picker-list" id="picker-list"></div>
+  </div>
+</div>
+
+<div class="picker-overlay" id="vote-overlay">
+  <div class="picker-sheet">
+    <div class="picker-head"><span class="picker-title">Vote sur les pr&eacute;dictions des autres</span><button class="picker-close" id="vote-close">×</button></div>
+    <div class="vote-list" id="vote-list"></div>
+    <div class="vote-done"><button class="pseudo-go" id="vote-finish" type="button">Termin&eacute;</button></div>
   </div>
 </div>
 
@@ -797,6 +822,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const SUBMIT_COLLECTION = 'predis-indiv-2026-27';
+const LIBRES_COLLECTION = 'predis-indiv-2026-27-libres';
 
 const isDev = new URLSearchParams(location.search).has('dev');
 const btnSubmit = document.getElementById('btn-submit');
@@ -814,13 +840,98 @@ btnSubmit.addEventListener('click', async () => {
       picks: picks,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
+    const freeTexts = picks['libre'] || [];
+    if (freeTexts.length){
+      await postFreePredictionsToLibres(PSEUDO, freeTexts).catch(e => console.error('libres sync', e));
+    }
     showToast('Pronostics soumis. Merci !');
+    maybeShowVoteOverlay();
   }catch(e){
     console.error(e);
     showToast('Échec de l\'envoi, réessaie.');
   } finally {
     btnSubmit.disabled = false; btnSubmit.textContent = original;
   }
+});
+
+/* ---------- vote sur les predictions libres des autres, apres soumission ---------- */
+async function postFreePredictionsToLibres(pseudo, freeTexts){
+  const authorKey = normalizePseudo(pseudo);
+  const batch = db.batch();
+  freeTexts.forEach((text, i) => {
+    const ref = db.collection(LIBRES_COLLECTION).doc(authorKey + '__' + i);
+    batch.set(ref, {
+      text: text,
+      authorPseudo: pseudo,
+      authorKey: authorKey,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }, {merge: true});
+  });
+  await batch.commit();
+}
+
+async function maybeShowVoteOverlay(){
+  const myKey = normalizePseudo(PSEUDO);
+  let snap;
+  try{
+    snap = await db.collection(LIBRES_COLLECTION).get();
+  }catch(e){ console.error(e); return; }
+  const candidates = snap.docs
+    .map(d => ({id: d.id, ...d.data()}))
+    .filter(p => p.text && p.authorKey !== myKey && !(p.voters && p.voters[myKey]))
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5);
+  if (!candidates.length) return;
+  const list = document.getElementById('vote-list');
+  list.innerHTML = candidates.map(p => `
+    <div class="vote-row" data-id="${p.id}">
+      <div class="vt-text">${escapeHtml(p.text)}</div>
+      <div class="vt-author">par ${escapeHtml(p.authorPseudo || '?')}</div>
+      <div class="vt-actions">
+        <button class="vt-btn like" type="button" data-id="${p.id}" data-dir="like">J&rsquo;aime</button>
+        <button class="vt-btn dislike" type="button" data-id="${p.id}" data-dir="dislike">J&rsquo;aime pas</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('vote-overlay').classList.add('show');
+}
+
+async function castVote(id, dir){
+  const myKey = normalizePseudo(PSEUDO);
+  const ref = db.collection(LIBRES_COLLECTION).doc(id);
+  await db.runTransaction(async (tx) => {
+    const doc = await tx.get(ref);
+    if (!doc.exists) return;
+    const data = doc.data();
+    if (data.voters && data.voters[myKey]) return;
+    const field = dir === 'like' ? 'likes' : 'dislikes';
+    tx.update(ref, {
+      [field]: firebase.firestore.FieldValue.increment(1),
+      ['voters.' + myKey]: dir,
+    });
+  });
+}
+
+document.getElementById('vote-list').addEventListener('click', async (e) => {
+  const btn = e.target.closest('.vt-btn');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const dir = btn.dataset.dir;
+  const row = btn.closest('.vote-row');
+  row.querySelectorAll('.vt-btn').forEach(b => b.disabled = true);
+  try{
+    await castVote(id, dir);
+    row.classList.add('voted');
+    row.insertAdjacentHTML('beforeend', `<div class="vt-voted-tag">${dir === 'like' ? 'Aimé, merci' : 'Noté, merci'}</div>`);
+  }catch(e){
+    console.error(e);
+    row.querySelectorAll('.vt-btn').forEach(b => b.disabled = false);
+  }
+});
+document.getElementById('vote-close').addEventListener('click', () => {
+  document.getElementById('vote-overlay').classList.remove('show');
+});
+document.getElementById('vote-finish').addEventListener('click', () => {
+  document.getElementById('vote-overlay').classList.remove('show');
 });
 
 loadDB();

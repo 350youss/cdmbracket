@@ -55,6 +55,17 @@ h1{margin-top:28px;font-family:var(--disp);font-weight:700;font-size:clamp(28px,
 .free-item{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13.5px;}
 .free-item b{color:var(--sub);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;margin-right:8px;}
 
+.free-rankings{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:640px){.free-rankings{grid-template-columns:1fr;}}
+.frc-title{font-family:var(--disp);font-weight:600;font-size:13px;color:#fff;margin-bottom:8px;}
+.free-rank-row{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:6px;}
+.frr-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
+.frr-meta{margin-top:6px;display:flex;align-items:center;gap:8px;font-family:var(--body);font-size:11px;}
+.frr-author{color:var(--muted);}
+.frr-score{font-weight:700;}
+.frr-score.like{color:#5fbf8a;}
+.frr-score.dislike{color:var(--danger);}
+
 .subs{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);}
 .subs h2{font-family:var(--disp);font-weight:600;font-size:19px;color:#fff;}
 .sub-list{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
@@ -99,6 +110,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const SUBMIT_COLLECTION = 'predis-indiv-2026-27';
+const LIBRES_COLLECTION = 'predis-indiv-2026-27-libres';
 
 const CLUB_META = [
   {id:'psg', name:'Paris Saint-Germain', logo:'logos/PSG.png'},
@@ -147,10 +159,14 @@ function pickMedia(p){
 }
 
 async function main(){
-  let docs;
+  let docs, libres;
   try{
-    const snap = await db.collection(SUBMIT_COLLECTION).get();
+    const [snap, libresSnap] = await Promise.all([
+      db.collection(SUBMIT_COLLECTION).get(),
+      db.collection(LIBRES_COLLECTION).get(),
+    ]);
     docs = snap.docs.map(d => d.data());
+    libres = libresSnap.docs.map(d => d.data());
   }catch(e){
     document.getElementById('meta').textContent = 'Impossible de charger les données (' + e.message + ').';
     return;
@@ -172,19 +188,31 @@ async function main(){
     block.className = 'cat-block';
 
     if (cat.kind === 'free'){
-      const items = [];
-      docs.forEach(d => {
-        (d.picks && d.picks[cat.id] || []).forEach(text => items.push({text, pseudo: d.pseudo}));
-      });
-      block.innerHTML = `<div class="cat-head" style="--tc:${cat.c}"><span class="ct">${cat.label}</span><span class="cn">${items.length} réponse${items.length>1?'s':''}</span></div>`;
-      if (items.length){
-        const wall = document.createElement('div');
-        wall.className = 'free-wall';
-        wall.innerHTML = items.map(it => `<div class="free-item"><b>${escapeHtml(it.pseudo)}</b>${escapeHtml(it.text)}</div>`).join('');
-        block.appendChild(wall);
-      } else {
+      block.innerHTML = `<div class="cat-head" style="--tc:${cat.c}"><span class="ct">${cat.label}</span><span class="cn">${libres.length} au total</span></div>`;
+      if (!libres.length){
         block.innerHTML += '<p class="empty-note">Personne n\'a encore ajouté de prédiction libre.</p>';
+        content.appendChild(block);
+        return;
       }
+      const mostLiked = libres.filter(p => (p.likes||0) > 0).sort((a,b) => (b.likes||0) - (a.likes||0)).slice(0,5);
+      const mostDisliked = libres.filter(p => (p.dislikes||0) > 0).sort((a,b) => (b.dislikes||0) - (a.dislikes||0)).slice(0,5);
+      const renderRankRow = p => `<div class="free-rank-row">
+          <div class="frr-text">${escapeHtml(p.text)}</div>
+          <div class="frr-meta"><span class="frr-author">${escapeHtml(p.authorPseudo||'?')}</span>
+            <span class="frr-score like">+${p.likes||0}</span><span class="frr-score dislike">-${p.dislikes||0}</span></div>
+        </div>`;
+      const rankings = document.createElement('div');
+      rankings.className = 'free-rankings';
+      rankings.innerHTML = `
+        <div class="free-rank-col">
+          <div class="frc-title">Les plus populaires</div>
+          ${mostLiked.length ? mostLiked.map(renderRankRow).join('') : '<p class="empty-note">Aucun vote pour l\'instant.</p>'}
+        </div>
+        <div class="free-rank-col">
+          <div class="frc-title">Les moins populaires</div>
+          ${mostDisliked.length ? mostDisliked.map(renderRankRow).join('') : '<p class="empty-note">Aucun vote pour l\'instant.</p>'}
+        </div>`;
+      block.appendChild(rankings);
       content.appendChild(block);
       return;
     }
