@@ -166,6 +166,7 @@ def scrape_club(cid, name, slug, tmid):
 
     fn_squad = os.path.join(CACHE, f"{cid}.html")
     raw_squad = fetch_url(fn_squad, f"https://www.transfermarkt.fr/{slug}/kader/verein/{tmid}/plus/1", name)
+    pro_ok = bool(raw_squad)
     if raw_squad:
         players += parse_squad(raw_squad, "PRO")
 
@@ -184,7 +185,7 @@ def scrape_club(cid, name, slug, tmid):
                 print(f"    · {name} {suf} -> {len(sub_players)} joueurs")
                 players += sub_players
 
-    return players
+    return players, pro_ok
 
 
 def main():
@@ -197,17 +198,17 @@ def main():
             pass
 
     clubs_data = []
-    ok_count = 0
+    failed = []
     for cid, name, slug, tmid in CLUBS:
         print(f"· {name} …")
-        players = scrape_club(cid, name, slug, tmid)
+        players, pro_ok = scrape_club(cid, name, slug, tmid)
         coach = fetch_coach(slug, tmid)
         pro_n = sum(1 for p in players if p["squad"] == "PRO")
-        if players:
-            ok_count += 1
+        if pro_ok:
             print(f"  -> {pro_n} pro + {len(players)-pro_n} jeunes/réserve = {len(players)} au total, entraîneur : {coach or '?'}")
         else:
-            print(f"  !! échec {name}, effectif précédent conservé si dispo")
+            failed.append(name)
+            print(f"  !! échec effectif PRO {name}, effectif précédent conservé si dispo")
             if cid in prev and prev[cid].get("players"):
                 players = prev[cid]["players"]
         if not coach and cid in prev:
@@ -221,7 +222,11 @@ def main():
         "clubs": clubs_data,
     }
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    ok_count = len(CLUBS) - len(failed)
     print(f"\n{total} joueurs sur {len(clubs_data)} clubs -> {OUT} ({ok_count}/{len(CLUBS)} clubs scrapés avec succès ce passage)")
+    if failed:
+        print(f"\n!! {len(failed)} club(s) en échec (effectif PRO conservé de la veille, potentiellement obsolète) : {', '.join(failed)}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

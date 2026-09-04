@@ -22,6 +22,8 @@ jobs:
         run: pip install requests beautifulsoup4 lxml
 
       - name: Scrape les effectifs Ligue 1
+        id: scrape
+        continue-on-error: true
         run: python scripts/scrape_players.py
 
       - name: Commit et push si les données ont changé
@@ -35,3 +37,9 @@ jobs:
             git commit -m "Mise à jour auto des effectifs L1 ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
             git push
           fi
+
+      - name: Échoue le run si un club n'a pas pu être scrapé (visible dans Actions)
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "Au moins un club a echoue au scrape (voir logs de l'etape 'Scrape les effectifs Ligue 1'). Effectif precedent conserve pour ce(s) club(s)."
+          exit 1
