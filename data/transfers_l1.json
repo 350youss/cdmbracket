@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-04T17:03:48",
- "sig": "0a21ae6f8c20584e858d5539504078ad",
+ "updated": "2026-09-04T20:03:55",
+ "sig": "8a63f0a0fc3ac7044f4a2016ac82b3c8",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -204,13 +204,13 @@
   "TFC|in|David Odogu|AC Milan": "2026-08-19",
   "TFC|out|Dayann Méthalie|AFC Sunderland": "2026-08-21",
   "TFC|out|Emersonn|Ipswich Town": "2026-08-09",
+  "TFC|out|Yann Gboho|Coventry City": "2026-09-04",
   "TFC|out|Charlie Cresswell|Stade Rennais": "2026-08-09",
   "TFC|out|Frank Magri|Al-Gharafa": "2026-08-20",
   "TFC|out|Warren Kamanzi|Malmö FF": "2026-08-09",
   "TFC|out|Djibril Sidibé|Le Mans FC": "2026-08-18",
   "TFC|out|Kjetil Haug|Go Ahead Eagles": "2026-08-09",
   "TFC|out|Álex Domínguez|Ponferradina": "2026-08-09",
-  "TFC|out|Yann Gboho|Coventry City": "2026-09-04",
   "TFC|out|Ibrahim Cissoko|PEC Zwolle": "2026-08-09",
   "TFC|out|Edhy Zuliani|VVV-Venlo": "2026-08-09",
   "TFC|out|Mário Sauer|1.FC K'lautern": "2026-08-26",
@@ -370,6 +370,7 @@
   "LM|out|Anthony Ribelin|Amiens SC": "2026-08-09",
   "LM|out|Mathis Hamdi|QRM": "2026-08-09",
   "LM|out|Taylor Luvambo|FC Arges": "2026-08-09",
+  "LM|out|Milan Robin|Estoril": "2026-09-04",
   "LM|out|Izhak Hammoudi|Bourges FC": "2026-08-09",
   "LM|out|Nathan Tronchet|FR Haguenau": "2026-08-09",
   "LM|out|Baptiste Guillaume|Sans club": "2026-08-09"
@@ -2494,6 +2495,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Yann Gboho",
+     "age": 25,
+     "pos": "AiG",
+     "club": "Coventry City",
+     "club_id": 990,
+     "type": "paid",
+     "val": 12.0,
+     "fs": "2026-09-04"
+    },
+    {
      "p": "Charlie Cresswell",
      "age": 23,
      "pos": "DC",
@@ -2552,16 +2563,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
-    },
-    {
-     "p": "Yann Gboho",
-     "age": 25,
-     "pos": "AiG",
-     "club": "Coventry City",
-     "club_id": 990,
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-09-04"
     },
     {
      "p": "Ibrahim Cissoko",
@@ -4232,6 +4233,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Milan Robin",
+     "age": 26,
+     "pos": "MC",
+     "club": "Estoril",
+     "club_id": 1465,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-04"
     },
     {
      "p": "Izhak Hammoudi",
@@ -12385,24 +12396,6 @@
      "g": 0,
      "a": 2,
      "min": 2193
-    },
-    "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "24",
-    "p": "Milan Robin",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 26,
-    "val": 1.0,
-    "stats": {
-     "m": 32,
-     "s": 22,
-     "g": 2,
-     "a": 4,
-     "min": 1767
     },
     "statsClub": "Le Mans FC",
     "valDelta": 0.0,
