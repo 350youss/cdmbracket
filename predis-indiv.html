@@ -183,6 +183,8 @@ body::before{
   background:var(--tc,var(--champion));color:#181205;border:none;border-radius:8px;padding:0 16px;cursor:pointer;flex-shrink:0;}
 .free-ic{width:34px;height:34px;border-radius:50%;background:var(--panel3);flex-shrink:0;
   display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--sub);}
+.free-limit{font-family:var(--body);font-size:12px;color:var(--muted);padding:10px 14px;
+  border:1.5px dashed var(--line-strong);border-radius:8px;text-align:center;}
 
 /* ---------------- pseudo ---------------- */
 .pseudo-gate{position:fixed;inset:0;background:var(--bg);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
@@ -526,6 +528,7 @@ function renderSlot(slotEl, cat, pick){
   slotEl.querySelector('.pick-filled').addEventListener('click', () => openPicker(cat));
 }
 
+const FREE_MAX = 3;
 function renderFreeSlot(slotEl, cat, entries){
   entries = entries || [];
   const items = entries.map((text, i) => `
@@ -534,12 +537,13 @@ function renderFreeSlot(slotEl, cat, entries){
         <span class="pf-info"><span class="pf-name">${escapeHtml(text)}</span><span class="pf-meta">Prédiction libre</span></span>
         <button class="pick-remove" aria-label="Retirer" data-i="${i}">×</button>
       </div>`).join('');
-  slotEl.innerHTML = `<div class="free-list">${items}
+  const canAddMore = entries.length < FREE_MAX;
+  const inputRow = canAddMore ? `
       <div class="pick-free" style="--tc:${cat.c}">
         <input type="text" class="free-input" placeholder="${entries.length ? 'Ajouter une autre prédiction…' : 'Prédiction libre…'}" maxlength="80">
         <button class="free-save">Valider</button>
-      </div>
-    </div>`;
+      </div>` : `<div class="free-limit">Limite de ${FREE_MAX} prédictions libres atteinte</div>`;
+  slotEl.innerHTML = `<div class="free-list">${items}${inputRow}</div>`;
   slotEl.querySelectorAll('.pick-remove').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -551,10 +555,12 @@ function renderFreeSlot(slotEl, cat, entries){
     });
   });
   const input = slotEl.querySelector('.free-input');
+  if (!input) return;
   const save = () => {
     const v = input.value.trim();
     if (!v) return;
     if (!picks[cat.id]) picks[cat.id] = [];
+    if (picks[cat.id].length >= FREE_MAX) return;
     picks[cat.id].push(v);
     render();
   };
