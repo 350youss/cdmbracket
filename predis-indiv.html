@@ -617,7 +617,7 @@ function renderPickerList(query){
     items = items.filter(it => normalizeSearch(it.name).includes(q) ||
       (CLUB_BY_ID[it.clubId] && normalizeSearch(CLUB_BY_ID[it.clubId].name).includes(q)));
   }
-  items = items.slice(0, 120);
+  items = items.slice(0, 1500);
 
   if (!items.length){
     pickerList.innerHTML = '<div class="picker-empty">Aucun résultat.</div>';
