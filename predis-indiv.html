@@ -726,6 +726,13 @@ async function shareOrDownload(blob, filename, text){
       if (err && err.name === 'AbortError') return;
     }
   }
+  if (navigator.clipboard && window.ClipboardItem){
+    try{
+      await navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+      showToast('Image copiée dans le presse-papier.');
+      return;
+    }catch(err){ console.error('clipboard write', err); }
+  }
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = filename;
