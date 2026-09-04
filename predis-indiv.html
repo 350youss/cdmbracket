@@ -808,44 +808,67 @@ async function shareImage(){
       deception:'#b083d6', top:'#c98a2e', flop:'#e2496a'};
     const textOnHex = {mvp:'#181205', top:'#181205'};
 
-    let y = HEADH;
+    // regroupe les lignes consécutives de la même catégorie (ex: plusieurs prédictions libres)
+    // sous un seul bandeau de label, au lieu de répéter le libellé sur chaque ligne
+    const groups = [];
     for (const row of rows){
-      const c = colorHex[row.cat.id] || '#7d808a';
-      const tOn = textOnHex[row.cat.id] || '#fff';
-      ctx.fillStyle = '#131417'; ctx.fillRect(0, y, W, ROWH);
-      ctx.fillStyle = c; ctx.fillRect(0, y, LABELW, ROWH);
-      ctx.strokeStyle = 'rgba(255,255,255,.08)'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(0, y+ROWH); ctx.lineTo(W, y+ROWH); ctx.stroke();
+      const last = groups[groups.length-1];
+      if (last && last.cat.id === row.cat.id) last.items.push(row);
+      else groups.push({cat: row.cat, items: [row]});
+    }
 
+    let y = HEADH;
+    for (const group of groups){
+      const groupH = group.items.length * ROWH;
+      const c = colorHex[group.cat.id] || '#7d808a';
+      const tOn = textOnHex[group.cat.id] || '#fff';
+
+      ctx.fillStyle = c; ctx.fillRect(0, y, LABELW, groupH);
       ctx.fillStyle = tOn;
       ctx.font = '600 21px "General Sans", sans-serif';
       ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      ctx.fillText(row.cat.label.toUpperCase(), 20, y+ROWH/2-4);
+      ctx.fillText(group.cat.label.toUpperCase(), 20, y+groupH/2-4);
 
-      const cy = y + ROWH/2, cx = LABELW + 26;
-      const img = row.pick.clubId ? crestMap[row.pick.clubId] : null;
-      if (img){
-        const s = 46, ar = img.width/img.height;
-        let dw = s, dh = s;
-        if (ar > 1) dh = s/ar; else dw = s*ar;
-        ctx.drawImage(img, cx, cy-dh/2, dw, dh);
-      } else {
-        roundRect(ctx, cx, cy-23, 46, 46, 23);
-        ctx.fillStyle = '#1c1e23'; ctx.fill();
-        ctx.strokeStyle = 'rgba(255,255,255,.1)'; ctx.lineWidth = 1; ctx.stroke();
-      }
-      ctx.fillStyle = '#fff';
-      ctx.font = '600 18px "Inter", sans-serif';
-      ctx.fillText(row.pick.name, cx+62, cy-2);
-      ctx.fillStyle = '#98999e';
-      ctx.font = '500 12.5px "Inter", sans-serif';
-      const club = row.pick.clubId ? CLUB_BY_ID[row.pick.clubId] : null;
-      const metaTxt = row.pick.kind === 'player' ? (club ? club.name : '') :
-        row.pick.kind === 'club' ? 'Équipe' :
-        row.pick.kind === 'free' ? 'Prédiction libre' :
-        (club ? club.name + ' · Entraîneur' : 'Entraîneur');
-      ctx.fillText(metaTxt, cx+62, cy+18);
-      y += ROWH;
+      let ry = y;
+      group.items.forEach((row, i) => {
+        ctx.fillStyle = '#131417'; ctx.fillRect(LABELW, ry, W-LABELW, ROWH);
+        ctx.strokeStyle = 'rgba(255,255,255,.08)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(LABELW, ry+ROWH); ctx.lineTo(W, ry+ROWH); ctx.stroke();
+
+        const cy = ry + ROWH/2, cx = LABELW + 26;
+        const img = row.pick.clubId ? crestMap[row.pick.clubId] : null;
+        if (img){
+          const s = 46, ar = img.width/img.height;
+          let dw = s, dh = s;
+          if (ar > 1) dh = s/ar; else dw = s*ar;
+          ctx.drawImage(img, cx, cy-dh/2, dw, dh);
+        } else if (row.pick.kind === 'free'){
+          roundRect(ctx, cx, cy-23, 46, 46, 23);
+          ctx.fillStyle = c; ctx.fill();
+          ctx.fillStyle = tOn;
+          ctx.font = '700 20px "Inter", sans-serif';
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(String(i+1), cx+23, cy+1);
+          ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        } else {
+          roundRect(ctx, cx, cy-23, 46, 46, 23);
+          ctx.fillStyle = '#1c1e23'; ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,.1)'; ctx.lineWidth = 1; ctx.stroke();
+        }
+        ctx.fillStyle = '#fff';
+        ctx.font = '600 18px "Inter", sans-serif';
+        ctx.fillText(row.pick.name, cx+62, cy-2);
+        ctx.fillStyle = '#98999e';
+        ctx.font = '500 12.5px "Inter", sans-serif';
+        const club = row.pick.clubId ? CLUB_BY_ID[row.pick.clubId] : null;
+        const metaTxt = row.pick.kind === 'player' ? (club ? club.name : '') :
+          row.pick.kind === 'club' ? 'Équipe' :
+          row.pick.kind === 'free' ? '' :
+          (club ? club.name + ' · Entraîneur' : 'Entraîneur');
+        if (metaTxt) ctx.fillText(metaTxt, cx+62, cy+18);
+        ry += ROWH;
+      });
+      y += groupH;
     }
 
     ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
