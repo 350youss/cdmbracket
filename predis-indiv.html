@@ -170,9 +170,8 @@ body::before{
 .vt-btn:disabled{cursor:default;}
 .vt-btn.like:hover:not(:disabled){background:rgba(64,180,120,.15);border-color:rgba(64,180,120,.4);color:#7be3ab;}
 .vt-btn.dislike:hover:not(:disabled){background:rgba(226,73,106,.15);border-color:rgba(226,73,106,.4);color:#f0899e;}
-.vote-row.voted .vt-actions{display:none;}
-.vote-row .vt-voted-tag{margin-top:10px;font-family:var(--body);font-weight:700;font-size:11px;text-transform:uppercase;color:var(--champion);}
-.vote-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13px;}
+.vt-progress{text-align:center;font-family:var(--body);font-weight:600;font-size:11px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
 .vote-done{padding:14px 16px;border-top:1px solid var(--line);}
 
 .free-list{display:flex;flex-direction:column;gap:8px;width:100%;align-self:stretch;}
@@ -873,29 +872,42 @@ async function postFreePredictionsToLibres(pseudo, freeTexts){
   await batch.commit();
 }
 
+let voteQueue = [];
+let voteIndex = 0;
+
 async function maybeShowVoteOverlay(){
   const myKey = normalizePseudo(PSEUDO);
   let snap;
   try{
     snap = await db.collection(LIBRES_COLLECTION).get();
   }catch(e){ console.error(e); return; }
-  const candidates = snap.docs
+  voteQueue = snap.docs
     .map(d => ({id: d.id, ...d.data()}))
     .filter(p => p.text && p.authorKey !== myKey && !(p.voters && p.voters[myKey]))
     .sort(() => Math.random() - 0.5)
     .slice(0, 5);
-  if (!candidates.length) return;
-  const list = document.getElementById('vote-list');
-  list.innerHTML = candidates.map(p => `
-    <div class="vote-row" data-id="${p.id}">
+  voteIndex = 0;
+  if (!voteQueue.length) return;
+  renderVoteCard();
+  document.getElementById('vote-overlay').classList.add('show');
+}
+
+function renderVoteCard(){
+  if (voteIndex >= voteQueue.length){
+    document.getElementById('vote-overlay').classList.remove('show');
+    return;
+  }
+  const p = voteQueue[voteIndex];
+  document.getElementById('vote-list').innerHTML = `
+    <div class="vt-progress">${voteIndex + 1} / ${voteQueue.length}</div>
+    <div class="vote-row">
       <div class="vt-text">${escapeHtml(p.text)}</div>
       <div class="vt-author">par ${escapeHtml(p.authorPseudo || '?')}</div>
       <div class="vt-actions">
-        <button class="vt-btn like" type="button" data-id="${p.id}" data-dir="like"><span class="vt-main">Possible</span><span class="vt-sub">de fou</span></button>
-        <button class="vt-btn dislike" type="button" data-id="${p.id}" data-dir="dislike"><span class="vt-main">Jamais</span><span class="vt-sub">de la vie</span></button>
+        <button class="vt-btn like" type="button" data-dir="like"><span class="vt-main">Possible</span><span class="vt-sub">de fou</span></button>
+        <button class="vt-btn dislike" type="button" data-dir="dislike"><span class="vt-main">Jamais</span><span class="vt-sub">de la vie</span></button>
       </div>
-    </div>`).join('');
-  document.getElementById('vote-overlay').classList.add('show');
+    </div>`;
 }
 
 async function castVote(id, dir){
@@ -917,18 +929,17 @@ async function castVote(id, dir){
 document.getElementById('vote-list').addEventListener('click', async (e) => {
   const btn = e.target.closest('.vt-btn');
   if (!btn) return;
-  const id = btn.dataset.id;
-  const dir = btn.dataset.dir;
-  const row = btn.closest('.vote-row');
-  row.querySelectorAll('.vt-btn').forEach(b => b.disabled = true);
+  const p = voteQueue[voteIndex];
+  if (!p) return;
+  document.querySelectorAll('#vote-list .vt-btn').forEach(b => b.disabled = true);
   try{
-    await castVote(id, dir);
-    row.classList.add('voted');
-    row.insertAdjacentHTML('beforeend', `<div class="vt-voted-tag">${dir === 'like' ? 'Voté possible de fou' : 'Voté jamais de la vie'}</div>`);
+    await castVote(p.id, btn.dataset.dir);
   }catch(e){
     console.error(e);
-    row.querySelectorAll('.vt-btn').forEach(b => b.disabled = false);
   }
+  voteIndex++;
+  await new Promise(r => setTimeout(r, 200));
+  renderVoteCard();
 });
 document.getElementById('vote-close').addEventListener('click', () => {
   document.getElementById('vote-overlay').classList.remove('show');
