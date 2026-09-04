@@ -1,6 +1,6 @@
 {
  "season": "2026-27",
- "updated": "2026-09-04T20:04:24",
+ "updated": "2026-09-04T23:04:26",
  "base": {
   "agent_fees_base": 10.0,
   "note": "On ne se base plus sur l'exercice 2024-25 : le numérateur est recalculé à partir de l'effectif actuel (squad_finances). Seuls les honoraires d'agents restent une estimation fixe."

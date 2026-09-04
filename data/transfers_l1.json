@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-04T20:03:55",
- "sig": "8a63f0a0fc3ac7044f4a2016ac82b3c8",
+ "updated": "2026-09-04T23:03:59",
+ "sig": "40654ed5966bf907bd7d2c35853a4dca",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -167,6 +167,7 @@
   "RCSA|out|Pape Diong|KVC Westerlo": "2026-08-27",
   "RCSA|out|Ben Chilwell|Crystal Palace": "2026-09-02",
   "RCSA|out|Stefan Bajic|Alem. Aachen": "2026-08-09",
+  "RCSA|out|Abakar Sylla|Gaziantep FK": "2026-09-04",
   "RCSA|out|Óscar Perea|América": "2026-08-09",
   "RCSA|out|Mathis Amougou|Toulouse": "2026-09-01",
   "RCSA|out|Andrew Omobamidele|RSC Anderlecht": "2026-09-02",
@@ -253,6 +254,7 @@
   "SB29|out|Daouda Guindo|Stade de Reims": "2026-08-09",
   "SB29|out|Axel Camblan|Estoril": "2026-09-04",
   "SB29|out|Noah Jauny|Francs Borains": "2026-08-12",
+  "SB29|out|Hamidou Makalou|SC Bastia": "2026-09-04",
   "SCO|in|Joseph Kalulu|Pau FC": "2026-08-19",
   "SCO|in|Usman Simbakoli|RWDM Brussels": "2026-08-09",
   "SCO|in|Branco van den Boomen|Ajax": "2026-08-09",
@@ -286,13 +288,13 @@
   "HAC|out|Yassine Kechta|CD Leganés": "2026-08-09",
   "HAC|out|Gautier Lloris|Stade Brestois": "2026-08-12",
   "HAC|out|Kenny Quetant|Werder Brême": "2026-08-09",
+  "HAC|out|Étienne Youté Kinkoué|Lausanne-Sport": "2026-09-04",
   "HAC|out|Loïc Nego|Omonia Nicosie": "2026-08-09",
   "HAC|out|Fodé Doucouré|FC Nantes": "2026-09-01",
   "HAC|out|Godson Kyeremeh|Red Star FC": "2026-09-01",
   "HAC|out|Mokrane Bentoumi|Roda JC": "2026-08-27",
   "HAC|out|Noam Obougou|AS Nancy": "2026-08-12",
   "HAC|out|Abdoulaye Touré|Sans club": "2026-08-09",
-  "HAC|out|Étienne Youté Kinkoué|Sans club": "2026-08-09",
   "HAC|out|Sofiane Boufal|Sans club": "2026-08-09",
   "AJA|in|Arthur Piedfort|KVC Westerlo": "2026-08-09",
   "AJA|in|Danny Namaso|FC Porto": "2026-08-09",
@@ -2105,6 +2107,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Abakar Sylla",
+     "age": 23,
+     "pos": "DC",
+     "club": "Gaziantep FK",
+     "club_id": 2832,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-04"
+    },
+    {
      "p": "Óscar Perea",
      "age": 20,
      "pos": "AiG",
@@ -3003,6 +3015,16 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-12"
+    },
+    {
+     "p": "Hamidou Makalou",
+     "age": 20,
+     "pos": "MDC",
+     "club": "SC Bastia",
+     "club_id": 595,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-04"
     }
    ]
   },
@@ -3355,6 +3377,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Étienne Youté Kinkoué",
+     "age": 24,
+     "pos": "DC",
+     "club": "Lausanne-Sport",
+     "club_id": 527,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-04"
+    },
+    {
      "p": "Loïc Nego",
      "age": 35,
      "pos": "ArD",
@@ -3408,16 +3440,6 @@
      "p": "Abdoulaye Touré",
      "age": 32,
      "pos": "MDC",
-     "club": "Sans club",
-     "club_id": 515,
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-09"
-    },
-    {
-     "p": "Étienne Youté Kinkoué",
-     "age": 24,
-     "pos": "DC",
      "club": "Sans club",
      "club_id": 515,
      "type": "none",
@@ -6244,7 +6266,7 @@
   ],
   "OM": [
    {
-    "n": "12",
+    "n": "1",
     "p": "Jeffrey de Lange",
     "pos": "GdB",
     "grp": "GK",
@@ -7640,24 +7662,6 @@
     "statsClub": "Sturm Graz",
     "valDelta": 0.0,
     "valSince": "19/08/2026"
-   },
-   {
-    "n": "5",
-    "p": "Abakar Sylla",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 23,
-    "val": 2.5,
-    "stats": {
-     "m": 2,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 46
-    },
-    "statsClub": "RC Strasbourg",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
    },
    {
     "n": "36",
@@ -9584,24 +9588,6 @@
      "min": 774
     },
     "statsClub": "RB Salzbourg",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "33",
-    "p": "Hamidou Makalou",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 20,
-    "val": 1.0,
-    "stats": {
-     "m": 18,
-     "s": 3,
-     "g": 0,
-     "a": 0,
-     "min": 392
-    },
-    "statsClub": "Stade Brestois 29",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
