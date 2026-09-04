@@ -203,6 +203,7 @@ body::before{
 .pseudo-switch{background:transparent;border:none;color:var(--sub);text-decoration:underline;font-family:var(--body);
   font-size:12.5px;cursor:pointer;padding:0;}
 .pseudo-switch:hover{color:#fff;}
+#board.locked{pointer-events:none;opacity:.85;}
 .bleed-bar{height:3px;background:linear-gradient(90deg,var(--champion),#eeb457,var(--champion));
   background-size:220% 100%;animation:bar 14s var(--ease) infinite;position:relative;z-index:5;}
 @keyframes bar{50%{background-position:100% 0;}100%{background-position:220% 0;}}
@@ -258,7 +259,7 @@ body::before{
   </div>
 
   <div class="pseudo-bar" id="pseudo-bar" style="display:none">
-    Pronostics de <b id="pseudo-name"></b> · <button class="pseudo-switch" id="pseudo-switch">changer de pseudo</button>
+    Pronostics de <b id="pseudo-name"></b><span id="lock-badge" style="display:none"> · verrouill&eacute;s</span> · <button class="pseudo-switch" id="pseudo-switch">changer de pseudo</button>
   </div>
 
   <div class="board" id="board"></div>
@@ -344,8 +345,25 @@ let PLAYERS_ALL = [];   // pro + B + U19 + U17, tous clubs
 let COACHES = [];       // {name, clubId}
 let picks = {};         // catId -> {kind:'player'|'club'|'coach', name, clubId, pos, squad}
 
+/* ---------- Firestore : déclaré tôt, nécessaire dès l'entrée du pseudo pour
+   savoir si ses pronostics sont déjà soumis (verrouillés) ---------- */
+const firebaseConfig = {
+  apiKey: "AIzaSyB8F5baV8T6qq4gWiz0cbAkhAYli4Lyips",
+  authDomain: "predi-l1.firebaseapp.com",
+  projectId: "predi-l1",
+  storageBucket: "predi-l1.firebasestorage.app",
+  messagingSenderId: "15010416982",
+  appId: "1:15010416982:web:1e2b1834ffac4f2607aef7",
+  measurementId: "G-FV2JC1TZ9Y"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const SUBMIT_COLLECTION = 'predis-indiv-2026-27';
+const LIBRES_COLLECTION = 'predis-indiv-2026-27-libres';
+
 /* ---- pseudo : identifie la personne pour lui garder ses pronostics en mémoire ---- */
 let PSEUDO = '';
+let LOCKED = false;     // true dès qu'une soumission existe pour ce pseudo : lecture seule
 function normalizePseudo(p){
   return p.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
@@ -364,15 +382,35 @@ function persistPicks(){
 }
 function showPseudoBar(){
   document.getElementById('pseudo-name').textContent = PSEUDO;
+  document.getElementById('lock-badge').style.display = LOCKED ? '' : 'none';
   document.getElementById('pseudo-bar').style.display = 'flex';
 }
-function enterAsPseudo(p){
+function applyLockState(){
+  board.classList.toggle('locked', LOCKED);
+  document.getElementById('btn-random').style.display = LOCKED ? 'none' : '';
+  document.getElementById('btn-reset').style.display = LOCKED ? 'none' : '';
+  document.getElementById('btn-submit').style.display = (LOCKED || !isDev) ? 'none' : '';
+  document.getElementById('lock-badge').style.display = LOCKED ? '' : 'none';
+}
+async function enterAsPseudo(p){
   PSEUDO = p;
   try{ localStorage.setItem('predis-indiv:pseudo', p); }catch(e){}
-  loadPicksFor(p);
   document.getElementById('pseudo-gate').style.display = 'none';
+  let existing = null;
+  try{
+    const doc = await db.collection(SUBMIT_COLLECTION).doc(normalizePseudo(p)).get();
+    if (doc.exists) existing = doc.data();
+  }catch(e){ console.error('lock check', e); }
+  if (existing){
+    LOCKED = true;
+    picks = existing.picks || {};
+  } else {
+    LOCKED = false;
+    loadPicksFor(p);
+  }
   showPseudoBar();
   render();
+  applyLockState();
 }
 document.getElementById('pseudo-go').addEventListener('click', () => {
   const input = document.getElementById('pseudo-input');
@@ -809,21 +847,7 @@ async function shareImage(){
 }
 document.getElementById('btn-share').addEventListener('click', shareImage);
 
-/* ---------- soumission : Firestore, caché derrière ?dev=1 pour tester avant public ---------- */
-const firebaseConfig = {
-  apiKey: "AIzaSyB8F5baV8T6qq4gWiz0cbAkhAYli4Lyips",
-  authDomain: "predi-l1.firebaseapp.com",
-  projectId: "predi-l1",
-  storageBucket: "predi-l1.firebasestorage.app",
-  messagingSenderId: "15010416982",
-  appId: "1:15010416982:web:1e2b1834ffac4f2607aef7",
-  measurementId: "G-FV2JC1TZ9Y"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const SUBMIT_COLLECTION = 'predis-indiv-2026-27';
-const LIBRES_COLLECTION = 'predis-indiv-2026-27-libres';
-
+/* ---------- soumission : caché derrière ?dev=1 pour tester avant public ---------- */
 const isDev = new URLSearchParams(location.search).has('dev');
 const btnSubmit = document.getElementById('btn-submit');
 if (isDev) btnSubmit.style.display = '';
@@ -845,6 +869,8 @@ btnSubmit.addEventListener('click', async () => {
       await postFreePredictionsToLibres(PSEUDO, freeTexts).catch(e => console.error('libres sync', e));
     }
     showToast('Pronostics soumis. Merci !');
+    LOCKED = true;
+    applyLockState();
     maybeShowVoteOverlay();
   }catch(e){
     console.error(e);
