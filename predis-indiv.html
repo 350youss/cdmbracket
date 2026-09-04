@@ -827,7 +827,16 @@ async function shareImage(){
       ctx.fillStyle = tOn;
       ctx.font = '600 21px "General Sans", sans-serif';
       ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      ctx.fillText(group.cat.label.toUpperCase(), 20, y+groupH/2-4);
+      if (group.items.length > 1){
+        // groupe multi-lignes : le libellé agit comme titre de section, en haut du bloc
+        ctx.fillText(group.cat.label.toUpperCase(), 20, y+34);
+        ctx.font = '500 12px "Inter", sans-serif';
+        ctx.globalAlpha = .75;
+        ctx.fillText(`${group.items.length} prédictions`, 20, y+52);
+        ctx.globalAlpha = 1;
+      } else {
+        ctx.fillText(group.cat.label.toUpperCase(), 20, y+groupH/2-4);
+      }
 
       let ry = y;
       group.items.forEach((row, i) => {
@@ -841,7 +850,7 @@ async function shareImage(){
           const s = 46, ar = img.width/img.height;
           let dw = s, dh = s;
           if (ar > 1) dh = s/ar; else dw = s*ar;
-          ctx.drawImage(img, cx, cy-dh/2, dw, dh);
+          ctx.drawImage(img, cx+(s-dw)/2, cy-dh/2, dw, dh);
         } else if (row.pick.kind === 'free'){
           roundRect(ctx, cx, cy-23, 46, 46, 23);
           ctx.fillStyle = c; ctx.fill();
