@@ -161,9 +161,12 @@ body::before{
 .vote-row .vt-text{font-family:var(--body);font-size:13.5px;color:#fff;line-height:1.45;}
 .vote-row .vt-author{margin-top:4px;font-family:var(--body);font-size:11px;color:var(--muted);}
 .vote-row .vt-actions{margin-top:10px;display:flex;gap:8px;}
-.vt-btn{flex:1;font-family:var(--body);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.02em;
-  border-radius:8px;padding:9px;cursor:pointer;border:1px solid var(--line-strong);background:var(--panel2);color:var(--sub);
+.vt-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  font-family:var(--body);border-radius:8px;padding:10px 9px;cursor:pointer;border:1px solid var(--line-strong);
+  background:var(--panel2);color:var(--sub);
   transition:background .15s var(--ease),color .15s var(--ease),border-color .15s var(--ease);}
+.vt-btn .vt-main{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.02em;}
+.vt-btn .vt-sub{font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.02em;opacity:.65;}
 .vt-btn:disabled{cursor:default;}
 .vt-btn.like:hover:not(:disabled){background:rgba(64,180,120,.15);border-color:rgba(64,180,120,.4);color:#7be3ab;}
 .vt-btn.dislike:hover:not(:disabled){background:rgba(226,73,106,.15);border-color:rgba(226,73,106,.4);color:#f0899e;}
@@ -888,8 +891,8 @@ async function maybeShowVoteOverlay(){
       <div class="vt-text">${escapeHtml(p.text)}</div>
       <div class="vt-author">par ${escapeHtml(p.authorPseudo || '?')}</div>
       <div class="vt-actions">
-        <button class="vt-btn like" type="button" data-id="${p.id}" data-dir="like">J&rsquo;aime</button>
-        <button class="vt-btn dislike" type="button" data-id="${p.id}" data-dir="dislike">J&rsquo;aime pas</button>
+        <button class="vt-btn like" type="button" data-id="${p.id}" data-dir="like"><span class="vt-main">Possible</span><span class="vt-sub">de fou</span></button>
+        <button class="vt-btn dislike" type="button" data-id="${p.id}" data-dir="dislike"><span class="vt-main">Jamais</span><span class="vt-sub">de la vie</span></button>
       </div>
     </div>`).join('');
   document.getElementById('vote-overlay').classList.add('show');
@@ -921,7 +924,7 @@ document.getElementById('vote-list').addEventListener('click', async (e) => {
   try{
     await castVote(id, dir);
     row.classList.add('voted');
-    row.insertAdjacentHTML('beforeend', `<div class="vt-voted-tag">${dir === 'like' ? 'Aimé, merci' : 'Noté, merci'}</div>`);
+    row.insertAdjacentHTML('beforeend', `<div class="vt-voted-tag">${dir === 'like' ? 'Voté possible de fou' : 'Voté jamais de la vie'}</div>`);
   }catch(e){
     console.error(e);
     row.querySelectorAll('.vt-btn').forEach(b => b.disabled = false);
