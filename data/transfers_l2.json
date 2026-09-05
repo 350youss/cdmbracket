@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-05T00:31:03",
- "sig": "5c46ec7466fd1edcff89f32f272a092e",
+ "updated": "2026-09-05T22:15:49",
+ "sig": "b3409c791a74c0b70dd70f63bc572dbc",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -136,6 +136,7 @@
   "CF63|out|Abdoul Kader Bamba|FC Granada": "2026-08-18",
   "CF63|out|Famara Diédhiou|Al-Orobah": "2026-08-21",
   "CF63|out|Amine Saïd|GFA Rumilly Val": "2026-08-23",
+  "CF63|out|Tom Auvré|Atlético CP": "2026-09-05",
   "CF63|out|Cheick Oumar Konaté|SK Beveren": "2026-09-04",
   "CF63|out|Maximiliano Caufriez|Sans club": "2026-08-18",
   "CF63|out|Henri Saivet|Sans club": "2026-08-18",
@@ -1647,6 +1648,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-23"
+    },
+    {
+     "p": "Tom Auvré",
+     "age": 19,
+     "pos": "AiG",
+     "club": "Atlético CP",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-05"
     },
     {
      "p": "Cheick Oumar Konaté",
@@ -7412,14 +7422,6 @@
     "val": 0.07
    },
    {
-    "n": "26",
-    "p": "Élie N'Gatta",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.8
-   },
-   {
     "n": "4",
     "p": "Arthur Vitelli",
     "pos": "DC",
@@ -7458,6 +7460,14 @@
     "grp": "DEF",
     "age": 30,
     "val": 0.25
+   },
+   {
+    "n": "26",
+    "p": "Élie N'Gatta",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 20,
+    "val": 0.8
    },
    {
     "n": "17",
