@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -128,29 +128,52 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hi
   font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:90;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-.picker-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;
-  display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);}
-.picker-overlay.show{opacity:1;pointer-events:auto;}
-@media (min-width:640px){.picker-overlay{align-items:center;}}
-.picker-sheet{background:var(--panel2);border:1px solid var(--line-strong);border-top:3px solid var(--champion);
-  border-radius:18px 18px 0 0;width:100%;max-width:420px;max-height:76vh;display:flex;flex-direction:column;overflow:hidden;
+/* ---------------- panneau mercato d'un club (clic sur un écusson) : reprend
+   le design de mercato-l1.html, d'où les variables locales redéfinies pour
+   matcher exactement sa palette (in/out/loan/accent/s1/mono/title...) ---------------- */
+.mv-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:210;
+  display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);padding:20px;}
+.mv-overlay.show{opacity:1;pointer-events:auto;}
+.mv-panel{
+  --s1:#131417; --in:#33c07a; --out:#f04d68; --accent:#5b8fef; --loan:#5b8fef;
+  --txt:#f2f2f0; --mv-sub:#98999e; --mv-muted:#5c5d63; --mv-line:rgba(255,255,255,.06);
+  --mono:'JetBrains Mono',ui-monospace,monospace; --title:'General Sans',-apple-system,'Segoe UI',sans-serif;
+  background:#0e0f12;border:1px solid var(--line-strong);border-top:3px solid var(--champion);
+  border-radius:18px;width:100%;max-width:640px;max-height:86vh;overflow-y:auto;
   transform:translateY(16px);transition:transform .2s var(--ease);}
-@media (min-width:640px){.picker-sheet{border-radius:18px;}}
-.picker-overlay.show .picker-sheet{transform:translateY(0);}
-.picker-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;
-  border-bottom:1px solid var(--line);}
-.picker-title{font-family:var(--disp);font-size:17px;color:#fff;}
-.picker-close{background:transparent;border:none;color:var(--sub);font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;}
-.picker-close:hover{color:#fff;}
-.picker-list{overflow-y:auto;padding:8px;}
-.picker-row{display:flex;align-items:center;gap:12px;padding:11px 10px;cursor:pointer;
-  background:transparent;border:none;width:100%;text-align:left;font-family:var(--body);}
-.picker-row:hover{background:var(--panel3);}
-.picker-row img{width:32px;height:32px;object-fit:contain;flex-shrink:0;}
-.picker-sw{width:6px;height:26px;flex-shrink:0;background:var(--pc,var(--mid));}
-.picker-row .prn{font-weight:600;font-size:14px;color:#fff;}
-.picker-row .prs{font-size:11.5px;color:var(--muted);margin-top:1px;}
-.picker-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13px;}
+.mv-overlay.show .mv-panel{transform:translateY(0);}
+.mv-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;
+  border-bottom:1px solid var(--line);position:sticky;top:0;background:#0e0f12;z-index:1;}
+.mv-close{background:transparent;border:none;color:var(--sub);font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;}
+.mv-close:hover{color:#fff;}
+.mv-body{padding:20px;}
+.mv-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.mv-head img{width:46px;height:46px;object-fit:contain;flex-shrink:0;}
+.mv-name{font-family:var(--title);font-weight:700;font-size:21px;color:#fff;line-height:1.15;letter-spacing:-.01em;}
+.mv-bal{margin-left:auto;text-align:right;}
+.mv-bal .bl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mv-muted);font-weight:600;}
+.mv-bal .bv{font-family:var(--mono);font-weight:700;font-size:21px;line-height:1.3;font-variant-numeric:tabular-nums;}
+.mv-bal .bv.pos{color:var(--in);} .mv-bal .bv.neg{color:var(--out);} .mv-bal .bv.zero{color:var(--mv-sub);}
+.mv-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media (max-width:560px){.mv-cols{grid-template-columns:1fr;}}
+.mv-col{background:var(--s1);border:1px solid var(--mv-line);border-radius:14px;overflow:hidden;}
+.mv-col-head{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;font-weight:600;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;}
+.mv-col.in .mv-col-head{background:rgba(51,192,122,.07);color:var(--in);border-bottom:1px solid rgba(51,192,122,.16);}
+.mv-col.out .mv-col-head{background:rgba(240,77,104,.07);color:var(--out);border-bottom:1px solid rgba(240,77,104,.16);}
+.mv-col-head .meta{font-size:10px;letter-spacing:.02em;color:var(--mv-sub);font-weight:500;text-transform:none;font-family:var(--mono);}
+.mv-col-head .meta b{color:var(--txt);}
+.mv-row{display:flex;align-items:center;gap:10px;padding:9px 15px;border-bottom:1px solid rgba(255,255,255,.035);}
+.mv-row:last-child{border-bottom:none;}
+.mv-pos{flex-shrink:0;width:30px;text-align:center;font-size:8px;font-weight:700;letter-spacing:.01em;padding:3px 0;border-radius:4px;color:#0a0b0d;font-family:var(--mono);}
+.mv-p-gk{background:#8a8f98;} .mv-p-def{background:var(--accent);} .mv-p-mid{background:var(--in);} .mv-p-att{background:#ff8f4d;}
+.mv-who{flex:1;min-width:0;}
+.mv-who .nm{font-size:12.5px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mv-who .nm .age{color:var(--mv-muted);font-weight:500;font-size:10px;margin-left:5px;font-family:var(--mono);}
+.mv-who .cl{font-size:10.5px;color:var(--mv-sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+.mv-who .cl .arrow{color:#38393e;margin-right:4px;}
+.mv-fee{flex-shrink:0;text-align:right;font-weight:600;font-size:12px;font-family:var(--mono);font-variant-numeric:tabular-nums;}
+.mv-fee.paid{color:#fff;} .mv-fee.free{color:var(--mv-sub);font-weight:500;} .mv-fee.loan{color:var(--loan);font-weight:600;} .mv-fee.none{color:#38393e;font-weight:500;}
+.mv-empty{padding:16px;font-size:11px;color:var(--mv-muted);text-align:center;font-style:italic;}
 </style>
 </head>
 <body>
@@ -211,10 +234,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hi
 
 <div id="tooltip"></div>
 <div class="toast" id="toast"></div>
-<div class="picker-overlay" id="picker-overlay">
-  <div class="picker-sheet">
-    <div class="picker-head"><span class="picker-title" id="picker-title"></span><button class="picker-close" id="picker-close">×</button></div>
-    <div class="picker-list" id="picker-list"></div>
+<div class="mv-overlay" id="mv-overlay">
+  <div class="mv-panel">
+    <div class="mv-top"><span></span><button class="mv-close" id="mv-close">×</button></div>
+    <div class="mv-body" id="mv-body"></div>
   </div>
 </div>
 
@@ -258,12 +281,9 @@ const poolCount = document.getElementById('pool-count');
 const rowsWrap = document.getElementById('rows');
 const toast = document.getElementById('toast');
 const tooltip = document.getElementById('tooltip');
-const pickerOverlay = document.getElementById('picker-overlay');
-const pickerTitle = document.getElementById('picker-title');
-const pickerList = document.getElementById('picker-list');
 
 const DRAG_OK = window.matchMedia('(pointer: fine)').matches;
-if (DRAG_OK) document.getElementById('hero-sub').textContent = "Classe les 18 clubs selon la qualité de leur mercato. Glisse un écusson du banc vers un tier, ou touche le banc pour choisir un tier.";
+if (DRAG_OK) document.getElementById('hero-sub').textContent = "Classe les 18 clubs selon la qualité de leur mercato. Reste appuyé sur un écusson pour le glisser dans un tier ; un simple clic affiche son mercato.";
 let dragData = null; // {clubId, fromTier: tierId|null}
 
 /* état : chaque tier = simple liste de club.id, sans limite de longueur */
@@ -347,6 +367,7 @@ function render(){
         const filled = slot.querySelector('.slot-filled');
         filled.addEventListener('mouseenter', () => showTooltip(filled, club.name));
         filled.addEventListener('mouseleave', hideTooltip);
+        filled.addEventListener('click', () => openMercatoView(club));
         slot.querySelector('.slot-remove').addEventListener('click', e => {
           e.stopPropagation();
           placements[t.id].splice(idx, 1);
@@ -394,7 +415,7 @@ function makeBenchCrest(club){
   el.innerHTML = `<img src="${club.logo}" alt="${club.name}" loading="lazy">`;
   el.addEventListener('mouseenter', () => showTooltip(el, club.name));
   el.addEventListener('mouseleave', hideTooltip);
-  el.addEventListener('click', () => openTierPicker(club));
+  el.addEventListener('click', () => openMercatoView(club));
   if (DRAG_OK){
     el.draggable = true;
     el.addEventListener('dragstart', e => {
@@ -406,31 +427,76 @@ function makeBenchCrest(club){
   return el;
 }
 
-function openTierPicker(club){
-  pickerTitle.textContent = club.name;
-  pickerList.innerHTML = '';
-  TIERS.forEach(t => {
-    const row = document.createElement('button');
-    row.className = 'picker-row';
-    row.innerHTML = `<span class="picker-sw" style="--pc:${t.c}"></span>
-      <span><span class="prn">${t.label} · ${t.hint}</span>
-      <span class="prs">${placements[t.id].length} club${placements[t.id].length>1?'s':''} d&eacute;j&agrave;</span></span>`;
-    row.addEventListener('click', () => {
-      placements[t.id].push(club.id);
-      closePicker();
-      persist();
-      render();
-    });
-    pickerList.appendChild(row);
-  });
-  openPicker();
+/* ---------------- panneau mercato d'un club (clic sur un écusson) ---------------- */
+const mvOverlay = document.getElementById('mv-overlay');
+const mvBody = document.getElementById('mv-body');
+let TRANSFERS_BY_CODE = null;
+async function loadTransfers(){
+  try{
+    const res = await fetch('data/transfers_l1.json', {cache:'no-store'});
+    const data = await res.json();
+    TRANSFERS_BY_CODE = Object.fromEntries((data.clubs||[]).map(c => [c.code, c]));
+  }catch(e){ console.error('transfers load', e); TRANSFERS_BY_CODE = {}; }
 }
+loadTransfers();
 
-function openPicker(){ pickerOverlay.classList.add('show'); }
-function closePicker(){ pickerOverlay.classList.remove('show'); }
-document.getElementById('picker-close').addEventListener('click', closePicker);
-pickerOverlay.addEventListener('click', e => { if (e.target === pickerOverlay) closePicker(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closePicker(); });
+const MV_POS = {GdB:'mv-p-gk',ArD:'mv-p-def',ArG:'mv-p-def',DC:'mv-p-def',MDC:'mv-p-mid',MC:'mv-p-mid',MO:'mv-p-mid',MD:'mv-p-mid',MG:'mv-p-mid',AiD:'mv-p-att',AiG:'mv-p-att',AC:'mv-p-att',SA:'mv-p-att'};
+function mvMoney(v){
+  if (v < 1) return Math.round(v*1000)+' K€';
+  const s = Number.isInteger(v) ? String(v) : (Math.round(v*10)/10).toString().replace('.',',');
+  return s+' M€';
+}
+function mvFeeText(t){
+  if (t.type === 'paid') return mvMoney(t.val);
+  if (t.type === 'loan') return t.val > 0 ? mvMoney(t.val)+' · prêt' : 'Prêt';
+  if (t.type === 'free') return 'Libre';
+  return '—';
+}
+function mvSideTotal(list){
+  let s = 0; list.forEach(t => { if (t.type === 'paid' || t.type === 'loan') s += t.val; });
+  return {sum: s, n: list.length};
+}
+function mvRowHtml(t, dir){
+  const arrow = dir === 'in' ? '←' : '→';
+  return `<div class="mv-row">
+    <span class="mv-pos ${MV_POS[t.pos]||'mv-p-mid'}">${escapeHtml(t.pos)}</span>
+    <span class="mv-who"><span class="nm">${escapeHtml(t.p)}<span class="age">${t.age} ans</span></span>
+      <span class="cl"><span class="arrow">${arrow}</span>${escapeHtml(t.club)}</span></span>
+    <span class="mv-fee ${t.type}">${mvFeeText(t)}</span></div>`;
+}
+async function openMercatoView(club){
+  if (!TRANSFERS_BY_CODE) await loadTransfers();
+  const c = TRANSFERS_BY_CODE[club.id.toUpperCase()];
+  if (!c){
+    mvBody.innerHTML = `<div class="mv-head"><img src="${club.logo}" alt=""><span class="mv-name">${escapeHtml(club.name)}</span></div>
+      <div class="mv-empty">Données mercato indisponibles pour ce club.</div>`;
+  } else {
+    const a = mvSideTotal(c.arr||[]), d = mvSideTotal(c.dep||[]);
+    const bal = d.sum - a.sum;
+    const cls = bal > 0.001 ? 'pos' : (bal < -0.001 ? 'neg' : 'zero');
+    const txt = (bal >= 0 ? '+' : '−') + mvMoney(Math.abs(bal));
+    const inR = (c.arr||[]).length ? c.arr.map(t => mvRowHtml(t,'in')).join('') : '<div class="mv-empty">Aucune arrivée</div>';
+    const outR = (c.dep||[]).length ? c.dep.map(t => mvRowHtml(t,'out')).join('') : '<div class="mv-empty">Aucun départ</div>';
+    mvBody.innerHTML = `
+      <div class="mv-head">
+        <img src="${club.logo}" alt="">
+        <span class="mv-name">${escapeHtml(club.name)}</span>
+        <span class="mv-bal"><div class="bl">Solde</div><div class="bv ${cls}">${txt}</div></span>
+      </div>
+      <div class="mv-cols">
+        <div class="mv-col in"><div class="mv-col-head">Arrivées <span class="meta"><b>${a.n}</b> · ${mvMoney(a.sum)}</span></div>${inR}</div>
+        <div class="mv-col out"><div class="mv-col-head">Départs <span class="meta"><b>${d.n}</b> · ${mvMoney(d.sum)}</span></div>${outR}</div>
+      </div>`;
+  }
+  mvOverlay.classList.add('show');
+}
+function closeMercatoView(){ mvOverlay.classList.remove('show'); }
+document.getElementById('mv-close').addEventListener('click', closeMercatoView);
+mvOverlay.addEventListener('click', e => { if (e.target === mvOverlay) closeMercatoView(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMercatoView(); });
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
 
 function showToast(msg){
   toast.textContent = msg;
