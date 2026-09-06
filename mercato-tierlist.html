@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tier List Mercato L1 (perso)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d; --panel:#131417; --panel2:#191a1e; --panel3:#1f2025;
+  --ink:#f2f2f0; --sub:#98999e; --muted:#5c5d63; --faint:#38393e;
+  --line:rgba(255,255,255,.09); --line-strong:rgba(255,255,255,.2);
+
+  --champion:#e2a53f; --champion-dim:rgba(226,165,63,.14);
+  --ucl:#4d7fe0; --ucl-dim:rgba(77,127,224,.14);
+  --uecl:#3fae7c; --uecl-dim:rgba(63,174,124,.14);
+  --warn:#c98a2e; --warn-dim:rgba(201,138,46,.14);
+  --danger:#e2496a; --danger-dim:rgba(226,73,106,.16);
+  --mid:#7d808a; --mid-dim:rgba(125,128,138,.12);
+
+  --body:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --disp:'General Sans',-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--panel3) var(--bg);}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+::selection{background:var(--champion-dim);color:#fff;}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--panel3);border-radius:6px;}
+
+.wrap{position:relative;max-width:1180px;margin:0 auto;padding:0 32px 110px;}
+@media (max-width:640px){.wrap{padding:0 16px 90px;}}
+
+.hero{padding:20px 0 8px;}
+.eyebrow{font-family:var(--body);font-weight:600;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--champion);}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,5vw,50px);
+  line-height:1.05;letter-spacing:-.015em;color:#fff;margin-top:14px;text-wrap:balance;max-width:20ch;}
+.hero .sub{margin-top:16px;font-family:var(--body);font-size:15px;color:var(--sub);max-width:52ch;line-height:1.55;}
+
+.toolbar{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;row-gap:14px;column-gap:14px;justify-content:flex-end;}
+.quick-actions{display:flex;flex-wrap:wrap;gap:8px;}
+.qbtn{font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--sub);background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:7px 13px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:5px;transition:border-color .18s var(--ease),color .18s var(--ease),background .18s var(--ease),opacity .18s var(--ease);}
+.qbtn svg{width:10px;height:10px;flex-shrink:0;}
+.qbtn:hover{border-color:var(--line-strong);color:#fff;}
+.qbtn:active{transform:scale(.97);}
+.qbtn.primary{background:var(--champion);border-color:var(--champion);color:#241605;}
+.qbtn.primary:hover{background:#eeb457;border-color:#eeb457;color:#241605;}
+.qbtn:disabled{opacity:.4;cursor:default;}
+
+.share-row{display:block;width:100%;margin-top:14px;text-align:center;padding:12px 13px;}
+.bench{margin-top:18px;position:relative;}
+.bench-top{display:flex;align-items:baseline;justify-content:flex-end;gap:12px;margin-bottom:10px;}
+.bench-count{font-family:var(--body);font-size:11px;color:var(--muted);white-space:nowrap;}
+.bench-slots{min-height:78px;display:flex;flex-wrap:wrap;gap:12px;padding:18px;background:var(--panel);
+  border:1px solid var(--line);border-radius:18px;}
+.bench-empty{font-family:var(--body);font-size:12.5px;color:var(--muted);font-style:italic;padding:6px 2px;}
+@media (max-width:640px){ .bench-slots{display:none;} .bench-top{margin-bottom:0;} }
+
+.crest{width:62px;height:62px;background:var(--panel2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex-shrink:0;
+  user-select:none;-webkit-user-select:none;
+  clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px));
+  transition:box-shadow .2s var(--ease),transform .2s var(--ease);}
+.crest img{width:40px;height:40px;object-fit:contain;pointer-events:none;}
+.crest:hover{box-shadow:0 0 0 2px var(--line-strong);}
+.crest[draggable="true"]{cursor:grab;}
+.crest[draggable="true"]:active{cursor:grabbing;}
+.bench-slots.drag-over{outline:2px dashed var(--champion);outline-offset:6px;}
+
+#tooltip{position:fixed;pointer-events:none;z-index:80;background:var(--panel3);border:1px solid var(--line-strong);
+  color:var(--ink);font-family:var(--body);font-weight:500;font-size:12px;padding:6px 11px;
+  white-space:nowrap;opacity:0;transform:translate(-50%,-8px);transition:opacity .16s var(--ease);}
+#tooltip.show{opacity:1;}
+#tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--panel3);}
+
+.board{margin-top:32px;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+.tier{display:flex;background:var(--panel);}
+.tier + .tier{border-top:1px solid var(--line);}
+.tier-label{width:150px;flex-shrink:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;
+  border-left:4px solid var(--tc,var(--mid));background:var(--td,var(--mid-dim));}
+.tier-label .tl{font-family:var(--disp);font-weight:700;font-size:26px;color:#fff;line-height:1.05;}
+.tier-label .tn{margin-top:6px;font-family:var(--body);font-weight:600;font-size:11px;
+  color:rgba(255,255,255,.7);}
+.tier-body{flex:1;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:64px;}
+.tier-body.drag-over{background:var(--td,var(--champion-dim));}
+.tier-empty-hint{font-family:var(--body);font-size:12px;color:var(--muted);font-style:italic;}
+
+.slot{width:62px;height:62px;flex-shrink:0;position:relative;}
+.slot-filled{width:100%;height:100%;background:var(--panel2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(0 6px,6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px));}
+.slot-filled img{width:40px;height:40px;object-fit:contain;pointer-events:none;}
+.slot-filled[draggable="true"]{cursor:grab;}
+.slot-filled[draggable="true"]:active{cursor:grabbing;}
+.slot-remove{position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;
+  background:var(--danger);border:2px solid var(--bg);color:#fff;font-size:12px;line-height:1;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;}
+
+@media (max-width:640px){
+  .tier{flex-direction:column;}
+  .tier-label{width:100%;border-left:none;border-bottom:3px solid var(--tc,var(--mid));flex-direction:row;
+    align-items:baseline;gap:10px;padding:10px 14px;}
+  .tier-label .tl{font-size:20px;}
+  .tier-body{padding:12px 14px;}
+}
+
+.legend{margin-top:26px;font-family:var(--body);font-size:12.5px;color:var(--sub);line-height:1.7;max-width:66ch;}
+.legend b{color:var(--ink);font-weight:600;}
+.credit{margin-top:46px;font-family:var(--body);font-size:10.5px;color:var(--faint);text-align:center;
+  letter-spacing:.05em;text-transform:uppercase;}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--panel3);
+  color:var(--ink);border:1px solid var(--line-strong);border-radius:999px;padding:13px 22px;font-family:var(--body);font-weight:500;
+  font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:90;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.picker-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;
+  display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);}
+.picker-overlay.show{opacity:1;pointer-events:auto;}
+@media (min-width:640px){.picker-overlay{align-items:center;}}
+.picker-sheet{background:var(--panel2);border:1px solid var(--line-strong);border-top:3px solid var(--champion);
+  border-radius:18px 18px 0 0;width:100%;max-width:420px;max-height:76vh;display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(16px);transition:transform .2s var(--ease);}
+@media (min-width:640px){.picker-sheet{border-radius:18px;}}
+.picker-overlay.show .picker-sheet{transform:translateY(0);}
+.picker-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;
+  border-bottom:1px solid var(--line);}
+.picker-title{font-family:var(--disp);font-size:17px;color:#fff;}
+.picker-close{background:transparent;border:none;color:var(--sub);font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;}
+.picker-close:hover{color:#fff;}
+.picker-list{overflow-y:auto;padding:8px;}
+.picker-row{display:flex;align-items:center;gap:12px;padding:11px 10px;cursor:pointer;
+  background:transparent;border:none;width:100%;text-align:left;font-family:var(--body);}
+.picker-row:hover{background:var(--panel3);}
+.picker-row img{width:32px;height:32px;object-fit:contain;flex-shrink:0;}
+.picker-sw{width:6px;height:26px;flex-shrink:0;background:var(--pc,var(--mid));}
+.picker-row .prn{font-weight:600;font-size:14px;color:#fff;}
+.picker-row .prs{font-size:11.5px;color:var(--muted);margin-top:1px;}
+.picker-empty{padding:24px 16px;text-align:center;color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+<style>
+.kdx-nav{position:sticky;top:14px;z-index:9999;padding:0 16px;margin-bottom:20px;}
+.kdx-navbar{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:rgba(19,20,23,.62);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:9px 10px 9px 22px;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.5);font-family:-apple-system,'Segoe UI',Arial,sans-serif;}
+.kdx-navbar a{text-decoration:none;}
+.kdx-brand{display:flex;align-items:center;flex-shrink:0;} .kdx-brand img{height:20px;width:auto;display:block;}
+.kdx-links{display:flex;align-items:center;justify-content:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.kdx-links::-webkit-scrollbar{display:none;}
+.kdx-links a{font-weight:500;font-size:13px;color:#98999e;white-space:nowrap;flex-shrink:0;
+  padding:9px 13px;border-radius:999px;transition:color .2s,background .2s;}
+.kdx-links a:hover{color:#fff;background:rgba(255,255,255,.06);}
+.kdx-links a.active{color:#fff;background:rgba(255,255,255,.1);}
+@media(max-width:640px){.kdx-links a{font-size:12px;padding:8px 10px;}}
+</style>
+<nav class="kdx-nav"><div class="kdx-navbar">
+  <a class="kdx-brand" href="index.html"><img src="images/kooradex-logo.png" alt="Kooradex"></a>
+  <div class="kdx-links">
+    <a href="mercato.html">Mercato</a>
+    <a href="pronostics-l1.html">Pr&eacute;dis</a>
+    <a href="squad-cost.html">Sant&eacute; OM</a>
+    <a href="lorenzi-time.html">Lorenzi Time</a>
+    <a href="/predis-indiv/libres">Vote Libre</a>
+  </div>
+</div></nav>
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Outil perso &middot; pas public</div>
+    <h1>Tier list des mercatos<br>de Ligue 1</h1>
+    <p class="sub" id="hero-sub">Classe les 18 clubs selon la qualit&eacute; de leur mercato, en les glissant dans leur tier.</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="quick-actions">
+      <button class="qbtn" id="btn-reset">Reset</button>
+    </div>
+  </div>
+
+  <button class="qbtn primary share-row" id="btn-share">Partager</button>
+
+  <div class="bench">
+    <div class="bench-top">
+      <div class="bench-count" id="pool-count">0 / 18 class&eacute;s</div>
+    </div>
+    <div class="bench-slots" id="pool"></div>
+  </div>
+
+  <div class="board" id="rows"></div>
+
+  <p class="legend">Glisse un &eacute;cusson du banc vers un tier (souris), ou touche-le pour choisir un tier (mobile). Les tiers n'ont pas de nombre de places limit&eacute;.</p>
+
+  <div class="credit">Fait avec 350 &middot; usage perso, sauvegard&eacute; sur cet appareil</div>
+</div>
+
+<div id="tooltip"></div>
+<div class="toast" id="toast"></div>
+<div class="picker-overlay" id="picker-overlay">
+  <div class="picker-sheet">
+    <div class="picker-head"><span class="picker-title" id="picker-title"></span><button class="picker-close" id="picker-close">×</button></div>
+    <div class="picker-list" id="picker-list"></div>
+  </div>
+</div>
+
+<script>
+const CLUBS = [
+  {id:'psg', name:'Paris Saint-Germain', logo:'logos/PSG.png'},
+  {id:'rcl', name:'RC Lens', logo:'logos/RCL.png'},
+  {id:'losc', name:'LOSC Lille', logo:'logos/LOSC.svg'},
+  {id:'ol', name:'Olympique Lyonnais', logo:'logos/OL.png'},
+  {id:'om', name:'Olympique de Marseille', logo:'logos/OM.png'},
+  {id:'srfc', name:'Stade Rennais', logo:'logos/SRFC.svg'},
+  {id:'asm', name:'AS Monaco', logo:'logos/ASM.png'},
+  {id:'rcsa', name:'RC Strasbourg', logo:'logos/RCSA.png'},
+  {id:'fcl', name:'FC Lorient', logo:'logos/FCL.svg'},
+  {id:'tfc', name:'Toulouse FC', logo:'logos/TFC.png'},
+  {id:'pfc', name:'Paris FC', logo:'logos/PFC.svg'},
+  {id:'sb29', name:'Stade Brestois 29', logo:'logos/SB29.png'},
+  {id:'sco', name:'Angers SCO', logo:'logos/SCO.png'},
+  {id:'hac', name:'Le Havre AC', logo:'logos/HAC.svg'},
+  {id:'aja', name:'AJ Auxerre', logo:'logos/AJA.svg'},
+  {id:'ogcn', name:'OGC Nice', logo:'logos/OGCN.png'},
+  {id:'estac', name:'ESTAC Troyes', logo:'logos/ESTAC.png'},
+  {id:'lm', name:'Le Mans FC', logo:'logos/LM.svg'},
+];
+
+/* 5 tiers, sans nombre de places fixe (contrairement à la tier-list de
+   classement) : un tier peut recevoir n'importe quel nombre de clubs.
+   Labels/couleurs à ajuster une fois les catégories précisées. */
+const TIERS = [
+  {id:'s', label:'S', hint:'Mercato exceptionnel', c:'var(--champion)', dim:'var(--champion-dim)'},
+  {id:'a', label:'A', hint:'Très bon mercato',      c:'var(--ucl)',      dim:'var(--ucl-dim)'},
+  {id:'b', label:'B', hint:'Mercato correct',       c:'var(--uecl)',     dim:'var(--uecl-dim)'},
+  {id:'c', label:'C', hint:'Mercato moyen',         c:'var(--warn)',     dim:'var(--warn-dim)'},
+  {id:'d', label:'D', hint:'Mercato raté',          c:'var(--danger)',   dim:'var(--danger-dim)'},
+];
+const TIERS_BY_ID = Object.fromEntries(TIERS.map(t => [t.id, t]));
+const STORAGE_KEY = 'mercato-tierlist:placements';
+
+const pool = document.getElementById('pool');
+const poolCount = document.getElementById('pool-count');
+const rowsWrap = document.getElementById('rows');
+const toast = document.getElementById('toast');
+const tooltip = document.getElementById('tooltip');
+const pickerOverlay = document.getElementById('picker-overlay');
+const pickerTitle = document.getElementById('picker-title');
+const pickerList = document.getElementById('picker-list');
+
+const DRAG_OK = window.matchMedia('(pointer: fine)').matches;
+if (DRAG_OK) document.getElementById('hero-sub').textContent = "Classe les 18 clubs selon la qualité de leur mercato. Glisse un écusson du banc vers un tier, ou touche le banc pour choisir un tier.";
+let dragData = null; // {clubId, fromTier: tierId|null}
+
+/* état : chaque tier = simple liste de club.id, sans limite de longueur */
+let placements = {};
+function resetState(save){
+  placements = {};
+  TIERS.forEach(t => { placements[t.id] = []; });
+  if (save !== false) persist();
+}
+function persist(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(placements)); }catch(e){}
+}
+function loadPersisted(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    const validIds = new Set(CLUBS.map(c => c.id));
+    resetState(false);
+    TIERS.forEach(t => {
+      if (Array.isArray(parsed[t.id])){
+        placements[t.id] = parsed[t.id].filter(id => validIds.has(id));
+      }
+    });
+    return true;
+  }catch(e){ return false; }
+}
+if (!loadPersisted()) resetState(false);
+
+function placedIds(){
+  return new Set(Object.values(placements).flat());
+}
+
+/* ---- build board skeleton (une fois) ---- */
+TIERS.forEach(t => {
+  const tier = document.createElement('div');
+  tier.className = 'tier';
+  tier.innerHTML = `
+    <div class="tier-label" style="--tc:${t.c};--td:${t.dim}">
+      <div class="tl">${t.label}</div>
+      <div class="tn">${t.hint}</div>
+    </div>
+    <div class="tier-body" data-tier="${t.id}" style="--tc:${t.c};--td:${t.dim}"></div>`;
+  rowsWrap.appendChild(tier);
+});
+
+function showTooltip(el, text){
+  tooltip.textContent = text;
+  const r = el.getBoundingClientRect();
+  tooltip.style.left = (r.left + r.width/2) + 'px';
+  tooltip.style.top = (r.top - 12) + 'px';
+  tooltip.classList.add('show');
+}
+function hideTooltip(){ tooltip.classList.remove('show'); }
+
+function render(){
+  const placed = placedIds();
+
+  pool.innerHTML = '';
+  const bench = CLUBS.filter(c => !placed.has(c.id));
+  if (!bench.length){
+    pool.innerHTML = '<div class="bench-empty">Tous les clubs sont classés.</div>';
+  } else {
+    bench.forEach(c => pool.appendChild(makeBenchCrest(c)));
+  }
+  poolCount.textContent = placed.size + ' / ' + CLUBS.length + ' classés';
+
+  TIERS.forEach(t => {
+    const zone = document.querySelector(`.tier-body[data-tier="${t.id}"]`);
+    zone.innerHTML = '';
+    const ids = placements[t.id];
+    if (!ids.length){
+      zone.innerHTML = '<div class="tier-empty-hint">Dépose ou choisis un club ici.</div>';
+    } else {
+      ids.forEach((clubId, idx) => {
+        const club = CLUBS.find(c => c.id === clubId);
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.innerHTML = `<div class="slot-filled"><img src="${club.logo}" alt="${club.name}"></div>
+          <button class="slot-remove" aria-label="Retirer ${club.name}">×</button>`;
+        const filled = slot.querySelector('.slot-filled');
+        filled.addEventListener('mouseenter', () => showTooltip(filled, club.name));
+        filled.addEventListener('mouseleave', hideTooltip);
+        slot.querySelector('.slot-remove').addEventListener('click', e => {
+          e.stopPropagation();
+          placements[t.id].splice(idx, 1);
+          persist();
+          render();
+        });
+        if (DRAG_OK){
+          filled.draggable = true;
+          filled.addEventListener('dragstart', e => {
+            dragData = {clubId, fromTier: t.id};
+            e.dataTransfer.effectAllowed = 'move';
+            hideTooltip();
+          });
+        }
+        zone.appendChild(slot);
+      });
+    }
+    attachTierDropTarget(zone, t.id);
+  });
+}
+
+function attachTierDropTarget(zone, tierId){
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (!dragData) return;
+    if (dragData.fromTier === tierId){ dragData = null; return; }
+    if (dragData.fromTier){
+      const arr = placements[dragData.fromTier];
+      const i = arr.indexOf(dragData.clubId);
+      if (i > -1) arr.splice(i, 1);
+    }
+    placements[tierId].push(dragData.clubId);
+    dragData = null;
+    persist();
+    render();
+  });
+}
+
+function makeBenchCrest(club){
+  const el = document.createElement('div');
+  el.className = 'crest';
+  el.innerHTML = `<img src="${club.logo}" alt="${club.name}" loading="lazy">`;
+  el.addEventListener('mouseenter', () => showTooltip(el, club.name));
+  el.addEventListener('mouseleave', hideTooltip);
+  el.addEventListener('click', () => openTierPicker(club));
+  if (DRAG_OK){
+    el.draggable = true;
+    el.addEventListener('dragstart', e => {
+      dragData = {clubId: club.id, fromTier: null};
+      e.dataTransfer.effectAllowed = 'move';
+      hideTooltip();
+    });
+  }
+  return el;
+}
+
+function openTierPicker(club){
+  pickerTitle.textContent = club.name;
+  pickerList.innerHTML = '';
+  TIERS.forEach(t => {
+    const row = document.createElement('button');
+    row.className = 'picker-row';
+    row.innerHTML = `<span class="picker-sw" style="--pc:${t.c}"></span>
+      <span><span class="prn">${t.label} · ${t.hint}</span>
+      <span class="prs">${placements[t.id].length} club${placements[t.id].length>1?'s':''} d&eacute;j&agrave;</span></span>`;
+    row.addEventListener('click', () => {
+      placements[t.id].push(club.id);
+      closePicker();
+      persist();
+      render();
+    });
+    pickerList.appendChild(row);
+  });
+  openPicker();
+}
+
+function openPicker(){ pickerOverlay.classList.add('show'); }
+function closePicker(){ pickerOverlay.classList.remove('show'); }
+document.getElementById('picker-close').addEventListener('click', closePicker);
+pickerOverlay.addEventListener('click', e => { if (e.target === pickerOverlay) closePicker(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePicker(); });
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  resetState();
+  render();
+  showToast('Tier list réinitialisée.');
+});
+
+render();
+
+if (DRAG_OK){
+  pool.addEventListener('dragover', e => { e.preventDefault(); pool.classList.add('drag-over'); });
+  pool.addEventListener('dragleave', () => pool.classList.remove('drag-over'));
+  pool.addEventListener('drop', e => {
+    e.preventDefault();
+    pool.classList.remove('drag-over');
+    if (!dragData || !dragData.fromTier){ dragData = null; return; }
+    const arr = placements[dragData.fromTier];
+    const i = arr.indexOf(dragData.clubId);
+    if (i > -1) arr.splice(i, 1);
+    dragData = null;
+    persist();
+    render();
+  });
+}
+
+/* ---------- partage : image canvas + Web Share API (facultatif, usage perso) ---------- */
+function loadImage(src){
+  return new Promise((resolve,reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+async function shareOrDownload(blob, filename, text){
+  const file = new File([blob], filename, {type:'image/png'});
+  if (navigator.canShare && navigator.canShare({files:[file]})){
+    try{ await navigator.share({files:[file], title:text, text}); return; }
+    catch(err){ if (err && err.name === 'AbortError') return; }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+async function shareImage(){
+  const btn = document.getElementById('btn-share');
+  const original = btn.textContent;
+  const rows = TIERS.map(t => ({tier: t, clubs: placements[t.id]})).filter(r => r.clubs.length);
+  if (!rows.length){ showToast('Classe au moins un club avant de partager.'); return; }
+  btn.disabled = true; btn.textContent = 'Génération...';
+  try{
+    if (document.fonts.status !== 'loaded'){
+      await Promise.race([document.fonts.ready, new Promise(r => setTimeout(r,150))]);
+    }
+    const LABELW = 150, TILE = 70, GAP = 14, LANE = 560, PADR = 20;
+    const HEADH = 84, FOOTH = 36, ROWPAD = 10, LINEH = TILE+14;
+    const W = LABELW + LANE + PADR;
+
+    function roundRect(x,y,w,h,r){
+      ctx.beginPath();
+      ctx.moveTo(x+r,y);
+      ctx.arcTo(x+w,y,x+w,y+h,r);
+      ctx.arcTo(x+w,y+h,x,y+h,r);
+      ctx.arcTo(x,y+h,x,y,r);
+      ctx.arcTo(x,y,x+w,y,r);
+      ctx.closePath();
+    }
+    function wrapClubs(ids, laneWidth){
+      const lines = [[]];
+      let curW = 0;
+      ids.forEach((id, i) => {
+        const w = TILE + (i>0 ? GAP : 0);
+        if (curW + w > laneWidth && curW > 0){ lines.push([]); curW = 0; }
+        lines[lines.length-1].push(id);
+        curW += w;
+      });
+      return lines;
+    }
+
+    const laid = rows.map(row => {
+      const lines = wrapClubs(row.clubs, LANE - 20);
+      const rowH = ROWPAD*2 + lines.length*LINEH;
+      return {...row, lines, rowH};
+    });
+    const H = HEADH + laid.reduce((s,r) => s+r.rowH, 0) + FOOTH;
+
+    const DPR = 2.5;
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(W*DPR); canvas.height = Math.round(H*DPR);
+    const ctx = canvas.getContext('2d');
+    ctx.scale(DPR, DPR);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    ctx.fillStyle = '#0a0b0d'; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#131417'; ctx.fillRect(0,0,W,HEADH);
+    ctx.fillStyle = '#e2a53f'; ctx.fillRect(0,0,W,4);
+    ctx.strokeStyle = 'rgba(255,255,255,.1)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0,HEADH); ctx.lineTo(W,HEADH); ctx.stroke();
+
+    ctx.fillStyle = '#fff';
+    ctx.font = '700 26px "General Sans", sans-serif';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText('TIER LIST MERCATO', 24, 44);
+    ctx.fillStyle = '#98999e';
+    ctx.font = '600 12px "Inter", sans-serif';
+    ctx.fillText('LIGUE 1 · SAISON 2026/27', 24, 64);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#98999e';
+    ctx.font = '700 18px "Inter", sans-serif';
+    ctx.fillText('BY 350', W-24, 48);
+    ctx.textAlign = 'left';
+
+    const colorFor = id => ({s:'#e2a53f', a:'#4d7fe0', b:'#3fae7c', c:'#c98a2e', d:'#e2496a'}[id] || '#454850');
+    const textOnFor = id => (id==='s'||id==='c') ? '#181205' : '#fff';
+
+    const neededIds = [...new Set(rows.flatMap(r => r.clubs))];
+    const crestMap = {};
+    await Promise.all(neededIds.map(async id => {
+      const club = CLUBS.find(c => c.id === id);
+      try{ crestMap[id] = await loadImage(club.logo); }
+      catch(e){ crestMap[id] = null; }
+    }));
+
+    let y = HEADH;
+    for (const row of laid){
+      const c = colorFor(row.tier.id), tOn = textOnFor(row.tier.id);
+      ctx.fillStyle = '#131417'; ctx.fillRect(0, y, W, row.rowH);
+      ctx.fillStyle = c; ctx.fillRect(0, y, LABELW, row.rowH);
+      ctx.strokeStyle = 'rgba(255,255,255,.08)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, y+row.rowH); ctx.lineTo(W, y+row.rowH); ctx.stroke();
+
+      ctx.fillStyle = tOn;
+      ctx.font = '700 30px "General Sans", sans-serif';
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.fillText(row.tier.label, 22, y+row.rowH/2+10);
+
+      row.lines.forEach((lineIds, li) => {
+        const contentW = lineIds.length*TILE + (lineIds.length-1)*GAP;
+        const startX = LABELW + Math.max(20, (LANE-contentW)/2);
+        const cy = y + ROWPAD + LINEH*li + LINEH/2;
+        let cx = startX;
+        lineIds.forEach((id, i) => {
+          if (i>0) cx += GAP;
+          const img = crestMap[id];
+          roundRect(cx, cy-TILE/2, TILE, TILE, 12);
+          ctx.fillStyle = '#1c1e23'; ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,.1)'; ctx.lineWidth = 1; ctx.stroke();
+          if (img){
+            const pad = 7, s = TILE-pad*2, ar = img.width/img.height;
+            let dw = s, dh = s;
+            if (ar > 1) dh = s/ar; else dw = s*ar;
+            ctx.drawImage(img, cx+(TILE-dw)/2, cy-dh/2, dw, dh);
+          }
+          cx += TILE;
+        });
+      });
+      y += row.rowH;
+    }
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    await shareOrDownload(blob, 'tierlist-mercato-l1.png', 'Ma tier list du mercato Ligue 1');
+  } finally {
+    btn.disabled = false; btn.textContent = original;
+  }
+}
+document.getElementById('btn-share').addEventListener('click', shareImage);
+</script>
+</body>
+</html>
