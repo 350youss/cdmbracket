@@ -65,7 +65,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hi
 .bench-slots{min-height:78px;display:flex;flex-wrap:wrap;gap:12px;padding:18px;background:var(--panel);
   border:1px solid var(--line);border-radius:18px;}
 .bench-empty{font-family:var(--body);font-size:12.5px;color:var(--muted);font-style:italic;padding:6px 2px;}
-@media (max-width:640px){ .bench-slots{display:none;} .bench-top{margin-bottom:0;} }
+/* contrairement à la tier list de classement, ici le banc est la SEULE
+   source de logos (les tiers démarrent vides, sans cases "+" par club) :
+   on ne le cache jamais, même sur mobile */
 
 .crest{width:62px;height:62px;background:var(--panel2);border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex-shrink:0;
