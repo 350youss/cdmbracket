@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-06T18:31:02",
- "sig": "7aca467e0ebe91e0aebf530f9b5114c7",
+ "updated": "2026-09-07T00:31:02",
+ "sig": "8f95055a3585ee173a39c8bfea587b01",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -302,16 +302,16 @@
   "NANCY|out|Youssouf Tandia|SAS Épinal": "2026-08-18",
   "NANCY|out|Faitout Maouassa|Sans club": "2026-08-18",
   "ANNECY|in|Pascal Mozie|Legia Varsovie": "2026-08-18",
-  "ANNECY|in|Alan Mondesir|Montlouis": "2026-08-18",
   "ANNECY|in|Esteban Marre|Istres FC": "2026-08-18",
+  "ANNECY|in|Alan Mondesir|Montlouis": "2026-08-18",
   "ANNECY|in|Sacha Lima|UF Touraine": "2026-08-18",
   "ANNECY|in|Jonathan Do Marcolino|Stade Rennais": "2026-09-01",
   "ANNECY|in|David Oduro|Barça Atlètic": "2026-08-22",
   "ANNECY|in|Souleymane Fofana|ASEC Mimosas": "2026-09-01",
+  "ANNECY|out|Axel Drouhin|KV Kortrijk": "2026-09-04",
   "ANNECY|out|Ben Hamed Touré|Barnsley FC": "2026-08-31",
   "ANNECY|out|Valentin Jacob|GFA Rumilly Val": "2026-08-18",
   "ANNECY|out|Aymerick Nedelec|Chambéry SF": "2026-08-18",
-  "ANNECY|out|Axel Drouhin|KV Kortrijk": "2026-09-04",
   "ANNECY|out|Abdel Hbouch|US Boulogne": "2026-08-18",
   "ANNECY|out|Cédric Makutungu|AS Cannes": "2026-08-18",
   "ANNECY|out|Ranjan Neelakandan|FC Vaduz": "2026-08-18",
@@ -3225,19 +3225,19 @@
      "fs": "2026-08-18"
     },
     {
-     "p": "Alan Mondesir",
+     "p": "Esteban Marre",
      "age": 22,
-     "pos": "AiG",
-     "club": "Montlouis",
+     "pos": "ArD",
+     "club": "Istres FC",
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
     },
     {
-     "p": "Esteban Marre",
+     "p": "Alan Mondesir",
      "age": 22,
-     "pos": "ArD",
-     "club": "Istres FC",
+     "pos": "AiG",
+     "club": "Montlouis",
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
@@ -3281,6 +3281,15 @@
    ],
    "dep": [
     {
+     "p": "Axel Drouhin",
+     "age": 26,
+     "pos": "DC",
+     "club": "KV Kortrijk",
+     "type": "paid",
+     "val": 0.5,
+     "fs": "2026-09-04"
+    },
+    {
      "p": "Ben Hamed Touré",
      "age": 23,
      "pos": "AC",
@@ -3306,15 +3315,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Axel Drouhin",
-     "age": 26,
-     "pos": "DC",
-     "club": "KV Kortrijk",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-09-04"
     },
     {
      "p": "Abdel Hbouch",
@@ -5194,7 +5194,7 @@
     "p": "Junior Sambia",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 29,
+    "age": 30,
     "val": 0.5
    },
    {
@@ -6486,7 +6486,7 @@
     "p": "Tanguy Ahile",
     "pos": "MDC",
     "grp": "MID",
-    "age": 21,
+    "age": 22,
     "val": 0.4
    },
    {
@@ -7608,7 +7608,7 @@
     "p": "Boubacar Fofana",
     "pos": "AiG",
     "grp": "ATT",
-    "age": 27,
+    "age": 28,
     "val": 0.15
    },
    {
