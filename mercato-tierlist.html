@@ -90,11 +90,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hi
 .board{margin-top:32px;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
 .tier{display:flex;background:var(--panel);}
 .tier + .tier{border-top:1px solid var(--line);}
-.tier-label{width:150px;flex-shrink:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;
+.tier-label{width:210px;flex-shrink:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;
   border-left:4px solid var(--tc,var(--mid));background:var(--td,var(--mid-dim));}
-.tier-label .tl{font-family:var(--disp);font-weight:700;font-size:26px;color:#fff;line-height:1.05;}
-.tier-label .tn{margin-top:6px;font-family:var(--body);font-weight:600;font-size:11px;
-  color:rgba(255,255,255,.7);}
+.tier-label .tl{font-family:var(--disp);font-weight:700;font-size:19px;color:#fff;line-height:1.2;text-transform:uppercase;letter-spacing:-.005em;}
 .tier-body{flex:1;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-height:64px;}
 .tier-body.drag-over{background:var(--td,var(--champion-dim));}
 .tier-empty-hint{font-family:var(--body);font-size:12px;color:var(--muted);font-style:italic;}
@@ -114,7 +112,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hi
   .tier{flex-direction:column;}
   .tier-label{width:100%;border-left:none;border-bottom:3px solid var(--tc,var(--mid));flex-direction:row;
     align-items:baseline;gap:10px;padding:10px 14px;}
-  .tier-label .tl{font-size:20px;}
+  .tier-label .tl{font-size:16px;}
   .tier-body{padding:12px 14px;}
 }
 
@@ -265,14 +263,20 @@ const CLUBS = [
 
 /* 5 tiers, sans nombre de places fixe (contrairement à la tier-list de
    classement) : un tier peut recevoir n'importe quel nombre de clubs.
-   Labels/couleurs à ajuster une fois les catégories précisées. */
+   Couleur pleine (c) utilisée pour la bordure + le visuel de partage,
+   textOn choisi pour la lisibilité du texte sur cette couleur pleine. */
 const TIERS = [
-  {id:'s', label:'S', hint:'Mercato exceptionnel', c:'var(--champion)', dim:'var(--champion-dim)'},
-  {id:'a', label:'A', hint:'Très bon mercato',      c:'var(--ucl)',      dim:'var(--ucl-dim)'},
-  {id:'b', label:'B', hint:'Mercato correct',       c:'var(--uecl)',     dim:'var(--uecl-dim)'},
-  {id:'c', label:'C', hint:'Mercato moyen',         c:'var(--warn)',     dim:'var(--warn-dim)'},
-  {id:'d', label:'D', hint:'Mercato raté',          c:'var(--danger)',   dim:'var(--danger-dim)'},
+  {id:'goat',    label:'GOAT',                          c:'#e2496a', textOn:'#fff'},
+  {id:'clean',   label:'Sah propre',                     c:'#dd7f3c', textOn:'#181205'},
+  {id:'ok',      label:'OK',                             c:'#e2c53f', textOn:'#181205'},
+  {id:'joke',    label:"C'est une blague j'espère",      c:'#3fae7c', textOn:'#fff'},
+  {id:'delete',  label:'Il faut supprimer le club',       c:'#4d7fe0', textOn:'#fff'},
 ];
+function hexToRgba(hex, a){
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${a})`;
+}
+TIERS.forEach(t => { t.dim = hexToRgba(t.c, .14); });
 const TIERS_BY_ID = Object.fromEntries(TIERS.map(t => [t.id, t]));
 const STORAGE_KEY = 'mercato-tierlist:placements';
 
@@ -324,7 +328,6 @@ TIERS.forEach(t => {
   tier.innerHTML = `
     <div class="tier-label" style="--tc:${t.c};--td:${t.dim}">
       <div class="tl">${t.label}</div>
-      <div class="tn">${t.hint}</div>
     </div>
     <div class="tier-body" data-tier="${t.id}" style="--tc:${t.c};--td:${t.dim}"></div>`;
   rowsWrap.appendChild(tier);
@@ -561,7 +564,7 @@ async function shareImage(){
     if (document.fonts.status !== 'loaded'){
       await Promise.race([document.fonts.ready, new Promise(r => setTimeout(r,150))]);
     }
-    const LABELW = 150, TILE = 70, GAP = 14, LANE = 560, PADR = 20;
+    const LABELW = 200, TILE = 70, GAP = 14, LANE = 560, PADR = 20;
     const HEADH = 84, FOOTH = 36, ROWPAD = 10, LINEH = TILE+14;
     const W = LABELW + LANE + PADR;
 
@@ -573,6 +576,19 @@ async function shareImage(){
       ctx.arcTo(x,y+h,x,y,r);
       ctx.arcTo(x,y,x+w,y,r);
       ctx.closePath();
+    }
+    function wrapLabel(text, maxWidth, font){
+      ctx.font = font;
+      const words = text.split(' ');
+      const lines = [];
+      let cur = '';
+      words.forEach(w => {
+        const test = cur ? cur+' '+w : w;
+        if (ctx.measureText(test).width > maxWidth && cur){ lines.push(cur); cur = w; }
+        else cur = test;
+      });
+      if (cur) lines.push(cur);
+      return lines;
     }
     function wrapClubs(ids, laneWidth){
       const lines = [[]];
@@ -586,17 +602,24 @@ async function shareImage(){
       return lines;
     }
 
+    /* canvas créé tôt (taille provisoire) uniquement pour mesurer le texte
+       via ctx.measureText avant de connaître la hauteur finale */
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const LBLFONT = '700 22px "General Sans", sans-serif';
     const laid = rows.map(row => {
       const lines = wrapClubs(row.clubs, LANE - 20);
-      const rowH = ROWPAD*2 + lines.length*LINEH;
-      return {...row, lines, rowH};
+      const crestRowH = ROWPAD*2 + lines.length*LINEH;
+      const lblLines = wrapLabel(row.tier.label.toUpperCase(), LABELW-40, LBLFONT);
+      const lblBlockH = lblLines.length*27 + ROWPAD*2;
+      const rowH = Math.max(crestRowH, lblBlockH);
+      return {...row, lines, lblLines, rowH};
     });
     const H = HEADH + laid.reduce((s,r) => s+r.rowH, 0) + FOOTH;
 
     const DPR = 2.5;
-    const canvas = document.createElement('canvas');
     canvas.width = Math.round(W*DPR); canvas.height = Math.round(H*DPR);
-    const ctx = canvas.getContext('2d');
     ctx.scale(DPR, DPR);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
@@ -620,9 +643,6 @@ async function shareImage(){
     ctx.fillText('BY 350', W-24, 48);
     ctx.textAlign = 'left';
 
-    const colorFor = id => ({s:'#e2a53f', a:'#4d7fe0', b:'#3fae7c', c:'#c98a2e', d:'#e2496a'}[id] || '#454850');
-    const textOnFor = id => (id==='s'||id==='c') ? '#181205' : '#fff';
-
     const neededIds = [...new Set(rows.flatMap(r => r.clubs))];
     const crestMap = {};
     await Promise.all(neededIds.map(async id => {
@@ -633,16 +653,18 @@ async function shareImage(){
 
     let y = HEADH;
     for (const row of laid){
-      const c = colorFor(row.tier.id), tOn = textOnFor(row.tier.id);
+      const c = row.tier.c, tOn = row.tier.textOn;
       ctx.fillStyle = '#131417'; ctx.fillRect(0, y, W, row.rowH);
       ctx.fillStyle = c; ctx.fillRect(0, y, LABELW, row.rowH);
       ctx.strokeStyle = 'rgba(255,255,255,.08)'; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(0, y+row.rowH); ctx.lineTo(W, y+row.rowH); ctx.stroke();
 
       ctx.fillStyle = tOn;
-      ctx.font = '700 30px "General Sans", sans-serif';
+      ctx.font = LBLFONT;
       ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      ctx.fillText(row.tier.label, 22, y+row.rowH/2+10);
+      const lblBlockH2 = row.lblLines.length*27;
+      let ly = y + row.rowH/2 - lblBlockH2/2 + 20;
+      row.lblLines.forEach(line => { ctx.fillText(line, 20, ly); ly += 27; });
 
       row.lines.forEach((lineIds, li) => {
         const contentW = lineIds.length*TILE + (lineIds.length-1)*GAP;

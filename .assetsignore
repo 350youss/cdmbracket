@@ -2,6 +2,7 @@ scripts/
 data/*
 !data/players.json
 !data/rumeurs.json
+!data/transfers_l1.json
 .github/
 *.bat
 *.vbs
