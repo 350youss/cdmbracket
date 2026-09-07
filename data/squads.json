@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-07T00:00:51",
- "sig": "7b3186369eb1d9f14e8b4af363049dd9",
+ "updated": "2026-09-07T20:38:02",
+ "sig": "db30a21eb1d4b3091631b2bbc46a3de7",
  "squads": {
   "FCB": [
    {
@@ -1636,6 +1636,18 @@
     "valSince": "07/09/2026"
    },
    {
+    "n": "7",
+    "p": "Iliman Ndiaye",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 26,
+    "val": 55.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "07/09/2026"
+   },
+   {
     "n": "42",
     "p": "Antoine Semenyo",
     "pos": "AiD",
@@ -1650,18 +1662,6 @@
      "min": 2025
     },
     "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "07/09/2026"
-   },
-   {
-    "n": "7",
-    "p": "Iliman Ndiaye",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 26,
-    "val": 55.0,
-    "stats": null,
-    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "07/09/2026"
    },
@@ -1866,24 +1866,6 @@
     "valSince": "07/09/2026"
    },
    {
-    "n": "49",
-    "p": "Myles Lewis-Skelly",
-    "pos": "ArG",
-    "grp": "DEF",
-    "age": 19,
-    "val": 45.0,
-    "stats": {
-     "m": 36,
-     "s": 19,
-     "g": 0,
-     "a": 4,
-     "min": 1908
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "07/09/2026"
-   },
-   {
     "n": "12",
     "p": "Jurriën Timber",
     "pos": "ArD",
@@ -1932,6 +1914,24 @@
      "g": 6,
      "a": 3,
      "min": 4300
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "07/09/2026"
+   },
+   {
+    "n": "49",
+    "p": "Myles Lewis-Skelly",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 19,
+    "val": 45.0,
+    "stats": {
+     "m": 36,
+     "s": 19,
+     "g": 0,
+     "a": 4,
+     "min": 1908
     },
     "statsClub": "",
     "valDelta": 0.0,
