@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-07T00:31:02",
- "sig": "8f95055a3585ee173a39c8bfea587b01",
+ "updated": "2026-09-07T13:17:18",
+ "sig": "759d32b0c8521a40e010cea5a9ccc4f4",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -220,6 +220,7 @@
   "USLD|in|Khalil Ayari|PSG": "2026-08-18",
   "USLD|in|Ousmane Touré|LOSC Lille": "2026-08-18",
   "USLD|in|Franck Atoen|Samsunspor": "2026-08-18",
+  "USLD|in|Gaëtan Robail|Sans club": "2026-09-07",
   "USLD|in|Felipe Abner|Sans club": "2026-09-05",
   "USLD|out|Antoine Sekongo|Samsunspor": "2026-08-18",
   "USLD|out|Thomas Robinet|FC Nantes": "2026-09-01",
@@ -2445,6 +2446,15 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Gaëtan Robail",
+     "age": 32,
+     "pos": "AiG",
+     "club": "Sans club",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-07"
     },
     {
      "p": "Felipe Abner",
@@ -5998,7 +6008,7 @@
     "val": 0.5
    },
    {
-    "n": "",
+    "n": "30",
     "p": "Felipe Abner",
     "pos": "ArG",
     "grp": "DEF",
@@ -6076,6 +6086,14 @@
     "grp": "MID",
     "age": 27,
     "val": 0.35
+   },
+   {
+    "n": "9",
+    "p": "Gaëtan Robail",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 32,
+    "val": 0.4
    },
    {
     "n": "93",
