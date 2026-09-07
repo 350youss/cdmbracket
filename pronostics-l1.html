@@ -331,13 +331,35 @@ const DRAG_OK = window.matchMedia('(pointer: fine)').matches;
 if (DRAG_OK) document.getElementById('hero-sub').textContent = "Fais ta tier-list du classement de L1 en mettant les clubs à leur place. Glisse un club, ou touche le + d'une case.";
 let dragData = null; // {clubId, from:{tierId,idx}|null}
 
-/* état : chaque tier a un tableau de longueur max, rempli de club.id ou null */
+/* état : chaque tier a un tableau de longueur max, rempli de club.id ou null.
+   Toujours modifiable (contrairement aux prédis indiv) : simplement gardé en
+   mémoire sur cet appareil pour ne pas perdre le classement à chaque visite. */
 let placements = {};
+const STORAGE_KEY = 'pronostics-l1:placements';
 function resetState(){
   placements = {};
   TIERS.forEach(t => { placements[t.id] = new Array(t.max).fill(null); });
 }
-resetState();
+function persist(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(placements)); }catch(e){}
+}
+function loadPersisted(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    const validIds = new Set(CLUBS.map(c => c.id));
+    resetState();
+    TIERS.forEach(t => {
+      if (!Array.isArray(parsed[t.id])) return;
+      parsed[t.id].forEach((clubId, idx) => {
+        if (idx < t.max && validIds.has(clubId)) placements[t.id][idx] = clubId;
+      });
+    });
+    return true;
+  }catch(e){ return false; }
+}
+if (!loadPersisted()) resetState();
 
 function placedIds(){
   return new Set(Object.values(placements).flat().filter(Boolean));
@@ -378,6 +400,7 @@ function hideTooltip(){ tooltip.classList.remove('show'); }
 
 /* ---- rendu complet à partir de l'état ---- */
 function render(){
+  persist();
   const placed = placedIds();
 
   pool.innerHTML = '';
