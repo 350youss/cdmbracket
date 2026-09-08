@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-07T13:17:18",
- "sig": "759d32b0c8521a40e010cea5a9ccc4f4",
+ "updated": "2026-09-08T13:47:53",
+ "sig": "8c61ba5e658fd3a3cb4c8fe5e23089d0",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -74,6 +74,7 @@
   "REIMS|out|Hiroki Sekine|Holstein Kiel": "2026-08-18",
   "REIMS|out|Jordan|Greuther Fürth": "2026-08-30",
   "REIMS|out|Maxime Busi|Royal Antwerp": "2026-08-18",
+  "REIMS|out|Yohan Demoncy|FC Sochaux": "2026-09-08",
   "REIMS|out|Alexandre Olliero|Grenoble": "2026-08-18",
   "REIMS|out|Antoine Leautey|WH Three Towns": "2026-08-18",
   "REIMS|out|Oumar Diakité|Sturm Graz": "2026-09-04",
@@ -255,14 +256,14 @@
   "GF38|out|Loris Mouyokolo|Baltika": "2026-08-18",
   "GF38|out|Jessy Benet|Pau FC": "2026-08-18",
   "GF38|out|Gaëtan Paquiez|Pau FC": "2026-08-18",
+  "GF38|out|Efe Sarıkaya|Gaziantep FK": "2026-09-05",
   "GF38|out|Maxime Pattier|US Saint-Malo": "2026-08-18",
   "GF38|out|Stone Mambo|FC Noah": "2026-08-18",
   "GF38|out|Shaquil Delos|La Louvière": "2026-08-18",
-  "GF38|out|Evans Maurin|Casa Pia": "2026-08-31",
   "GF38|out|Mathieu Mion|US Boulogne": "2026-09-02",
+  "GF38|out|Evans Maurin|Casa Pia": "2026-08-31",
   "GF38|out|Allan Tchaptchet|RE Virton": "2026-08-18",
   "GF38|out|Alan Kerouedan|AS Cannes": "2026-08-18",
-  "GF38|out|Efe Sarıkaya|Gaziantep FK": "2026-09-05",
   "EAG|in|Teddy Averlant|Amiens SC": "2026-08-18",
   "EAG|in|Tuomas Ollila|Paris FC": "2026-08-27",
   "EAG|in|Brandon Bokangu|AS Nancy": "2026-09-05",
@@ -363,6 +364,7 @@
   "BOUL|out|Luka Boiteau|Valenciennes FC": "2026-08-18",
   "BOUL|out|Exaucé Mpembele Boula|Bourg-en-Bresse": "2026-08-18",
   "SOCH|in|Louicius Deedson|Dallas": "2026-08-27",
+  "SOCH|in|Yohan Demoncy|Stade de Reims": "2026-09-08",
   "SOCH|in|Mathis Clairicia|VfL Bochum": "2026-08-18",
   "SOCH|in|Victor Lobry|Amiens SC": "2026-08-18",
   "SOCH|in|Saad Agouzoul|AJ Auxerre": "2026-08-18",
@@ -379,6 +381,7 @@
   "DFCO|in|Moussa Faty|Le Puy FC": "2026-08-18",
   "DFCO|in|Ismaïl Bouleghcha|Le Puy FC": "2026-08-18",
   "DFCO|in|Axel Bargain|GOAL FC": "2026-08-18",
+  "DFCO|in|Tom Meynadier|Sans club": "2026-09-08",
   "DFCO|out|Julien Domingues|Al-Kholood": "2026-08-18",
   "DFCO|out|Jules Meyer|CSKA 1948": "2026-08-18",
   "DFCO|out|Ismaïl Diallo|Toulouse": "2026-08-18",
@@ -1064,6 +1067,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Yohan Demoncy",
+     "age": 30,
+     "pos": "MC",
+     "club": "FC Sochaux",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-08"
     },
     {
      "p": "Alexandre Olliero",
@@ -2775,6 +2787,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Efe Sarıkaya",
+     "age": 20,
+     "pos": "DC",
+     "club": "Gaziantep FK",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-05"
+    },
+    {
      "p": "Maxime Pattier",
      "age": 30,
      "pos": "GdB",
@@ -2802,15 +2823,6 @@
      "fs": "2026-08-18"
     },
     {
-     "p": "Evans Maurin",
-     "age": 25,
-     "pos": "AC",
-     "club": "Casa Pia",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-31"
-    },
-    {
      "p": "Mathieu Mion",
      "age": 25,
      "pos": "ArG",
@@ -2818,6 +2830,15 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-09-02"
+    },
+    {
+     "p": "Evans Maurin",
+     "age": 25,
+     "pos": "AC",
+     "club": "Casa Pia",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-31"
     },
     {
      "p": "Allan Tchaptchet",
@@ -2836,15 +2857,6 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
-    },
-    {
-     "p": "Efe Sarıkaya",
-     "age": 20,
-     "pos": "DC",
-     "club": "Gaziantep FK",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-09-05"
     }
    ]
   },
@@ -3805,6 +3817,15 @@
      "fs": "2026-08-27"
     },
     {
+     "p": "Yohan Demoncy",
+     "age": 30,
+     "pos": "MC",
+     "club": "Stade de Reims",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-08"
+    },
+    {
      "p": "Mathis Clairicia",
      "age": 23,
      "pos": "AC",
@@ -3957,6 +3978,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Tom Meynadier",
+     "age": 26,
+     "pos": "ArD",
+     "club": "Sans club",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-08"
     }
    ],
    "dep": [
@@ -4150,7 +4180,7 @@
     "val": 1.8
    },
    {
-    "n": "",
+    "n": "14",
     "p": "Áron Csongvai",
     "pos": "MDC",
     "grp": "MID",
@@ -4216,7 +4246,7 @@
    {
     "n": "7",
     "p": "Irvin Cardona",
-    "pos": "AiD",
+    "pos": "AC",
     "grp": "ATT",
     "age": 29,
     "val": 2.5
@@ -4600,14 +4630,6 @@
     "grp": "MID",
     "age": 22,
     "val": 0.8
-   },
-   {
-    "n": "",
-    "p": "Yohan Demoncy",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 30,
-    "val": 0.4
    },
    {
     "n": "87",
@@ -7590,6 +7612,14 @@
     "val": 0.0
    },
    {
+    "n": "24",
+    "p": "Yohan Demoncy",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 30,
+    "val": 0.4
+   },
+   {
     "n": "15",
     "p": "Jonathan Mexique",
     "pos": "MC",
@@ -7758,6 +7788,14 @@
     "grp": "DEF",
     "age": 26,
     "val": 0.3
+   },
+   {
+    "n": "",
+    "p": "Tom Meynadier",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 26,
+    "val": 0.5
    },
    {
     "n": "93",
