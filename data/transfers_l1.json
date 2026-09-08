@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-08T13:50:29",
- "sig": "de7b7c29fa32eab274c4a1fe3e371e81",
+ "updated": "2026-09-08T17:03:48",
+ "sig": "97e097112d4faaeb950a9fa7911d24ba",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -168,8 +168,8 @@
   "RCSA|out|Junior Mwanga|Le Havre AC": "2026-08-09",
   "RCSA|out|Pape Diong|KVC Westerlo": "2026-08-27",
   "RCSA|out|Ben Chilwell|Crystal Palace": "2026-09-02",
-  "RCSA|out|Stefan Bajic|Alem. Aachen": "2026-08-09",
   "RCSA|out|Abakar Sylla|Gaziantep FK": "2026-09-04",
+  "RCSA|out|Stefan Bajic|Alem. Aachen": "2026-08-09",
   "RCSA|out|Óscar Perea|América": "2026-08-09",
   "RCSA|out|Mathis Amougou|Toulouse": "2026-09-01",
   "RCSA|out|Andrew Omobamidele|RSC Anderlecht": "2026-09-02",
@@ -2121,6 +2121,16 @@
      "fs": "2026-09-02"
     },
     {
+     "p": "Abakar Sylla",
+     "age": 23,
+     "pos": "DC",
+     "club": "Gaziantep FK",
+     "club_id": 2832,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-04"
+    },
+    {
      "p": "Stefan Bajic",
      "age": 24,
      "pos": "GdB",
@@ -2129,16 +2139,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
-    },
-    {
-     "p": "Abakar Sylla",
-     "age": 23,
-     "pos": "DC",
-     "club": "Gaziantep FK",
-     "club_id": 2832,
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-09-04"
     },
     {
      "p": "Óscar Perea",
