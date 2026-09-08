@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-08T13:47:53",
- "sig": "8c61ba5e658fd3a3cb4c8fe5e23089d0",
+ "updated": "2026-09-08T18:31:01",
+ "sig": "e23281a196ef47b41df454c04e41f66b",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -362,6 +362,7 @@
   "BOUL|out|Hervé Touré|OFK Beograd": "2026-08-18",
   "BOUL|out|Lilian Raillot|US Orléans": "2026-08-18",
   "BOUL|out|Luka Boiteau|Valenciennes FC": "2026-08-18",
+  "BOUL|out|Azamat Uriev|FR Haguenau": "2026-09-08",
   "BOUL|out|Exaucé Mpembele Boula|Bourg-en-Bresse": "2026-08-18",
   "SOCH|in|Louicius Deedson|Dallas": "2026-08-27",
   "SOCH|in|Yohan Demoncy|Stade de Reims": "2026-09-08",
@@ -3789,6 +3790,15 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Azamat Uriev",
+     "age": 22,
+     "pos": "GdB",
+     "club": "FR Haguenau",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-08"
     },
     {
      "p": "Exaucé Mpembele Boula",
@@ -7304,14 +7314,6 @@
     "grp": "GK",
     "age": 25,
     "val": 0.7
-   },
-   {
-    "n": "30",
-    "p": "Azamat Uriev",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 22,
-    "val": 0.25
    },
    {
     "n": "16",
