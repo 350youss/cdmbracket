@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-08T17:03:48",
- "sig": "97e097112d4faaeb950a9fa7911d24ba",
+ "updated": "2026-09-09T14:03:51",
+ "sig": "9219dbdd970bf328c7dc30fcaf216525",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -316,6 +316,7 @@
   "AJA|out|Donovan Léon|Abha": "2026-08-09",
   "AJA|out|Saad Agouzoul|FC Sochaux": "2026-08-09",
   "AJA|out|Theo Bair|Bolton": "2026-09-01",
+  "AJA|out|Francisco Sierralta|Piast Gliwice": "2026-09-09",
   "AJA|out|Lasso Coulibaly|Viborg FF": "2026-09-04",
   "AJA|out|Théo De Percin|SC Bastia": "2026-08-09",
   "AJA|out|Tom Negrel|Sans club": "2026-08-09",
@@ -933,7 +934,7 @@
     {
      "p": "Ayyoub Bouaddi",
      "age": 18,
-     "pos": "MC",
+     "pos": "MDC",
      "club": "Man City",
      "club_id": 281,
      "type": "paid",
@@ -3669,6 +3670,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-09-01"
+    },
+    {
+     "p": "Francisco Sierralta",
+     "age": 29,
+     "pos": "DC",
+     "club": "Piast Gliwice",
+     "club_id": 6112,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-09"
     },
     {
      "p": "Lasso Coulibaly",
@@ -7178,6 +7189,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "40",
+    "p": "Jules Stawiecki",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 19,
+    "val": 0.15,
+    "stats": {
+     "m": 0,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 0
+    },
+    "statsClub": "AS Monaco",
+    "valDelta": 0.0,
+    "valSince": "08/09/2026"
+   },
+   {
     "n": "13",
     "p": "Christian Mawissa",
     "pos": "DC",
@@ -8682,7 +8711,7 @@
     "p": "Niko Sigur",
     "pos": "MDC",
     "grp": "MID",
-    "age": 22,
+    "age": 23,
     "val": 4.0,
     "stats": {
      "m": 35,
@@ -10352,7 +10381,7 @@
     "p": "Timothée Pembélé",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 23,
+    "age": 24,
     "val": 1.8,
     "stats": {
      "m": 14,
@@ -10764,24 +10793,6 @@
      "g": 3,
      "a": 0,
      "min": 1006
-    },
-    "statsClub": "AJ Auxerre",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "4",
-    "p": "Francisco Sierralta",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 29,
-    "val": 1.2,
-    "stats": {
-     "m": 11,
-     "s": 10,
-     "g": 1,
-     "a": 0,
-     "min": 952
     },
     "statsClub": "AJ Auxerre",
     "valDelta": 0.0,
@@ -12324,7 +12335,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "12",
     "p": "João Almeida",
     "pos": "ArG",
     "grp": "DEF",
@@ -15880,6 +15891,12 @@
    {
     "d": "08/09/2026",
     "v": 0.4
+   }
+  ],
+  "1075582": [
+   {
+    "d": "08/09/2026",
+    "v": 0.15
    }
   ]
  }
