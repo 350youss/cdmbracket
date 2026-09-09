@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-09T14:03:51",
- "sig": "9219dbdd970bf328c7dc30fcaf216525",
+ "updated": "2026-09-09T20:03:47",
+ "sig": "0ed09e9c3ac9e239fd63f47689e9f374",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -365,6 +365,7 @@
   "ESTAC|out|Elijah Odede|Lommel SK": "2026-09-04",
   "ESTAC|out|Fred Ondoa Onambele|FC Villefranche": "2026-08-09",
   "ESTAC|out|Xavier Chavalerin|Sans club": "2026-08-09",
+  "ESTAC|out|Tom Akpakoun|Sans club": "2026-09-09",
   "LM|in|Habib Diallo|FC Metz": "2026-09-01",
   "LM|in|Louis Mafouta|EA Guingamp": "2026-08-09",
   "LM|in|Yasser Larouci|Troyes": "2026-08-09",
@@ -4180,6 +4181,16 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Tom Akpakoun",
+     "age": 21,
+     "pos": "DC",
+     "club": "Sans club",
+     "club_id": 515,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-09"
     }
    ]
   },
@@ -11823,24 +11834,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "37",
-    "p": "Tom Akpakoun",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 21,
-    "val": 0.0,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "ESTAC Troyes",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "14",
     "p": "Ismaël Boura",
     "pos": "ArG",
@@ -11911,6 +11904,24 @@
     "statsClub": "ESTAC Troyes",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "31",
+    "p": "Noah Donkor",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.03,
+    "stats": {
+     "m": 6,
+     "s": 3,
+     "g": 0,
+     "a": 1,
+     "min": 267
+    },
+    "statsClub": "ESTAC Troyes",
+    "valDelta": 0.0,
+    "valSince": "09/09/2026"
    },
    {
     "n": "26",
@@ -12033,6 +12044,18 @@
     "valSince": "21/08/2026"
    },
    {
+    "n": "36",
+    "p": "Idrissa Soukouna",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 18,
+    "val": 0.0,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "09/09/2026"
+   },
+   {
     "n": "7",
     "p": "Kandet Diawara",
     "pos": "AiG",
@@ -12141,6 +12164,18 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "39",
+    "p": "Yacouba Koné",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 19,
+    "val": 0.1,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.0,
+    "valSince": "09/09/2026"
+   },
+   {
     "n": "34",
     "p": "Ibrahim Traoré",
     "pos": "AC",
@@ -12157,6 +12192,24 @@
     "statsClub": "ESTAC Troyes",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "37",
+    "p": "Christ Batola",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 17,
+    "val": 0.0,
+    "stats": {
+     "m": 1,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 3
+    },
+    "statsClub": "ESTAC Troyes",
+    "valDelta": 0.0,
+    "valSince": "09/09/2026"
    }
   ],
   "LM": [
@@ -15897,6 +15950,30 @@
    {
     "d": "08/09/2026",
     "v": 0.15
+   }
+  ],
+  "1119840": [
+   {
+    "d": "09/09/2026",
+    "v": 0.03
+   }
+  ],
+  "1364925": [
+   {
+    "d": "09/09/2026",
+    "v": 0.0
+   }
+  ],
+  "1523861": [
+   {
+    "d": "09/09/2026",
+    "v": 0.1
+   }
+  ],
+  "1337539": [
+   {
+    "d": "09/09/2026",
+    "v": 0.0
    }
   ]
  }
