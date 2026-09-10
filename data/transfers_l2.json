@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-08T18:31:01",
- "sig": "e23281a196ef47b41df454c04e41f66b",
+ "updated": "2026-09-10T20:36:44",
+ "sig": "1e56daa0979d33e157d5f6cd6f3c3c2b",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -122,10 +122,10 @@
   "MHSC|out|Khalil Fayad|Hajduk Split": "2026-09-01",
   "MHSC|out|Téji Savanier|FC Metz": "2026-08-18",
   "MHSC|out|Alexandre Mendy|Al-Faisaly": "2026-08-18",
+  "MHSC|out|Christopher Jullien|FCV Dender EH": "2026-09-10",
   "MHSC|out|Yanis Issoufou|Millwall": "2026-09-04",
   "MHSC|out|Lucas Mincarelli|Estrela Amadora": "2026-08-18",
   "MHSC|out|Junior Ndiaye|Valenciennes FC": "2026-09-05",
-  "MHSC|out|Christopher Jullien|Sans club": "2026-08-18",
   "CF63|in|Rominigue Kouamé|Cádiz CF": "2026-09-01",
   "CF63|in|Arthur Saintorens|Av. Bayonnais": "2026-08-18",
   "CF63|in|Jean Grillot|G. Bordeaux": "2026-08-18",
@@ -137,7 +137,6 @@
   "CF63|out|Abdoul Kader Bamba|FC Granada": "2026-08-18",
   "CF63|out|Famara Diédhiou|Al-Orobah": "2026-08-21",
   "CF63|out|Amine Saïd|GFA Rumilly Val": "2026-08-23",
-  "CF63|out|Tom Auvré|Atlético CP": "2026-09-05",
   "CF63|out|Cheick Oumar Konaté|SK Beveren": "2026-09-04",
   "CF63|out|Maximiliano Caufriez|Sans club": "2026-08-18",
   "CF63|out|Henri Saivet|Sans club": "2026-08-18",
@@ -1522,6 +1521,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Christopher Jullien",
+     "age": 33,
+     "pos": "DC",
+     "club": "FCV Dender EH",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-10"
+    },
+    {
      "p": "Yanis Issoufou",
      "age": 19,
      "pos": "AiG",
@@ -1547,15 +1555,6 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-09-05"
-    },
-    {
-     "p": "Christopher Jullien",
-     "age": 33,
-     "pos": "DC",
-     "club": "Sans club",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
     }
    ]
   },
@@ -1665,15 +1664,6 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-23"
-    },
-    {
-     "p": "Tom Auvré",
-     "age": 19,
-     "pos": "AiG",
-     "club": "Atlético CP",
-     "type": "free",
-     "val": 0.0,
-     "fs": "2026-09-05"
     },
     {
      "p": "Cheick Oumar Konaté",
@@ -4444,7 +4434,7 @@
     "p": "Wilitty Younoussa",
     "pos": "MC",
     "grp": "MID",
-    "age": 24,
+    "age": 25,
     "val": 0.9
    },
    {
@@ -5644,6 +5634,14 @@
     "val": 0.4
    },
    {
+    "n": "13",
+    "p": "Corentin Issanchou",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 21,
+    "val": 0.07
+   },
+   {
     "n": "6",
     "p": "Jordan Mendes",
     "pos": "MDC",
@@ -5698,14 +5696,6 @@
     "grp": "MID",
     "age": 19,
     "val": 0.5
-   },
-   {
-    "n": "13",
-    "p": "Corentin Issanchou",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 21,
-    "val": 0.07
    },
    {
     "n": "",
@@ -7182,7 +7172,7 @@
     "p": "Esteban Mouton",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 22,
+    "age": 23,
     "val": 0.5
    },
    {
@@ -7238,7 +7228,7 @@
     "p": "Julien Maggiotti",
     "pos": "MC",
     "grp": "MID",
-    "age": 30,
+    "age": 31,
     "val": 0.3
    },
    {
@@ -7384,7 +7374,7 @@
     "p": "Oscar Lenne",
     "pos": "ArG",
     "grp": "DEF",
-    "age": 19,
+    "age": 20,
     "val": 0.1
    },
    {
@@ -7690,7 +7680,7 @@
     "p": "Kapit Djoco",
     "pos": "AC",
     "grp": "ATT",
-    "age": 30,
+    "age": 31,
     "val": 0.4
    },
    {
@@ -7934,6 +7924,14 @@
     "grp": "ATT",
     "age": 37,
     "val": 0.07
+   },
+   {
+    "n": "9",
+    "p": "Tyris Dong",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 17,
+    "val": 0.05
    }
   ]
  }
