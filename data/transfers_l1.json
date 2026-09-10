@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-09T20:03:47",
- "sig": "0ed09e9c3ac9e239fd63f47689e9f374",
+ "updated": "2026-09-10T20:39:38",
+ "sig": "67c3c94dc1b9589d96a1311c103b57ca",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -315,6 +315,7 @@
   "AJA|out|Gideon Mensah|1.FC Köln": "2026-08-09",
   "AJA|out|Donovan Léon|Abha": "2026-08-09",
   "AJA|out|Saad Agouzoul|FC Sochaux": "2026-08-09",
+  "AJA|out|Josué Casimir|Dinamo Moscou": "2026-09-10",
   "AJA|out|Theo Bair|Bolton": "2026-09-01",
   "AJA|out|Francisco Sierralta|Piast Gliwice": "2026-09-09",
   "AJA|out|Lasso Coulibaly|Viborg FF": "2026-09-04",
@@ -1883,7 +1884,7 @@
     {
      "p": "Oso",
      "age": 23,
-     "pos": "AiG",
+     "pos": "ArG",
      "club": "Séville FC",
      "club_id": 368,
      "type": "paid",
@@ -3663,6 +3664,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Josué Casimir",
+     "age": 24,
+     "pos": "AiD",
+     "club": "Dinamo Moscou",
+     "club_id": 121,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-10"
+    },
+    {
      "p": "Theo Bair",
      "age": 27,
      "pos": "AC",
@@ -4535,7 +4546,7 @@
      "s": 31,
      "g": 0,
      "a": 7,
-     "min": 2772
+     "min": 2771
     },
     "statsClub": "Aston Villa",
     "valDelta": 0.0,
@@ -4787,7 +4798,7 @@
      "s": 31,
      "g": 21,
      "a": 3,
-     "min": 2693
+     "min": 2692
     },
     "statsClub": "Barcelone",
     "valDelta": 10.0,
@@ -5179,7 +5190,7 @@
      "s": 39,
      "g": 15,
      "a": 11,
-     "min": 3477
+     "min": 3473
     },
     "statsClub": "RSC Anderlecht",
     "valDelta": 0.0,
@@ -5215,7 +5226,7 @@
      "s": 33,
      "g": 2,
      "a": 11,
-     "min": 2849
+     "min": 2850
     },
     "statsClub": "La Gantoise",
     "valDelta": 0.0,
@@ -5433,7 +5444,7 @@
      "s": 8,
      "g": 0,
      "a": 0,
-     "min": 647
+     "min": 646
     },
     "statsClub": "Séville FC",
     "valDelta": 0.0,
@@ -5469,7 +5480,7 @@
      "s": 12,
      "g": 0,
      "a": 1,
-     "min": 1243
+     "min": 1242
     },
     "statsClub": "LOSC Lille",
     "valDelta": 0.0,
@@ -5577,7 +5588,7 @@
      "s": 20,
      "g": 5,
      "a": 9,
-     "min": 2007
+     "min": 2006
     },
     "statsClub": "RB Salzbourg",
     "valDelta": 0.0,
@@ -6667,7 +6678,7 @@
      "s": 1,
      "g": 1,
      "a": 0,
-     "min": 92
+     "min": 90
     },
     "statsClub": "Olympique de Marseille",
     "valDelta": 0.0,
@@ -7736,6 +7747,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "36",
+    "p": "Oso",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 23,
+    "val": 10.0,
+    "stats": {
+     "m": 24,
+     "s": 17,
+     "g": 2,
+     "a": 3,
+     "min": 1648
+    },
+    "statsClub": "Séville FC",
+    "valDelta": 0.0,
+    "valSince": "30/08/2026"
+   },
+   {
     "n": "15",
     "p": "Mateo Del Blanco",
     "pos": "ArG",
@@ -7946,24 +7975,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "36",
-    "p": "Oso",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 23,
-    "val": 10.0,
-    "stats": {
-     "m": 24,
-     "s": 17,
-     "g": 2,
-     "a": 3,
-     "min": 1648
-    },
-    "statsClub": "Séville FC",
-    "valDelta": 0.0,
-    "valSince": "30/08/2026"
-   },
-   {
     "n": "19",
     "p": "Fábio Baldé",
     "pos": "AiG",
@@ -7975,7 +7986,7 @@
      "s": 3,
      "g": 1,
      "a": 1,
-     "min": 515
+     "min": 514
     },
     "statsClub": "Hambourg",
     "valDelta": 0.0,
@@ -8011,7 +8022,7 @@
      "s": 16,
      "g": 2,
      "a": 4,
-     "min": 1732
+     "min": 1731
     },
     "statsClub": "RC Strasbourg",
     "valDelta": 0.0,
@@ -8729,7 +8740,7 @@
      "s": 27,
      "g": 1,
      "a": 3,
-     "min": 2529
+     "min": 2528
     },
     "statsClub": "Hajduk Split",
     "valDelta": 0.0,
@@ -8801,7 +8812,7 @@
      "s": 36,
      "g": 5,
      "a": 9,
-     "min": 2978
+     "min": 2979
     },
     "statsClub": "Viborg FF",
     "valDelta": 0.0,
@@ -9295,7 +9306,7 @@
      "s": 25,
      "g": 10,
      "a": 5,
-     "min": 1949
+     "min": 1950
     },
     "statsClub": "FC Lorient",
     "valDelta": 0.0,
@@ -9645,7 +9656,7 @@
      "s": 11,
      "g": 0,
      "a": 0,
-     "min": 774
+     "min": 775
     },
     "statsClub": "RB Salzbourg",
     "valDelta": 0.0,
@@ -11146,24 +11157,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "7",
-    "p": "Josué Casimir",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 24,
-    "val": 3.0,
-    "stats": {
-     "m": 31,
-     "s": 16,
-     "g": 1,
-     "a": 0,
-     "min": 1521
-    },
-    "statsClub": "AJ Auxerre",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "11",
     "p": "Eros Maddy",
     "pos": "AiD",
@@ -11549,7 +11542,7 @@
      "s": 23,
      "g": 1,
      "a": 2,
-     "min": 2081
+     "min": 2080
     },
     "statsClub": "OGC Nice",
     "valDelta": 0.0,
@@ -11615,7 +11608,7 @@
      "s": 32,
      "g": 10,
      "a": 3,
-     "min": 2742
+     "min": 2741
     },
     "statsClub": "OGC Nice",
     "valDelta": 0.0,
@@ -11935,7 +11928,7 @@
      "s": 6,
      "g": 0,
      "a": 0,
-     "min": 542
+     "min": 541
     },
     "statsClub": "ESTAC Troyes",
     "valDelta": 0.0,
@@ -12007,7 +12000,7 @@
      "s": 32,
      "g": 2,
      "a": 2,
-     "min": 2956
+     "min": 2957
     },
     "statsClub": "Zira FK",
     "valDelta": 0.0,
