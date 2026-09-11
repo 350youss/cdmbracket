@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-10T20:36:44",
- "sig": "1e56daa0979d33e157d5f6cd6f3c3c2b",
+ "updated": "2026-09-11T18:57:40",
+ "sig": "a3300bfb81818fd016ed531b8d4b2627",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -38,12 +38,14 @@
   "FCN|in|Ryad Hachem|Red Star FC": "2026-08-27",
   "FCN|in|Amin Cherni|Göztepe": "2026-09-01",
   "FCN|in|Saïdou Sow|R. Strasbourg": "2026-08-18",
+  "FCN|in|Patrik Carlgren|Sans club": "2026-09-11",
   "FCN|out|Matthis Abline|Monaco": "2026-08-18",
   "FCN|out|Herba Guirassy|BSC Young Boys": "2026-08-31",
   "FCN|out|Alban Lafont|Amed SK": "2026-08-18",
   "FCN|out|Chidozie Awaziem|Konyaspor": "2026-08-18",
   "FCN|out|Yassine Benhattab|Montpellier": "2026-09-04",
   "FCN|out|Mostafa Mohamed|Konyaspor": "2026-09-01",
+  "FCN|out|Deiver Machado|Rodina Moscow": "2026-09-11",
   "FCN|out|Anthony Lopes|Angers SCO": "2026-08-18",
   "FCN|out|Francis Coquelin|Stade Lavallois": "2026-08-18",
   "FCN|out|Mathieu Acapandié|Hajduk Split": "2026-08-18",
@@ -53,7 +55,6 @@
   "FCN|out|Jean-Kévin Duverne|Omonia Nicosie": "2026-08-18",
   "FCN|out|Bahmed Deuff|Royal Antwerp": "2026-09-04",
   "FCN|out|Hugo Lamy|VFC La Roche": "2026-09-01",
-  "FCN|out|Deiver Machado|Sans club": "2026-08-18",
   "FCN|out|Patrik Carlgren|Sans club": "2026-08-18",
   "REIMS|in|Samuel Kotto|La Gantoise": "2026-08-18",
   "REIMS|in|Tom Ritzy Hülsmann|TSV Hartberg": "2026-08-18",
@@ -731,6 +732,15 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Patrik Carlgren",
+     "age": 34,
+     "pos": "GdB",
+     "club": "Sans club",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-11"
     }
    ],
    "dep": [
@@ -787,6 +797,15 @@
      "type": "paid",
      "val": 0.75,
      "fs": "2026-09-01"
+    },
+    {
+     "p": "Deiver Machado",
+     "age": 33,
+     "pos": "ArG",
+     "club": "Rodina Moscow",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-11"
     },
     {
      "p": "Anthony Lopes",
@@ -868,15 +887,6 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-09-01"
-    },
-    {
-     "p": "Deiver Machado",
-     "age": 32,
-     "pos": "ArG",
-     "club": "Sans club",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
     },
     {
      "p": "Patrik Carlgren",
@@ -4276,6 +4286,14 @@
     "grp": "GK",
     "age": 33,
     "val": 0.7
+   },
+   {
+    "n": "",
+    "p": "Patrik Carlgren",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 34,
+    "val": 0.4
    },
    {
     "n": "16",
