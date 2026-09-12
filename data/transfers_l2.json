@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-11T18:57:40",
- "sig": "a3300bfb81818fd016ed531b8d4b2627",
+ "updated": "2026-09-12T18:31:03",
+ "sig": "c399a24d1410f8b670765439aeaa509c",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -221,6 +221,7 @@
   "USLD|in|Khalil Ayari|PSG": "2026-08-18",
   "USLD|in|Ousmane Touré|LOSC Lille": "2026-08-18",
   "USLD|in|Franck Atoen|Samsunspor": "2026-08-18",
+  "USLD|in|M'Baye Niang|Sans club": "2026-09-12",
   "USLD|in|Gaëtan Robail|Sans club": "2026-09-07",
   "USLD|in|Felipe Abner|Sans club": "2026-09-05",
   "USLD|out|Antoine Sekongo|Samsunspor": "2026-08-18",
@@ -260,6 +261,7 @@
   "GF38|out|Maxime Pattier|US Saint-Malo": "2026-08-18",
   "GF38|out|Stone Mambo|FC Noah": "2026-08-18",
   "GF38|out|Shaquil Delos|La Louvière": "2026-08-18",
+  "GF38|out|Mamady Bangré|Sumqayit": "2026-09-12",
   "GF38|out|Mathieu Mion|US Boulogne": "2026-09-02",
   "GF38|out|Evans Maurin|Casa Pia": "2026-08-31",
   "GF38|out|Allan Tchaptchet|RE Virton": "2026-08-18",
@@ -1441,7 +1443,7 @@
     {
      "p": "Daylam Meddah",
      "age": 23,
-     "pos": "DC",
+     "pos": "MDC",
      "club": "Pau FC",
      "type": "none",
      "val": 0.0,
@@ -1595,7 +1597,7 @@
     {
      "p": "Jean Grillot",
      "age": 20,
-     "pos": "DC",
+     "pos": "MDC",
      "club": "G. Bordeaux",
      "type": "free",
      "val": 0.0,
@@ -2284,7 +2286,7 @@
     {
      "p": "Daylam Meddah",
      "age": 23,
-     "pos": "DC",
+     "pos": "MDC",
      "club": "Montpellier",
      "type": "none",
      "val": 0.0,
@@ -2459,6 +2461,15 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "M'Baye Niang",
+     "age": 31,
+     "pos": "AC",
+     "club": "Sans club",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-12"
     },
     {
      "p": "Gaëtan Robail",
@@ -2824,6 +2835,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Mamady Bangré",
+     "age": 25,
+     "pos": "AiD",
+     "club": "Sumqayit",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-12"
+    },
+    {
      "p": "Mathieu Mion",
      "age": 25,
      "pos": "ArG",
@@ -2888,7 +2908,7 @@
     {
      "p": "Brandon Bokangu",
      "age": 26,
-     "pos": "AiD",
+     "pos": "AC",
      "club": "AS Nancy",
      "type": "paid",
      "val": 0.1,
@@ -3107,7 +3127,7 @@
     {
      "p": "Brandon Bokangu",
      "age": 26,
-     "pos": "AiD",
+     "pos": "AC",
      "club": "EA Guingamp",
      "type": "paid",
      "val": 0.1,
@@ -4288,7 +4308,7 @@
     "val": 0.7
    },
    {
-    "n": "",
+    "n": "30",
     "p": "Patrik Carlgren",
     "pos": "GdB",
     "grp": "GK",
@@ -4496,7 +4516,7 @@
     "val": 2.0
    },
    {
-    "n": "",
+    "n": "27",
     "p": "Thomas Robinet",
     "pos": "AC",
     "grp": "ATT",
@@ -4844,6 +4864,14 @@
     "val": 2.0
    },
    {
+    "n": "21",
+    "p": "Jahyann Pandore",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 18,
+    "val": 0.2
+   },
+   {
     "n": "10",
     "p": "Téji Savanier",
     "pos": "MO",
@@ -4908,7 +4936,7 @@
     "val": 0.9
    },
    {
-    "n": "",
+    "n": "33",
     "p": "Abdourahmane Mbodji",
     "pos": "AC",
     "grp": "ATT",
@@ -4966,14 +4994,6 @@
     "val": 2.0
    },
    {
-    "n": "27",
-    "p": "Daylam Meddah",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 23,
-    "val": 1.5
-   },
-   {
     "n": "15",
     "p": "Julien Laporte",
     "pos": "DC",
@@ -5028,6 +5048,14 @@
     "grp": "DEF",
     "age": 21,
     "val": 0.05
+   },
+   {
+    "n": "27",
+    "p": "Daylam Meddah",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 23,
+    "val": 1.5
    },
    {
     "n": "77",
@@ -5192,14 +5220,6 @@
     "val": 0.2
    },
    {
-    "n": "5",
-    "p": "Jean Grillot",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.2
-   },
-   {
     "n": "45",
     "p": "Matys Donavin",
     "pos": "DC",
@@ -5256,6 +5276,14 @@
     "val": 0.25
    },
    {
+    "n": "5",
+    "p": "Jean Grillot",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 20,
+    "val": 0.2
+   },
+   {
     "n": "2",
     "p": "Abdellah Baallal",
     "pos": "MC",
@@ -5264,7 +5292,7 @@
     "val": 1.8
    },
    {
-    "n": "",
+    "n": "26",
     "p": "Rominigue Kouamé",
     "pos": "MC",
     "grp": "MID",
@@ -5296,7 +5324,7 @@
     "val": 0.5
    },
    {
-    "n": "",
+    "n": "7",
     "p": "Florian Bianchini",
     "pos": "AiD",
     "grp": "ATT",
@@ -5708,7 +5736,7 @@
     "val": 0.25
    },
    {
-    "n": "",
+    "n": "10",
     "p": "Mathis Saka",
     "pos": "MO",
     "grp": "MID",
@@ -5716,7 +5744,7 @@
     "val": 0.5
    },
    {
-    "n": "",
+    "n": "21",
     "p": "Kelian Nsona",
     "pos": "AiG",
     "grp": "ATT",
@@ -5732,7 +5760,7 @@
     "val": 0.4
    },
    {
-    "n": "",
+    "n": "27",
     "p": "Marco Essimi",
     "pos": "AiD",
     "grp": "ATT",
@@ -5828,14 +5856,6 @@
     "grp": "DEF",
     "age": 21,
     "val": 0.3
-   },
-   {
-    "n": "38",
-    "p": "Lucas Rakotozafy",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.0
    },
    {
     "n": "97",
@@ -6160,6 +6180,14 @@
     "val": 1.0
    },
    {
+    "n": "99",
+    "p": "M'Baye Niang",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 31,
+    "val": 0.8
+   },
+   {
     "n": "94",
     "p": "Enzo Mayilla",
     "pos": "AC",
@@ -6250,7 +6278,7 @@
     "val": 1.2
    },
    {
-    "n": "",
+    "n": "97",
     "p": "Yvann Maçon",
     "pos": "ArD",
     "grp": "DEF",
@@ -6368,14 +6396,6 @@
     "grp": "ATT",
     "age": 27,
     "val": 0.6
-   },
-   {
-    "n": "11",
-    "p": "Mamady Bangré",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 25,
-    "val": 0.35
    },
    {
     "n": "92",
@@ -6628,20 +6648,20 @@
     "val": 0.0
    },
    {
-    "n": "22",
-    "p": "Brandon Bokangu",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 26,
-    "val": 0.5
-   },
-   {
     "n": "18",
     "p": "Stanislas Kielt",
     "pos": "AC",
     "grp": "ATT",
     "age": 24,
     "val": 0.7
+   },
+   {
+    "n": "22",
+    "p": "Brandon Bokangu",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 26,
+    "val": 0.5
    }
   ],
   "NANCY": [
@@ -6750,7 +6770,7 @@
     "val": 0.8
    },
    {
-    "n": "19",
+    "n": "6",
     "p": "Kouroufia Kébé",
     "pos": "MDC",
     "grp": "MID",
@@ -7800,6 +7820,14 @@
     "val": 0.3
    },
    {
+    "n": "42",
+    "p": "Ylan Aka",
+    "pos": "ArG",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.07
+   },
+   {
     "n": "",
     "p": "Tom Meynadier",
     "pos": "ArD",
@@ -7870,14 +7898,6 @@
     "grp": "MID",
     "age": 31,
     "val": 0.15
-   },
-   {
-    "n": "42",
-    "p": "Ylan Aka",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 19,
-    "val": 0.07
    },
    {
     "n": "17",
