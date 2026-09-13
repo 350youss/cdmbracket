@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-10T20:39:38",
- "sig": "67c3c94dc1b9589d96a1311c103b57ca",
+ "updated": "2026-09-13T11:03:53",
+ "sig": "11bf9e2d6f83643b5b05e36567520cf8",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -234,13 +234,13 @@
   "PFC|out|Lohann Doucet|Vit. Guimarães": "2026-08-09",
   "PFC|out|Julien Lopez|AS Cannes": "2026-08-09",
   "PFC|out|Ylan El Hadary|AS Nancy": "2026-08-27",
-  "PFC|out|Ciro Immobile|Fin de carrière": "2026-08-15",
   "PFC|out|Pierre-Yves Hamel|Sans club": "2026-08-09",
   "PFC|out|Lamine Gueye|Sans club": "2026-08-09",
   "PFC|out|Timothée Kolodziejczak|Sans club": "2026-08-09",
   "PFC|out|Sofiane Alakouch|Sans club": "2026-08-09",
   "PFC|out|Rémy Riou|Sans club": "2026-08-09",
   "PFC|out|Gabriel Oualengbe|Sans club": "2026-08-09",
+  "PFC|out|Ciro Immobile|Fin de carrière": "2026-08-15",
   "SB29|in|Giovani Versini|Pau FC": "2026-09-02",
   "SB29|in|Gautier Lloris|Le Havre AC": "2026-08-12",
   "SB29|in|Joseph Nonge|Kocaelispor": "2026-08-09",
@@ -320,6 +320,7 @@
   "AJA|out|Francisco Sierralta|Piast Gliwice": "2026-09-09",
   "AJA|out|Lasso Coulibaly|Viborg FF": "2026-09-04",
   "AJA|out|Théo De Percin|SC Bastia": "2026-08-09",
+  "AJA|out|Eros Maddy|Sans club": "2026-09-13",
   "AJA|out|Tom Negrel|Sans club": "2026-08-09",
   "AJA|out|Nathan Buayi-Kiala|Sans club": "2026-08-09",
   "OGCN|in|Gauthier Hein|FC Metz": "2026-08-09",
@@ -2814,16 +2815,6 @@
      "fs": "2026-08-27"
     },
     {
-     "p": "Ciro Immobile",
-     "age": 36,
-     "pos": "AC",
-     "club": "Fin de carrière",
-     "club_id": null,
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-15"
-    },
-    {
      "p": "Pierre-Yves Hamel",
      "age": 32,
      "pos": "AC",
@@ -2882,6 +2873,16 @@
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Ciro Immobile",
+     "age": 36,
+     "pos": "AC",
+     "club": "Fin de carrière",
+     "club_id": null,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-08-15"
     }
    ]
   },
@@ -3712,6 +3713,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Eros Maddy",
+     "age": 25,
+     "pos": "AiD",
+     "club": "Sans club",
+     "club_id": 515,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-13"
     },
     {
      "p": "Tom Negrel",
@@ -5161,24 +5172,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "38",
-    "p": "Mezian Mesloub",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 16,
-    "val": 0.5,
-    "stats": {
-     "m": 1,
-     "s": 0,
-     "g": 1,
-     "a": 0,
-     "min": 11
-    },
-    "statsClub": "RC Lens",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "9",
     "p": "Thorgan Hazard",
     "pos": "MO",
@@ -5193,6 +5186,24 @@
      "min": 3473
     },
     "statsClub": "RSC Anderlecht",
+    "valDelta": 0.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "38",
+    "p": "Mezian Mesloub",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 16,
+    "val": 0.5,
+    "stats": {
+     "m": 1,
+     "s": 0,
+     "g": 1,
+     "a": 0,
+     "min": 11
+    },
+    "statsClub": "RC Lens",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -5449,6 +5460,24 @@
     "statsClub": "Séville FC",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "38",
+    "p": "Maxima Goffi",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 18,
+    "val": 1.0,
+    "stats": {
+     "m": 3,
+     "s": 2,
+     "g": 0,
+     "a": 0,
+     "min": 218
+    },
+    "statsClub": "LOSC Lille",
+    "valDelta": 0.0,
+    "valSince": "12/09/2026"
    },
    {
     "n": "15",
@@ -8961,7 +8990,7 @@
     "p": "Jacen Russell-Rowe",
     "pos": "AC",
     "grp": "ATT",
-    "age": 23,
+    "age": 24,
     "val": 3.0,
     "stats": {
      "m": 15,
@@ -10933,7 +10962,7 @@
     "p": "Ackah-Tidiane Zoukrou",
     "pos": "ArG",
     "grp": "DEF",
-    "age": 17,
+    "age": 18,
     "val": 0.0,
     "stats": null,
     "statsClub": null,
@@ -11153,24 +11182,6 @@
     "val": 0.4,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "11",
-    "p": "Eros Maddy",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 25,
-    "val": 0.15,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "AJ Auxerre",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -12265,7 +12276,7 @@
     "p": "Raúl Torrente",
     "pos": "DC",
     "grp": "DEF",
-    "age": 24,
+    "age": 25,
     "val": 2.5,
     "stats": {
      "m": 1,
@@ -12388,11 +12399,11 @@
     "age": 20,
     "val": 0.4,
     "stats": {
-     "m": 6,
+     "m": 7,
      "s": 4,
      "g": 0,
      "a": 0,
-     "min": 361
+     "min": 364
     },
     "statsClub": "Coritiba FC",
     "valDelta": 0.0,
@@ -15967,6 +15978,12 @@
    {
     "d": "09/09/2026",
     "v": 0.0
+   }
+  ],
+  "1306455": [
+   {
+    "d": "12/09/2026",
+    "v": 1.0
    }
   ]
  }
