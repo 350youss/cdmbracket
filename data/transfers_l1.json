@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-13T11:03:53",
- "sig": "11bf9e2d6f83643b5b05e36567520cf8",
+ "updated": "2026-09-14T23:03:56",
+ "sig": "a123e13ddcfb063063d6d01117313038",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -291,13 +291,13 @@
   "HAC|out|Gautier Lloris|Stade Brestois": "2026-08-12",
   "HAC|out|Kenny Quetant|Werder Brême": "2026-08-09",
   "HAC|out|Étienne Youté Kinkoué|Lausanne-Sport": "2026-09-04",
+  "HAC|out|Sofiane Boufal|Al-Ittihad": "2026-09-14",
   "HAC|out|Loïc Nego|Omonia Nicosie": "2026-08-09",
   "HAC|out|Fodé Doucouré|FC Nantes": "2026-09-01",
   "HAC|out|Godson Kyeremeh|Red Star FC": "2026-09-01",
   "HAC|out|Mokrane Bentoumi|Roda JC": "2026-08-27",
   "HAC|out|Noam Obougou|AS Nancy": "2026-08-12",
   "HAC|out|Abdoulaye Touré|Sans club": "2026-08-09",
-  "HAC|out|Sofiane Boufal|Sans club": "2026-08-09",
   "AJA|in|Arthur Piedfort|KVC Westerlo": "2026-08-09",
   "AJA|in|Danny Namaso|FC Porto": "2026-08-09",
   "AJA|in|Christ Makosso|Luton": "2026-08-09",
@@ -3415,6 +3415,16 @@
      "fs": "2026-09-04"
     },
     {
+     "p": "Sofiane Boufal",
+     "age": 32,
+     "pos": "AiG",
+     "club": "Al-Ittihad",
+     "club_id": 13505,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-14"
+    },
+    {
      "p": "Loïc Nego",
      "age": 35,
      "pos": "ArD",
@@ -3468,16 +3478,6 @@
      "p": "Abdoulaye Touré",
      "age": 32,
      "pos": "MDC",
-     "club": "Sans club",
-     "club_id": 515,
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-09"
-    },
-    {
-     "p": "Sofiane Boufal",
-     "age": 32,
-     "pos": "MO",
      "club": "Sans club",
      "club_id": 515,
      "type": "none",
@@ -9606,7 +9606,7 @@
     "p": "Justin Bourgault",
     "pos": "ArG",
     "grp": "DEF",
-    "age": 20,
+    "age": 21,
     "val": 1.0,
     "stats": {
      "m": 2,
