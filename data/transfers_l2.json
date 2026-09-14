@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-12T18:31:03",
- "sig": "c399a24d1410f8b670765439aeaa509c",
+ "updated": "2026-09-14T21:31:03",
+ "sig": "92b710a7cbeef5a2cd68df7ece55434b",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -24,6 +24,7 @@
   "ASSE|out|Aïmen Moueffek|Cádiz CF": "2026-08-31",
   "ASSE|out|Pierre Ekwah|AJ Auxerre": "2026-08-27",
   "ASSE|out|Luan Gadegbeku|Pau FC": "2026-08-18",
+  "ASSE|out|Strahinja Stojkovic|OFK Beograd": "2026-09-14",
   "ASSE|out|Jebryl Sahraoui|Aubagne Air Bel": "2026-08-18",
   "ASSE|out|Axel Dodote|Pau FC": "2026-08-18",
   "FCN|in|Killian Corredor|Darmstadt 98": "2026-08-18",
@@ -82,6 +83,7 @@
   "REIMS|out|Malcolm Jeng|FC Groningen": "2026-08-18",
   "REIMS|out|Adama Bojang|R Charleroi SC": "2026-08-18",
   "REIMS|out|Pape Sissoko|SV Ried": "2026-08-18",
+  "REIMS|out|Soumaïla Sylla|Nîmes Olympique": "2026-09-14",
   "REIMS|out|Nicolas Pallois|Sans club": "2026-08-18",
   "FCM|in|Cristian Devenish|Avs FS": "2026-08-18",
   "FCM|in|Idris Mohamed|Le Puy FC": "2026-08-18",
@@ -317,6 +319,7 @@
   "ANNECY|out|Valentin Jacob|GFA Rumilly Val": "2026-08-18",
   "ANNECY|out|Aymerick Nedelec|Chambéry SF": "2026-08-18",
   "ANNECY|out|Abdel Hbouch|US Boulogne": "2026-08-18",
+  "ANNECY|out|Nolan Ferro|Javor-Matis": "2026-09-14",
   "ANNECY|out|Cédric Makutungu|AS Cannes": "2026-08-18",
   "ANNECY|out|Ranjan Neelakandan|FC Vaduz": "2026-08-18",
   "ANNECY|out|Vincent Pajot|Fin de carrière": "2026-08-18",
@@ -600,6 +603,15 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Strahinja Stojkovic",
+     "age": 19,
+     "pos": "ArD",
+     "club": "OFK Beograd",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-14"
     },
     {
      "p": "Jebryl Sahraoui",
@@ -1142,6 +1154,15 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
+    },
+    {
+     "p": "Soumaïla Sylla",
+     "age": 22,
+     "pos": "GdB",
+     "club": "Nîmes Olympique",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-14"
     },
     {
      "p": "Nicolas Pallois",
@@ -3369,6 +3390,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Nolan Ferro",
+     "age": 20,
+     "pos": "MC",
+     "club": "Javor-Matis",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-14"
+    },
+    {
      "p": "Cédric Makutungu",
      "age": 28,
      "pos": "ArG",
@@ -4186,14 +4216,6 @@
     "val": 2.0
    },
    {
-    "n": "2",
-    "p": "Strahinja Stojkovic",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.7
-   },
-   {
     "n": "16",
     "p": "Tamar Svetlin",
     "pos": "MDC",
@@ -4550,14 +4572,6 @@
     "val": 0.1
    },
    {
-    "n": "94",
-    "p": "Soumaïla Sylla",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 22,
-    "val": 0.07
-   },
-   {
     "n": "22",
     "p": "Samuel Kotto",
     "pos": "DC",
@@ -4908,7 +4922,7 @@
     "p": "Hamza Kadamani",
     "pos": "AiG",
     "grp": "ATT",
-    "age": 16,
+    "age": 17,
     "val": 0.1
    },
    {
@@ -7042,14 +7056,6 @@
     "grp": "MID",
     "age": 19,
     "val": 0.3
-   },
-   {
-    "n": "24",
-    "p": "Nolan Ferro",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 20,
-    "val": 0.0
    },
    {
     "n": "22",
