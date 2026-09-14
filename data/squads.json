@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-14T09:00:52",
- "sig": "c0c8c0434b8332d976cb2137b88f5ec9",
+ "updated": "2026-09-14T15:00:53",
+ "sig": "19ef10ba583bd4bef7671d94ee206b2e",
  "squads": {
   "FCB": [
    {
@@ -5934,6 +5934,24 @@
     "valSince": "14/09/2026"
    },
    {
+    "n": "17",
+    "p": "Andy Diouf",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 23,
+    "val": 20.0,
+    "stats": {
+     "m": 29,
+     "s": 7,
+     "g": 4,
+     "a": 0,
+     "min": 823
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "14/09/2026"
+   },
+   {
     "n": "20",
     "p": "Hakan Çalhanoğlu",
     "pos": "MDC",
@@ -6048,24 +6066,6 @@
      "g": 1,
      "a": 3,
      "min": 2253
-    },
-    "statsClub": "",
-    "valDelta": 0.0,
-    "valSince": "14/09/2026"
-   },
-   {
-    "n": "17",
-    "p": "Andy Diouf",
-    "pos": "MD",
-    "grp": "MID",
-    "age": 23,
-    "val": 20.0,
-    "stats": {
-     "m": 29,
-     "s": 7,
-     "g": 4,
-     "a": 0,
-     "min": 823
     },
     "statsClub": "",
     "valDelta": 0.0,
