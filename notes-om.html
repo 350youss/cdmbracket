@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
 <style>
 :root{
   --bg:#0a0b0d; --s1:#131417; --s2:#191a1e; --s3:#1f2025;
@@ -46,6 +48,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);overflow-x:hi
   border-radius:999px;padding:7px 14px;font-family:var(--body);font-size:12px;color:var(--sub);}
 .leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .leg-dot.chat{background:#a78bfa;} .leg-dot.moi{background:var(--om);} .leg-dot.lequipe{background:var(--gold,#d1a94e);}
+.leg-dot.site{background:var(--good);}
 
 .matchbar{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .mchip{font-family:var(--body);font-weight:700;font-size:12.5px;color:var(--sub);background:var(--s1);
@@ -60,6 +63,47 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);overflow-x:hi
 .matchhead .mh-title{font-family:var(--title);font-weight:700;font-size:18px;color:#fff;}
 .matchhead .mh-meta{margin-top:3px;font-family:var(--body);font-size:12px;color:var(--sub);}
 .matchhead .mh-score{font-family:var(--mono);font-weight:700;font-size:22px;color:var(--om);}
+.matchhead .mh-right{display:flex;align-items:center;gap:16px;margin-left:auto;}
+.btn-add-notes{font-family:var(--body);font-weight:700;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;
+  background:var(--good);border:1px solid var(--good);color:#04240f;border-radius:999px;padding:10px 18px;cursor:pointer;
+  white-space:nowrap;transition:opacity .15s var(--ease);}
+.btn-add-notes:hover{opacity:.88;}
+.btn-add-notes.mine{background:var(--s2);border-color:var(--line-soft);color:var(--txt);}
+
+.notes-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:220;
+  display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);}
+.notes-overlay.show{opacity:1;pointer-events:auto;}
+@media (min-width:640px){.notes-overlay{align-items:center;}}
+.notes-sheet{background:var(--s2);border:1px solid var(--line-soft);border-top:3px solid var(--good);
+  border-radius:18px 18px 0 0;width:100%;max-width:460px;max-height:82vh;display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(16px);transition:transform .2s var(--ease);}
+@media (min-width:640px){.notes-sheet{border-radius:18px;}}
+.notes-overlay.show .notes-sheet{transform:translateY(0);}
+.notes-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);}
+.notes-head span{font-family:var(--title);font-weight:600;font-size:16px;color:#fff;}
+.notes-close{background:transparent;border:none;color:var(--sub);font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;}
+.notes-close:hover{color:#fff;}
+.notes-body{overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;}
+.notes-pseudo{display:flex;flex-direction:column;gap:6px;}
+.notes-pseudo label{font-family:var(--body);font-size:11.5px;color:var(--sub);}
+.notes-pseudo input{background:var(--s1);border:1.5px solid var(--line-soft);border-radius:8px;
+  padding:10px 12px;font-family:var(--body);font-size:14px;color:#fff;}
+.notes-pseudo input:focus{outline:none;border-color:var(--good);}
+.notes-row{display:flex;align-items:center;gap:10px;}
+.notes-row .player-cell{flex:1;min-width:0;}
+.notes-row input[type=number]{width:64px;flex-shrink:0;background:var(--s1);border:1.5px solid var(--line-soft);
+  border-radius:8px;padding:8px 10px;font-family:var(--mono);font-size:14px;color:#fff;text-align:center;}
+.notes-row input[type=number]:focus{outline:none;border-color:var(--good);}
+.notes-foot{padding:14px 20px 20px;border-top:1px solid var(--line);}
+.notes-submit{width:100%;font-family:var(--body);font-weight:700;font-size:13px;text-transform:uppercase;
+  letter-spacing:.03em;background:var(--good);color:#04240f;border:none;border-radius:8px;padding:13px;cursor:pointer;}
+.notes-submit:hover{opacity:.9;}
+.notes-hint{font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.5;}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--s3);
+  color:var(--txt);border:1px solid var(--line-soft);border-radius:999px;padding:13px 22px;font-family:var(--body);font-weight:500;
+  font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:230;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 .tblwrap{margin-top:22px;background:var(--s1);border:1px solid var(--line);border-radius:18px;overflow-x:auto;}
 table{width:100%;border-collapse:collapse;min-width:600px;}
@@ -127,13 +171,14 @@ td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px
   <div class="hero">
     <div class="eyebrow">Olympique de Marseille &middot; Saison 2026/27</div>
     <h1>Notes des joueurs</h1>
-    <p class="sub">Apr&egrave;s chaque match, trois regards sur la performance des joueurs de l'OM : <b>le chat Twitch</b>, <b>350</b> et <b>L'&Eacute;quipe</b>. Trie le tableau en cliquant sur une colonne.</p>
+    <p class="sub">Apr&egrave;s chaque match, quatre regards sur la performance des joueurs de l'OM : <b>le chat Twitch</b>, <b>350</b>, <b>L'&Eacute;quipe</b> et <b>le site</b> (toi). Trie le tableau en cliquant sur une colonne.</p>
   </div>
 
   <div class="legend">
     <span class="leg-chip"><span class="leg-dot chat"></span>Chat Twitch</span>
     <span class="leg-chip"><span class="leg-dot moi"></span>350</span>
     <span class="leg-chip"><span class="leg-dot lequipe"></span>L'&Eacute;quipe</span>
+    <span class="leg-chip"><span class="leg-dot site"></span>Site (toi)</span>
   </div>
 
   <div class="matchbar" id="matchbar"></div>
@@ -147,6 +192,7 @@ td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px
           <th class="num" data-key="chat">Chat<span class="arrow">&#9660;</span></th>
           <th class="num" data-key="moi">350<span class="arrow">&#9660;</span></th>
           <th class="num" data-key="lequipe">L'&Eacute;quipe<span class="arrow">&#9660;</span></th>
+          <th class="num" data-key="site">Site<span class="arrow">&#9660;</span></th>
           <th class="num" data-key="avg">Moyenne<span class="arrow">&#9660;</span></th>
         </tr>
       </thead>
@@ -159,13 +205,45 @@ td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px
     <p>Envoie les notes du prochain match (chat, les tiennes, L'&Eacute;quipe) et elles arriveront ici, tri&eacute;es par joueur.</p>
   </div>
 
-  <div class="credit">Fait avec 350 &middot; donn&eacute;es saisies manuellement pour l'instant</div>
+  <div class="credit">Fait avec 350 &middot; chat/350/L'&Eacute;quipe saisis manuellement, notes du site en direct</div>
 </div>
+
+<div class="notes-overlay" id="notes-overlay">
+  <div class="notes-sheet">
+    <div class="notes-head"><span id="notes-title">Mes notes</span><button class="notes-close" id="notes-close">&times;</button></div>
+    <div class="notes-body" id="notes-body"></div>
+    <div class="notes-foot">
+      <button class="notes-submit" id="notes-submit">Enregistrer mes notes</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 const POS_CLASS = {GdB:'pos-gk',ArD:'pos-def',ArG:'pos-def',DC:'pos-def',MDC:'pos-mid',MC:'pos-mid',MO:'pos-mid',MD:'pos-mid',MG:'pos-mid',AiD:'pos-att',AiG:'pos-att',AC:'pos-att',SA:'pos-att'};
 
+const firebaseConfig = {
+  apiKey: "AIzaSyB8F5baV8T6qq4gWiz0cbAkhAYli4Lyips",
+  authDomain: "predi-l1.firebaseapp.com",
+  projectId: "predi-l1",
+  storageBucket: "predi-l1.firebasestorage.app",
+  messagingSenderId: "15010416982",
+  appId: "1:15010416982:web:1e2b1834ffac4f2607aef7",
+  measurementId: "G-FV2JC1TZ9Y"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const SITE_COLLECTION = 'notes-om-site';
+
+function normalizePseudo(p){
+  return p.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+let PSEUDO = '';
+try{ PSEUDO = localStorage.getItem('predis-indiv:pseudo') || ''; }catch(e){}
+
 let DATA = null;
+let SITE_DOCS = []; // [{matchId, pseudo, ratings:{player:val}}]
 let currentMatchId = 'all'; // 'all' = agrégat saison
 let sortKey = 'avg';
 let sortDir = 'desc';
@@ -188,6 +266,23 @@ function avg(arr){
   return vals.reduce((a,b) => a+b, 0) / vals.length;
 }
 
+async function loadSiteNotes(){
+  try{
+    const snap = await db.collection(SITE_COLLECTION).get();
+    SITE_DOCS = snap.docs.map(d => d.data());
+  }catch(e){
+    console.error('site notes load', e);
+    SITE_DOCS = [];
+  }
+}
+
+function siteValuesFor(player, matchId){
+  return SITE_DOCS
+    .filter(d => matchId == null || d.matchId === matchId)
+    .map(d => d.ratings && d.ratings[player])
+    .filter(v => v != null);
+}
+
 async function load(){
   try{
     const res = await fetch('data/notes-om.json', {cache:'no-store'});
@@ -196,6 +291,7 @@ async function load(){
     console.error('notes-om load', e);
     DATA = {matches: []};
   }
+  await loadSiteNotes();
   buildMatchbar();
   render();
 }
@@ -233,12 +329,22 @@ function rowsForCurrentView(){
     });
     return Object.values(byPlayer).map(p => {
       const chat = avg(p.chatList), moi = avg(p.moiList), lequipe = avg(p.lequipeList);
-      return {player: p.player, pos: p.pos, chat, moi, lequipe, avg: avg([chat, moi, lequipe]), n: p.chatList.length};
+      const site = avg(siteValuesFor(p.player, null));
+      return {player: p.player, pos: p.pos, chat, moi, lequipe, site, avg: avg([chat, moi, lequipe, site]), n: p.chatList.length};
     });
   }
   const m = DATA.matches.find(x => x.id === currentMatchId);
   if (!m) return [];
-  return (m.ratings||[]).map(r => ({player: r.player, pos: r.pos, chat: r.chat, moi: r.moi, lequipe: r.lequipe, avg: avg([r.chat, r.moi, r.lequipe]), n: 1}));
+  return (m.ratings||[]).map(r => {
+    const site = avg(siteValuesFor(r.player, currentMatchId));
+    return {player: r.player, pos: r.pos, chat: r.chat, moi: r.moi, lequipe: r.lequipe, site, avg: avg([r.chat, r.moi, r.lequipe, site]), n: 1};
+  });
+}
+
+function mySiteDocFor(matchId){
+  if (!PSEUDO) return null;
+  const key = normalizePseudo(PSEUDO);
+  return SITE_DOCS.find(d => d.matchId === matchId && normalizePseudo(d.pseudo||'') === key) || null;
 }
 
 function renderMatchhead(){
@@ -248,13 +354,18 @@ function renderMatchhead(){
   if (!m){ el.classList.remove('show'); return; }
   const d = new Date(m.date);
   const dateTxt = d.toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+  const mine = mySiteDocFor(m.id);
   el.classList.add('show');
   el.innerHTML = `
     <div>
       <div class="mh-title">OM ${escapeHtml(m.home ? 'vs' : '@')} ${escapeHtml(m.opponent)}</div>
       <div class="mh-meta">${escapeHtml(m.competition||'')}${m.journee ? ' &middot; J'+m.journee : ''} &middot; ${dateTxt}</div>
     </div>
-    ${m.score ? `<div class="mh-score">${escapeHtml(m.score)}</div>` : ''}`;
+    <div class="mh-right">
+      ${m.score ? `<div class="mh-score">${escapeHtml(m.score)}</div>` : ''}
+      <button class="btn-add-notes${mine ? ' mine' : ''}" id="btn-add-notes" data-match="${escapeHtml(m.id)}">${mine ? 'Modifier mes notes' : 'Ajouter mes notes'}</button>
+    </div>`;
+  document.getElementById('btn-add-notes').addEventListener('click', () => openNotesForm(m.id));
 }
 
 function render(){
@@ -287,6 +398,7 @@ function render(){
       <td class="num ${rateClass(r.chat)}">${fmtNote(r.chat)}</td>
       <td class="num ${rateClass(r.moi)}">${fmtNote(r.moi)}</td>
       <td class="num ${rateClass(r.lequipe)}">${fmtNote(r.lequipe)}</td>
+      <td class="num ${rateClass(r.site)}">${fmtNote(r.site)}</td>
       <td class="num ${rateClass(r.avg)}">${fmtNote(r.avg)}</td>
     </tr>`).join('');
 
@@ -304,6 +416,86 @@ document.querySelectorAll('thead th').forEach(th => {
     else { sortKey = key; sortDir = key === 'player' ? 'asc' : 'desc'; }
     render();
   });
+});
+
+/* ---------- ajouter/modifier mes notes (visiteurs du site) ---------- */
+const notesOverlay = document.getElementById('notes-overlay');
+const notesBody = document.getElementById('notes-body');
+let notesMatchId = null;
+
+function openNotesForm(matchId){
+  notesMatchId = matchId;
+  const m = DATA.matches.find(x => x.id === matchId);
+  if (!m) return;
+  document.getElementById('notes-title').textContent = 'Mes notes · vs ' + m.opponent;
+  const mine = mySiteDocFor(matchId);
+  const existing = (mine && mine.ratings) || {};
+  const players = m.ratings.map(r => r.player);
+  notesBody.innerHTML = `
+    <div class="notes-pseudo">
+      <label for="notes-pseudo-input">Ton pseudo</label>
+      <input type="text" id="notes-pseudo-input" placeholder="Ton pseudo" maxlength="24" autocomplete="off" value="${escapeHtml(PSEUDO)}">
+    </div>
+    <p class="notes-hint">Note sur 10 (d&eacute;cimales possibles). Laisse vide les joueurs que tu ne veux pas noter.</p>
+    ${players.map(p => {
+      const rating = m.ratings.find(r => r.player === p);
+      const posBadge = rating && rating.pos ? `<span class="pos-badge ${POS_CLASS[rating.pos]||'pos-mid'}">${escapeHtml(rating.pos)}</span>` : '';
+      const val = existing[p] != null ? existing[p] : '';
+      return `<div class="notes-row">
+        <span class="player-cell">${posBadge}<span class="player-name">${escapeHtml(p)}</span></span>
+        <input type="number" step="0.5" min="0" max="10" data-player="${escapeHtml(p)}" value="${val}">
+      </div>`;
+    }).join('')}`;
+  notesOverlay.classList.add('show');
+}
+function closeNotesForm(){ notesOverlay.classList.remove('show'); }
+document.getElementById('notes-close').addEventListener('click', closeNotesForm);
+notesOverlay.addEventListener('click', e => { if (e.target === notesOverlay) closeNotesForm(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNotesForm(); });
+
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+document.getElementById('notes-submit').addEventListener('click', async () => {
+  const pseudoInput = document.getElementById('notes-pseudo-input');
+  const pseudo = pseudoInput.value.trim();
+  if (pseudo.length < 2){ pseudoInput.focus(); showToast('Entre un pseudo (2 caractères min).'); return; }
+  const ratings = {};
+  notesBody.querySelectorAll('input[type=number]').forEach(inp => {
+    const v = inp.value.trim();
+    if (v !== '') ratings[inp.dataset.player] = Math.max(0, Math.min(10, parseFloat(v.replace(',', '.'))));
+  });
+  if (!Object.keys(ratings).length){ showToast('Note au moins un joueur.'); return; }
+
+  PSEUDO = pseudo;
+  try{ localStorage.setItem('predis-indiv:pseudo', pseudo); }catch(e){}
+  const btn = document.getElementById('notes-submit');
+  const original = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Envoi...';
+  try{
+    const key = normalizePseudo(pseudo);
+    await db.collection(SITE_COLLECTION).doc(notesMatchId + '__' + key).set({
+      matchId: notesMatchId,
+      pseudo: pseudo,
+      ratings: ratings,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    SITE_DOCS = SITE_DOCS.filter(d => !(d.matchId === notesMatchId && normalizePseudo(d.pseudo||'') === key));
+    SITE_DOCS.push({matchId: notesMatchId, pseudo, ratings});
+    closeNotesForm();
+    showToast('Notes enregistrées, merci !');
+    render();
+  }catch(e){
+    console.error(e);
+    showToast('Échec de l\'envoi, réessaie.');
+  } finally {
+    btn.disabled = false; btn.textContent = original;
+  }
 });
 
 load();
