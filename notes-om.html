@@ -84,11 +84,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);overflow-x:hi
 .notes-close{background:transparent;border:none;color:var(--sub);font-size:22px;line-height:1;cursor:pointer;padding:4px 8px;}
 .notes-close:hover{color:#fff;}
 .notes-body{overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;}
-.notes-pseudo{display:flex;flex-direction:column;gap:6px;}
-.notes-pseudo label{font-family:var(--body);font-size:11.5px;color:var(--sub);}
-.notes-pseudo input{background:var(--s1);border:1.5px solid var(--line-soft);border-radius:8px;
-  padding:10px 12px;font-family:var(--body);font-size:14px;color:#fff;}
-.notes-pseudo input:focus{outline:none;border-color:var(--good);}
+.notes-hint b{color:#fff;}
 .notes-row{display:flex;align-items:center;gap:10px;}
 .notes-row .player-cell{flex:1;min-width:0;}
 .notes-row input[type=number]{width:64px;flex-shrink:0;background:var(--s1);border:1.5px solid var(--line-soft);
@@ -135,6 +131,25 @@ td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px
 
 .credit{margin-top:46px;font-family:var(--body);font-size:10.5px;color:var(--faint);text-align:center;
   letter-spacing:.05em;text-transform:uppercase;}
+
+.pseudo-gate{position:fixed;inset:0;background:var(--bg);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
+.pseudo-card{width:100%;max-width:400px;background:var(--s2);border:1px solid var(--line-soft);
+  border-top:3px solid var(--good);border-radius:18px;overflow:hidden;padding:28px 26px;}
+.pg-title{font-family:var(--title);font-weight:700;font-size:23px;color:#fff;line-height:1.1;letter-spacing:-.01em;}
+.pg-sub{margin-top:10px;font-family:var(--body);font-size:13.5px;color:var(--sub);line-height:1.5;}
+.pseudo-input{margin-top:20px;width:100%;background:var(--s1);border:1.5px solid var(--line-soft);border-radius:8px;
+  padding:12px 14px;font-family:var(--body);font-size:15px;color:#fff;}
+.pseudo-input::placeholder{color:var(--muted);}
+.pseudo-input:focus{outline:none;border-color:var(--good);}
+.pseudo-go{margin-top:12px;width:100%;font-family:var(--body);font-weight:700;font-size:13px;text-transform:uppercase;
+  letter-spacing:.03em;background:var(--good);color:#04240f;border:none;border-radius:8px;padding:13px;cursor:pointer;}
+.pseudo-go:hover{opacity:.9;}
+.pseudo-err{margin-top:10px;font-family:var(--body);font-size:12px;color:var(--bad);display:none;}
+.pseudo-bar{margin-top:20px;display:flex;align-items:center;gap:8px;font-family:var(--body);font-size:12.5px;color:var(--sub);}
+.pseudo-bar b{color:#fff;font-weight:700;}
+.pseudo-switch{background:transparent;border:none;color:var(--sub);text-decoration:underline;font-family:var(--body);
+  font-size:12.5px;cursor:pointer;padding:0;}
+.pseudo-switch:hover{color:#fff;}
 </style>
 </head>
 <body>
@@ -172,6 +187,9 @@ td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px
     <div class="eyebrow">Olympique de Marseille &middot; Saison 2026/27</div>
     <h1>Notes des joueurs</h1>
     <p class="sub">Apr&egrave;s chaque match, quatre regards sur la performance des joueurs de l'OM : <b>le chat Twitch</b>, <b>350</b>, <b>L'&Eacute;quipe</b> et <b>le site</b> (toi). Trie le tableau en cliquant sur une colonne.</p>
+    <div class="pseudo-bar" id="pseudo-bar" style="display:none">
+      Tes notes sont gard&eacute;es sous <b id="pseudo-name"></b> &middot; <button class="pseudo-switch" id="pseudo-switch">changer de pseudo</button>
+    </div>
   </div>
 
   <div class="legend">
@@ -220,6 +238,16 @@ td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px
 
 <div class="toast" id="toast"></div>
 
+<div class="pseudo-gate" id="pseudo-gate">
+  <div class="pseudo-card">
+    <div class="pg-title">Avant de noter</div>
+    <p class="pg-sub">Choisis un pseudo (le m&ecirc;me que sur Predis Indiv si tu en as un) pour retrouver tes notes &agrave; chaque visite.</p>
+    <input type="text" class="pseudo-input" id="pseudo-input" placeholder="Ton pseudo" maxlength="24" autocomplete="off">
+    <div class="pseudo-err" id="pseudo-err">Entre au moins 2 caract&egrave;res.</div>
+    <button class="pseudo-go" id="pseudo-go">C'est parti</button>
+  </div>
+</div>
+
 <script>
 const POS_CLASS = {GdB:'pos-gk',ArD:'pos-def',ArG:'pos-def',DC:'pos-def',MDC:'pos-mid',MC:'pos-mid',MO:'pos-mid',MD:'pos-mid',MG:'pos-mid',AiD:'pos-att',AiG:'pos-att',AC:'pos-att',SA:'pos-att'};
 
@@ -240,7 +268,6 @@ function normalizePseudo(p){
   return p.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 let PSEUDO = '';
-try{ PSEUDO = localStorage.getItem('predis-indiv:pseudo') || ''; }catch(e){}
 
 let DATA = null;
 let SITE_DOCS = []; // [{matchId, pseudo, ratings:{player:val}}]
@@ -432,11 +459,7 @@ function openNotesForm(matchId){
   const existing = (mine && mine.ratings) || {};
   const players = m.ratings.map(r => r.player);
   notesBody.innerHTML = `
-    <div class="notes-pseudo">
-      <label for="notes-pseudo-input">Ton pseudo</label>
-      <input type="text" id="notes-pseudo-input" placeholder="Ton pseudo" maxlength="24" autocomplete="off" value="${escapeHtml(PSEUDO)}">
-    </div>
-    <p class="notes-hint">Note sur 10 (d&eacute;cimales possibles). Laisse vide les joueurs que tu ne veux pas noter.</p>
+    <p class="notes-hint">Not&eacute; sous <b>${escapeHtml(PSEUDO)}</b>. Note sur 10 (d&eacute;cimales possibles), laisse vide les joueurs que tu ne veux pas noter.</p>
     ${players.map(p => {
       const rating = m.ratings.find(r => r.player === p);
       const posBadge = rating && rating.pos ? `<span class="pos-badge ${POS_CLASS[rating.pos]||'pos-mid'}">${escapeHtml(rating.pos)}</span>` : '';
@@ -462,9 +485,6 @@ function showToast(msg){
 }
 
 document.getElementById('notes-submit').addEventListener('click', async () => {
-  const pseudoInput = document.getElementById('notes-pseudo-input');
-  const pseudo = pseudoInput.value.trim();
-  if (pseudo.length < 2){ pseudoInput.focus(); showToast('Entre un pseudo (2 caractères min).'); return; }
   const ratings = {};
   notesBody.querySelectorAll('input[type=number]').forEach(inp => {
     const v = inp.value.trim();
@@ -472,21 +492,19 @@ document.getElementById('notes-submit').addEventListener('click', async () => {
   });
   if (!Object.keys(ratings).length){ showToast('Note au moins un joueur.'); return; }
 
-  PSEUDO = pseudo;
-  try{ localStorage.setItem('predis-indiv:pseudo', pseudo); }catch(e){}
   const btn = document.getElementById('notes-submit');
   const original = btn.textContent;
   btn.disabled = true; btn.textContent = 'Envoi...';
   try{
-    const key = normalizePseudo(pseudo);
+    const key = normalizePseudo(PSEUDO);
     await db.collection(SITE_COLLECTION).doc(notesMatchId + '__' + key).set({
       matchId: notesMatchId,
-      pseudo: pseudo,
+      pseudo: PSEUDO,
       ratings: ratings,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     SITE_DOCS = SITE_DOCS.filter(d => !(d.matchId === notesMatchId && normalizePseudo(d.pseudo||'') === key));
-    SITE_DOCS.push({matchId: notesMatchId, pseudo, ratings});
+    SITE_DOCS.push({matchId: notesMatchId, pseudo: PSEUDO, ratings});
     closeNotesForm();
     showToast('Notes enregistrées, merci !');
     render();
@@ -498,7 +516,46 @@ document.getElementById('notes-submit').addEventListener('click', async () => {
   }
 });
 
-load();
+/* ---------- pseudo : identifie la personne, comme sur Predis Indiv ---------- */
+function showPseudoBar(){
+  document.getElementById('pseudo-name').textContent = PSEUDO;
+  document.getElementById('pseudo-bar').style.display = 'flex';
+}
+function enterAsPseudo(p){
+  PSEUDO = p;
+  try{ localStorage.setItem('predis-indiv:pseudo', p); }catch(e){}
+  document.getElementById('pseudo-gate').style.display = 'none';
+  showPseudoBar();
+  load();
+}
+document.getElementById('pseudo-go').addEventListener('click', () => {
+  const input = document.getElementById('pseudo-input');
+  const v = input.value.trim();
+  const err = document.getElementById('pseudo-err');
+  if (v.length < 2){ err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  enterAsPseudo(v);
+});
+document.getElementById('pseudo-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('pseudo-go').click();
+});
+document.getElementById('pseudo-switch').addEventListener('click', () => {
+  document.getElementById('pseudo-bar').style.display = 'none';
+  document.getElementById('pseudo-input').value = '';
+  document.getElementById('pseudo-err').style.display = 'none';
+  document.getElementById('pseudo-gate').style.display = 'flex';
+  document.getElementById('pseudo-input').focus();
+});
+(function initPseudo(){
+  let saved = '';
+  try{ saved = localStorage.getItem('predis-indiv:pseudo') || ''; }catch(e){}
+  if (saved){
+    enterAsPseudo(saved);
+  } else {
+    document.getElementById('pseudo-gate').style.display = 'flex';
+    setTimeout(() => document.getElementById('pseudo-input').focus(), 50);
+  }
+})();
 </script>
 </body>
 </html>
