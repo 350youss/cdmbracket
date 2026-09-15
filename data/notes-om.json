@@ -24,6 +24,28 @@
       ]
     },
     {
+      "id": "parisfc-2026-09-06",
+      "date": "2026-09-06",
+      "opponent": "Paris FC",
+      "competition": "Ligue 1",
+      "journee": 3,
+      "home": true,
+      "score": "2-3",
+      "ratings": [
+        {"player": "De Lange", "pos": "GdB", "chat": 2.1, "moi": 3, "lequipe": null},
+        {"player": "Weah", "pos": "ArD", "chat": 3.1, "moi": 3, "lequipe": null},
+        {"player": "Egan-Riley", "pos": "DC", "chat": 0.9, "moi": 3, "lequipe": null},
+        {"player": "Aguerd", "pos": "DC", "chat": 1.6, "moi": 2, "lequipe": null},
+        {"player": "Emerson", "pos": "ArG", "chat": 2.8, "moi": 3, "lequipe": null},
+        {"player": "Abdelli", "pos": "MO", "chat": 2.6, "moi": 4, "lequipe": null},
+        {"player": "Højbjerg", "pos": "MDC", "chat": 2.3, "moi": 3, "lequipe": null},
+        {"player": "Gomes", "pos": "MO", "chat": 3.3, "moi": 3, "lequipe": null},
+        {"player": "Harit", "pos": "AiG", "chat": 5.8, "moi": 6, "lequipe": null},
+        {"player": "Paixão", "pos": "AiG", "chat": 3.3, "moi": 2, "lequipe": null},
+        {"player": "Gouiri", "pos": "AC", "chat": 6.1, "moi": 6, "lequipe": null}
+      ]
+    },
+    {
       "id": "monaco-2026-08-30",
       "date": "2026-08-30",
       "opponent": "AS Monaco",
