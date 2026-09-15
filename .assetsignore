@@ -3,6 +3,7 @@ data/*
 !data/players.json
 !data/rumeurs.json
 !data/transfers_l1.json
+!data/notes-om.json
 .github/
 *.bat
 *.vbs

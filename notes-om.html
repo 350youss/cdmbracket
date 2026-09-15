@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes des joueurs OM</title>
+<meta name="description" content="Notes des joueurs de l'OM apres chaque match : chat Twitch, note perso, note L'Equipe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d; --s1:#131417; --s2:#191a1e; --s3:#1f2025;
+  --om:#2faee0; --om-dim:rgba(47,174,224,.14);
+  --good:#33c07a; --bad:#f04d68;
+  --txt:#f2f2f0; --sub:#98999e; --muted:#5c5d63; --faint:#38393e;
+  --line:rgba(255,255,255,.07); --line-soft:rgba(255,255,255,.12);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --title:'General Sans',-apple-system,'Segoe UI',sans-serif;
+  --body:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);}
+body{background:var(--bg);color:var(--txt);font-family:var(--body);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+::selection{background:var(--om-dim);color:#fff;}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--s3);border-radius:6px;}
+
+.wrap{position:relative;max-width:1080px;margin:0 auto;padding:0 32px 110px;}
+@media (max-width:640px){.wrap{padding:0 16px 90px;}}
+
+.hero{padding:20px 0 8px;}
+.eyebrow{font-family:var(--body);font-weight:600;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--om);}
+.hero h1{font-family:var(--title);font-weight:700;font-size:clamp(30px,5vw,50px);
+  line-height:1.05;letter-spacing:-.015em;color:#fff;margin-top:14px;}
+.hero .sub{margin-top:16px;font-family:var(--body);font-size:15px;color:var(--sub);max-width:60ch;line-height:1.6;}
+.hero .sub b{color:var(--txt);font-weight:600;}
+
+.legend{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;}
+.leg-chip{display:inline-flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--line);
+  border-radius:999px;padding:7px 14px;font-family:var(--body);font-size:12px;color:var(--sub);}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.leg-dot.chat{background:#a78bfa;} .leg-dot.moi{background:var(--om);} .leg-dot.lequipe{background:var(--gold,#d1a94e);}
+
+.matchbar{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+.mchip{font-family:var(--body);font-weight:700;font-size:12.5px;color:var(--sub);background:var(--s1);
+  border:1px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;white-space:nowrap;
+  transition:background .18s var(--ease),color .18s var(--ease),border-color .18s var(--ease);}
+.mchip:hover{border-color:var(--line-soft);color:#fff;}
+.mchip.active{background:var(--om);border-color:var(--om);color:#04202c;}
+
+.matchhead{margin-top:22px;display:none;align-items:center;justify-content:space-between;gap:14px;
+  background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:16px 20px;}
+.matchhead.show{display:flex;flex-wrap:wrap;}
+.matchhead .mh-title{font-family:var(--title);font-weight:700;font-size:18px;color:#fff;}
+.matchhead .mh-meta{margin-top:3px;font-family:var(--body);font-size:12px;color:var(--sub);}
+.matchhead .mh-score{font-family:var(--mono);font-weight:700;font-size:22px;color:var(--om);}
+
+.tblwrap{margin-top:22px;background:var(--s1);border:1px solid var(--line);border-radius:18px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;min-width:600px;}
+thead th{text-align:left;font-family:var(--body);font-weight:600;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);padding:14px 16px;border-bottom:1px solid var(--line);
+  cursor:pointer;user-select:none;white-space:nowrap;transition:color .15s var(--ease);}
+thead th:hover{color:var(--sub);}
+thead th.num{text-align:right;}
+thead th .arrow{margin-left:4px;opacity:0;font-size:9px;}
+thead th.sorted .arrow{opacity:1;color:var(--om);}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--line);font-family:var(--body);font-size:13.5px;vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,.02);}
+td.num{text-align:right;font-family:var(--mono);font-weight:700;font-size:13.5px;}
+.player-cell{display:flex;align-items:center;gap:10px;}
+.pos-badge{flex-shrink:0;width:30px;text-align:center;font-size:8px;font-weight:700;letter-spacing:.01em;
+  padding:3px 0;border-radius:4px;color:#0a0b0d;font-family:var(--mono);}
+.pos-gk{background:#8a8f98;} .pos-def{background:var(--om);} .pos-mid{background:var(--good);} .pos-att{background:#ff8f4d;}
+.player-name{font-weight:600;color:#fff;}
+.match-count{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:4px;}
+.rate-good{color:var(--good);} .rate-bad{color:var(--bad);} .rate-mid{color:var(--txt);}
+.na{color:var(--faint);font-weight:500;}
+
+.empty-state{margin-top:22px;background:var(--s1);border:1.5px dashed var(--line-soft);border-radius:18px;
+  padding:40px 24px;text-align:center;}
+.empty-state h3{font-family:var(--title);font-weight:600;font-size:18px;color:#fff;}
+.empty-state p{margin-top:8px;font-family:var(--body);font-size:13.5px;color:var(--sub);max-width:48ch;
+  margin-left:auto;margin-right:auto;line-height:1.6;}
+
+.credit{margin-top:46px;font-family:var(--body);font-size:10.5px;color:var(--faint);text-align:center;
+  letter-spacing:.05em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<style>
+.kdx-nav{position:sticky;top:14px;z-index:9999;padding:0 16px;margin-bottom:20px;}
+.kdx-navbar{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:rgba(19,20,23,.62);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:9px 10px 9px 22px;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.5);font-family:-apple-system,'Segoe UI',Arial,sans-serif;}
+.kdx-navbar a{text-decoration:none;}
+.kdx-brand{display:flex;align-items:center;flex-shrink:0;} .kdx-brand img{height:20px;width:auto;display:block;}
+.kdx-links{display:flex;align-items:center;justify-content:center;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.kdx-links::-webkit-scrollbar{display:none;}
+.kdx-links a{font-weight:500;font-size:13px;color:#98999e;white-space:nowrap;flex-shrink:0;
+  padding:9px 13px;border-radius:999px;transition:color .2s,background .2s;}
+.kdx-links a:hover{color:#fff;background:rgba(255,255,255,.06);}
+.kdx-links a.active{color:#fff;background:rgba(255,255,255,.1);}
+@media(max-width:640px){.kdx-links a{font-size:12px;padding:8px 10px;}}
+</style>
+<nav class="kdx-nav"><div class="kdx-navbar">
+  <a class="kdx-brand" href="index.html"><img src="images/kooradex-logo.png" alt="Kooradex"></a>
+  <div class="kdx-links">
+    <a href="mercato.html">Mercato</a>
+    <a href="pronostics-l1.html">Pr&eacute;dis</a>
+    <a href="squad-cost.html">Sant&eacute; OM</a>
+    <a href="lorenzi-time.html">Lorenzi Time</a>
+    <a href="/predis-indiv/libres">Vote Libre</a>
+    <a href="notes-om.html" class="active">Notes OM</a>
+  </div>
+</div></nav>
+<script>document.querySelector('.kdx-links a.active')?.scrollIntoView({inline:'center', block:'nearest'});</script>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Olympique de Marseille &middot; Saison 2026/27</div>
+    <h1>Notes des joueurs</h1>
+    <p class="sub">Apr&egrave;s chaque match, trois regards sur la performance des joueurs de l'OM : <b>le chat Twitch</b>, <b>350</b> et <b>L'&Eacute;quipe</b>. Trie le tableau en cliquant sur une colonne.</p>
+  </div>
+
+  <div class="legend">
+    <span class="leg-chip"><span class="leg-dot chat"></span>Chat Twitch</span>
+    <span class="leg-chip"><span class="leg-dot moi"></span>350</span>
+    <span class="leg-chip"><span class="leg-dot lequipe"></span>L'&Eacute;quipe</span>
+  </div>
+
+  <div class="matchbar" id="matchbar"></div>
+  <div class="matchhead" id="matchhead"></div>
+
+  <div class="tblwrap" id="tblwrap" style="display:none">
+    <table>
+      <thead>
+        <tr>
+          <th data-key="player">Joueur<span class="arrow">&#9660;</span></th>
+          <th class="num" data-key="chat">Chat<span class="arrow">&#9660;</span></th>
+          <th class="num" data-key="moi">350<span class="arrow">&#9660;</span></th>
+          <th class="num" data-key="lequipe">L'&Eacute;quipe<span class="arrow">&#9660;</span></th>
+          <th class="num" data-key="avg">Moyenne<span class="arrow">&#9660;</span></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="empty-state" id="empty-state">
+    <h3>Pas encore de notes</h3>
+    <p>Envoie les notes du prochain match (chat, les tiennes, L'&Eacute;quipe) et elles arriveront ici, tri&eacute;es par joueur.</p>
+  </div>
+
+  <div class="credit">Fait avec 350 &middot; donn&eacute;es saisies manuellement pour l'instant</div>
+</div>
+
+<script>
+const POS_CLASS = {GdB:'pos-gk',ArD:'pos-def',ArG:'pos-def',DC:'pos-def',MDC:'pos-mid',MC:'pos-mid',MO:'pos-mid',MD:'pos-mid',MG:'pos-mid',AiD:'pos-att',AiG:'pos-att',AC:'pos-att',SA:'pos-att'};
+
+let DATA = null;
+let currentMatchId = 'all'; // 'all' = agrégat saison
+let sortKey = 'avg';
+let sortDir = 'desc';
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function fmtNote(v){
+  return v == null ? '<span class="na">—</span>' : v.toFixed(1).replace('.', ',');
+}
+function rateClass(v){
+  if (v == null) return '';
+  if (v >= 7) return 'rate-good';
+  if (v < 5) return 'rate-bad';
+  return 'rate-mid';
+}
+function avg(arr){
+  const vals = arr.filter(v => v != null);
+  if (!vals.length) return null;
+  return vals.reduce((a,b) => a+b, 0) / vals.length;
+}
+
+async function load(){
+  try{
+    const res = await fetch('data/notes-om.json', {cache:'no-store'});
+    DATA = await res.json();
+  }catch(e){
+    console.error('notes-om load', e);
+    DATA = {matches: []};
+  }
+  buildMatchbar();
+  render();
+}
+
+function buildMatchbar(){
+  const bar = document.getElementById('matchbar');
+  if (!DATA.matches.length){
+    bar.innerHTML = '';
+    return;
+  }
+  const sorted = [...DATA.matches].sort((a,b) => new Date(b.date) - new Date(a.date));
+  const chips = [`<button class="mchip active" data-match="all">Toute la saison</button>`]
+    .concat(sorted.map(m => `<button class="mchip" data-match="${escapeHtml(m.id)}">vs ${escapeHtml(m.opponent)}</button>`));
+  bar.innerHTML = chips.join('');
+  bar.querySelectorAll('.mchip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentMatchId = btn.dataset.match;
+      bar.querySelectorAll('.mchip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    });
+  });
+}
+
+function rowsForCurrentView(){
+  if (currentMatchId === 'all'){
+    const byPlayer = {};
+    DATA.matches.forEach(m => {
+      (m.ratings||[]).forEach(r => {
+        if (!byPlayer[r.player]) byPlayer[r.player] = {player: r.player, pos: r.pos, chatList: [], moiList: [], lequipeList: []};
+        byPlayer[r.player].chatList.push(r.chat);
+        byPlayer[r.player].moiList.push(r.moi);
+        byPlayer[r.player].lequipeList.push(r.lequipe);
+      });
+    });
+    return Object.values(byPlayer).map(p => {
+      const chat = avg(p.chatList), moi = avg(p.moiList), lequipe = avg(p.lequipeList);
+      return {player: p.player, pos: p.pos, chat, moi, lequipe, avg: avg([chat, moi, lequipe]), n: p.chatList.length};
+    });
+  }
+  const m = DATA.matches.find(x => x.id === currentMatchId);
+  if (!m) return [];
+  return (m.ratings||[]).map(r => ({player: r.player, pos: r.pos, chat: r.chat, moi: r.moi, lequipe: r.lequipe, avg: avg([r.chat, r.moi, r.lequipe]), n: 1}));
+}
+
+function renderMatchhead(){
+  const el = document.getElementById('matchhead');
+  if (currentMatchId === 'all'){ el.classList.remove('show'); el.innerHTML = ''; return; }
+  const m = DATA.matches.find(x => x.id === currentMatchId);
+  if (!m){ el.classList.remove('show'); return; }
+  const d = new Date(m.date);
+  const dateTxt = d.toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+  el.classList.add('show');
+  el.innerHTML = `
+    <div>
+      <div class="mh-title">OM ${escapeHtml(m.home ? 'vs' : '@')} ${escapeHtml(m.opponent)}</div>
+      <div class="mh-meta">${escapeHtml(m.competition||'')}${m.journee ? ' &middot; J'+m.journee : ''} &middot; ${dateTxt}</div>
+    </div>
+    ${m.score ? `<div class="mh-score">${escapeHtml(m.score)}</div>` : ''}`;
+}
+
+function render(){
+  renderMatchhead();
+  const rows = rowsForCurrentView();
+  const tblwrap = document.getElementById('tblwrap');
+  const emptyState = document.getElementById('empty-state');
+  if (!rows.length){
+    tblwrap.style.display = 'none';
+    emptyState.style.display = '';
+    return;
+  }
+  tblwrap.style.display = '';
+  emptyState.style.display = 'none';
+
+  rows.sort((a,b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (sortKey === 'player'){ av = av||''; bv = bv||''; return sortDir==='asc' ? av.localeCompare(bv) : bv.localeCompare(av); }
+    av = av == null ? -Infinity : av; bv = bv == null ? -Infinity : bv;
+    return sortDir === 'asc' ? av - bv : bv - av;
+  });
+
+  document.getElementById('tbody').innerHTML = rows.map(r => `
+    <tr>
+      <td><div class="player-cell">
+        ${r.pos ? `<span class="pos-badge ${POS_CLASS[r.pos]||'pos-mid'}">${escapeHtml(r.pos)}</span>` : ''}
+        <span class="player-name">${escapeHtml(r.player)}</span>
+        ${currentMatchId==='all' && r.n>1 ? `<span class="match-count">${r.n} matchs</span>` : ''}
+      </div></td>
+      <td class="num ${rateClass(r.chat)}">${fmtNote(r.chat)}</td>
+      <td class="num ${rateClass(r.moi)}">${fmtNote(r.moi)}</td>
+      <td class="num ${rateClass(r.lequipe)}">${fmtNote(r.lequipe)}</td>
+      <td class="num ${rateClass(r.avg)}">${fmtNote(r.avg)}</td>
+    </tr>`).join('');
+
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.key === sortKey);
+    const arrow = th.querySelector('.arrow');
+    if (th.dataset.key === sortKey) arrow.innerHTML = sortDir === 'asc' ? '&#9650;' : '&#9660;';
+  });
+}
+
+document.querySelectorAll('thead th').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (sortKey === key) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    else { sortKey = key; sortDir = key === 'player' ? 'asc' : 'desc'; }
+    render();
+  });
+});
+
+load();
+</script>
+</body>
+</html>
