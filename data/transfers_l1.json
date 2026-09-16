@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-14T23:03:56",
- "sig": "a123e13ddcfb063063d6d01117313038",
+ "updated": "2026-09-16T11:03:42",
+ "sig": "fad1115c3b5e8a9f39d16e03a1767bf5",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -62,6 +62,7 @@
   "LOSC|out|Vincent Burlet|Cracovia": "2026-08-09",
   "LOSC|out|Chancel Mbemba|Al-Diriyah": "2026-08-10",
   "LOSC|out|Thomas Meunier|AFC Sunderland": "2026-08-09",
+  "LOSC|out|Arnaud Bodart|Le Havre AC": "2026-09-16",
   "LOSC|out|Aïssa Mandi|UD Levante": "2026-08-09",
   "LOSC|out|Lisandru Olmeta|Torreense": "2026-08-09",
   "LOSC|out|Félix Correia|Séville FC": "2026-09-01",
@@ -275,6 +276,7 @@
   "HAC|in|Junior Mwanga|R. Strasbourg": "2026-08-09",
   "HAC|in|Josh Maja|West Brom": "2026-08-09",
   "HAC|in|Timothée Pembélé|AFC Sunderland": "2026-08-09",
+  "HAC|in|Arnaud Bodart|LOSC Lille": "2026-09-16",
   "HAC|in|Gauthier Gallon|FCV Dender EH": "2026-08-27",
   "HAC|in|Kaito Mizuta|RW Essen": "2026-08-09",
   "HAC|in|Vincent Sasso|USL Dunkerque": "2026-08-09",
@@ -1013,6 +1015,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Arnaud Bodart",
+     "age": 28,
+     "pos": "GdB",
+     "club": "Le Havre AC",
+     "club_id": 738,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-16"
     },
     {
      "p": "Aïssa Mandi",
@@ -3253,6 +3265,16 @@
      "fs": "2026-08-09"
     },
     {
+     "p": "Arnaud Bodart",
+     "age": 28,
+     "pos": "GdB",
+     "club": "LOSC Lille",
+     "club_id": 1082,
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-16"
+    },
+    {
      "p": "Gauthier Gallon",
      "age": 33,
      "pos": "GdB",
@@ -5370,24 +5392,6 @@
     "statsClub": "San Lorenzo",
     "valDelta": 0.0,
     "valSince": "27/08/2026"
-   },
-   {
-    "n": "16",
-    "p": "Arnaud Bodart",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 28,
-    "val": 1.5,
-    "stats": {
-     "m": 5,
-     "s": 4,
-     "g": 0,
-     "a": 0,
-     "min": 405
-    },
-    "statsClub": "LOSC Lille",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
    },
    {
     "n": "3",
@@ -7936,7 +7940,7 @@
     "p": "Omari Kellyman",
     "pos": "MO",
     "grp": "MID",
-    "age": 20,
+    "age": 21,
     "val": 1.7,
     "stats": {
      "m": 0,
@@ -9382,7 +9386,7 @@
     "p": "Luca Koleosho",
     "pos": "AiD",
     "grp": "ATT",
-    "age": 21,
+    "age": 22,
     "val": 6.0,
     "stats": {
      "m": 18,
@@ -10265,6 +10269,24 @@
    }
   ],
   "HAC": [
+   {
+    "n": "16",
+    "p": "Arnaud Bodart",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 28,
+    "val": 1.5,
+    "stats": {
+     "m": 5,
+     "s": 4,
+     "g": 0,
+     "a": 0,
+     "min": 405
+    },
+    "statsClub": "LOSC Lille",
+    "valDelta": 0.0,
+    "valSince": "16/08/2026"
+   },
    {
     "n": "77",
     "p": "Lionel Mpasi-Nzau",
