@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-16T11:03:42",
- "sig": "fad1115c3b5e8a9f39d16e03a1767bf5",
+ "updated": "2026-09-16T20:03:50",
+ "sig": "71db98f4e2421ee9b9617e6338b129ba",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -347,7 +347,7 @@
   "OGCN|out|Rareș Ilie|Mantova": "2026-08-09",
   "OGCN|out|Maxime Dupé|FC Nantes": "2026-08-09",
   "OGCN|out|Kevin Carlos|Cagliari": "2026-08-10",
-  "OGCN|out|Brad-Hamilton Mantsounga|RE Virton": "2026-09-04",
+  "OGCN|out|Brad-Hamilton Mantsounga|Excel. Virton": "2026-09-16",
   "OGCN|out|Victor Orakpo|Genclerbirligi": "2026-09-04",
   "OGCN|out|Tanguy Ndombélé|Sans club": "2026-08-09",
   "OGCN|out|Dante|Fin de carrière": "2026-08-09",
@@ -4000,11 +4000,11 @@
      "p": "Brad-Hamilton Mantsounga",
      "age": 18,
      "pos": "DC",
-     "club": "RE Virton",
+     "club": "Excel. Virton",
      "club_id": 1199,
      "type": "loan",
      "val": 0.0,
-     "fs": "2026-09-04"
+     "fs": "2026-09-16"
     },
     {
      "p": "Victor Orakpo",
