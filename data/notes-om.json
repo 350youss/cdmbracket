@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T00:47:04",
+  "updated": "2026-09-18T00:50:19",
   "matches": [
     {
       "id": "strasbourg-2026-08-21",
@@ -395,77 +395,77 @@
           "pos": "GdB",
           "chat": 1.1,
           "moi": 3,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Weah",
           "pos": "ArD",
           "chat": 1.1,
           "moi": 2,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Egan-Riley",
           "pos": "DC",
           "chat": 3.1,
           "moi": 4,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Cornelius",
           "pos": "DC",
           "chat": 2.8,
           "moi": 3,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Garcia",
           "pos": "ArG",
           "chat": 2.3,
           "moi": 3,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Højbjerg",
           "pos": "MDC",
           "chat": 1.1,
           "moi": 1,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Abdelli",
           "pos": "MO",
           "chat": 4.7,
           "moi": 5,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Abdallah",
           "pos": "AiD",
           "chat": 5.7,
           "moi": 6,
-          "lequipe": null
+          "lequipe": 6
         },
         {
           "player": "Gomes",
           "pos": "MO",
           "chat": 1.6,
           "moi": 1,
-          "lequipe": null
+          "lequipe": 3
         },
         {
           "player": "Harit",
           "pos": "AiG",
           "chat": 3.7,
           "moi": 3,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Maupay",
           "pos": "AC",
           "chat": 3,
           "moi": 3,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Emerson",
