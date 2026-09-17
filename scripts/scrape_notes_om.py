@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Detecte automatiquement les nouveaux matchs de l'OM en Ligue 1 termines et
-ajoute une entree dans data/notes-om.json avec la liste des joueurs ayant
-joue au moins 23 minutes (reference : Sofascore), prete a recevoir les
-notes (chat / 350 / L'Equipe / site) qui restent saisies a la main.
+Detecte automatiquement les nouveaux matchs de l'OM (toutes competitions
+suivies, cf. COMPETITIONS) termines et ajoute une entree dans
+data/notes-om.json avec la liste des joueurs ayant joue au moins 23
+minutes (reference : Sofascore), prete a recevoir les notes (chat / 350 /
+L'Equipe / site) qui restent saisies a la main.
 
 Ne touche jamais aux matchs deja presents dans le fichier (identifies par
 leur date) : ne fait qu'ajouter les matchs manquants, pour ne jamais
 ecraser des notes deja rentrees.
+
+La saison en cours de chaque competition est resolue dynamiquement (par
+annee, ex. "26/27") plutot que codee en dur : s'adapte tout seul chaque
+saison, et ignore proprement une competition dont la saison n'existe pas
+encore sur Sofascore (ex. Coupe de France, creee seulement a l'entree en
+lice des clubs pro).
 
 L'API Sofascore bloque les clients HTTP "nus" (User-Agent seul ne suffit
 pas, blocage au niveau de l'empreinte TLS) : on passe par curl_cffi avec
@@ -37,9 +44,17 @@ OUT = os.path.join(ROOT, "data", "notes-om.json")
 PLAYERS = os.path.join(ROOT, "data", "players.json")
 
 OM_TEAM_ID = 1641
-L1_TOURNAMENT_ID = 34
-L1_SEASON_ID = 96127          # Ligue 1 26/27, a mettre a jour l'an prochain
 MIN_MINUTES = 23
+SEASON_YEAR = "26/27"   # a mettre a jour l'ete prochain (ou detecter dynamiquement plus tard)
+
+# competitions suivies : (nom affiche, id tournoi Sofascore, id max de tour
+# a essayer avant d'abandonner). Ajouter la Ligue des Champions ici si l'OM
+# s'y qualifie une saison prochaine.
+COMPETITIONS = [
+    ("Ligue 1", 34, 40),
+    ("UEFA Europa League", 679, 20),
+    ("Coupe de France", 335, 10),
+]
 
 HEADERS_IMPERSONATE = "chrome124"
 BASE = "https://api.sofascore.com/api/v1"
@@ -99,16 +114,26 @@ def load_roster_positions():
     return {norm(p["name"]): p["pos"] for p in om.get("players", [])}
 
 
-def find_om_rounds():
-    """parcourt les journees de L1 et renvoie les matchs OM termines"""
+def resolve_season_id(tournament_id):
+    """id de la saison en cours (SEASON_YEAR) pour un tournoi, ou None si
+    elle n'existe pas encore sur Sofascore (ex. coupe pas encore demarree)"""
+    d = get(f"{BASE}/unique-tournament/{tournament_id}/seasons")
+    for s in d.get("seasons", []):
+        if s.get("year") == SEASON_YEAR:
+            return s["id"]
+    return None
+
+
+def find_om_matches(tournament_id, season_id, max_round):
+    """parcourt les tours/journees d'une competition et renvoie les
+    matchs OM termines"""
     matches = []
     round_num = 1
     misses = 0
-    while round_num <= 40 and misses < 3:
+    while round_num <= max_round and misses < 3:
         try:
-            d = get(f"{BASE}/unique-tournament/{L1_TOURNAMENT_ID}/season/{L1_SEASON_ID}/events/round/{round_num}")
+            d = get(f"{BASE}/unique-tournament/{tournament_id}/season/{season_id}/events/round/{round_num}")
         except Exception as e:
-            print(f"  ! journee {round_num} : {e}")
             misses += 1
             round_num += 1
             continue
@@ -129,7 +154,7 @@ def find_om_rounds():
     return matches
 
 
-def build_match_entry(ev, round_num, roster_pos):
+def build_match_entry(ev, round_num, competition_name, roster_pos):
     home, away = ev["homeTeam"], ev["awayTeam"]
     is_home = home["id"] == OM_TEAM_ID
     opponent = away["name"] if is_home else home["name"]
@@ -153,7 +178,7 @@ def build_match_entry(ev, round_num, roster_pos):
         "id": f"{slugify(opponent)}-{date}",
         "date": date,
         "opponent": opponent,
-        "competition": "Ligue 1",
+        "competition": competition_name,
         "journee": round_num,
         "home": is_home,
         "score": score,
@@ -169,28 +194,37 @@ def main():
         except Exception:
             pass
     existing_dates = {m["date"] for m in data.get("matches", [])}
-
-    print("Recherche des journees de Ligue 1 jouees par l'OM...")
-    found = find_om_rounds()
-    print(f"{len(found)} match(s) OM termine(s) trouve(s) sur Sofascore.")
-
     roster_pos = load_roster_positions()
 
     added = 0
-    for item in found:
-        ev, round_num = item["event"], item["round"]
-        date = datetime.fromtimestamp(ev["startTimestamp"], tz=timezone.utc).strftime("%Y-%m-%d")
-        if date in existing_dates:
-            continue
-        print(f"  + nouveau match : {ev['homeTeam']['name']} - {ev['awayTeam']['name']} ({date})")
+    for name, tournament_id, max_round in COMPETITIONS:
+        print(f"· {name}...")
         try:
-            entry = build_match_entry(ev, round_num, roster_pos)
+            season_id = resolve_season_id(tournament_id)
         except Exception as e:
-            print(f"    ! echec recuperation composition : {e}")
+            print(f"  ! impossible de resoudre la saison : {e}")
             continue
-        data["matches"].append(entry)
-        existing_dates.add(date)
-        added += 1
+        if season_id is None:
+            print(f"  -> saison {SEASON_YEAR} pas encore disponible, ignoree pour l'instant")
+            continue
+
+        found = find_om_matches(tournament_id, season_id, max_round)
+        print(f"  {len(found)} match(s) OM termine(s) trouve(s)")
+
+        for item in found:
+            ev, round_num = item["event"], item["round"]
+            date = datetime.fromtimestamp(ev["startTimestamp"], tz=timezone.utc).strftime("%Y-%m-%d")
+            if date in existing_dates:
+                continue
+            print(f"    + nouveau match : {ev['homeTeam']['name']} - {ev['awayTeam']['name']} ({date})")
+            try:
+                entry = build_match_entry(ev, round_num, name, roster_pos)
+            except Exception as e:
+                print(f"      ! echec recuperation composition : {e}")
+                continue
+            data["matches"].append(entry)
+            existing_dates.add(date)
+            added += 1
 
     if added:
         data["updated"] = datetime.now().isoformat(timespec="seconds")
