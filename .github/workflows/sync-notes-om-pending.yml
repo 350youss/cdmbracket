@@ -1,0 +1,38 @@
+name: Sync Notes OM pending checklist
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # toutes les 5 minutes : recupere un pointage envoye depuis notes-om-admin.html
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installe les dépendances
+        run: pip install requests
+
+      - name: Synchronise la file d'attente
+        run: python scripts/sync_notes_om_pending.py
+
+      - name: Commit et push si un match a été ajouté
+        run: |
+          git config user.name "predi-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- data/notes-om.json; then
+            echo "Rien à synchroniser."
+          else
+            git add data/notes-om.json
+            git commit -m "Ajoute le match pointé manuellement ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git pull --no-rebase --no-edit
+            git push
+          fi

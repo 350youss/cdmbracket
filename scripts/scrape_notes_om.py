@@ -101,7 +101,10 @@ def get(url, **params):
 
 
 def load_roster_positions():
-    """nom normalise -> code de poste precis, tire de data/players.json (OM)"""
+    """nom court normalise -> code de poste precis, tire de data/players.json
+    (OM). Indexe par nom court (cf. short_name), pas nom complet : le nom
+    legal Sofascore ("Conrad Jaden Egan-Riley") ne matche pas le nom
+    d'usage de notre base ("CJ Egan-Riley")."""
     if not os.path.exists(PLAYERS):
         return {}
     try:
@@ -111,7 +114,7 @@ def load_roster_positions():
     om = next((c for c in d.get("clubs", []) if c.get("id") == "om"), None)
     if not om:
         return {}
-    return {norm(p["name"]): p["pos"] for p in om.get("players", [])}
+    return {norm(short_name(p["name"])): p["pos"] for p in om.get("players", [])}
 
 
 def resolve_season_id(tournament_id):
@@ -171,7 +174,7 @@ def build_match_entry(ev, round_num, competition_name, roster_pos):
             continue
         full_name = p["player"]["name"]
         name = short_name(full_name)
-        pos = roster_pos.get(norm(full_name)) or POS_FALLBACK.get(p.get("position"), "MC")
+        pos = roster_pos.get(norm(name)) or POS_FALLBACK.get(p.get("position"), "MC")
         ratings.append({"player": name, "pos": pos, "chat": None, "moi": None, "lequipe": None})
 
     return {

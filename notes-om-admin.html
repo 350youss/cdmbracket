@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pointage feuille de match OM</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<style>
+:root{
+  --bg:#0a0b0d; --s1:#131417; --s2:#191a1e; --s3:#1f2025;
+  --om:#2faee0; --om-dim:rgba(47,174,224,.14);
+  --good:#33c07a; --bad:#f04d68;
+  --txt:#f2f2f0; --sub:#98999e; --muted:#5c5d63; --faint:#38393e;
+  --line:rgba(255,255,255,.07); --line-soft:rgba(255,255,255,.12);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --title:'General Sans',-apple-system,'Segoe UI',sans-serif;
+  --body:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scrollbar-width:thin;scrollbar-color:var(--s3) var(--bg);}
+body{background:var(--bg);color:var(--txt);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.wrap{max-width:640px;margin:0 auto;padding:24px 20px 90px;}
+
+.eyebrow{font-family:var(--body);font-weight:600;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--om);}
+h1{font-family:var(--title);font-weight:700;font-size:clamp(26px,5vw,36px);color:#fff;margin-top:12px;letter-spacing:-.01em;}
+.sub{margin-top:10px;font-family:var(--body);font-size:13.5px;color:var(--sub);line-height:1.55;}
+
+.matchcard{margin-top:22px;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
+.mc-title{font-family:var(--title);font-weight:700;font-size:18px;color:#fff;}
+.mc-meta{margin-top:4px;font-family:var(--body);font-size:12px;color:var(--sub);}
+.mc-picker{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;}
+.mc-chip{font-family:var(--body);font-weight:600;font-size:11.5px;color:var(--sub);background:var(--s2);
+  border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;}
+.mc-chip.active{background:var(--om);border-color:var(--om);color:#04202c;}
+.mc-chip:hover{color:#fff;}
+
+.section-title{margin-top:24px;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);}
+.plist{margin-top:10px;background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.prow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);cursor:pointer;
+  transition:background .15s var(--ease);}
+.prow:last-child{border-bottom:none;}
+.prow:hover{background:rgba(255,255,255,.02);}
+.prow input{width:20px;height:20px;accent-color:var(--good);flex-shrink:0;cursor:pointer;}
+.pname{flex:1;font-weight:600;font-size:14px;color:#fff;}
+.pname .sub-in{margin-left:8px;font-weight:500;font-size:11px;color:var(--muted);}
+
+.actions{margin-top:24px;display:flex;gap:10px;}
+.btn{flex:1;font-family:var(--body);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.03em;
+  border-radius:10px;padding:14px;cursor:pointer;border:none;}
+.btn-primary{background:var(--good);color:#04240f;}
+.btn-primary:hover{opacity:.9;}
+.btn-primary:disabled{opacity:.4;cursor:default;}
+.btn-secondary{background:var(--s2);border:1px solid var(--line-soft);color:var(--txt);}
+
+.state{margin-top:22px;background:var(--s1);border:1.5px dashed var(--line-soft);border-radius:14px;
+  padding:30px 20px;text-align:center;font-family:var(--body);font-size:13.5px;color:var(--sub);line-height:1.6;}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--s3);
+  color:var(--txt);border:1px solid var(--line-soft);border-radius:999px;padding:13px 22px;font-family:var(--body);font-weight:500;
+  font-size:12.5px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:90;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Outil perso &middot; pas public</div>
+  <h1>Pointage feuille de match</h1>
+  <p class="sub">Coche les joueurs qui ont jou&eacute; <b>23 minutes ou plus</b>. L'envoi met la liste dans une file d'attente que le robot synchronise avec Notes OM en quelques minutes.</p>
+
+  <div id="content">
+    <div class="state" id="loading">Chargement du prochain match OM...</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB8F5baV8T6qq4gWiz0cbAkhAYli4Lyips",
+  authDomain: "predi-l1.firebaseapp.com",
+  projectId: "predi-l1",
+  storageBucket: "predi-l1.firebasestorage.app",
+  messagingSenderId: "15010416982",
+  appId: "1:15010416982:web:1e2b1834ffac4f2607aef7",
+  measurementId: "G-FV2JC1TZ9Y"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const PENDING_COLLECTION = 'notes-om-pending';
+const OM_TEAM_ID = 1641;
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+async function sofa(path){
+  const res = await fetch('https://api.sofascore.com/api/v1' + path, {cache:'no-store'});
+  if (!res.ok) throw new Error('Sofascore ' + res.status);
+  return res.json();
+}
+
+let EVENTS = [];
+let currentEvent = null;
+let players = []; // {name, checked, bench}
+
+async function loadEvents(){
+  const content = document.getElementById('content');
+  let data;
+  try{
+    data = await sofa(`/team/${OM_TEAM_ID}/events/next/0`);
+  }catch(e){
+    content.innerHTML = `<div class="state">Impossible de charger les prochains matchs Sofascore (${escapeHtml(e.message)}).</div>`;
+    return;
+  }
+  EVENTS = (data.events || []).slice(0, 5);
+  if (!EVENTS.length){
+    content.innerHTML = `<div class="state">Aucun match &agrave; venir trouv&eacute;.</div>`;
+    return;
+  }
+  renderPicker();
+  selectEvent(EVENTS[0]);
+}
+
+function renderPicker(){
+  const content = document.getElementById('content');
+  const chips = EVENTS.map((e,i) => {
+    const opp = e.homeTeam.id === OM_TEAM_ID ? e.awayTeam.name : e.homeTeam.name;
+    return `<button class="mc-chip${i===0?' active':''}" data-i="${i}">vs ${escapeHtml(opp)}</button>`;
+  }).join('');
+  content.innerHTML = `
+    <div class="matchcard">
+      <div class="mc-title" id="mc-title"></div>
+      <div class="mc-meta" id="mc-meta"></div>
+      <div class="mc-picker">${chips}</div>
+    </div>
+    <div id="squad-zone"></div>`;
+  content.querySelectorAll('.mc-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      content.querySelectorAll('.mc-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectEvent(EVENTS[+btn.dataset.i]);
+    });
+  });
+}
+
+async function selectEvent(ev){
+  currentEvent = ev;
+  const isHome = ev.homeTeam.id === OM_TEAM_ID;
+  const opponent = isHome ? ev.awayTeam.name : ev.homeTeam.name;
+  document.getElementById('mc-title').textContent = `OM ${isHome ? 'vs' : '@'} ${opponent}`;
+  const d = new Date(ev.startTimestamp * 1000);
+  document.getElementById('mc-meta').textContent = `${ev.tournament.name} · ${d.toLocaleDateString('fr-FR', {day:'numeric', month:'long'})} · ${d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}`;
+
+  const zone = document.getElementById('squad-zone');
+  zone.innerHTML = `<div class="state">Chargement de la feuille de match...</div>`;
+  let lineups;
+  try{
+    lineups = await sofa(`/event/${ev.id}/lineups`);
+  }catch(e){
+    zone.innerHTML = `<div class="state">Feuille de match pas encore disponible pour ce match. R&eacute;essaie plus pr&egrave;s du coup d'envoi.</div>`;
+    return;
+  }
+  const side = isHome ? lineups.home : lineups.away;
+  if (!side || !side.players || !side.players.length){
+    zone.innerHTML = `<div class="state">Compositions pas encore annonc&eacute;es. R&eacute;essaie plus tard.</div>`;
+    return;
+  }
+  players = side.players.map(p => ({
+    name: p.player.name,
+    checked: !p.substitute,
+    bench: !!p.substitute,
+  }));
+  renderSquad();
+}
+
+function renderSquad(){
+  const zone = document.getElementById('squad-zone');
+  const starters = players.filter(p => !p.bench);
+  const bench = players.filter(p => p.bench);
+  const rowHtml = (p, idx) => `
+    <div class="prow" data-idx="${idx}">
+      <input type="checkbox" ${p.checked ? 'checked' : ''}>
+      <span class="pname">${escapeHtml(p.name)}</span>
+    </div>`;
+  zone.innerHTML = `
+    <div class="section-title">Titulaires</div>
+    <div class="plist">${starters.map((p) => rowHtml(p, players.indexOf(p))).join('')}</div>
+    <div class="section-title">Rempla&ccedil;ants</div>
+    <div class="plist">${bench.length ? bench.map((p) => rowHtml(p, players.indexOf(p))).join('') : '<div class="prow" style="cursor:default"><span class="pname" style="color:var(--muted)">Aucun remplaçant entré en jeu listé</span></div>'}</div>
+    <div class="actions">
+      <button class="btn btn-secondary" id="btn-refresh">Recharger la compo</button>
+      <button class="btn btn-primary" id="btn-send">Envoyer (${players.filter(p=>p.checked).length} coch&eacute;s)</button>
+    </div>`;
+  zone.querySelectorAll('.prow[data-idx]').forEach(row => {
+    row.addEventListener('click', (e) => {
+      const idx = +row.dataset.idx;
+      if (e.target.tagName !== 'INPUT'){
+        players[idx].checked = !players[idx].checked;
+      } else {
+        players[idx].checked = e.target.checked;
+      }
+      renderSquad();
+    });
+  });
+  document.getElementById('btn-refresh').addEventListener('click', () => selectEvent(currentEvent));
+  document.getElementById('btn-send').addEventListener('click', sendPending);
+}
+
+async function sendPending(){
+  const checked = players.filter(p => p.checked);
+  if (!checked.length){ showToast('Coche au moins un joueur.'); return; }
+  const btn = document.getElementById('btn-send');
+  btn.disabled = true; btn.textContent = 'Envoi...';
+  try{
+    let fresh;
+    try{ fresh = await sofa(`/event/${currentEvent.id}`); }catch(e){ fresh = {event: currentEvent}; }
+    const ev = fresh.event || currentEvent;
+    const isHome = ev.homeTeam.id === OM_TEAM_ID;
+    const opponent = isHome ? ev.awayTeam.name : ev.homeTeam.name;
+    const date = new Date(ev.startTimestamp * 1000).toISOString().slice(0,10);
+    const score = `${(ev.homeScore && ev.homeScore.display) ?? '?'}-${(ev.awayScore && ev.awayScore.display) ?? '?'}`;
+    await db.collection(PENDING_COLLECTION).doc(String(ev.id)).set({
+      eventId: ev.id,
+      date, opponent,
+      competition: ev.tournament.name,
+      home: isHome,
+      score,
+      players: checked.map(p => ({name: p.name})),
+      submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    showToast('Envoyé ! Le robot va le récupérer sous peu.');
+  }catch(e){
+    console.error(e);
+    showToast('Échec de l\'envoi : ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = `Envoyer (${checked.length} cochés)`;
+  }
+}
+
+loadEvents();
+</script>
+</body>
+</html>
