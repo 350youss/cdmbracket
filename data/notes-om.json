@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17T22:47:21",
+  "updated": "2026-09-18T00:47:04",
   "matches": [
     {
       "id": "strasbourg-2026-08-21",
@@ -393,106 +393,106 @@
         {
           "player": "De Lange",
           "pos": "GdB",
-          "chat": null,
-          "moi": null,
+          "chat": 1.1,
+          "moi": 3,
           "lequipe": null
         },
         {
           "player": "Weah",
           "pos": "ArD",
-          "chat": null,
-          "moi": null,
+          "chat": 1.1,
+          "moi": 2,
           "lequipe": null
         },
         {
           "player": "Egan-Riley",
           "pos": "DC",
-          "chat": null,
-          "moi": null,
+          "chat": 3.1,
+          "moi": 4,
           "lequipe": null
         },
         {
           "player": "Cornelius",
           "pos": "DC",
-          "chat": null,
-          "moi": null,
+          "chat": 2.8,
+          "moi": 3,
           "lequipe": null
         },
         {
           "player": "Garcia",
           "pos": "ArG",
-          "chat": null,
-          "moi": null,
+          "chat": 2.3,
+          "moi": 3,
           "lequipe": null
         },
         {
           "player": "Højbjerg",
           "pos": "MDC",
-          "chat": null,
-          "moi": null,
+          "chat": 1.1,
+          "moi": 1,
           "lequipe": null
         },
         {
           "player": "Abdelli",
           "pos": "MO",
-          "chat": null,
-          "moi": null,
+          "chat": 4.7,
+          "moi": 5,
           "lequipe": null
         },
         {
           "player": "Abdallah",
           "pos": "AiD",
-          "chat": null,
-          "moi": null,
+          "chat": 5.7,
+          "moi": 6,
           "lequipe": null
         },
         {
           "player": "Gomes",
           "pos": "MO",
-          "chat": null,
-          "moi": null,
+          "chat": 1.6,
+          "moi": 1,
           "lequipe": null
         },
         {
           "player": "Harit",
           "pos": "AiG",
-          "chat": null,
-          "moi": null,
+          "chat": 3.7,
+          "moi": 3,
           "lequipe": null
         },
         {
           "player": "Maupay",
           "pos": "AC",
-          "chat": null,
-          "moi": null,
+          "chat": 3,
+          "moi": 3,
           "lequipe": null
         },
         {
           "player": "Emerson",
           "pos": "ArG",
-          "chat": null,
-          "moi": null,
+          "chat": 0.7,
+          "moi": 2,
           "lequipe": null
         },
         {
           "player": "Paixão",
           "pos": "AiG",
-          "chat": null,
-          "moi": null,
+          "chat": 1.8,
+          "moi": 2,
           "lequipe": null
         },
         {
           "player": "Aguerd",
           "pos": "DC",
-          "chat": null,
-          "moi": null,
+          "chat": 2.6,
+          "moi": 4,
           "lequipe": null
         },
         {
           "player": "Gouiri",
           "pos": "AC",
-          "chat": null,
-          "moi": null,
+          "chat": 2.1,
+          "moi": 2,
           "lequipe": null
         }
       ]
