@@ -48,18 +48,45 @@ def get(url):
     return r.json()
 
 
-def main():
+def load_current_event_id():
+    """id du match actuellement publie (s'il y en a un), pour eviter de
+    sauter directement au prochain match programme pendant qu'un match est
+    encore en cours (l'endpoint /events/next/0 de Sofascore bascule vers le
+    match suivant des le coup d'envoi, avant meme la fin du match en cours)."""
+    if not os.path.exists(OUT):
+        return None
     try:
-        next_events = get(f"{BASE}/team/{OM_TEAM_ID}/events/next/0").get("events", [])
-    except Exception as e:
-        print(f"! impossible de recuperer le prochain match : {e}")
-        return
-    if not next_events:
-        json.dump({"eventId": None}, open(OUT, "w", encoding="utf-8"))
-        print("Aucun match a venir.")
-        return
+        return json.load(open(OUT, encoding="utf-8")).get("eventId")
+    except Exception:
+        return None
 
-    ev = next_events[0]
+
+def main():
+    current_id = load_current_event_id()
+    if current_id:
+        try:
+            status = get(f"{BASE}/event/{current_id}")["event"]["status"]["type"]
+        except Exception:
+            status = None
+        if status == "inprogress":
+            ev = get(f"{BASE}/event/{current_id}")["event"]
+            print("Match en cours, on garde le meme evenement.")
+        else:
+            ev = None
+    else:
+        ev = None
+
+    if ev is None:
+        try:
+            next_events = get(f"{BASE}/team/{OM_TEAM_ID}/events/next/0").get("events", [])
+        except Exception as e:
+            print(f"! impossible de recuperer le prochain match : {e}")
+            return
+        if not next_events:
+            json.dump({"eventId": None}, open(OUT, "w", encoding="utf-8"))
+            print("Aucun match a venir.")
+            return
+        ev = next_events[0]
     is_home = ev["homeTeam"]["id"] == OM_TEAM_ID
     opponent = ev["awayTeam"]["name"] if is_home else ev["homeTeam"]["name"]
     out = {
