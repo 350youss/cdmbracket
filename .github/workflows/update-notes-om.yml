@@ -1,0 +1,38 @@
+name: Update Notes OM matches
+
+on:
+  schedule:
+    - cron: '20 */3 * * *'   # toutes les 3h, pour detecter un match termine peu apres coup de sifflet final
+  workflow_dispatch: {}      # declenchement manuel depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installe les dépendances
+        run: pip install curl_cffi
+
+      - name: Detecte les nouveaux matchs OM (Ligue 1) termines
+        run: python scripts/scrape_notes_om.py
+
+      - name: Commit et push si un nouveau match a été détecté
+        run: |
+          git config user.name "predi-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- data/notes-om.json; then
+            echo "Aucun nouveau match détecté."
+          else
+            git add data/notes-om.json
+            git commit -m "Ajoute automatiquement le(s) nouveau(x) match(s) OM ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git pull --no-rebase --no-edit
+            git push
+          fi
