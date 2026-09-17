@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T00:00:00",
+  "updated": "2026-09-17T22:47:21",
   "matches": [
     {
       "id": "strasbourg-2026-08-21",
@@ -10,17 +10,83 @@
       "home": true,
       "score": "4-0",
       "ratings": [
-        {"player": "De Lange", "pos": "GdB", "chat": 5.6, "moi": 5, "lequipe": 6},
-        {"player": "Weah", "pos": "ArD", "chat": 5.4, "moi": 4, "lequipe": 5},
-        {"player": "Egan-Riley", "pos": "DC", "chat": 6.6, "moi": 6, "lequipe": 6},
-        {"player": "Kondogbia", "pos": "MDC", "chat": 6.4, "moi": 6, "lequipe": 7},
-        {"player": "Emerson", "pos": "ArG", "chat": 5.7, "moi": 5, "lequipe": 6},
-        {"player": "Abdelli", "pos": "MO", "chat": 6.7, "moi": 6, "lequipe": 6},
-        {"player": "Højbjerg", "pos": "MDC", "chat": 5.6, "moi": 5, "lequipe": 7},
-        {"player": "Gomes", "pos": "MO", "chat": 7.2, "moi": 7, "lequipe": 7},
-        {"player": "Harit", "pos": "AiG", "chat": 4.3, "moi": 4, "lequipe": 6},
-        {"player": "Gouiri", "pos": "AC", "chat": 6.8, "moi": 6, "lequipe": 7},
-        {"player": "Paixão", "pos": "AiG", "chat": 7.4, "moi": 7, "lequipe": 7}
+        {
+          "player": "De Lange",
+          "pos": "GdB",
+          "chat": 5.6,
+          "moi": 5,
+          "lequipe": 6
+        },
+        {
+          "player": "Weah",
+          "pos": "ArD",
+          "chat": 5.4,
+          "moi": 4,
+          "lequipe": 5
+        },
+        {
+          "player": "Egan-Riley",
+          "pos": "DC",
+          "chat": 6.6,
+          "moi": 6,
+          "lequipe": 6
+        },
+        {
+          "player": "Kondogbia",
+          "pos": "MDC",
+          "chat": 6.4,
+          "moi": 6,
+          "lequipe": 7
+        },
+        {
+          "player": "Emerson",
+          "pos": "ArG",
+          "chat": 5.7,
+          "moi": 5,
+          "lequipe": 6
+        },
+        {
+          "player": "Abdelli",
+          "pos": "MO",
+          "chat": 6.7,
+          "moi": 6,
+          "lequipe": 6
+        },
+        {
+          "player": "Højbjerg",
+          "pos": "MDC",
+          "chat": 5.6,
+          "moi": 5,
+          "lequipe": 7
+        },
+        {
+          "player": "Gomes",
+          "pos": "MO",
+          "chat": 7.2,
+          "moi": 7,
+          "lequipe": 7
+        },
+        {
+          "player": "Harit",
+          "pos": "AiG",
+          "chat": 4.3,
+          "moi": 4,
+          "lequipe": 6
+        },
+        {
+          "player": "Gouiri",
+          "pos": "AC",
+          "chat": 6.8,
+          "moi": 6,
+          "lequipe": 7
+        },
+        {
+          "player": "Paixão",
+          "pos": "AiG",
+          "chat": 7.4,
+          "moi": 7,
+          "lequipe": 7
+        }
       ]
     },
     {
@@ -32,17 +98,83 @@
       "home": true,
       "score": "2-3",
       "ratings": [
-        {"player": "De Lange", "pos": "GdB", "chat": 2.1, "moi": 3, "lequipe": 4},
-        {"player": "Weah", "pos": "ArD", "chat": 3.1, "moi": 3, "lequipe": 4},
-        {"player": "Egan-Riley", "pos": "DC", "chat": 0.9, "moi": 3, "lequipe": 3},
-        {"player": "Aguerd", "pos": "DC", "chat": 1.6, "moi": 2, "lequipe": 3},
-        {"player": "Emerson", "pos": "ArG", "chat": 2.8, "moi": 3, "lequipe": 4},
-        {"player": "Abdelli", "pos": "MO", "chat": 2.6, "moi": 4, "lequipe": 4},
-        {"player": "Højbjerg", "pos": "MDC", "chat": 2.3, "moi": 3, "lequipe": 4},
-        {"player": "Gomes", "pos": "MO", "chat": 3.3, "moi": 3, "lequipe": 4},
-        {"player": "Harit", "pos": "AiG", "chat": 5.8, "moi": 6, "lequipe": 6},
-        {"player": "Paixão", "pos": "AiG", "chat": 3.3, "moi": 2, "lequipe": 5},
-        {"player": "Gouiri", "pos": "AC", "chat": 6.1, "moi": 6, "lequipe": 7}
+        {
+          "player": "De Lange",
+          "pos": "GdB",
+          "chat": 2.1,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Weah",
+          "pos": "ArD",
+          "chat": 3.1,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Egan-Riley",
+          "pos": "DC",
+          "chat": 0.9,
+          "moi": 3,
+          "lequipe": 3
+        },
+        {
+          "player": "Aguerd",
+          "pos": "DC",
+          "chat": 1.6,
+          "moi": 2,
+          "lequipe": 3
+        },
+        {
+          "player": "Emerson",
+          "pos": "ArG",
+          "chat": 2.8,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Abdelli",
+          "pos": "MO",
+          "chat": 2.6,
+          "moi": 4,
+          "lequipe": 4
+        },
+        {
+          "player": "Højbjerg",
+          "pos": "MDC",
+          "chat": 2.3,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Gomes",
+          "pos": "MO",
+          "chat": 3.3,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Harit",
+          "pos": "AiG",
+          "chat": 5.8,
+          "moi": 6,
+          "lequipe": 6
+        },
+        {
+          "player": "Paixão",
+          "pos": "AiG",
+          "chat": 3.3,
+          "moi": 2,
+          "lequipe": 5
+        },
+        {
+          "player": "Gouiri",
+          "pos": "AC",
+          "chat": 6.1,
+          "moi": 6,
+          "lequipe": 7
+        }
       ]
     },
     {
@@ -54,20 +186,104 @@
       "home": false,
       "score": "2-0",
       "ratings": [
-        {"player": "De Lange", "pos": "GdB", "chat": 3.0, "moi": 3, "lequipe": 4},
-        {"player": "Weah", "pos": "ArD", "chat": 3.1, "moi": 3, "lequipe": 4},
-        {"player": "Egan-Riley", "pos": "DC", "chat": 2.9, "moi": 3, "lequipe": 3},
-        {"player": "Kondogbia", "pos": "MDC", "chat": 2.2, "moi": 2, "lequipe": 2},
-        {"player": "Emerson", "pos": "ArG", "chat": 1.9, "moi": 2, "lequipe": 6},
-        {"player": "Abdelli", "pos": "MO", "chat": 5.3, "moi": 5, "lequipe": 5},
-        {"player": "Højbjerg", "pos": "MDC", "chat": 4.5, "moi": 4, "lequipe": 6},
-        {"player": "Gomes", "pos": "MO", "chat": 4.0, "moi": 4, "lequipe": 3},
-        {"player": "Harit", "pos": "AiG", "chat": 4.2, "moi": 4, "lequipe": 5},
-        {"player": "Timber", "pos": "MC", "chat": 2.8, "moi": 2, "lequipe": 3},
-        {"player": "Gouiri", "pos": "AC", "chat": 3.0, "moi": 3, "lequipe": 4},
-        {"player": "Nnadi", "pos": "MDC", "chat": 4.4, "moi": 4, "lequipe": null},
-        {"player": "Abdallah", "pos": "AiD", "chat": 6.4, "moi": 6, "lequipe": 4},
-        {"player": "Aguerd", "pos": "DC", "chat": 5.7, "moi": 5, "lequipe": null}
+        {
+          "player": "De Lange",
+          "pos": "GdB",
+          "chat": 3.0,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Weah",
+          "pos": "ArD",
+          "chat": 3.1,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Egan-Riley",
+          "pos": "DC",
+          "chat": 2.9,
+          "moi": 3,
+          "lequipe": 3
+        },
+        {
+          "player": "Kondogbia",
+          "pos": "MDC",
+          "chat": 2.2,
+          "moi": 2,
+          "lequipe": 2
+        },
+        {
+          "player": "Emerson",
+          "pos": "ArG",
+          "chat": 1.9,
+          "moi": 2,
+          "lequipe": 6
+        },
+        {
+          "player": "Abdelli",
+          "pos": "MO",
+          "chat": 5.3,
+          "moi": 5,
+          "lequipe": 5
+        },
+        {
+          "player": "Højbjerg",
+          "pos": "MDC",
+          "chat": 4.5,
+          "moi": 4,
+          "lequipe": 6
+        },
+        {
+          "player": "Gomes",
+          "pos": "MO",
+          "chat": 4.0,
+          "moi": 4,
+          "lequipe": 3
+        },
+        {
+          "player": "Harit",
+          "pos": "AiG",
+          "chat": 4.2,
+          "moi": 4,
+          "lequipe": 5
+        },
+        {
+          "player": "Timber",
+          "pos": "MC",
+          "chat": 2.8,
+          "moi": 2,
+          "lequipe": 3
+        },
+        {
+          "player": "Gouiri",
+          "pos": "AC",
+          "chat": 3.0,
+          "moi": 3,
+          "lequipe": 4
+        },
+        {
+          "player": "Nnadi",
+          "pos": "MDC",
+          "chat": 4.4,
+          "moi": 4,
+          "lequipe": null
+        },
+        {
+          "player": "Abdallah",
+          "pos": "AiD",
+          "chat": 6.4,
+          "moi": 6,
+          "lequipe": 4
+        },
+        {
+          "player": "Aguerd",
+          "pos": "DC",
+          "chat": 5.7,
+          "moi": 5,
+          "lequipe": null
+        }
       ]
     },
     {
@@ -79,18 +295,206 @@
       "home": false,
       "score": "1-0",
       "ratings": [
-        {"player": "De Lange", "pos": "GdB", "chat": 4.6, "moi": 5, "lequipe": 5},
-        {"player": "Weah", "pos": "ArD", "chat": 1.3, "moi": 2, "lequipe": 4},
-        {"player": "Egan-Riley", "pos": "DC", "chat": 4.3, "moi": 4, "lequipe": 6},
-        {"player": "Aguerd", "pos": "DC", "chat": 2.8, "moi": 4, "lequipe": 6},
-        {"player": "Emerson", "pos": "ArG", "chat": 2.7, "moi": 3, "lequipe": 6},
-        {"player": "Højbjerg", "pos": "MDC", "chat": 3.1, "moi": 3, "lequipe": 6},
-        {"player": "Harit", "pos": "AiG", "chat": 5.6, "moi": 5, "lequipe": 6},
-        {"player": "Gomes", "pos": "MO", "chat": 1.5, "moi": 1, "lequipe": 3},
-        {"player": "Abdelli", "pos": "MO", "chat": 3.8, "moi": 4, "lequipe": 5},
-        {"player": "Paixão", "pos": "AiG", "chat": 2.7, "moi": 3, "lequipe": 5},
-        {"player": "Gouiri", "pos": "AC", "chat": 5.5, "moi": 5, "lequipe": 5},
-        {"player": "Abdallah", "pos": "AiD", "chat": 3.1, "moi": 2, "lequipe": null}
+        {
+          "player": "De Lange",
+          "pos": "GdB",
+          "chat": 4.6,
+          "moi": 5,
+          "lequipe": 5
+        },
+        {
+          "player": "Weah",
+          "pos": "ArD",
+          "chat": 1.3,
+          "moi": 2,
+          "lequipe": 4
+        },
+        {
+          "player": "Egan-Riley",
+          "pos": "DC",
+          "chat": 4.3,
+          "moi": 4,
+          "lequipe": 6
+        },
+        {
+          "player": "Aguerd",
+          "pos": "DC",
+          "chat": 2.8,
+          "moi": 4,
+          "lequipe": 6
+        },
+        {
+          "player": "Emerson",
+          "pos": "ArG",
+          "chat": 2.7,
+          "moi": 3,
+          "lequipe": 6
+        },
+        {
+          "player": "Højbjerg",
+          "pos": "MDC",
+          "chat": 3.1,
+          "moi": 3,
+          "lequipe": 6
+        },
+        {
+          "player": "Harit",
+          "pos": "AiG",
+          "chat": 5.6,
+          "moi": 5,
+          "lequipe": 6
+        },
+        {
+          "player": "Gomes",
+          "pos": "MO",
+          "chat": 1.5,
+          "moi": 1,
+          "lequipe": 3
+        },
+        {
+          "player": "Abdelli",
+          "pos": "MO",
+          "chat": 3.8,
+          "moi": 4,
+          "lequipe": 5
+        },
+        {
+          "player": "Paixão",
+          "pos": "AiG",
+          "chat": 2.7,
+          "moi": 3,
+          "lequipe": 5
+        },
+        {
+          "player": "Gouiri",
+          "pos": "AC",
+          "chat": 5.5,
+          "moi": 5,
+          "lequipe": 5
+        },
+        {
+          "player": "Abdallah",
+          "pos": "AiD",
+          "chat": 3.1,
+          "moi": 2,
+          "lequipe": null
+        }
+      ]
+    },
+    {
+      "id": "besiktas-jk-2026-09-17",
+      "date": "2026-09-17",
+      "opponent": "Beşiktaş JK",
+      "competition": "UEFA Europa League",
+      "journee": null,
+      "home": false,
+      "score": "4-1",
+      "ratings": [
+        {
+          "player": "De Lange",
+          "pos": "GdB",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Weah",
+          "pos": "ArD",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Egan-Riley",
+          "pos": "DC",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Cornelius",
+          "pos": "DC",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Garcia",
+          "pos": "ArG",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Højbjerg",
+          "pos": "MDC",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Abdelli",
+          "pos": "MO",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Abdallah",
+          "pos": "AiD",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Gomes",
+          "pos": "MO",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Harit",
+          "pos": "AiG",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Maupay",
+          "pos": "AC",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Emerson",
+          "pos": "ArG",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Paixão",
+          "pos": "AiG",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Aguerd",
+          "pos": "DC",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        },
+        {
+          "player": "Gouiri",
+          "pos": "AC",
+          "chat": null,
+          "moi": null,
+          "lequipe": null
+        }
       ]
     }
   ]
