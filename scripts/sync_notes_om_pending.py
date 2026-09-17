@@ -17,6 +17,11 @@ from datetime import datetime
 import requests
 
 try:
+    from curl_cffi import requests as curl_requests
+except ImportError:
+    curl_requests = None
+
+try:
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 except Exception:
@@ -120,6 +125,23 @@ def delete_pending(doc_id):
     requests.delete(f"{BASE}/{doc_id}", timeout=25).raise_for_status()
 
 
+def fetch_score(event_id):
+    """score final via l'API Sofascore (curl_cffi, meme contournement anti-bot
+    que les autres scripts) : le formulaire de pointage ne l'envoie plus
+    (il est rempli avant le coup de sifflet, donc pas encore definitif a ce
+    moment-la). Best-effort : si indisponible, on laisse "?-?"."""
+    if curl_requests is None or not event_id:
+        return None
+    try:
+        r = curl_requests.get(f"https://api.sofascore.com/api/v1/event/{event_id}", impersonate="chrome124", timeout=20)
+        r.raise_for_status()
+        ev = r.json()["event"]
+        return f"{ev['homeScore'].get('display','?')}-{ev['awayScore'].get('display','?')}"
+    except Exception as e:
+        print(f"    (score indisponible : {e})")
+        return None
+
+
 def main():
     data = {"updated": datetime.now().isoformat(timespec="seconds"), "matches": []}
     if os.path.exists(OUT):
@@ -161,6 +183,7 @@ def main():
             player_short = short_name(full_name)
             pos = roster_pos.get(norm(player_short), "MC")
             ratings.append({"player": player_short, "pos": pos, "chat": None, "moi": None, "lequipe": None})
+        score = fetch_score(f.get("eventId")) or f.get("score") or "?-?"
         entry = {
             "id": f"{slugify(opponent)}-{date}",
             "date": date,
@@ -168,7 +191,7 @@ def main():
             "competition": f.get("competition") or "?",
             "journee": None,
             "home": bool(f.get("home")),
-            "score": f.get("score") or "?-?",
+            "score": score,
             "ratings": ratings,
         }
         data["matches"].append(entry)

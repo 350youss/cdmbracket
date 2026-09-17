@@ -3,6 +3,7 @@ name: Sync Notes OM pending checklist
 on:
   schedule:
     - cron: '*/5 * * * *'   # toutes les 5 minutes : recupere un pointage envoye depuis notes-om-admin.html
+                             # et rafraichit la compo du prochain match (feuille officielle 1h30-30min avant le coup d'envoi)
   workflow_dispatch: {}
 
 permissions:
@@ -19,20 +20,23 @@ jobs:
           python-version: '3.12'
 
       - name: Installe les dépendances
-        run: pip install requests
+        run: pip install requests curl_cffi
 
-      - name: Synchronise la file d'attente
+      - name: Synchronise la file d'attente (pointage manuel)
         run: python scripts/sync_notes_om_pending.py
 
-      - name: Commit et push si un match a été ajouté
+      - name: Rafraîchit la compo du prochain match
+        run: python scripts/fetch_next_lineup.py
+
+      - name: Commit et push si quelque chose a changé
         run: |
           git config user.name "predi-bot"
           git config user.email "actions@users.noreply.github.com"
-          if git diff --quiet -- data/notes-om.json; then
+          if git diff --quiet -- data/notes-om.json data/notes-om-next-lineup.json; then
             echo "Rien à synchroniser."
           else
-            git add data/notes-om.json
-            git commit -m "Ajoute le match pointé manuellement ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
+            git add data/notes-om.json data/notes-om-next-lineup.json
+            git commit -m "Sync Notes OM ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
             git pull --no-rebase --no-edit
             git push
           fi

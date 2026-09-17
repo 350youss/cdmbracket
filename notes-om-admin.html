@@ -37,11 +37,6 @@ h1{font-family:var(--title);font-weight:700;font-size:clamp(26px,5vw,36px);color
 .matchcard{margin-top:22px;background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
 .mc-title{font-family:var(--title);font-weight:700;font-size:18px;color:#fff;}
 .mc-meta{margin-top:4px;font-family:var(--body);font-size:12px;color:var(--sub);}
-.mc-picker{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;}
-.mc-chip{font-family:var(--body);font-weight:600;font-size:11.5px;color:var(--sub);background:var(--s2);
-  border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;}
-.mc-chip.active{background:var(--om);border-color:var(--om);color:#04202c;}
-.mc-chip:hover{color:#fff;}
 
 .section-title{margin-top:24px;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);}
@@ -97,7 +92,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const PENDING_COLLECTION = 'notes-om-pending';
-const OM_TEAM_ID = 1641;
 
 function escapeHtml(s){
   return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -110,83 +104,54 @@ function showToast(msg){
   showToast._t = setTimeout(() => t.classList.remove('show'), 2600);
 }
 
-async function sofa(path){
-  const res = await fetch('https://api.sofascore.com/api/v1' + path, {cache:'no-store'});
-  if (!res.ok) throw new Error('Sofascore ' + res.status);
-  return res.json();
-}
-
-let EVENTS = [];
-let currentEvent = null;
+let currentMatch = null;
 let players = []; // {name, checked, bench}
 
+/* la page ne parle plus jamais directement a l'API Sofascore : les
+   requetes cross-origin depuis kooradex.fr y sont bloquees (403), meme si
+   un appel depuis sofascore.com lui-meme passe. C'est un script serveur
+   (scripts/fetch_next_lineup.py, execute toutes les 5 min par GitHub
+   Actions) qui prepare la donnee et la publie en JSON statique du meme
+   domaine, sans souci de CORS. */
 async function loadEvents(){
   const content = document.getElementById('content');
   let data;
   try{
-    data = await sofa(`/team/${OM_TEAM_ID}/events/next/0`);
+    const res = await fetch('data/notes-om-next-lineup.json', {cache:'no-store'});
+    data = await res.json();
   }catch(e){
-    content.innerHTML = `<div class="state">Impossible de charger les prochains matchs Sofascore (${escapeHtml(e.message)}).</div>`;
+    content.innerHTML = `<div class="state">Impossible de charger le prochain match (${escapeHtml(e.message)}).</div>`;
     return;
   }
-  EVENTS = (data.events || []).slice(0, 5);
-  if (!EVENTS.length){
+  if (!data.eventId){
     content.innerHTML = `<div class="state">Aucun match &agrave; venir trouv&eacute;.</div>`;
     return;
   }
-  renderPicker();
-  selectEvent(EVENTS[0]);
+  currentMatch = data;
+  renderMatch();
 }
 
-function renderPicker(){
+function renderMatch(){
   const content = document.getElementById('content');
-  const chips = EVENTS.map((e,i) => {
-    const opp = e.homeTeam.id === OM_TEAM_ID ? e.awayTeam.name : e.homeTeam.name;
-    return `<button class="mc-chip${i===0?' active':''}" data-i="${i}">vs ${escapeHtml(opp)}</button>`;
-  }).join('');
+  const d = new Date(currentMatch.startTimestamp * 1000);
   content.innerHTML = `
     <div class="matchcard">
-      <div class="mc-title" id="mc-title"></div>
-      <div class="mc-meta" id="mc-meta"></div>
-      <div class="mc-picker">${chips}</div>
+      <div class="mc-title">OM ${currentMatch.home ? 'vs' : '@'} ${escapeHtml(currentMatch.opponent)}</div>
+      <div class="mc-meta">${escapeHtml(currentMatch.competition)} · ${d.toLocaleDateString('fr-FR', {day:'numeric', month:'long'})} · ${d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</div>
     </div>
     <div id="squad-zone"></div>`;
-  content.querySelectorAll('.mc-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      content.querySelectorAll('.mc-chip').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      selectEvent(EVENTS[+btn.dataset.i]);
-    });
-  });
-}
-
-async function selectEvent(ev){
-  currentEvent = ev;
-  const isHome = ev.homeTeam.id === OM_TEAM_ID;
-  const opponent = isHome ? ev.awayTeam.name : ev.homeTeam.name;
-  document.getElementById('mc-title').textContent = `OM ${isHome ? 'vs' : '@'} ${opponent}`;
-  const d = new Date(ev.startTimestamp * 1000);
-  document.getElementById('mc-meta').textContent = `${ev.tournament.name} · ${d.toLocaleDateString('fr-FR', {day:'numeric', month:'long'})} · ${d.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}`;
 
   const zone = document.getElementById('squad-zone');
-  zone.innerHTML = `<div class="state">Chargement de la feuille de match...</div>`;
-  let lineups;
-  try{
-    lineups = await sofa(`/event/${ev.id}/lineups`);
-  }catch(e){
-    zone.innerHTML = `<div class="state">Feuille de match pas encore disponible pour ce match. R&eacute;essaie plus pr&egrave;s du coup d'envoi.</div>`;
+  const starters = currentMatch.starters || [];
+  const bench = currentMatch.bench || [];
+  if (!starters.length && !bench.length){
+    zone.innerHTML = `<div class="state">Compositions pas encore annonc&eacute;es (g&eacute;n&eacute;ralement entre 1h30 et 30 min avant le coup d'envoi). Recharge la page plus tard.</div>`;
     return;
   }
-  const side = isHome ? lineups.home : lineups.away;
-  if (!side || !side.players || !side.players.length){
-    zone.innerHTML = `<div class="state">Compositions pas encore annonc&eacute;es. R&eacute;essaie plus tard.</div>`;
-    return;
-  }
-  players = side.players.map(p => ({
-    name: p.player.name,
-    checked: !p.substitute,
-    bench: !!p.substitute,
-  }));
+  players = [
+    ...starters.map(name => ({name, checked: true, bench: false})),
+    ...bench.map(name => ({name, checked: false, bench: true})),
+  ];
   renderSquad();
 }
 
@@ -219,7 +184,7 @@ function renderSquad(){
       renderSquad();
     });
   });
-  document.getElementById('btn-refresh').addEventListener('click', () => selectEvent(currentEvent));
+  document.getElementById('btn-refresh').addEventListener('click', loadEvents);
   document.getElementById('btn-send').addEventListener('click', sendPending);
 }
 
@@ -229,19 +194,17 @@ async function sendPending(){
   const btn = document.getElementById('btn-send');
   btn.disabled = true; btn.textContent = 'Envoi...';
   try{
-    let fresh;
-    try{ fresh = await sofa(`/event/${currentEvent.id}`); }catch(e){ fresh = {event: currentEvent}; }
-    const ev = fresh.event || currentEvent;
-    const isHome = ev.homeTeam.id === OM_TEAM_ID;
-    const opponent = isHome ? ev.awayTeam.name : ev.homeTeam.name;
-    const date = new Date(ev.startTimestamp * 1000).toISOString().slice(0,10);
-    const score = `${(ev.homeScore && ev.homeScore.display) ?? '?'}-${(ev.awayScore && ev.awayScore.display) ?? '?'}`;
-    await db.collection(PENDING_COLLECTION).doc(String(ev.id)).set({
-      eventId: ev.id,
-      date, opponent,
-      competition: ev.tournament.name,
-      home: isHome,
-      score,
+    const date = new Date(currentMatch.startTimestamp * 1000).toISOString().slice(0,10);
+    // le score final est recupere cote serveur au moment de la synchro
+    // (scripts/sync_notes_om_pending.py), pas ici : a l'heure ou tu
+    // pointes (souvent avant le coup de sifflet), il n'est pas encore
+    // definitif de toute facon.
+    await db.collection(PENDING_COLLECTION).doc(String(currentMatch.eventId)).set({
+      eventId: currentMatch.eventId,
+      date,
+      opponent: currentMatch.opponent,
+      competition: currentMatch.competition,
+      home: currentMatch.home,
       players: checked.map(p => ({name: p.name})),
       submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
     });

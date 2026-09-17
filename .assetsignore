@@ -4,6 +4,7 @@ data/*
 !data/rumeurs.json
 !data/transfers_l1.json
 !data/notes-om.json
+!data/notes-om-next-lineup.json
 .github/
 *.bat
 *.vbs
