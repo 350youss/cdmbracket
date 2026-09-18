@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-16T20:03:50",
- "sig": "71db98f4e2421ee9b9617e6338b129ba",
+ "updated": "2026-09-18T23:03:46",
+ "sig": "4d12978bca87ddc1ba45a1a18a493f71",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -121,6 +121,7 @@
   "SRFC|out|Jonathan Do Marcolino|FC Annecy": "2026-09-01",
   "SRFC|out|Yassir Zabiri|Racing": "2026-08-09",
   "SRFC|out|Seko Fofana|FC Porto": "2026-08-26",
+  "SRFC|out|Alidu Seidu|OGC Nice": "2026-09-18",
   "SRFC|out|Glen Kamara|QPR": "2026-08-09",
   "SRFC|out|Rayan Bamba|Le Mans FC": "2026-08-09",
   "SRFC|out|Nordan Mukiele|Montpellier": "2026-08-09",
@@ -331,6 +332,7 @@
   "OGCN|in|Axel Witsel|Girona FC": "2026-08-19",
   "OGCN|in|Mohamed Amoura|Wolfsburg": "2026-09-01",
   "OGCN|in|Elye Wahi|Francfort": "2026-08-24",
+  "OGCN|in|Alidu Seidu|Stade Rennais": "2026-09-18",
   "OGCN|in|Niels Nkounkou|Francfort": "2026-09-01",
   "OGCN|in|Zoumana Diallo|Nice Espoir": "2026-08-17",
   "OGCN|out|Mohamed-Ali Cho|Hull City": "2026-08-27",
@@ -1635,6 +1637,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-26"
+    },
+    {
+     "p": "Alidu Seidu",
+     "age": 26,
+     "pos": "DC",
+     "club": "OGC Nice",
+     "club_id": 417,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-18"
     },
     {
      "p": "Glen Kamara",
@@ -3833,6 +3845,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-24"
+    },
+    {
+     "p": "Alidu Seidu",
+     "age": 26,
+     "pos": "DC",
+     "club": "Stade Rennais",
+     "club_id": 273,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-18"
     },
     {
      "p": "Niels Nkounkou",
@@ -6846,24 +6868,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "36",
-    "p": "Alidu Seidu",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 26,
-    "val": 6.0,
-    "stats": {
-     "m": 24,
-     "s": 16,
-     "g": 0,
-     "a": 1,
-     "min": 1407
-    },
-    "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "5",
     "p": "Gonçalo Oliveira",
     "pos": "DC",
@@ -7611,11 +7615,11 @@
     "age": 23,
     "val": 20.0,
     "stats": {
-     "m": 34,
-     "s": 28,
+     "m": 35,
+     "s": 29,
      "g": 8,
      "a": 7,
-     "min": 2620
+     "min": 2642
     },
     "statsClub": "FC Nantes",
     "valDelta": 0.0,
@@ -8350,7 +8354,7 @@
     "p": "Alec Georgen",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 27,
+    "age": 28,
     "val": 1.5,
     "stats": {
      "m": 34,
@@ -8613,11 +8617,11 @@
     "age": 21,
     "val": 18.0,
     "stats": {
-     "m": 33,
-     "s": 33,
+     "m": 34,
+     "s": 34,
      "g": 0,
      "a": 0,
-     "min": 2940
+     "min": 2962
     },
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
@@ -8643,11 +8647,11 @@
     "age": 27,
     "val": 7.0,
     "stats": {
-     "m": 33,
-     "s": 31,
+     "m": 34,
+     "s": 32,
      "g": 0,
      "a": 2,
-     "min": 2765
+     "min": 2787
     },
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
@@ -8661,11 +8665,11 @@
     "age": 29,
     "val": 5.0,
     "stats": {
-     "m": 35,
-     "s": 33,
+     "m": 36,
+     "s": 34,
      "g": 1,
      "a": 1,
-     "min": 2838
+     "min": 2860
     },
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
@@ -8679,11 +8683,11 @@
     "age": 19,
     "val": 5.0,
     "stats": {
-     "m": 13,
-     "s": 8,
+     "m": 14,
+     "s": 9,
      "g": 1,
      "a": 0,
-     "min": 787
+     "min": 809
     },
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
@@ -8823,11 +8827,11 @@
     "age": 26,
     "val": 9.0,
     "stats": {
-     "m": 34,
-     "s": 32,
+     "m": 35,
+     "s": 33,
      "g": 2,
      "a": 5,
-     "min": 2854
+     "min": 2876
     },
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
@@ -8961,11 +8965,11 @@
     "age": 21,
     "val": 6.0,
     "stats": {
-     "m": 32,
-     "s": 16,
+     "m": 33,
+     "s": 17,
      "g": 6,
      "a": 6,
-     "min": 1531
+     "min": 1553
     },
     "statsClub": "Toulouse FC",
     "valDelta": 0.0,
@@ -9879,11 +9883,11 @@
     "age": 35,
     "val": 0.9,
     "stats": {
-     "m": 32,
-     "s": 32,
+     "m": 33,
+     "s": 33,
      "g": 0,
      "a": 0,
-     "min": 2879
+     "min": 2901
     },
     "statsClub": "FC Nantes",
     "valDelta": 0.0,
@@ -11378,6 +11382,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "36",
+    "p": "Alidu Seidu",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 26,
+    "val": 6.0,
+    "stats": {
+     "m": 24,
+     "s": 16,
+     "g": 0,
+     "a": 1,
+     "min": 1407
+    },
+    "statsClub": "Stade Rennais",
+    "valDelta": 0.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "35",
     "p": "Xavier Mandza",
     "pos": "DC",
@@ -11466,7 +11488,7 @@
     "p": "Hamza Koutoune",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 19,
+    "age": 20,
     "val": 0.15,
     "stats": {
      "m": 2,
@@ -12457,11 +12479,11 @@
     "age": 34,
     "val": 1.0,
     "stats": {
-     "m": 35,
-     "s": 27,
+     "m": 36,
+     "s": 28,
      "g": 3,
      "a": 4,
-     "min": 2304
+     "min": 2326
     },
     "statsClub": "Toulouse",
     "valDelta": 0.0,
