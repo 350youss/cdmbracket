@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-18T23:03:46",
- "sig": "4d12978bca87ddc1ba45a1a18a493f71",
+ "updated": "2026-09-19T23:03:53",
+ "sig": "397e01e228834979c16ec3189f42d83c",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -300,6 +300,7 @@
   "HAC|out|Godson Kyeremeh|Red Star FC": "2026-09-01",
   "HAC|out|Mokrane Bentoumi|Roda JC": "2026-08-27",
   "HAC|out|Noam Obougou|AS Nancy": "2026-08-12",
+  "HAC|out|Paul Argney|Dinan Léhon": "2026-09-19",
   "HAC|out|Abdoulaye Touré|Sans club": "2026-08-09",
   "AJA|in|Arthur Piedfort|KVC Westerlo": "2026-08-09",
   "AJA|in|Danny Namaso|FC Porto": "2026-08-09",
@@ -3507,6 +3508,16 @@
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-12"
+    },
+    {
+     "p": "Paul Argney",
+     "age": 20,
+     "pos": "GdB",
+     "club": "Dinan Léhon",
+     "club_id": 46324,
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-09-19"
     },
     {
      "p": "Abdoulaye Touré",
@@ -10326,24 +10337,6 @@
     "statsClub": "FCV Dender EH",
     "valDelta": 0.0,
     "valSince": "27/08/2026"
-   },
-   {
-    "n": "50",
-    "p": "Paul Argney",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 20,
-    "val": 0.2,
-    "stats": {
-     "m": 2,
-     "s": 2,
-     "g": 0,
-     "a": 0,
-     "min": 180
-    },
-    "statsClub": "Le Havre AC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
    },
    {
     "n": "15",
