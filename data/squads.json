@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-20T00:00:56",
- "sig": "393d7f3f4ee890a17983dbbdf14f884e",
+ "updated": "2026-09-20T21:00:49",
+ "sig": "bfd2a67576cb258e70672b72356333e5",
  "squads": {
   "FCB": [
    {
@@ -2396,6 +2396,24 @@
     "valSince": "20/09/2026"
    },
    {
+    "n": "53",
+    "p": "James McConnell",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 22,
+    "val": 1.5,
+    "stats": {
+     "m": 0,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 0
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "20/09/2026"
+   },
+   {
     "n": "10",
     "p": "Alexis Mac Allister",
     "pos": "MC",
@@ -2528,18 +2546,6 @@
     "valSince": "20/09/2026"
    },
    {
-    "n": "67",
-    "p": "Lewis Koumas",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 21,
-    "val": 4.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "20/09/2026"
-   },
-   {
     "n": "14",
     "p": "Federico Chiesa",
     "pos": "AiD",
@@ -2590,6 +2596,18 @@
      "min": 2872
     },
     "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "20/09/2026"
+   },
+   {
+    "n": "67",
+    "p": "Lewis Koumas",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 4.0,
+    "stats": null,
+    "statsClub": null,
     "valDelta": 0.0,
     "valSince": "20/09/2026"
    }
