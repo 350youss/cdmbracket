@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-21T00:18:04",
+  "updated": "2026-09-21T13:22:01",
   "matches": [
     {
       "id": "strasbourg-2026-08-21",
@@ -511,56 +511,56 @@
           "pos": "GdB",
           "chat": 3.8,
           "moi": 3.5,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Weah",
           "pos": "ArD",
           "chat": 1.6,
           "moi": 1.5,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Egan-Riley",
           "pos": "DC",
           "chat": 5.3,
           "moi": 4.0,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Aguerd",
           "pos": "DC",
           "chat": 4.2,
           "moi": 4.0,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Emerson",
           "pos": "ArG",
           "chat": 1.1,
           "moi": 1.0,
-          "lequipe": null
+          "lequipe": 4
         },
         {
           "player": "Højbjerg",
           "pos": "MDC",
           "chat": 2.6,
           "moi": 3.0,
-          "lequipe": null
+          "lequipe": 6
         },
         {
           "player": "Abdelli",
           "pos": "MO",
           "chat": 4.9,
           "moi": 5.0,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Harit",
           "pos": "AiG",
           "chat": 4.9,
           "moi": 5.0,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Paixão",
@@ -574,21 +574,21 @@
           "pos": "AC",
           "chat": 4.2,
           "moi": 5.0,
-          "lequipe": null
+          "lequipe": 6
         },
         {
           "player": "Maupay",
           "pos": "AC",
           "chat": 1.2,
           "moi": 1.0,
-          "lequipe": null
+          "lequipe": 3
         },
         {
           "player": "Gomes",
           "pos": "MO",
           "chat": 5.0,
           "moi": 4.0,
-          "lequipe": null
+          "lequipe": 5
         },
         {
           "player": "Abdallah",
