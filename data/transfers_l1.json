@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-19T23:03:53",
- "sig": "397e01e228834979c16ec3189f42d83c",
+ "updated": "2026-09-23T12:46:10",
+ "sig": "7a4ed48296f07d126af4e80481bf67a2",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -337,7 +337,7 @@
   "OGCN|in|Niels Nkounkou|Francfort": "2026-09-01",
   "OGCN|in|Zoumana Diallo|Nice Espoir": "2026-08-17",
   "OGCN|out|Mohamed-Ali Cho|Hull City": "2026-08-27",
-  "OGCN|out|Kojo Peprah Oppong|Fenerbahçe": "2026-08-28",
+  "OGCN|out|Kojo Oppong|Fenerbahçe": "2026-09-23",
   "OGCN|out|Charles Vanhoutte|Feyenoord": "2026-08-09",
   "OGCN|out|Jérémie Boga|Juventus": "2026-08-09",
   "OGCN|out|Aliou Baldé|FC Saint-Gall": "2026-08-09",
@@ -3900,14 +3900,14 @@
      "fs": "2026-08-27"
     },
     {
-     "p": "Kojo Peprah Oppong",
+     "p": "Kojo Oppong",
      "age": 22,
      "pos": "DC",
      "club": "Fenerbahçe",
      "club_id": 36,
      "type": "paid",
      "val": 12.0,
-     "fs": "2026-08-28"
+     "fs": "2026-09-23"
     },
     {
      "p": "Charles Vanhoutte",
@@ -5521,7 +5521,7 @@
     "p": "Romain Perraud",
     "pos": "ArG",
     "grp": "DEF",
-    "age": 28,
+    "age": 29,
     "val": 7.0,
     "stats": {
      "m": 41,
@@ -7095,6 +7095,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "65",
+    "p": "Henrick Do Marcolino",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 20,
+    "val": 0.3,
+    "stats": {
+     "m": 1,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 2
+    },
+    "statsClub": "Stade Rennais FC",
+    "valDelta": 0.0,
+    "valSince": "21/09/2026"
+   },
+   {
     "n": "90",
     "p": "Issa Soumaré",
     "pos": "AiG",
@@ -8343,7 +8361,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "30",
     "p": "Srdjan Kuzmic",
     "pos": "ArG",
     "grp": "DEF",
@@ -8617,6 +8635,24 @@
     "statsClub": "FC Lorient",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "42",
+    "p": "Mamadou Koné",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 19,
+    "val": 0.3,
+    "stats": {
+     "m": 2,
+     "s": 0,
+     "g": 1,
+     "a": 0,
+     "min": 44
+    },
+    "statsClub": "FC Lorient",
+    "valDelta": 0.0,
+    "valSince": "21/09/2026"
    }
   ],
   "TFC": [
@@ -9469,7 +9505,7 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "",
+    "n": "18",
     "p": "Omar Sissoko",
     "pos": "AC",
     "grp": "ATT",
@@ -10157,7 +10193,7 @@
     "valSince": "23/08/2026"
    },
    {
-    "n": "7",
+    "n": "10",
     "p": "Amine Sbaï",
     "pos": "AiG",
     "grp": "ATT",
@@ -11059,7 +11095,7 @@
     "p": "Assane Dioussé",
     "pos": "MDC",
     "grp": "MID",
-    "age": 28,
+    "age": 29,
     "val": 0.5,
     "stats": {
      "m": 16,
@@ -11583,7 +11619,7 @@
     "p": "Hicham Boudaoui",
     "pos": "MC",
     "grp": "MID",
-    "age": 26,
+    "age": 27,
     "val": 12.0,
     "stats": {
      "m": 32,
@@ -12685,7 +12721,7 @@
     "p": "Antoine Rabillard",
     "pos": "AC",
     "grp": "ATT",
-    "age": 30,
+    "age": 31,
     "val": 0.6,
     "stats": {
      "m": 34,
@@ -16021,6 +16057,18 @@
    {
     "d": "12/09/2026",
     "v": 1.0
+   }
+  ],
+  "1170001": [
+   {
+    "d": "21/09/2026",
+    "v": 0.3
+   }
+  ],
+  "1459673": [
+   {
+    "d": "21/09/2026",
+    "v": 0.3
    }
   ]
  }
