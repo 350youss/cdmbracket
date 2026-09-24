@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-16T18:31:01",
- "sig": "625de571d716f1b44a8dcc9622253908",
+ "updated": "2026-09-24T18:31:02",
+ "sig": "aff3504c6a507eb7b755dfe20f093240",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -139,6 +139,7 @@
   "CF63|out|Habib Keïta|Kocaelispor": "2026-08-18",
   "CF63|out|Abdoul Kader Bamba|FC Granada": "2026-08-18",
   "CF63|out|Famara Diédhiou|Al-Orobah": "2026-08-21",
+  "CF63|out|Yuliwes Bellache|Andrézieux": "2026-09-24",
   "CF63|out|Amine Saïd|GFA Rumilly Val": "2026-08-23",
   "CF63|out|Cheick Oumar Konaté|SK Beveren": "2026-09-04",
   "CF63|out|Maximiliano Caufriez|Sans club": "2026-08-18",
@@ -1688,6 +1689,15 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-21"
+    },
+    {
+     "p": "Yuliwes Bellache",
+     "age": 23,
+     "pos": "MC",
+     "club": "Andrézieux",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-09-24"
     },
     {
      "p": "Amine Saïd",
@@ -4149,7 +4159,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 23,
-    "val": 0.3
+    "val": 0.2
    },
    {
     "n": "15",
@@ -4157,7 +4167,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 23,
-    "val": 3.5
+    "val": 3.0
    },
    {
     "n": "18",
@@ -4165,7 +4175,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 24,
-    "val": 2.0
+    "val": 3.0
    },
    {
     "n": "26",
@@ -4173,7 +4183,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 29,
-    "val": 1.8
+    "val": 2.5
    },
    {
     "n": "6",
@@ -4181,7 +4191,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 28,
-    "val": 1.2
+    "val": 2.0
    },
    {
     "n": "11",
@@ -4205,7 +4215,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 20,
-    "val": 7.0
+    "val": 10.0
    },
    {
     "n": "13",
@@ -4216,12 +4226,20 @@
     "val": 2.0
    },
    {
+    "n": "14",
+    "p": "Áron Csongvai",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 25,
+    "val": 3.0
+   },
+   {
     "n": "16",
     "p": "Tamar Svetlin",
     "pos": "MDC",
     "grp": "MID",
     "age": 25,
-    "val": 2.5
+    "val": 3.0
    },
    {
     "n": "5",
@@ -4230,14 +4248,6 @@
     "grp": "MID",
     "age": 26,
     "val": 1.8
-   },
-   {
-    "n": "14",
-    "p": "Áron Csongvai",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 25,
-    "val": 1.7
    },
    {
     "n": "21",
@@ -4253,7 +4263,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 19,
-    "val": 0.05
+    "val": 0.2
    },
    {
     "n": "20",
@@ -4301,7 +4311,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 29,
-    "val": 2.5
+    "val": 3.0
    },
    {
     "n": "17",
@@ -4359,7 +4369,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 18,
-    "val": 25.0
+    "val": 15.0
    },
    {
     "n": "4",
@@ -4415,7 +4425,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 30,
-    "val": 1.0
+    "val": 0.9
    },
    {
     "n": "24",
@@ -4431,7 +4441,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 23,
-    "val": 7.0
+    "val": 6.0
    },
    {
     "n": "28",
@@ -4439,7 +4449,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 28,
-    "val": 2.0
+    "val": 1.8
    },
    {
     "n": "44",
@@ -4464,14 +4474,6 @@
     "grp": "MID",
     "age": 21,
     "val": 0.07
-   },
-   {
-    "n": "69",
-    "p": "Sacha Ziani",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 23,
-    "val": 0.0
    },
    {
     "n": "17",
@@ -4503,7 +4505,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 20,
-    "val": 10.0
+    "val": 7.0
    },
    {
     "n": "7",
@@ -4535,7 +4537,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 27,
-    "val": 2.0
+    "val": 1.8
    },
    {
     "n": "27",
@@ -4543,7 +4545,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 30,
-    "val": 0.8
+    "val": 1.0
    }
   ],
   "REIMS": [
@@ -4553,7 +4555,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 22,
-    "val": 1.5
+    "val": 2.5
    },
    {
     "n": "12",
@@ -4577,6 +4579,14 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 23,
+    "val": 5.0
+   },
+   {
+    "n": "28",
+    "p": "Elie N'Tamon",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 22,
     "val": 4.0
    },
    {
@@ -4585,15 +4595,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 29,
-    "val": 3.0
-   },
-   {
-    "n": "28",
-    "p": "Elie N'Tamon",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 22,
-    "val": 2.0
+    "val": 2.5
    },
    {
     "n": "27",
@@ -4625,7 +4627,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 18,
-    "val": 0.8
+    "val": 1.5
    },
    {
     "n": "63",
@@ -4668,19 +4670,11 @@
     "val": 4.0
    },
    {
-    "n": "8",
-    "p": "Yaya Fofana",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 22,
-    "val": 1.5
-   },
-   {
     "n": "30",
     "p": "John Patrick",
     "pos": "MC",
     "grp": "MID",
-    "age": 22,
+    "age": 23,
     "val": 0.8
    },
    {
@@ -4689,7 +4683,15 @@
     "pos": "MO",
     "grp": "MID",
     "age": 19,
-    "val": 7.0
+    "val": 10.0
+   },
+   {
+    "n": "8",
+    "p": "Yaya Fofana",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 22,
+    "val": 5.0
    },
    {
     "n": "",
@@ -4705,7 +4707,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 24,
-    "val": 2.5
+    "val": 3.0
    },
    {
     "n": "7",
@@ -4732,20 +4734,20 @@
     "val": 3.0
    },
    {
-    "n": "",
-    "p": "Amine Salama",
+    "n": "10",
+    "p": "Youssef El Kachati",
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
     "val": 1.0
    },
    {
-    "n": "10",
-    "p": "Youssef El Kachati",
+    "n": "",
+    "p": "Amine Salama",
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
-    "val": 0.65
+    "val": 0.8
    },
    {
     "n": "48",
@@ -4790,6 +4792,14 @@
     "val": 1.2
    },
    {
+    "n": "42",
+    "p": "Cristian Devenish",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 25,
+    "val": 1.2
+   },
+   {
     "n": "4",
     "p": "Michel Mboula",
     "pos": "DC",
@@ -4798,20 +4808,12 @@
     "val": 0.9
    },
    {
-    "n": "42",
-    "p": "Cristian Devenish",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 25,
-    "val": 0.8
-   },
-   {
     "n": "98",
     "p": "Idris Mohamed",
     "pos": "DC",
     "grp": "DEF",
     "age": 22,
-    "val": 0.35
+    "val": 0.5
    },
    {
     "n": "3",
@@ -4843,7 +4845,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 20,
-    "val": 5.0
+    "val": 4.0
    },
    {
     "n": "6",
@@ -4878,14 +4880,6 @@
     "val": 2.0
    },
    {
-    "n": "21",
-    "p": "Jahyann Pandore",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 18,
-    "val": 0.2
-   },
-   {
     "n": "10",
     "p": "Téji Savanier",
     "pos": "MO",
@@ -4899,6 +4893,22 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 23,
+    "val": 1.5
+   },
+   {
+    "n": "21",
+    "p": "Jahyann Pandore",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 18,
+    "val": 1.0
+   },
+   {
+    "n": "38",
+    "p": "Hamza Kadamani",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 17,
     "val": 1.0
    },
    {
@@ -4918,12 +4928,12 @@
     "val": 0.5
    },
    {
-    "n": "38",
-    "p": "Hamza Kadamani",
-    "pos": "AiG",
+    "n": "11",
+    "p": "Pape Moussa Fall",
+    "pos": "AC",
     "grp": "ATT",
-    "age": 17,
-    "val": 0.1
+    "age": 22,
+    "val": 9.0
    },
    {
     "n": "22",
@@ -4934,20 +4944,12 @@
     "val": 4.5
    },
    {
-    "n": "11",
-    "p": "Pape Moussa Fall",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 22,
-    "val": 3.5
-   },
-   {
     "n": "7",
     "p": "Ibou Sané",
     "pos": "AC",
     "grp": "ATT",
     "age": 21,
-    "val": 0.9
+    "val": 0.8
    },
    {
     "n": "33",
@@ -4973,7 +4975,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 23,
-    "val": 2.5
+    "val": 3.0
    },
    {
     "n": "50",
@@ -5005,7 +5007,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 21,
-    "val": 2.0
+    "val": 3.0
    },
    {
     "n": "15",
@@ -5069,7 +5071,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 23,
-    "val": 1.5
+    "val": 2.0
    },
    {
     "n": "77",
@@ -5077,7 +5079,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 22,
-    "val": 1.2
+    "val": 1.0
    },
    {
     "n": "26",
@@ -5128,16 +5130,16 @@
     "val": 0.7
    },
    {
-    "n": "10",
-    "p": "Yassine Benhattab",
+    "n": "18",
+    "p": "Nicolas Pays",
     "pos": "AiD",
     "grp": "ATT",
     "age": 23,
-    "val": 2.0
+    "val": 3.0
    },
    {
-    "n": "18",
-    "p": "Nicolas Pays",
+    "n": "10",
+    "p": "Yassine Benhattab",
     "pos": "AiD",
     "grp": "ATT",
     "age": 23,
@@ -5149,7 +5151,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 20,
-    "val": 1.0
+    "val": 1.5
    },
    {
     "n": "22",
@@ -5202,14 +5204,6 @@
     "val": 0.2
    },
    {
-    "n": "28",
-    "p": "Ivan M'Bahia",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 21,
-    "val": 2.5
-   },
-   {
     "n": "3",
     "p": "Andy Pelmard",
     "pos": "DC",
@@ -5218,12 +5212,12 @@
     "val": 2.0
    },
    {
-    "n": "21",
-    "p": "Yoann Salmier",
+    "n": "28",
+    "p": "Ivan M'Bahia",
     "pos": "DC",
     "grp": "DEF",
-    "age": 33,
-    "val": 0.6
+    "age": 21,
+    "val": 2.0
    },
    {
     "n": "4",
@@ -5231,7 +5225,15 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 20,
-    "val": 0.2
+    "val": 0.7
+   },
+   {
+    "n": "21",
+    "p": "Yoann Salmier",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 33,
+    "val": 0.6
    },
    {
     "n": "45",
@@ -5247,7 +5249,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 20,
-    "val": 0.9
+    "val": 0.8
    },
    {
     "n": "12",
@@ -5282,20 +5284,20 @@
     "val": 0.5
    },
    {
+    "n": "5",
+    "p": "Jean Grillot",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 20,
+    "val": 0.5
+   },
+   {
     "n": "13",
     "p": "Julien Astic",
     "pos": "MDC",
     "grp": "MID",
     "age": 21,
     "val": 0.25
-   },
-   {
-    "n": "5",
-    "p": "Jean Grillot",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 20,
-    "val": 0.2
    },
    {
     "n": "2",
@@ -5319,15 +5321,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 22,
-    "val": 0.6
-   },
-   {
-    "n": "8",
-    "p": "Yuliwes Bellache",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 23,
-    "val": 0.07
+    "val": 0.5
    },
    {
     "n": "11",
@@ -5351,7 +5345,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 21,
-    "val": 1.0
+    "val": 0.8
    },
    {
     "n": "17",
@@ -5359,7 +5353,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 21,
-    "val": 0.25
+    "val": 0.4
    },
    {
     "n": "19",
@@ -5378,20 +5372,20 @@
     "val": 0.6
    },
    {
+    "n": "90",
+    "p": "Christ Okou",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 20,
+    "val": 0.4
+   },
+   {
     "n": "23",
     "p": "Adrien Hunou",
     "pos": "AC",
     "grp": "ATT",
     "age": 32,
     "val": 0.25
-   },
-   {
-    "n": "90",
-    "p": "Christ Okou",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 20,
-    "val": 0.15
    },
    {
     "n": "29",
@@ -5436,12 +5430,20 @@
     "val": 1.5
    },
    {
+    "n": "4",
+    "p": "Elyaz Zidane",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 1.0
+   },
+   {
     "n": "6",
     "p": "Bradley Danger",
     "pos": "DC",
     "grp": "DEF",
     "age": 28,
-    "val": 0.8
+    "val": 0.7
    },
    {
     "n": "5",
@@ -5458,14 +5460,6 @@
     "grp": "DEF",
     "age": 33,
     "val": 0.3
-   },
-   {
-    "n": "4",
-    "p": "Elyaz Zidane",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.2
    },
    {
     "n": "25",
@@ -5489,7 +5483,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 23,
-    "val": 0.9
+    "val": 1.0
    },
    {
     "n": "80",
@@ -5505,7 +5499,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 21,
-    "val": 0.4
+    "val": 0.7
    },
    {
     "n": "21",
@@ -5537,7 +5531,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 24,
-    "val": 0.35
+    "val": 0.5
    },
    {
     "n": "10",
@@ -5593,7 +5587,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 27,
-    "val": 1.0
+    "val": 1.2
    },
    {
     "n": "9",
@@ -5619,7 +5613,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 25,
-    "val": 0.15
+    "val": 0.2
    },
    {
     "n": "30",
@@ -5627,7 +5621,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 23,
-    "val": 0.0
+    "val": 0.05
    },
    {
     "n": "3",
@@ -5642,7 +5636,7 @@
     "p": "Mathis Magnin",
     "pos": "DC",
     "grp": "DEF",
-    "age": 24,
+    "age": 25,
     "val": 1.5
    },
    {
@@ -5686,20 +5680,20 @@
     "val": 0.07
    },
    {
+    "n": "13",
+    "p": "Corentin Issanchou",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 21,
+    "val": 0.4
+   },
+   {
     "n": "28",
     "p": "Steven Luyambula",
     "pos": "ArD",
     "grp": "DEF",
     "age": 23,
     "val": 0.4
-   },
-   {
-    "n": "13",
-    "p": "Corentin Issanchou",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 21,
-    "val": 0.07
    },
    {
     "n": "6",
@@ -5715,7 +5709,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 25,
-    "val": 0.35
+    "val": 0.5
    },
    {
     "n": "29",
@@ -5723,7 +5717,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 22,
-    "val": 0.3
+    "val": 0.5
    },
    {
     "n": "22",
@@ -5754,7 +5748,7 @@
     "p": "Mathis Saka",
     "pos": "MO",
     "grp": "MID",
-    "age": 19,
+    "age": 20,
     "val": 0.5
    },
    {
@@ -5771,7 +5765,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 21,
-    "val": 0.4
+    "val": 0.5
    },
    {
     "n": "27",
@@ -5832,6 +5826,14 @@
     "val": 0.0
    },
    {
+    "n": "4",
+    "p": "Axel Dodote",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 19,
+    "val": 0.5
+   },
+   {
     "n": "88",
     "p": "Axel Bamba",
     "pos": "DC",
@@ -5854,14 +5856,6 @@
     "grp": "DEF",
     "age": 32,
     "val": 0.35
-   },
-   {
-    "n": "4",
-    "p": "Axel Dodote",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.3
    },
    {
     "n": "22",
@@ -5901,7 +5895,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 25,
-    "val": 0.6
+    "val": 0.5
    },
    {
     "n": "21",
@@ -5909,7 +5903,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 31,
-    "val": 1.0
+    "val": 0.9
    },
    {
     "n": "27",
@@ -5925,7 +5919,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 22,
-    "val": 0.35
+    "val": 0.6
    },
    {
     "n": "5",
@@ -5933,7 +5927,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 28,
-    "val": 0.25
+    "val": 0.35
    },
    {
     "n": "25",
@@ -5984,6 +5978,22 @@
     "val": 0.1
    },
    {
+    "n": "9",
+    "p": "Babacar Leye",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 26,
+    "val": 0.6
+   },
+   {
+    "n": "7",
+    "p": "Hacène Benali",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 26,
+    "val": 0.5
+   },
+   {
     "n": "18",
     "p": "Jérémy Sebas",
     "pos": "AC",
@@ -5992,28 +6002,12 @@
     "val": 0.5
    },
    {
-    "n": "7",
-    "p": "Hacène Benali",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 26,
-    "val": 0.35
-   },
-   {
-    "n": "9",
-    "p": "Babacar Leye",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 26,
-    "val": 0.35
-   },
-   {
     "n": "56",
     "p": "Abdoulaye Mbaye",
     "pos": "AC",
     "grp": "ATT",
     "age": 20,
-    "val": 0.0
+    "val": 0.1
    }
   ],
   "USLD": [
@@ -6023,7 +6017,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 29,
-    "val": 0.3
+    "val": 0.4
    },
    {
     "n": "73",
@@ -6114,20 +6108,20 @@
     "val": 0.1
    },
    {
+    "n": "18",
+    "p": "Théna Massock",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 19,
+    "val": 0.5
+   },
+   {
     "n": "15",
     "p": "Steven Nzonzi",
     "pos": "MDC",
     "grp": "MID",
     "age": 37,
     "val": 0.3
-   },
-   {
-    "n": "18",
-    "p": "Théna Massock",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 18,
-    "val": 0.2
    },
    {
     "n": "25",
@@ -6143,7 +6137,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 23,
-    "val": 0.6
+    "val": 0.8
    },
    {
     "n": "11",
@@ -6159,7 +6153,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 27,
-    "val": 0.35
+    "val": 0.5
    },
    {
     "n": "9",
@@ -6170,20 +6164,20 @@
     "val": 0.4
    },
    {
-    "n": "93",
-    "p": "Alex Daho",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 22,
-    "val": 0.25
-   },
-   {
     "n": "19",
     "p": "Souleymane Keita",
     "pos": "AiG",
     "grp": "ATT",
     "age": 20,
-    "val": 0.15
+    "val": 0.4
+   },
+   {
+    "n": "93",
+    "p": "Alex Daho",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 22,
+    "val": 0.4
    },
    {
     "n": "7",
@@ -6191,7 +6185,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 21,
-    "val": 1.0
+    "val": 2.0
    },
    {
     "n": "99",
@@ -6214,7 +6208,7 @@
     "p": "Pape Malick Dieng",
     "pos": "AC",
     "grp": "ATT",
-    "age": 22,
+    "age": 19,
     "val": 0.0
    },
    {
@@ -6228,20 +6222,20 @@
   ],
   "GF38": [
    {
+    "n": "1",
+    "p": "Alexandre Olliero",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 30,
+    "val": 0.3
+   },
+   {
     "n": "25",
     "p": "Théo Borne",
     "pos": "GdB",
     "grp": "GK",
     "age": 24,
     "val": 0.15
-   },
-   {
-    "n": "1",
-    "p": "Alexandre Olliero",
-    "pos": "GdB",
-    "grp": "GK",
-    "age": 30,
-    "val": 0.1
    },
    {
     "n": "16",
@@ -6273,7 +6267,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 22,
-    "val": 0.0
+    "val": 0.2
    },
    {
     "n": "27",
@@ -6292,6 +6286,14 @@
     "val": 1.2
    },
    {
+    "n": "19",
+    "p": "Nesta Zahui",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 23,
+    "val": 0.9
+   },
+   {
     "n": "97",
     "p": "Yvann Maçon",
     "pos": "ArD",
@@ -6300,20 +6302,12 @@
     "val": 0.8
    },
    {
-    "n": "19",
-    "p": "Nesta Zahui",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 23,
-    "val": 0.7
-   },
-   {
     "n": "48",
     "p": "Sakhalou Niakaté",
     "pos": "ArD",
     "grp": "DEF",
     "age": 20,
-    "val": 0.4
+    "val": 0.3
    },
    {
     "n": "22",
@@ -6337,7 +6331,15 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 22,
-    "val": 0.4
+    "val": 0.6
+   },
+   {
+    "n": "46",
+    "p": "Jules Mouton",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 21,
+    "val": 0.1
    },
    {
     "n": "45",
@@ -6348,19 +6350,19 @@
     "val": 0.0
    },
    {
-    "n": "46",
-    "p": "Jules Mouton",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 21,
-    "val": 0.0
-   },
-   {
     "n": "8",
     "p": "Lucas Bernadou",
     "pos": "MC",
     "grp": "MID",
-    "age": 25,
+    "age": 26,
+    "val": 0.5
+   },
+   {
+    "n": "10",
+    "p": "Baptiste Mouazan",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 24,
     "val": 0.5
    },
    {
@@ -6370,14 +6372,6 @@
     "grp": "MID",
     "age": 32,
     "val": 0.45
-   },
-   {
-    "n": "10",
-    "p": "Baptiste Mouazan",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 24,
-    "val": 0.4
    },
    {
     "n": "44",
@@ -6417,7 +6411,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 21,
-    "val": 0.28
+    "val": 0.4
    },
    {
     "n": "9",
@@ -6425,7 +6419,7 @@
     "pos": "DA",
     "grp": "MID",
     "age": 23,
-    "val": 0.35
+    "val": 0.25
    },
    {
     "n": "17",
@@ -6444,11 +6438,19 @@
     "val": 0.4
    },
    {
+    "n": "47",
+    "p": "Kyliann Fofana",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 20,
+    "val": 0.3
+   },
+   {
     "n": "12",
     "p": "Ugo Bonnet",
     "pos": "AC",
     "grp": "ATT",
-    "age": 32,
+    "age": 33,
     "val": 0.2
    },
    {
@@ -6457,14 +6459,6 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 21,
-    "val": 0.1
-   },
-   {
-    "n": "47",
-    "p": "Kyliann Fofana",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 20,
     "val": 0.1
    }
   ],
@@ -6483,7 +6477,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 29,
-    "val": 0.25
+    "val": 0.15
    },
    {
     "n": "40",
@@ -6494,19 +6488,19 @@
     "val": 0.0
    },
    {
-    "n": "7",
-    "p": "Donatien Gomis",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 31,
-    "val": 0.6
-   },
-   {
     "n": "36",
     "p": "Albin Demouchy",
     "pos": "DC",
     "grp": "DEF",
     "age": 24,
+    "val": 0.8
+   },
+   {
+    "n": "7",
+    "p": "Donatien Gomis",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 31,
     "val": 0.6
    },
    {
@@ -6539,7 +6533,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 21,
-    "val": 0.2
+    "val": 0.3
    },
    {
     "n": "2",
@@ -6579,7 +6573,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 22,
-    "val": 0.4
+    "val": 0.5
    },
    {
     "n": "8",
@@ -6611,7 +6605,7 @@
     "pos": "MD",
     "grp": "MID",
     "age": 26,
-    "val": 0.8
+    "val": 0.9
    },
    {
     "n": "20",
@@ -6619,14 +6613,14 @@
     "pos": "MD",
     "grp": "MID",
     "age": 23,
-    "val": 0.4
+    "val": 0.5
    },
    {
     "n": "23",
     "p": "Jasser Chamakh",
     "pos": "MG",
     "grp": "MID",
-    "age": 22,
+    "age": 23,
     "val": 0.1
    },
    {
@@ -6635,7 +6629,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 28,
-    "val": 1.8
+    "val": 1.5
    },
    {
     "n": "30",
@@ -6667,7 +6661,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 24,
-    "val": 0.7
+    "val": 0.8
    },
    {
     "n": "22",
@@ -6675,7 +6669,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
-    "val": 0.5
+    "val": 0.6
    }
   ],
   "NANCY": [
@@ -6700,7 +6694,7 @@
     "p": "Geoffrey Lembet",
     "pos": "GdB",
     "grp": "GK",
-    "age": 37,
+    "age": 38,
     "val": 0.05
    },
    {
@@ -6717,7 +6711,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 21,
-    "val": 1.0
+    "val": 1.2
    },
    {
     "n": "21",
@@ -6725,7 +6719,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 26,
-    "val": 0.8
+    "val": 0.9
    },
    {
     "n": "77",
@@ -6733,7 +6727,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 22,
-    "val": 0.4
+    "val": 0.7
    },
    {
     "n": "14",
@@ -6757,7 +6751,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 21,
-    "val": 1.5
+    "val": 1.8
    },
    {
     "n": "19",
@@ -6776,6 +6770,14 @@
     "val": 0.1
    },
    {
+    "n": "6",
+    "p": "Kouroufia Kébé",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 20,
+    "val": 0.8
+   },
+   {
     "n": "25",
     "p": "Jérémy Gélin",
     "pos": "MDC",
@@ -6784,19 +6786,11 @@
     "val": 0.8
    },
    {
-    "n": "6",
-    "p": "Kouroufia Kébé",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 20,
-    "val": 0.5
-   },
-   {
     "n": "18",
     "p": "Hugo Barbier",
     "pos": "MDC",
     "grp": "MID",
-    "age": 21,
+    "age": 22,
     "val": 0.2
    },
    {
@@ -6804,7 +6798,7 @@
     "p": "Mamadou Fofana",
     "pos": "MC",
     "grp": "MID",
-    "age": 25,
+    "age": 26,
     "val": 0.3
    },
    {
@@ -6845,7 +6839,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 26,
-    "val": 0.7
+    "val": 0.9
    },
    {
     "n": "70",
@@ -6856,6 +6850,14 @@
     "val": 1.0
    },
    {
+    "n": "7",
+    "p": "Zakaria Fdaouch",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 29,
+    "val": 0.7
+   },
+   {
     "n": "12",
     "p": "Ylan El Hadary",
     "pos": "AiG",
@@ -6864,20 +6866,20 @@
     "val": 0.7
    },
    {
-    "n": "7",
-    "p": "Zakaria Fdaouch",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 29,
-    "val": 0.6
-   },
-   {
     "n": "11",
     "p": "Sidi Cissé",
     "pos": "AiD",
     "grp": "ATT",
     "age": 23,
     "val": 0.15
+   },
+   {
+    "n": "9",
+    "p": "Ilyes Housni",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 1.0
    },
    {
     "n": "29",
@@ -6893,14 +6895,6 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 29,
-    "val": 0.7
-   },
-   {
-    "n": "9",
-    "p": "Ilyes Housni",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 21,
     "val": 0.7
    },
    {
@@ -6942,7 +6936,7 @@
     "p": "Matéo Gonzalez",
     "pos": "GdB",
     "grp": "GK",
-    "age": 20,
+    "age": 21,
     "val": 0.0
    },
    {
@@ -6950,7 +6944,7 @@
     "p": "Julien Kouadio",
     "pos": "DC",
     "grp": "DEF",
-    "age": 26,
+    "age": 27,
     "val": 1.0
    },
    {
@@ -6959,7 +6953,15 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 23,
-    "val": 0.6
+    "val": 0.7
+   },
+   {
+    "n": "23",
+    "p": "Mattéo Veillon",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 24,
+    "val": 0.5
    },
    {
     "n": "6",
@@ -6968,14 +6970,6 @@
     "grp": "DEF",
     "age": 30,
     "val": 0.4
-   },
-   {
-    "n": "23",
-    "p": "Mattéo Veillon",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 24,
-    "val": 0.3
    },
    {
     "n": "26",
@@ -7034,6 +7028,14 @@
     "val": 0.1
    },
    {
+    "n": "14",
+    "p": "Mohamed Koné",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 19,
+    "val": 0.6
+   },
+   {
     "n": "25",
     "p": "Paul Venot",
     "pos": "MC",
@@ -7050,19 +7052,11 @@
     "val": 0.4
    },
    {
-    "n": "14",
-    "p": "Mohamed Koné",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 19,
-    "val": 0.3
-   },
-   {
     "n": "22",
     "p": "Clément Billemaz",
     "pos": "MG",
     "grp": "MID",
-    "age": 27,
+    "age": 28,
     "val": 1.0
    },
    {
@@ -7071,7 +7065,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 20,
-    "val": 0.1
+    "val": 0.2
    },
    {
     "n": "11",
@@ -7087,7 +7081,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 20,
-    "val": 0.2
+    "val": 0.5
    },
    {
     "n": "7",
@@ -7111,7 +7105,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 24,
-    "val": 0.9
+    "val": 0.8
    },
    {
     "n": "9",
@@ -7161,7 +7155,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 22,
-    "val": 0.9
+    "val": 0.8
    },
    {
     "n": "3",
@@ -7193,7 +7187,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 21,
-    "val": 0.1
+    "val": 0.2
    },
    {
     "n": "22",
@@ -7201,7 +7195,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 26,
-    "val": 0.5
+    "val": 0.6
    },
    {
     "n": "35",
@@ -7217,7 +7211,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 23,
-    "val": 0.5
+    "val": 0.6
    },
    {
     "n": "6",
@@ -7228,20 +7222,28 @@
     "val": 0.8
    },
    {
-    "n": "13",
-    "p": "Francis Coquelin",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 35,
-    "val": 0.7
-   },
-   {
     "n": "8",
     "p": "Teddy Bouriaud",
     "pos": "MDC",
     "grp": "MID",
     "age": 29,
     "val": 0.5
+   },
+   {
+    "n": "13",
+    "p": "Francis Coquelin",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 35,
+    "val": 0.5
+   },
+   {
+    "n": "21",
+    "p": "Alessio Beaudouin",
+    "pos": "MDC",
+    "grp": "MID",
+    "age": 21,
+    "val": 0.25
    },
    {
     "n": "26",
@@ -7260,14 +7262,6 @@
     "val": 0.15
    },
    {
-    "n": "21",
-    "p": "Alessio Beaudouin",
-    "pos": "MDC",
-    "grp": "MID",
-    "age": 21,
-    "val": 0.1
-   },
-   {
     "n": "5",
     "p": "Julien Maggiotti",
     "pos": "MC",
@@ -7281,15 +7275,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 25,
-    "val": 0.1
-   },
-   {
-    "n": "",
-    "p": "Yanis Court",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 17,
-    "val": 0.0
+    "val": 0.2
    },
    {
     "n": "27",
@@ -7297,7 +7283,15 @@
     "pos": "MO",
     "grp": "MID",
     "age": 20,
-    "val": 0.0
+    "val": 0.1
+   },
+   {
+    "n": "32",
+    "p": "Yanis Court",
+    "pos": "MO",
+    "grp": "MID",
+    "age": 17,
+    "val": 0.1
    },
    {
     "n": "20",
@@ -7305,7 +7299,15 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 20,
-    "val": 0.4
+    "val": 0.6
+   },
+   {
+    "n": "31",
+    "p": "Mathys Houdayer",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 0.6
    },
    {
     "n": "11",
@@ -7324,14 +7326,6 @@
     "val": 0.35
    },
    {
-    "n": "31",
-    "p": "Mathys Houdayer",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 21,
-    "val": 0.3
-   },
-   {
     "n": "28",
     "p": "Abou Kanté",
     "pos": "AC",
@@ -7347,7 +7341,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 25,
-    "val": 0.7
+    "val": 0.9
    },
    {
     "n": "16",
@@ -7366,12 +7360,20 @@
     "val": 0.0
    },
    {
+    "n": "25",
+    "p": "Antoine Kerriou",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 23,
+    "val": 0.5
+   },
+   {
     "n": "15",
     "p": "Adrien Pinot",
     "pos": "DC",
     "grp": "DEF",
     "age": 25,
-    "val": 0.5
+    "val": 0.4
    },
    {
     "n": "20",
@@ -7379,15 +7381,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 26,
-    "val": 0.25
-   },
-   {
-    "n": "25",
-    "p": "Antoine Kerriou",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 23,
-    "val": 0.15
+    "val": 0.4
    },
    {
     "n": "4",
@@ -7395,7 +7389,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 22,
-    "val": 0.0
+    "val": 0.1
    },
    {
     "n": "12",
@@ -7406,7 +7400,7 @@
     "val": 0.6
    },
    {
-    "n": "",
+    "n": "29",
     "p": "Mathieu Mion",
     "pos": "ArG",
     "grp": "DEF",
@@ -7475,7 +7469,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 31,
-    "val": 0.25
+    "val": 0.2
    },
    {
     "n": "21",
@@ -7483,7 +7477,7 @@
     "pos": "MD",
     "grp": "MID",
     "age": 23,
-    "val": 0.5
+    "val": 0.7
    },
    {
     "n": "28",
@@ -7499,15 +7493,15 @@
     "pos": "MO",
     "grp": "MID",
     "age": 27,
-    "val": 0.4
+    "val": 0.6
    },
    {
-    "n": "",
+    "n": "11",
     "p": "Noah Fatar",
     "pos": "AiG",
     "grp": "ATT",
     "age": 24,
-    "val": 0.6
+    "val": 0.5
    },
    {
     "n": "64",
@@ -7515,7 +7509,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 27,
-    "val": 0.4
+    "val": 0.5
    },
    {
     "n": "7",
@@ -7523,7 +7517,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 21,
-    "val": 0.1
+    "val": 0.2
    },
    {
     "n": "9",
@@ -7539,15 +7533,15 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 24,
-    "val": 0.35
+    "val": 0.5
    },
    {
-    "n": "",
+    "n": "13",
     "p": "Ludéric Etonde",
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
-    "val": 0.0
+    "val": 0.1
    }
   ],
   "SOCH": [
@@ -7557,7 +7551,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 25,
-    "val": 0.7
+    "val": 0.5
    },
    {
     "n": "40",
@@ -7565,7 +7559,23 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 35,
-    "val": 0.07
+    "val": 0.15
+   },
+   {
+    "n": "26",
+    "p": "Élie N'Gatta",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 1.0
+   },
+   {
+    "n": "3",
+    "p": "Dalangunypole Gomis",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 22,
+    "val": 0.7
    },
    {
     "n": "4",
@@ -7574,14 +7584,6 @@
     "grp": "DEF",
     "age": 26,
     "val": 0.5
-   },
-   {
-    "n": "3",
-    "p": "Dalangunypole Gomis",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 22,
-    "val": 0.3
    },
    {
     "n": "97",
@@ -7608,14 +7610,6 @@
     "val": 0.25
    },
    {
-    "n": "26",
-    "p": "Élie N'Gatta",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.8
-   },
-   {
     "n": "17",
     "p": "Bendjaloud Youssouf",
     "pos": "ArD",
@@ -7624,12 +7618,20 @@
     "val": 0.2
    },
    {
+    "n": "21",
+    "p": "Bakary Diawara",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 17,
+    "val": 0.5
+   },
+   {
     "n": "23",
     "p": "Julien Masson",
     "pos": "MDC",
     "grp": "MID",
     "age": 28,
-    "val": 0.4
+    "val": 0.5
    },
    {
     "n": "8",
@@ -7638,14 +7640,6 @@
     "grp": "MID",
     "age": 21,
     "val": 0.2
-   },
-   {
-    "n": "21",
-    "p": "Bakary Diawara",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 17,
-    "val": 0.0
    },
    {
     "n": "24",
@@ -7680,20 +7674,20 @@
     "val": 0.6
    },
    {
-    "n": "77",
-    "p": "Landry Nomel",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 29,
-    "val": 0.25
-   },
-   {
     "n": "10",
     "p": "Boubacar Fofana",
     "pos": "AiG",
     "grp": "ATT",
     "age": 28,
-    "val": 0.15
+    "val": 0.4
+   },
+   {
+    "n": "77",
+    "p": "Landry Nomel",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 29,
+    "val": 0.35
    },
    {
     "n": "11",
@@ -7778,20 +7772,20 @@
     "val": 0.1
    },
    {
+    "n": "23",
+    "p": "Lenny Lacroix",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 23,
+    "val": 0.5
+   },
+   {
     "n": "6",
     "p": "Waly Diouf",
     "pos": "DC",
     "grp": "DEF",
     "age": 29,
     "val": 0.4
-   },
-   {
-    "n": "23",
-    "p": "Lenny Lacroix",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 23,
-    "val": 0.25
    },
    {
     "n": "5",
@@ -7823,7 +7817,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 26,
-    "val": 0.3
+    "val": 0.4
    },
    {
     "n": "42",
@@ -7831,10 +7825,10 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 19,
-    "val": 0.07
+    "val": 0.3
    },
    {
-    "n": "",
+    "n": "22",
     "p": "Tom Meynadier",
     "pos": "ArD",
     "grp": "DEF",
@@ -7847,7 +7841,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 23,
-    "val": 0.3
+    "val": 0.4
    },
    {
     "n": "19",
@@ -7863,7 +7857,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 26,
-    "val": 0.4
+    "val": 0.6
    },
    {
     "n": "18",
@@ -7871,15 +7865,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 26,
-    "val": 0.5
-   },
-   {
-    "n": "7",
-    "p": "Ben-Chayeel Hamada",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 23,
-    "val": 0.3
+    "val": 0.7
    },
    {
     "n": "21",
@@ -7887,7 +7873,15 @@
     "pos": "MC",
     "grp": "MID",
     "age": 23,
-    "val": 0.3
+    "val": 0.6
+   },
+   {
+    "n": "7",
+    "p": "Ben-Chayeel Hamada",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 23,
+    "val": 0.4
    },
    {
     "n": "14",
@@ -7911,7 +7905,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 28,
-    "val": 0.4
+    "val": 0.5
    },
    {
     "n": "4",
@@ -7946,12 +7940,20 @@
     "val": 0.4
    },
    {
+    "n": "9",
+    "p": "Tyris Dong",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 17,
+    "val": 0.5
+   },
+   {
     "n": "29",
     "p": "Alexis Ntamack",
     "pos": "AC",
     "grp": "ATT",
     "age": 22,
-    "val": 0.3
+    "val": 0.4
    },
    {
     "n": "90",
@@ -7959,7 +7961,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 21,
-    "val": 0.1
+    "val": 0.3
    },
    {
     "n": "11",
@@ -7968,14 +7970,6 @@
     "grp": "ATT",
     "age": 37,
     "val": 0.07
-   },
-   {
-    "n": "9",
-    "p": "Tyris Dong",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 17,
-    "val": 0.05
    }
   ]
  }
