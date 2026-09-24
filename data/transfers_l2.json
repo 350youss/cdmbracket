@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-24T18:31:02",
- "sig": "aff3504c6a507eb7b755dfe20f093240",
+ "updated": "2026-09-24T21:31:04",
+ "sig": "4d8bbdb40115423aa6980a1345e72f02",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -105,8 +105,9 @@
   "FCM|out|Joel Asoro|Apol. Limassol": "2026-08-18",
   "FCM|out|Joseph Nduquidi|Farense": "2026-08-18",
   "FCM|out|Ismaël Guerti|Grazer AK": "2026-08-18",
-  "FCM|out|Cléo Mélières|SC Bastia": "2026-08-18",
+  "FCM|out|Édouard Soumah-Abbad|Paris 13 Atl.": "2026-09-24",
   "FCM|out|Yannis Lawson|RFC Seraing": "2026-08-18",
+  "FCM|out|Cléo Mélières|SC Bastia": "2026-08-18",
   "FCM|out|Fodé Ballo-Touré|Sans club": "2026-08-18",
   "FCM|out|Benjamin Stambouli|Sans club": "2026-08-18",
   "MHSC|in|Yanis Zouaoui|Le Havre AC": "2026-08-28",
@@ -1365,19 +1366,28 @@
      "fs": "2026-08-18"
     },
     {
-     "p": "Cléo Mélières",
-     "age": 21,
-     "pos": "ArD",
-     "club": "SC Bastia",
+     "p": "Édouard Soumah-Abbad",
+     "age": 23,
+     "pos": "AiG",
+     "club": "Paris 13 Atl.",
      "type": "loan",
      "val": 0.0,
-     "fs": "2026-08-18"
+     "fs": "2026-09-24"
     },
     {
      "p": "Yannis Lawson",
      "age": 21,
      "pos": "ArG",
      "club": "RFC Seraing",
+     "type": "loan",
+     "val": 0.0,
+     "fs": "2026-08-18"
+    },
+    {
+     "p": "Cléo Mélières",
+     "age": 21,
+     "pos": "ArD",
+     "club": "SC Bastia",
      "type": "loan",
      "val": 0.0,
      "fs": "2026-08-18"
@@ -4918,14 +4928,6 @@
     "grp": "ATT",
     "age": 22,
     "val": 0.9
-   },
-   {
-    "n": "29",
-    "p": "Édouard Soumah-Abbad",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 23,
-    "val": 0.5
    },
    {
     "n": "11",
