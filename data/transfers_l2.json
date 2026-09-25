@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-24T21:31:04",
- "sig": "4d8bbdb40115423aa6980a1345e72f02",
+ "updated": "2026-09-25T12:31:01",
+ "sig": "f268c17c93793f564c59f19631084ab5",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -161,12 +161,12 @@
   "RED|out|Abdelsamad Hachem|Excel. Virton": "2026-09-16",
   "RED|out|Vincent Kany|Sans club": "2026-08-18",
   "RAF|in|Mathis Touho|FC Villefranche": "2026-08-18",
+  "RAF|in|Nachon Nsingi|La Louvière": "2026-08-18",
   "RAF|in|Mohamed Sylla|Bourg-en-Bresse": "2026-08-25",
   "RAF|in|Marco Essimi|Alverca": "2026-09-05",
   "RAF|in|Kelian Nsona|Casa Pia": "2026-09-02",
   "RAF|in|Steven Luyambula|US Orléans": "2026-08-18",
   "RAF|in|Damjan Pavlovic|Kauno Zalgiris": "2026-08-18",
-  "RAF|in|Nachon Nsingi|La Louvière": "2026-08-18",
   "RAF|in|Antonin Cartillier|FC Rouen 1899": "2026-08-18",
   "RAF|in|Mathis Saka|Toulouse": "2026-09-01",
   "RAF|out|Taïryk Arconte|Millwall": "2026-08-18",
@@ -259,12 +259,12 @@
   "GF38|out|Mamadou Diop|AJ Auxerre": "2026-08-18",
   "GF38|out|Yadaly Diaby|Vancouver": "2026-09-01",
   "GF38|out|Loris Mouyokolo|Baltika": "2026-08-18",
+  "GF38|out|Shaquil Delos|La Louvière": "2026-08-18",
   "GF38|out|Jessy Benet|Pau FC": "2026-08-18",
   "GF38|out|Gaëtan Paquiez|Pau FC": "2026-08-18",
   "GF38|out|Efe Sarıkaya|Gaziantep FK": "2026-09-05",
   "GF38|out|Maxime Pattier|US Saint-Malo": "2026-08-18",
   "GF38|out|Stone Mambo|FC Noah": "2026-08-18",
-  "GF38|out|Shaquil Delos|La Louvière": "2026-08-18",
   "GF38|out|Mamady Bangré|Sumqayit": "2026-09-12",
   "GF38|out|Mathieu Mion|US Boulogne": "2026-09-02",
   "GF38|out|Evans Maurin|Casa Pia": "2026-08-31",
@@ -1908,6 +1908,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Nachon Nsingi",
+     "age": 25,
+     "pos": "AC",
+     "club": "La Louvière",
+     "type": "paid",
+     "val": 0.1,
+     "fs": "2026-08-18"
+    },
+    {
      "p": "Mohamed Sylla",
      "age": 22,
      "pos": "DC",
@@ -1948,15 +1957,6 @@
      "age": 25,
      "pos": "MDC",
      "club": "Kauno Zalgiris",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Nachon Nsingi",
-     "age": 25,
-     "pos": "AC",
-     "club": "La Louvière",
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
@@ -2822,6 +2822,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Shaquil Delos",
+     "age": 27,
+     "pos": "ArD",
+     "club": "La Louvière",
+     "type": "paid",
+     "val": 0.2,
+     "fs": "2026-08-18"
+    },
+    {
      "p": "Jessy Benet",
      "age": 31,
      "pos": "MC",
@@ -2862,15 +2871,6 @@
      "age": 27,
      "pos": "DC",
      "club": "FC Noah",
-     "type": "none",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Shaquil Delos",
-     "age": 27,
-     "pos": "ArD",
-     "club": "La Louvière",
      "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
