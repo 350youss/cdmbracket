@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-23T12:46:10",
- "sig": "7a4ed48296f07d126af4e80481bf67a2",
+ "updated": "2026-09-27T11:03:57",
+ "sig": "70e367ce1fea961a98abc4af9d92acdf",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -249,8 +249,8 @@
   "SB29|in|Mathieu Patouillet|Al-Hilal": "2026-08-26",
   "SB29|in|Mamady Diambou|RB Salzbourg": "2026-08-13",
   "SB29|in|Noah Edjouma|LOSC Lille": "2026-09-01",
-  "SB29|in|Djylian N'Guessan|Saint-Étienne": "2026-09-04",
   "SB29|in|Djylian N'Guessan|Liverpool": "2026-09-04",
+  "SB29|in|Djylian N'Guessan|Saint-Étienne": "2026-09-04",
   "SB29|in|Egil Selvik|Watford": "2026-08-13",
   "SB29|in|Romain Cagnon|Sans club": "2026-08-19",
   "SB29|out|Grégoire Coudert|Burnley FC": "2026-08-19",
@@ -2981,8 +2981,8 @@
      "p": "Djylian N'Guessan",
      "age": 18,
      "pos": "AC",
-     "club": "Saint-Étienne",
-     "club_id": 618,
+     "club": "Liverpool",
+     "club_id": 31,
      "type": "loan",
      "val": 0.0,
      "fs": "2026-09-04"
@@ -2991,8 +2991,8 @@
      "p": "Djylian N'Guessan",
      "age": 18,
      "pos": "AC",
-     "club": "Liverpool",
-     "club_id": 31,
+     "club": "Saint-Étienne",
+     "club_id": 618,
      "type": "loan",
      "val": 0.0,
      "fs": "2026-09-04"
@@ -3156,7 +3156,7 @@
      "club": "Fenerbahçe",
      "club_id": 36,
      "type": "paid",
-     "val": 18.0,
+     "val": 17.1,
      "fs": "2026-08-09"
     },
     {
@@ -3840,7 +3840,7 @@
     {
      "p": "Mohamed Amoura",
      "age": 26,
-     "pos": "AC",
+     "pos": "AiG",
      "club": "Wolfsburg",
      "club_id": 82,
      "type": "loan",
@@ -4468,7 +4468,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 24,
-    "val": 25.0,
+    "val": 22.0,
     "stats": {
      "m": 26,
      "s": 26,
@@ -4477,7 +4477,7 @@
      "min": 2340
     },
     "statsClub": "Paris Saint-Germain",
-    "valDelta": 0.0,
+    "valDelta": -3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -4659,7 +4659,7 @@
     "p": "João Neves",
     "pos": "MC",
     "grp": "MID",
-    "age": 21,
+    "age": 22,
     "val": 140.0,
     "stats": {
      "m": 38,
@@ -4732,7 +4732,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 18,
-    "val": 10.0,
+    "val": 15.0,
     "stats": {
      "m": 13,
      "s": 7,
@@ -4741,7 +4741,7 @@
      "min": 685
     },
     "statsClub": "Paris Saint-Germain",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -4768,7 +4768,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 21,
-    "val": 35.0,
+    "val": 40.0,
     "stats": {
      "m": 44,
      "s": 41,
@@ -4777,7 +4777,7 @@
      "min": 3570
     },
     "statsClub": "Ajax",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -4786,7 +4786,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 19,
-    "val": 8.0,
+    "val": 6.0,
     "stats": {
      "m": 15,
      "s": 5,
@@ -4795,7 +4795,7 @@
      "min": 517
     },
     "statsClub": "Paris Saint-Germain",
-    "valDelta": 0.0,
+    "valDelta": -2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -4945,6 +4945,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "25",
+    "p": "Ismaëlo Ganiou",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 21,
+    "val": 30.0,
+    "stats": {
+     "m": 29,
+     "s": 28,
+     "g": 3,
+     "a": 0,
+     "min": 2541
+    },
+    "statsClub": "RC Lens",
+    "valDelta": 10.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "6",
     "p": "Samson Baidoo",
     "pos": "DC",
@@ -4981,21 +4999,21 @@
     "valSince": "01/09/2026"
    },
    {
-    "n": "25",
-    "p": "Ismaëlo Ganiou",
+    "n": "32",
+    "p": "Kyllian Antonio",
     "pos": "DC",
     "grp": "DEF",
-    "age": 21,
-    "val": 20.0,
+    "age": 18,
+    "val": 10.0,
     "stats": {
-     "m": 29,
-     "s": 28,
-     "g": 3,
-     "a": 0,
-     "min": 2541
+     "m": 7,
+     "s": 4,
+     "g": 0,
+     "a": 1,
+     "min": 382
     },
     "statsClub": "RC Lens",
-    "valDelta": 0.0,
+    "valDelta": 7.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5017,21 +5035,33 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "32",
-    "p": "Kyllian Antonio",
+    "n": "31",
+    "p": "Souleymane Sagnan",
     "pos": "DC",
     "grp": "DEF",
-    "age": 18,
+    "age": 21,
     "val": 3.0,
     "stats": {
-     "m": 7,
-     "s": 4,
+     "m": 0,
+     "s": 0,
      "g": 0,
-     "a": 1,
-     "min": 382
+     "a": 0,
+     "min": 0
     },
     "statsClub": "RC Lens",
-    "valDelta": 0.0,
+    "valDelta": 2.5,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "3",
+    "p": "Maik Nawrocki",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 25,
+    "val": 2.5,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5047,36 +5077,6 @@
      "g": 0,
      "a": 0,
      "min": 809
-    },
-    "statsClub": "RC Lens",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "3",
-    "p": "Maik Nawrocki",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 25,
-    "val": 1.5,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "31",
-    "p": "Souleymane Sagnan",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 21,
-    "val": 0.5,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
     },
     "statsClub": "RC Lens",
     "valDelta": 0.0,
@@ -5106,7 +5106,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 24,
-    "val": 2.2,
+    "val": 2.0,
     "stats": {
      "m": 0,
      "s": 0,
@@ -5115,7 +5115,7 @@
      "min": 0
     },
     "statsClub": "RC Lens",
-    "valDelta": 0.0,
+    "valDelta": -0.2,
     "valSince": "16/08/2026"
    },
    {
@@ -5155,6 +5155,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "8",
+    "p": "Yacine Titraoui",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 23,
+    "val": 9.0,
+    "stats": {
+     "m": 42,
+     "s": 40,
+     "g": 5,
+     "a": 3,
+     "min": 3543
+    },
+    "statsClub": "R Charleroi SC",
+    "valDelta": 2.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "5",
     "p": "Andrija Bulatovic",
     "pos": "MC",
@@ -5173,21 +5191,21 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "8",
-    "p": "Yacine Titraoui",
+    "n": "27",
+    "p": "Michaël Cuisance",
     "pos": "MC",
     "grp": "MID",
-    "age": 23,
-    "val": 7.0,
+    "age": 27,
+    "val": 6.0,
     "stats": {
-     "m": 42,
-     "s": 40,
-     "g": 5,
-     "a": 3,
-     "min": 3543
+     "m": 35,
+     "s": 33,
+     "g": 4,
+     "a": 6,
+     "min": 2934
     },
-    "statsClub": "R Charleroi SC",
-    "valDelta": 0.0,
+    "statsClub": "Hertha BSC",
+    "valDelta": 3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5209,21 +5227,21 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "27",
-    "p": "Michaël Cuisance",
-    "pos": "MC",
+    "n": "38",
+    "p": "Mezian Mesloub",
+    "pos": "MO",
     "grp": "MID",
-    "age": 27,
-    "val": 3.0,
+    "age": 16,
+    "val": 8.0,
     "stats": {
-     "m": 35,
-     "s": 33,
-     "g": 4,
-     "a": 6,
-     "min": 2934
+     "m": 1,
+     "s": 0,
+     "g": 1,
+     "a": 0,
+     "min": 11
     },
-    "statsClub": "Hertha BSC",
-    "valDelta": 0.0,
+    "statsClub": "RC Lens",
+    "valDelta": 7.5,
     "valSince": "16/08/2026"
    },
    {
@@ -5245,30 +5263,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "38",
-    "p": "Mezian Mesloub",
-    "pos": "MO",
-    "grp": "MID",
-    "age": 16,
-    "val": 0.5,
-    "stats": {
-     "m": 1,
-     "s": 0,
-     "g": 1,
-     "a": 0,
-     "min": 11
-    },
-    "statsClub": "RC Lens",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "19",
     "p": "Abdallah Sima",
     "pos": "AiG",
     "grp": "ATT",
     "age": 25,
-    "val": 5.0,
+    "val": 7.0,
     "stats": {
      "m": 27,
      "s": 9,
@@ -5277,7 +5277,7 @@
      "min": 982
     },
     "statsClub": "RC Lens",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5286,7 +5286,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 26,
-    "val": 4.0,
+    "val": 6.0,
     "stats": {
      "m": 35,
      "s": 33,
@@ -5295,7 +5295,7 @@
      "min": 2850
     },
     "statsClub": "La Gantoise",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5304,7 +5304,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 23,
-    "val": 2.0,
+    "val": 5.0,
     "stats": {
      "m": 13,
      "s": 12,
@@ -5313,7 +5313,7 @@
      "min": 1098
     },
     "statsClub": "Servette FC",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
     "valSince": "01/09/2026"
    },
    {
@@ -5396,7 +5396,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 26,
-    "val": 10.0,
+    "val": 12.0,
     "stats": {
      "m": 44,
      "s": 44,
@@ -5405,7 +5405,7 @@
      "min": 3945
     },
     "statsClub": "LOSC Lille",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5576,7 +5576,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 20,
-    "val": 1.2,
+    "val": 3.0,
     "stats": {
      "m": 16,
      "s": 9,
@@ -5585,7 +5585,7 @@
      "min": 800
     },
     "statsClub": "Servette FC",
-    "valDelta": 0.0,
+    "valDelta": 1.8,
     "valSince": "16/08/2026"
    },
    {
@@ -5666,7 +5666,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 23,
-    "val": 25.0,
+    "val": 30.0,
     "stats": {
      "m": 46,
      "s": 40,
@@ -5675,25 +5675,7 @@
      "min": 3404
     },
     "statsClub": "LOSC Lille",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "11",
-    "p": "Osame Sahraoui",
-    "pos": "AiG",
-    "grp": "ATT",
-    "age": 25,
-    "val": 9.0,
-    "stats": {
-     "m": 25,
-     "s": 7,
-     "g": 1,
-     "a": 2,
-     "min": 809
-    },
-    "statsClub": "LOSC Lille",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5702,7 +5684,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 22,
-    "val": 7.0,
+    "val": 10.0,
     "stats": {
      "m": 34,
      "s": 29,
@@ -5711,7 +5693,25 @@
      "min": 2408
     },
     "statsClub": "NEC Nijmegen",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "11",
+    "p": "Osame Sahraoui",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 25,
+    "val": 7.0,
+    "stats": {
+     "m": 25,
+     "s": 7,
+     "g": 1,
+     "a": 2,
+     "min": 809
+    },
+    "statsClub": "LOSC Lille",
+    "valDelta": -2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -5738,10 +5738,10 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 23,
-    "val": 1.8,
+    "val": 1.2,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
+    "valDelta": -0.6,
     "valSince": "16/08/2026"
    },
    {
@@ -5768,7 +5768,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 19,
-    "val": 8.0,
+    "val": 12.0,
     "stats": {
      "m": 22,
      "s": 5,
@@ -5777,7 +5777,7 @@
      "min": 709
     },
     "statsClub": "LOSC Lille",
-    "valDelta": 0.0,
+    "valDelta": 4.0,
     "valSince": "16/08/2026"
    },
    {
@@ -6052,7 +6052,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 23,
-    "val": 1.2,
+    "val": 2.0,
     "stats": {
      "m": 35,
      "s": 33,
@@ -6061,7 +6061,7 @@
      "min": 2990
     },
     "statsClub": "SCR Altach",
-    "valDelta": 0.0,
+    "valDelta": 0.8,
     "valSince": "16/08/2026"
    },
    {
@@ -6123,7 +6123,7 @@
     "p": "Tanner Tessmann",
     "pos": "MDC",
     "grp": "MID",
-    "age": 24,
+    "age": 25,
     "val": 10.0,
     "stats": {
      "m": 41,
@@ -6155,6 +6155,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "2",
+    "p": "Mads Bidstrup",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 25,
+    "val": 15.0,
+    "stats": {
+     "m": 36,
+     "s": 34,
+     "g": 0,
+     "a": 1,
+     "min": 3018
+    },
+    "statsClub": "RB Salzbourg",
+    "valDelta": 2.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "18",
     "p": "Khalis Merah",
     "pos": "MC",
@@ -6169,24 +6187,6 @@
      "min": 1698
     },
     "statsClub": "Olympique Lyonnais",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "2",
-    "p": "Mads Bidstrup",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 25,
-    "val": 13.0,
-    "stats": {
-     "m": 36,
-     "s": 34,
-     "g": 0,
-     "a": 1,
-     "min": 3018
-    },
-    "statsClub": "RB Salzbourg",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -6268,7 +6268,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 18,
-    "val": 10.0,
+    "val": 8.0,
     "stats": {
      "m": 11,
      "s": 2,
@@ -6277,7 +6277,7 @@
      "min": 293
     },
     "statsClub": "Olympique Lyonnais",
-    "valDelta": 0.0,
+    "valDelta": -2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -6304,7 +6304,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 22,
-    "val": 10.0,
+    "val": 12.0,
     "stats": {
      "m": 3,
      "s": 0,
@@ -6313,7 +6313,7 @@
      "min": 32
     },
     "statsClub": "Olympique Lyonnais",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -6322,7 +6322,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 20,
-    "val": 5.0,
+    "val": 8.0,
     "stats": {
      "m": 19,
      "s": 4,
@@ -6331,7 +6331,7 @@
      "min": 764
     },
     "statsClub": "OGC Nice",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -6391,12 +6391,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "40",
-    "p": "Jelle Van Neck",
+    "n": "92",
+    "p": "Théo Vermot",
     "pos": "GdB",
     "grp": "GK",
-    "age": 22,
-    "val": 0.0,
+    "age": 29,
+    "val": 0.3,
     "stats": {
      "m": 0,
      "s": 0,
@@ -6405,15 +6405,15 @@
      "min": 0
     },
     "statsClub": "Olympique de Marseille",
-    "valDelta": 0.0,
+    "valDelta": 0.3,
     "valSince": "16/08/2026"
    },
    {
-    "n": "92",
-    "p": "Théo Vermot",
+    "n": "40",
+    "p": "Jelle Van Neck",
     "pos": "GdB",
     "grp": "GK",
-    "age": 29,
+    "age": 22,
     "val": 0.0,
     "stats": {
      "m": 0,
@@ -6594,7 +6594,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 33,
-    "val": 3.0,
+    "val": 2.5,
     "stats": {
      "m": 17,
      "s": 14,
@@ -6603,7 +6603,7 @@
      "min": 1016
     },
     "statsClub": "Olympique de Marseille",
-    "valDelta": 0.0,
+    "valDelta": -0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -6666,7 +6666,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 19,
-    "val": 0.8,
+    "val": 1.0,
     "stats": {
      "m": 6,
      "s": 0,
@@ -6675,7 +6675,25 @@
      "min": 90
     },
     "statsClub": "Olympique de Marseille",
-    "valDelta": 0.0,
+    "valDelta": 0.2,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "48",
+    "p": "Keyliane Abdallah",
+    "pos": "AiD",
+    "grp": "ATT",
+    "age": 20,
+    "val": 5.0,
+    "stats": {
+     "m": 0,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 0
+    },
+    "statsClub": "Olympique de Marseille",
+    "valDelta": 4.95,
     "valSince": "16/08/2026"
    },
    {
@@ -6697,30 +6715,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "48",
-    "p": "Keyliane Abdallah",
-    "pos": "AiD",
-    "grp": "ATT",
-    "age": 20,
-    "val": 0.05,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "Olympique de Marseille",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "9",
     "p": "Amine Gouiri",
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
-    "val": 28.0,
+    "val": 30.0,
     "stats": {
      "m": 28,
      "s": 20,
@@ -6729,7 +6729,7 @@
      "min": 1705
     },
     "statsClub": "Olympique de Marseille",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -6843,6 +6843,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "48",
+    "p": "Abdelhamid Ait Boudlal",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 20.0,
+    "stats": {
+     "m": 21,
+     "s": 18,
+     "g": 2,
+     "a": 1,
+     "min": 1481
+    },
+    "statsClub": "Stade Rennais FC",
+    "valDelta": 8.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "24",
     "p": "Anthony Rouault",
     "pos": "DC",
@@ -6855,24 +6873,6 @@
      "g": 1,
      "a": 1,
      "min": 1993
-    },
-    "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "48",
-    "p": "Abdelhamid Ait Boudlal",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 12.0,
-    "stats": {
-     "m": 21,
-     "s": 18,
-     "g": 2,
-     "a": 1,
-     "min": 1481
     },
     "statsClub": "Stade Rennais FC",
     "valDelta": 0.0,
@@ -6920,7 +6920,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 21,
-    "val": 7.0,
+    "val": 10.0,
     "stats": {
      "m": 20,
      "s": 7,
@@ -6929,7 +6929,7 @@
      "min": 857
     },
     "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -6956,7 +6956,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 25,
-    "val": 3.5,
+    "val": 4.0,
     "stats": {
      "m": 40,
      "s": 40,
@@ -6965,7 +6965,7 @@
      "min": 3584
     },
     "statsClub": "KVC Westerlo",
-    "valDelta": 0.0,
+    "valDelta": 0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -7064,7 +7064,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 27,
-    "val": 12.0,
+    "val": 15.0,
     "stats": {
      "m": 17,
      "s": 11,
@@ -7073,7 +7073,7 @@
      "min": 867
     },
     "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7082,7 +7082,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 21,
-    "val": 0.8,
+    "val": 0.6,
     "stats": {
      "m": 0,
      "s": 0,
@@ -7091,7 +7091,7 @@
      "min": 0
     },
     "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
+    "valDelta": -0.2,
     "valSince": "16/08/2026"
    },
    {
@@ -7172,7 +7172,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 18,
-    "val": 1.5,
+    "val": 1.0,
     "stats": {
      "m": 9,
      "s": 0,
@@ -7181,7 +7181,7 @@
      "min": 72
     },
     "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
+    "valDelta": -0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -7190,7 +7190,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
-    "val": 35.0,
+    "val": 45.0,
     "stats": {
      "m": 35,
      "s": 34,
@@ -7199,7 +7199,7 @@
      "min": 2710
     },
     "statsClub": "Stade Rennais FC",
-    "valDelta": 0.0,
+    "valDelta": 10.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7208,7 +7208,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 21,
-    "val": 16.0,
+    "val": 18.0,
     "stats": {
      "m": 23,
      "s": 10,
@@ -7217,7 +7217,7 @@
      "min": 943
     },
     "statsClub": "AFC Sunderland",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7246,7 +7246,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 28,
-    "val": 3.5,
+    "val": 3.0,
     "stats": {
      "m": 29,
      "s": 27,
@@ -7255,7 +7255,7 @@
      "min": 2519
     },
     "statsClub": "AS Monaco",
-    "valDelta": 0.0,
+    "valDelta": -0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -7313,6 +7313,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "72",
+    "p": "Sadibou Sané",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 22,
+    "val": 12.0,
+    "stats": {
+     "m": 24,
+     "s": 23,
+     "g": 2,
+     "a": 1,
+     "min": 2031
+    },
+    "statsClub": "FC Metz",
+    "valDelta": 5.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "22",
     "p": "Mohammed Salisu",
     "pos": "DC",
@@ -7327,24 +7345,6 @@
      "min": 1613
     },
     "statsClub": "AS Monaco",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "72",
-    "p": "Sadibou Sané",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 22,
-    "val": 7.0,
-    "stats": {
-     "m": 24,
-     "s": 23,
-     "g": 2,
-     "a": 1,
-     "min": 2031
-    },
-    "statsClub": "FC Metz",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -7390,7 +7390,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 23,
-    "val": 6.0,
+    "val": 10.0,
     "stats": {
      "m": 32,
      "s": 30,
@@ -7399,7 +7399,7 @@
      "min": 2710
     },
     "statsClub": "Cercle Brugge",
-    "valDelta": 0.0,
+    "valDelta": 4.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7462,7 +7462,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 22,
-    "val": 40.0,
+    "val": 55.0,
     "stats": {
      "m": 31,
      "s": 29,
@@ -7471,7 +7471,7 @@
      "min": 2457
     },
     "statsClub": "AS Monaco",
-    "valDelta": 0.0,
+    "valDelta": 15.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7480,7 +7480,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 22,
-    "val": 15.0,
+    "val": 20.0,
     "stats": {
      "m": 36,
      "s": 21,
@@ -7489,7 +7489,25 @@
      "min": 2036
     },
     "statsClub": "AS Monaco",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "19",
+    "p": "Pape Cabral",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 19,
+    "val": 5.0,
+    "stats": {
+     "m": 6,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 107
+    },
+    "statsClub": "AS Monaco",
+    "valDelta": 3.8,
     "valSince": "16/08/2026"
    },
    {
@@ -7505,33 +7523,15 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "19",
-    "p": "Pape Cabral",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 19,
-    "val": 1.2,
-    "stats": {
-     "m": 6,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 107
-    },
-    "statsClub": "AS Monaco",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "46",
     "p": "Anis Soubeir",
     "pos": "MC",
     "grp": "MID",
     "age": 19,
-    "val": 0.8,
+    "val": 2.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
+    "valDelta": 1.2,
     "valSince": "06/09/2026"
    },
    {
@@ -7558,7 +7558,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 21,
-    "val": 4.0,
+    "val": 10.0,
     "stats": {
      "m": 12,
      "s": 1,
@@ -7567,7 +7567,7 @@
      "min": 275
     },
     "statsClub": "AS Monaco",
-    "valDelta": 0.0,
+    "valDelta": 6.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7576,10 +7576,10 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 19,
-    "val": 15.0,
+    "val": 20.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7642,7 +7642,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 23,
-    "val": 20.0,
+    "val": 25.0,
     "stats": {
      "m": 35,
      "s": 29,
@@ -7651,7 +7651,7 @@
      "min": 2642
     },
     "statsClub": "FC Nantes",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7678,7 +7678,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 20,
-    "val": 1.5,
+    "val": 15.0,
     "stats": {
      "m": 7,
      "s": 1,
@@ -7687,7 +7687,7 @@
      "min": 127
     },
     "statsClub": "AS Monaco",
-    "valDelta": 0.0,
+    "valDelta": 13.5,
     "valSince": "16/08/2026"
    }
   ],
@@ -7788,7 +7788,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 21,
-    "val": 3.0,
+    "val": 8.0,
     "stats": {
      "m": 26,
      "s": 17,
@@ -7797,7 +7797,7 @@
      "min": 1449
     },
     "statsClub": "Sturm Graz",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "19/08/2026"
    },
    {
@@ -7854,10 +7854,10 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 19,
-    "val": 0.35,
+    "val": 3.0,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
+    "valDelta": 2.65,
     "valSince": "16/08/2026"
    },
    {
@@ -7884,7 +7884,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 20,
-    "val": 8.0,
+    "val": 10.0,
     "stats": {
      "m": 28,
      "s": 15,
@@ -7893,7 +7893,7 @@
      "min": 1429
     },
     "statsClub": "Vit. Guimarães",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7956,7 +7956,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 23,
-    "val": 4.0,
+    "val": 7.0,
     "stats": {
      "m": 20,
      "s": 5,
@@ -7965,7 +7965,7 @@
      "min": 577
     },
     "statsClub": "Bor. M'gladbach",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -7974,7 +7974,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 21,
-    "val": 1.7,
+    "val": 4.0,
     "stats": {
      "m": 0,
      "s": 0,
@@ -7983,7 +7983,7 @@
      "min": 0
     },
     "statsClub": "Chelsea U21",
-    "valDelta": 0.0,
+    "valDelta": 2.3,
     "valSince": "25/08/2026"
    },
    {
@@ -7992,7 +7992,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 18,
-    "val": 0.5,
+    "val": 2.0,
     "stats": {
      "m": 12,
      "s": 4,
@@ -8001,7 +8001,7 @@
      "min": 437
     },
     "statsClub": "IFK Göteborg",
-    "valDelta": 0.0,
+    "valDelta": 1.5,
     "valSince": "16/08/2026"
    },
    {
@@ -8064,7 +8064,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 20,
-    "val": 12.0,
+    "val": 20.0,
     "stats": {
      "m": 19,
      "s": 9,
@@ -8073,7 +8073,7 @@
      "min": 800
     },
     "statsClub": "RC Strasbourg",
-    "valDelta": 0.0,
+    "valDelta": 8.0,
     "valSince": "16/08/2026"
    },
    {
@@ -8149,6 +8149,42 @@
     "valSince": "01/09/2026"
    },
    {
+    "n": "30",
+    "p": "Jacobo Ortega",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 20,
+    "val": 7.0,
+    "stats": {
+     "m": 17,
+     "s": 10,
+     "g": 6,
+     "a": 2,
+     "min": 888
+    },
+    "statsClub": "RM Castilla",
+    "valDelta": 6.0,
+    "valSince": "17/08/2026"
+   },
+   {
+    "n": "42",
+    "p": "Deivid Washington",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 21,
+    "val": 5.0,
+    "stats": {
+     "m": 9,
+     "s": 6,
+     "g": 0,
+     "a": 0,
+     "min": 502
+    },
+    "statsClub": "Chelsea U21",
+    "valDelta": 2.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "14",
     "p": "Sékou Mara",
     "pos": "AC",
@@ -8165,42 +8201,6 @@
     "statsClub": "RC Strasbourg",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
-   },
-   {
-    "n": "42",
-    "p": "Deivid Washington",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 21,
-    "val": 3.0,
-    "stats": {
-     "m": 9,
-     "s": 6,
-     "g": 0,
-     "a": 0,
-     "min": 502
-    },
-    "statsClub": "Chelsea U21",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
-   },
-   {
-    "n": "30",
-    "p": "Jacobo Ortega",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 20,
-    "val": 1.0,
-    "stats": {
-     "m": 17,
-     "s": 10,
-     "g": 6,
-     "a": 2,
-     "min": 888
-    },
-    "statsClub": "RM Castilla",
-    "valDelta": 0.0,
-    "valSince": "17/08/2026"
    }
   ],
   "FCL": [
@@ -8366,7 +8366,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 22,
-    "val": 2.0,
+    "val": 3.0,
     "stats": {
      "m": 32,
      "s": 29,
@@ -8375,7 +8375,7 @@
      "min": 2488
     },
     "statsClub": "Viborg FF",
-    "valDelta": 0.0,
+    "valDelta": 1.0,
     "valSince": "01/09/2026"
    },
    {
@@ -8432,7 +8432,7 @@
     "pos": "MC",
     "grp": "MID",
     "age": 27,
-    "val": 3.0,
+    "val": 7.0,
     "stats": {
      "m": 31,
      "s": 22,
@@ -8441,7 +8441,7 @@
      "min": 2071
     },
     "statsClub": "FC Lorient",
-    "valDelta": 0.0,
+    "valDelta": 4.0,
     "valSince": "16/08/2026"
    },
    {
@@ -8480,7 +8480,7 @@
     "pos": "MD",
     "grp": "MID",
     "age": 25,
-    "val": 2.0,
+    "val": 3.0,
     "stats": {
      "m": 18,
      "s": 8,
@@ -8489,7 +8489,7 @@
      "min": 777
     },
     "statsClub": "FC Lorient",
-    "valDelta": 0.0,
+    "valDelta": 1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -8583,6 +8583,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "18",
+    "p": "Ibrahima Baldé",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 23,
+    "val": 3.0,
+    "stats": {
+     "m": 32,
+     "s": 23,
+     "g": 13,
+     "a": 0,
+     "min": 2012
+    },
+    "statsClub": "Rodez AF",
+    "valDelta": 1.0,
+    "valSince": "01/09/2026"
+   },
+   {
     "n": "9",
     "p": "Mohamed Bamba",
     "pos": "AC",
@@ -8601,22 +8619,22 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "18",
-    "p": "Ibrahima Baldé",
+    "n": "42",
+    "p": "Mamadou Koné",
     "pos": "AC",
     "grp": "ATT",
-    "age": 23,
+    "age": 19,
     "val": 2.0,
     "stats": {
-     "m": 32,
-     "s": 23,
-     "g": 13,
+     "m": 2,
+     "s": 0,
+     "g": 1,
      "a": 0,
-     "min": 2012
+     "min": 44
     },
-    "statsClub": "Rodez AF",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
+    "statsClub": "FC Lorient",
+    "valDelta": 1.7,
+    "valSince": "21/09/2026"
    },
    {
     "n": "15",
@@ -8635,24 +8653,6 @@
     "statsClub": "FC Lorient",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
-   },
-   {
-    "n": "42",
-    "p": "Mamadou Koné",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 19,
-    "val": 0.3,
-    "stats": {
-     "m": 2,
-     "s": 0,
-     "g": 1,
-     "a": 0,
-     "min": 44
-    },
-    "statsClub": "FC Lorient",
-    "valDelta": 0.0,
-    "valSince": "21/09/2026"
    }
   ],
   "TFC": [
@@ -8764,7 +8764,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 20,
-    "val": 0.8,
+    "val": 3.5,
     "stats": {
      "m": 29,
      "s": 28,
@@ -8773,7 +8773,7 @@
      "min": 2424
     },
     "statsClub": "AC Horsens",
-    "valDelta": 0.0,
+    "valDelta": 2.7,
     "valSince": "16/08/2026"
    },
    {
@@ -8849,6 +8849,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "23",
+    "p": "Cristian Cásseres Jr.",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 26,
+    "val": 12.0,
+    "stats": {
+     "m": 35,
+     "s": 33,
+     "g": 2,
+     "a": 5,
+     "min": 2876
+    },
+    "statsClub": "Toulouse FC",
+    "valDelta": 3.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "18",
     "p": "Mathis Amougou",
     "pos": "MC",
@@ -8867,30 +8885,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "23",
-    "p": "Cristian Cásseres Jr.",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 26,
-    "val": 9.0,
-    "stats": {
-     "m": 35,
-     "s": 33,
-     "g": 2,
-     "a": 5,
-     "min": 2876
-    },
-    "statsClub": "Toulouse FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "8",
     "p": "Thomas Jørgensen",
     "pos": "MC",
     "grp": "MID",
     "age": 20,
-    "val": 5.0,
+    "val": 7.5,
     "stats": {
      "m": 36,
      "s": 36,
@@ -8899,7 +8899,7 @@
      "min": 2979
     },
     "statsClub": "Viborg FF",
-    "valDelta": 0.0,
+    "valDelta": 2.5,
     "valSince": "19/08/2026"
    },
    {
@@ -8973,8 +8973,8 @@
     "p": "Sion Oppong",
     "pos": "AiG",
     "grp": "ATT",
-    "age": 18,
-    "val": 0.45,
+    "age": 19,
+    "val": 3.5,
     "stats": {
      "m": 17,
      "s": 12,
@@ -8983,7 +8983,7 @@
      "min": 1030
     },
     "statsClub": "Brommapojkarna",
-    "valDelta": 0.0,
+    "valDelta": 3.05,
     "valSince": "16/08/2026"
    },
    {
@@ -8992,7 +8992,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 18,
-    "val": 0.25,
+    "val": 2.0,
     "stats": {
      "m": 4,
      "s": 0,
@@ -9001,7 +9001,7 @@
      "min": 40
     },
     "statsClub": "Toulouse FC",
-    "valDelta": 0.0,
+    "valDelta": 1.75,
     "valSince": "24/08/2026"
    },
    {
@@ -9120,7 +9120,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 22,
-    "val": 18.0,
+    "val": 20.0,
     "stats": {
      "m": 14,
      "s": 14,
@@ -9129,7 +9129,25 @@
      "min": 1260
     },
     "statsClub": "Paris FC",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "5",
+    "p": "Moustapha Mbow",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 26,
+    "val": 10.0,
+    "stats": {
+     "m": 34,
+     "s": 33,
+     "g": 0,
+     "a": 1,
+     "min": 2986
+    },
+    "statsClub": "Paris FC",
+    "valDelta": 1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9151,30 +9169,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "5",
-    "p": "Moustapha Mbow",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 26,
-    "val": 9.0,
-    "stats": {
-     "m": 34,
-     "s": 33,
-     "g": 0,
-     "a": 1,
-     "min": 2986
-    },
-    "statsClub": "Paris FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "31",
     "p": "Samir Chergui",
     "pos": "DC",
     "grp": "DEF",
     "age": 27,
-    "val": 3.0,
+    "val": 4.0,
     "stats": {
      "m": 15,
      "s": 13,
@@ -9183,7 +9183,7 @@
      "min": 1155
     },
     "statsClub": "Paris FC",
-    "valDelta": 0.0,
+    "valDelta": 1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9228,7 +9228,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 28,
-    "val": 1.8,
+    "val": 1.2,
     "stats": {
      "m": 19,
      "s": 14,
@@ -9237,7 +9237,7 @@
      "min": 1283
     },
     "statsClub": "Paris FC",
-    "valDelta": 0.0,
+    "valDelta": -0.6,
     "valSince": "16/08/2026"
    },
    {
@@ -9258,7 +9258,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 29,
-    "val": 3.0,
+    "val": 4.0,
     "stats": {
      "m": 32,
      "s": 28,
@@ -9267,7 +9267,7 @@
      "min": 2363
     },
     "statsClub": "Paris FC",
-    "valDelta": 0.0,
+    "valDelta": 1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9329,7 +9329,7 @@
     "p": "Patrick Zabi",
     "pos": "MC",
     "grp": "MID",
-    "age": 19,
+    "age": 20,
     "val": 20.0,
     "stats": {
      "m": 32,
@@ -9384,7 +9384,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 23,
-    "val": 15.0,
+    "val": 20.0,
     "stats": {
      "m": 32,
      "s": 25,
@@ -9393,7 +9393,7 @@
      "min": 1950
     },
     "statsClub": "FC Lorient",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9438,7 +9438,7 @@
     "pos": "AiD",
     "grp": "ATT",
     "age": 22,
-    "val": 6.0,
+    "val": 10.0,
     "stats": {
      "m": 18,
      "s": 4,
@@ -9447,7 +9447,7 @@
      "min": 630
     },
     "statsClub": "Paris FC",
-    "valDelta": 0.0,
+    "valDelta": 4.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9474,7 +9474,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 26,
-    "val": 10.0,
+    "val": 15.0,
     "stats": {
      "m": 32,
      "s": 32,
@@ -9483,7 +9483,7 @@
      "min": 2781
     },
     "statsClub": "AJ Auxerre",
-    "valDelta": 0.0,
+    "valDelta": 5.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9585,6 +9585,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "71",
+    "p": "Raphaël Le Guen",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 15.0,
+    "stats": {
+     "m": 6,
+     "s": 4,
+     "g": 0,
+     "a": 0,
+     "min": 373
+    },
+    "statsClub": "Stade Brestois 29",
+    "valDelta": 14.2,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "5",
     "p": "Brendan Chardonnet",
     "pos": "DC",
@@ -9617,24 +9635,6 @@
      "min": 2445
     },
     "statsClub": "Le Havre AC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "71",
-    "p": "Raphaël Le Guen",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 0.8,
-    "stats": {
-     "m": 6,
-     "s": 4,
-     "g": 0,
-     "a": 0,
-     "min": 373
-    },
-    "statsClub": "Stade Brestois 29",
     "valDelta": 0.0,
     "valSince": "16/08/2026"
    },
@@ -9715,7 +9715,7 @@
     "p": "Joris Chotard",
     "pos": "MDC",
     "grp": "MID",
-    "age": 24,
+    "age": 25,
     "val": 7.0,
     "stats": {
      "m": 34,
@@ -9806,7 +9806,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 23,
-    "val": 9.0,
+    "val": 12.0,
     "stats": {
      "m": 24,
      "s": 22,
@@ -9815,7 +9815,7 @@
      "min": 1766
     },
     "statsClub": "Stade Brestois 29",
-    "valDelta": 0.0,
+    "valDelta": 3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -9878,10 +9878,16 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 18,
-    "val": 4.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
+    "val": 5.0,
+    "stats": {
+     "m": 5,
+     "s": 1,
+     "g": 1,
+     "a": 0,
+     "min": 147
+    },
+    "statsClub": "Saint-Étienne",
+    "valDelta": 1.0,
     "valSince": "04/09/2026"
    },
    {
@@ -10180,7 +10186,7 @@
     "pos": "MO",
     "grp": "MID",
     "age": 18,
-    "val": 0.3,
+    "val": 0.8,
     "stats": {
      "m": 1,
      "s": 0,
@@ -10189,7 +10195,7 @@
      "min": 4
     },
     "statsClub": "Angers SCO",
-    "valDelta": 0.3,
+    "valDelta": 0.8,
     "valSince": "23/08/2026"
    },
    {
@@ -10198,7 +10204,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 25,
-    "val": 4.0,
+    "val": 6.0,
     "stats": {
      "m": 27,
      "s": 25,
@@ -10207,7 +10213,7 @@
      "min": 2014
     },
     "statsClub": "Angers SCO",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -10216,7 +10222,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 21,
-    "val": 1.0,
+    "val": 3.0,
     "stats": {
      "m": 11,
      "s": 1,
@@ -10225,7 +10231,7 @@
      "min": 165
     },
     "statsClub": "RC Lens",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -10270,7 +10276,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 19,
-    "val": 15.0,
+    "val": 12.0,
     "stats": {
      "m": 31,
      "s": 16,
@@ -10279,7 +10285,7 @@
      "min": 1446
     },
     "statsClub": "Angers SCO",
-    "valDelta": 0.0,
+    "valDelta": -3.0,
     "valSince": "16/08/2026"
    },
    {
@@ -10506,10 +10512,10 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 17,
-    "val": 0.0,
+    "val": 0.5,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
+    "valDelta": 0.5,
     "valSince": "02/09/2026"
    },
    {
@@ -10784,7 +10790,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 26,
-    "val": 1.5,
+    "val": 2.0,
     "stats": {
      "m": 31,
      "s": 31,
@@ -10793,7 +10799,7 @@
      "min": 2684
     },
     "statsClub": "Grenoble",
-    "valDelta": 0.0,
+    "valDelta": 0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -10905,6 +10911,42 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "15",
+    "p": "Christ Makosso",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 22,
+    "val": 2.0,
+    "stats": {
+     "m": 15,
+     "s": 13,
+     "g": 0,
+     "a": 0,
+     "min": 1224
+    },
+    "statsClub": "Luton",
+    "valDelta": 1.2,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "35",
+    "p": "Elikya Legros",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 18,
+    "val": 2.0,
+    "stats": {
+     "m": 0,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 0
+    },
+    "statsClub": "AJ Auxerre",
+    "valDelta": 2.0,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "13",
     "p": "Telli Siwe",
     "pos": "DC",
@@ -10920,42 +10962,6 @@
     },
     "statsClub": "AJ Auxerre",
     "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "15",
-    "p": "Christ Makosso",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 22,
-    "val": 0.8,
-    "stats": {
-     "m": 15,
-     "s": 13,
-     "g": 0,
-     "a": 0,
-     "min": 1224
-    },
-    "statsClub": "Luton",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "35",
-    "p": "Elikya Legros",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 18,
-    "val": 0.3,
-    "stats": {
-     "m": 0,
-     "s": 0,
-     "g": 0,
-     "a": 0,
-     "min": 0
-    },
-    "statsClub": "AJ Auxerre",
-    "valDelta": 0.3,
     "valSince": "16/08/2026"
    },
    {
@@ -11000,7 +11006,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 23,
-    "val": 0.8,
+    "val": 1.2,
     "stats": {
      "m": 40,
      "s": 25,
@@ -11009,7 +11015,7 @@
      "min": 2284
     },
     "statsClub": "Lausanne-Sport",
-    "valDelta": 0.0,
+    "valDelta": 0.4,
     "valSince": "16/08/2026"
    },
    {
@@ -11066,7 +11072,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 21,
-    "val": 4.0,
+    "val": 5.0,
     "stats": {
      "m": 37,
      "s": 35,
@@ -11075,7 +11081,7 @@
      "min": 3020
     },
     "statsClub": "KVC Westerlo",
-    "valDelta": 0.0,
+    "valDelta": 1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -11411,24 +11417,6 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "36",
-    "p": "Alidu Seidu",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 26,
-    "val": 6.0,
-    "stats": {
-     "m": 24,
-     "s": 16,
-     "g": 0,
-     "a": 1,
-     "min": 1407
-    },
-    "statsClub": "Stade Rennais",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "35",
     "p": "Xavier Mandza",
     "pos": "DC",
@@ -11439,6 +11427,24 @@
     "statsClub": null,
     "valDelta": 5.0,
     "valSince": "17/08/2026"
+   },
+   {
+    "n": "36",
+    "p": "Alidu Seidu",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 26,
+    "val": 5.0,
+    "stats": {
+     "m": 24,
+     "s": 16,
+     "g": 0,
+     "a": 1,
+     "min": 1407
+    },
+    "statsClub": "Stade Rennais",
+    "valDelta": -1.0,
+    "valSince": "16/08/2026"
    },
    {
     "n": "5",
@@ -11499,7 +11505,7 @@
     "p": "Jonathan Clauss",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 33,
+    "age": 34,
     "val": 4.0,
     "stats": {
      "m": 46,
@@ -11518,7 +11524,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 20,
-    "val": 0.15,
+    "val": 0.3,
     "stats": {
      "m": 2,
      "s": 0,
@@ -11527,7 +11533,7 @@
      "min": 18
     },
     "statsClub": "OGC Nice",
-    "valDelta": 0.0,
+    "valDelta": 0.15,
     "valSince": "16/08/2026"
    },
    {
@@ -11633,30 +11639,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "8",
-    "p": "Morgan Sanson",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 32,
-    "val": 3.5,
-    "stats": {
-     "m": 46,
-     "s": 31,
-     "g": 1,
-     "a": 2,
-     "min": 2718
-    },
-    "statsClub": "OGC Nice",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "39",
     "p": "Djibril Coulibaly",
     "pos": "MC",
     "grp": "MID",
     "age": 17,
-    "val": 1.0,
+    "val": 8.0,
     "stats": {
      "m": 7,
      "s": 4,
@@ -11665,7 +11653,25 @@
      "min": 275
     },
     "statsClub": "OGC Nice",
-    "valDelta": 0.0,
+    "valDelta": 7.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "8",
+    "p": "Morgan Sanson",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 32,
+    "val": 3.0,
+    "stats": {
+     "m": 46,
+     "s": 31,
+     "g": 1,
+     "a": 2,
+     "min": 2718
+    },
+    "statsClub": "OGC Nice",
+    "valDelta": -0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -11679,6 +11685,24 @@
     "statsClub": null,
     "valDelta": 0.0,
     "valSince": "16/08/2026"
+   },
+   {
+    "n": "9",
+    "p": "Mohamed Amoura",
+    "pos": "AiG",
+    "grp": "ATT",
+    "age": 26,
+    "val": 20.0,
+    "stats": {
+     "m": 33,
+     "s": 24,
+     "g": 8,
+     "a": 4,
+     "min": 2058
+    },
+    "statsClub": "Wolfsburg",
+    "valDelta": 0.0,
+    "valSince": "01/09/2026"
    },
    {
     "n": "10",
@@ -11704,7 +11728,7 @@
     "pos": "AiG",
     "grp": "ATT",
     "age": 24,
-    "val": 4.0,
+    "val": 3.0,
     "stats": {
      "m": 31,
      "s": 12,
@@ -11713,7 +11737,7 @@
      "min": 1059
     },
     "statsClub": "OGC Nice",
-    "valDelta": 0.0,
+    "valDelta": -1.0,
     "valSince": "16/08/2026"
    },
    {
@@ -11751,24 +11775,6 @@
     "statsClub": "Bor. M'gladbach",
     "valDelta": 0.0,
     "valSince": "17/08/2026"
-   },
-   {
-    "n": "9",
-    "p": "Mohamed Amoura",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 26,
-    "val": 20.0,
-    "stats": {
-     "m": 33,
-     "s": 24,
-     "g": 8,
-     "a": 4,
-     "min": 2058
-    },
-    "statsClub": "Wolfsburg",
-    "valDelta": 0.0,
-    "valSince": "01/09/2026"
    },
    {
     "n": "11",
@@ -11814,7 +11820,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 23,
-    "val": 1.5,
+    "val": 2.0,
     "stats": {
      "m": 35,
      "s": 35,
@@ -11823,7 +11829,7 @@
      "min": 3210
     },
     "statsClub": "Melbourne City",
-    "valDelta": 0.0,
+    "valDelta": 0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -11934,7 +11940,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 19,
-    "val": 0.5,
+    "val": 2.5,
     "stats": {
      "m": 25,
      "s": 6,
@@ -11943,7 +11949,7 @@
      "min": 780
     },
     "statsClub": "ESTAC Troyes",
-    "valDelta": 0.0,
+    "valDelta": 2.0,
     "valSince": "16/08/2026"
    },
    {
@@ -11988,7 +11994,7 @@
     "pos": "ArD",
     "grp": "DEF",
     "age": 19,
-    "val": 0.03,
+    "val": 0.3,
     "stats": {
      "m": 6,
      "s": 3,
@@ -11997,7 +12003,7 @@
      "min": 267
     },
     "statsClub": "ESTAC Troyes",
-    "valDelta": 0.0,
+    "valDelta": 0.27,
     "valSince": "09/09/2026"
    },
    {
@@ -12246,10 +12252,10 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 19,
-    "val": 0.1,
+    "val": 0.3,
     "stats": null,
     "statsClub": null,
-    "valDelta": 0.0,
+    "valDelta": 0.2,
     "valSince": "09/09/2026"
    },
    {
@@ -12314,7 +12320,7 @@
     "pos": "GdB",
     "grp": "GK",
     "age": 26,
-    "val": 0.15,
+    "val": 0.3,
     "stats": {
      "m": 8,
      "s": 8,
@@ -12323,7 +12329,7 @@
      "min": 720
     },
     "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
+    "valDelta": 0.15,
     "valSince": "16/08/2026"
    },
    {
@@ -12345,6 +12351,24 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "15",
+    "p": "Noa Boissé",
+    "pos": "DC",
+    "grp": "DEF",
+    "age": 20,
+    "val": 3.0,
+    "stats": {
+     "m": 14,
+     "s": 13,
+     "g": 1,
+     "a": 0,
+     "min": 1171
+    },
+    "statsClub": "Le Mans FC",
+    "valDelta": 1.5,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "16",
     "p": "Raúl Torrente",
     "pos": "DC",
@@ -12363,30 +12387,12 @@
     "valSince": "19/08/2026"
    },
    {
-    "n": "15",
-    "p": "Noa Boissé",
-    "pos": "DC",
-    "grp": "DEF",
-    "age": 20,
-    "val": 1.5,
-    "stats": {
-     "m": 14,
-     "s": 13,
-     "g": 1,
-     "a": 0,
-     "min": 1171
-    },
-    "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "21",
     "p": "Théo Eyoum",
     "pos": "DC",
     "grp": "DEF",
     "age": 24,
-    "val": 0.9,
+    "val": 1.2,
     "stats": {
      "m": 27,
      "s": 26,
@@ -12395,7 +12401,7 @@
      "min": 2346
     },
     "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
+    "valDelta": 0.3,
     "valSince": "16/08/2026"
    },
    {
@@ -12404,7 +12410,7 @@
     "pos": "DC",
     "grp": "DEF",
     "age": 29,
-    "val": 0.7,
+    "val": 0.9,
     "stats": {
      "m": 27,
      "s": 22,
@@ -12413,7 +12419,7 @@
      "min": 1938
     },
     "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
+    "valDelta": 0.2,
     "valSince": "16/08/2026"
    },
    {
@@ -12440,7 +12446,7 @@
     "pos": "ArG",
     "grp": "DEF",
     "age": 24,
-    "val": 2.5,
+    "val": 3.0,
     "stats": {
      "m": 35,
      "s": 27,
@@ -12449,7 +12455,7 @@
      "min": 2510
     },
     "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
+    "valDelta": 0.5,
     "valSince": "16/08/2026"
    },
    {
@@ -12501,6 +12507,18 @@
     "valSince": "16/08/2026"
    },
    {
+    "n": "26",
+    "p": "Rayan Bamba",
+    "pos": "ArD",
+    "grp": "DEF",
+    "age": 22,
+    "val": 1.5,
+    "stats": null,
+    "statsClub": null,
+    "valDelta": 0.5,
+    "valSince": "16/08/2026"
+   },
+   {
     "n": "19",
     "p": "Djibril Sidibé",
     "pos": "ArD",
@@ -12517,18 +12535,6 @@
     "statsClub": "Toulouse",
     "valDelta": 0.0,
     "valSince": "18/08/2026"
-   },
-   {
-    "n": "26",
-    "p": "Rayan Bamba",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 22,
-    "val": 1.0,
-    "stats": null,
-    "statsClub": null,
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
    },
    {
     "n": "29",
@@ -12554,7 +12560,7 @@
     "pos": "MDC",
     "grp": "MID",
     "age": 29,
-    "val": 0.6,
+    "val": 0.8,
     "stats": {
      "m": 36,
      "s": 24,
@@ -12563,7 +12569,43 @@
      "min": 2193
     },
     "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
+    "valDelta": 0.2,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "11",
+    "p": "Adil Bourabaa",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 21,
+    "val": 3.5,
+    "stats": {
+     "m": 14,
+     "s": 5,
+     "g": 0,
+     "a": 1,
+     "min": 645
+    },
+    "statsClub": "Le Mans FC",
+    "valDelta": 3.0,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "10",
+    "p": "Jean Vercruysse",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 26,
+    "val": 0.7,
+    "stats": {
+     "m": 9,
+     "s": 8,
+     "g": 1,
+     "a": 0,
+     "min": 682
+    },
+    "statsClub": "Le Mans FC",
+    "valDelta": 0.3,
     "valSince": "16/08/2026"
    },
    {
@@ -12579,42 +12621,6 @@
      "g": 2,
      "a": 1,
      "min": 2371
-    },
-    "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "11",
-    "p": "Adil Bourabaa",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 21,
-    "val": 0.5,
-    "stats": {
-     "m": 14,
-     "s": 5,
-     "g": 0,
-     "a": 1,
-     "min": 645
-    },
-    "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
-    "n": "10",
-    "p": "Jean Vercruysse",
-    "pos": "MC",
-    "grp": "MID",
-    "age": 26,
-    "val": 0.4,
-    "stats": {
-     "m": 9,
-     "s": 8,
-     "g": 1,
-     "a": 0,
-     "min": 682
     },
     "statsClub": "Le Mans FC",
     "valDelta": 0.0,
@@ -12686,7 +12692,7 @@
     "pos": "AC",
     "grp": "ATT",
     "age": 31,
-    "val": 4.0,
+    "val": 3.0,
     "stats": {
      "m": 25,
      "s": 21,
@@ -12695,7 +12701,7 @@
      "min": 1911
     },
     "statsClub": "FC Metz",
-    "valDelta": 0.0,
+    "valDelta": -1.0,
     "valSince": "01/09/2026"
    },
    {
@@ -12717,30 +12723,12 @@
     "valSince": "16/08/2026"
    },
    {
-    "n": "9",
-    "p": "Antoine Rabillard",
-    "pos": "AC",
-    "grp": "ATT",
-    "age": 31,
-    "val": 0.6,
-    "stats": {
-     "m": 34,
-     "s": 27,
-     "g": 9,
-     "a": 6,
-     "min": 1886
-    },
-    "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
-    "valSince": "16/08/2026"
-   },
-   {
     "n": "25",
     "p": "Dame Gueye",
     "pos": "AC",
     "grp": "ATT",
     "age": 31,
-    "val": 0.6,
+    "val": 0.8,
     "stats": {
      "m": 38,
      "s": 23,
@@ -12749,7 +12737,25 @@
      "min": 2037
     },
     "statsClub": "Le Mans FC",
-    "valDelta": 0.0,
+    "valDelta": 0.2,
+    "valSince": "16/08/2026"
+   },
+   {
+    "n": "9",
+    "p": "Antoine Rabillard",
+    "pos": "AC",
+    "grp": "ATT",
+    "age": 31,
+    "val": 0.7,
+    "stats": {
+     "m": 34,
+     "s": 27,
+     "g": 9,
+     "a": 6,
+     "min": 1886
+    },
+    "statsClub": "Le Mans FC",
+    "valDelta": 0.1,
     "valSince": "16/08/2026"
    },
    {
@@ -12801,6 +12807,10 @@
    {
     "d": "16/08/2026",
     "v": 25.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 22.0
    }
   ],
   "1074986": [
@@ -12891,6 +12901,10 @@
    {
     "d": "16/08/2026",
     "v": 10.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 15.0
    }
   ],
   "502670": [
@@ -12909,12 +12923,20 @@
    {
     "d": "16/08/2026",
     "v": 35.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 40.0
    }
   ],
   "1053208": [
    {
     "d": "16/08/2026",
     "v": 8.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 6.0
    }
   ],
   "914562": [
@@ -12985,6 +13007,10 @@
    {
     "d": "16/08/2026",
     "v": 20.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 30.0
    }
   ],
   "819566": [
@@ -12997,6 +13023,10 @@
    {
     "d": "16/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "126557": [
@@ -13009,12 +13039,20 @@
    {
     "d": "16/08/2026",
     "v": 1.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.5
    }
   ],
   "1160378": [
    {
     "d": "16/08/2026",
     "v": 0.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "344886": [
@@ -13027,6 +13065,10 @@
    {
     "d": "16/08/2026",
     "v": 2.2
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "631927": [
@@ -13051,6 +13093,10 @@
    {
     "d": "16/08/2026",
     "v": 7.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 9.0
    }
   ],
   "402008": [
@@ -13063,12 +13109,20 @@
    {
     "d": "16/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 6.0
    }
   ],
   "1297674": [
    {
     "d": "16/08/2026",
     "v": 0.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 8.0
    }
   ],
   "102226": [
@@ -13081,12 +13135,20 @@
    {
     "d": "16/08/2026",
     "v": 5.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 7.0
    }
   ],
   "393565": [
    {
     "d": "16/08/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 6.0
    }
   ],
   "184892": [
@@ -13123,6 +13185,10 @@
    {
     "d": "16/08/2026",
     "v": 10.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "417278": [
@@ -13183,6 +13249,10 @@
    {
     "d": "16/08/2026",
     "v": 1.2
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "1016015": [
@@ -13213,6 +13283,10 @@
    {
     "d": "16/08/2026",
     "v": 25.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 30.0
    }
   ],
   "479648": [
@@ -13225,12 +13299,20 @@
    {
     "d": "16/08/2026",
     "v": 9.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 7.0
    }
   ],
   "864112": [
    {
     "d": "16/08/2026",
     "v": 7.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "1184007": [
@@ -13243,12 +13325,20 @@
    {
     "d": "16/08/2026",
     "v": 1.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.2
    }
   ],
   "903666": [
    {
     "d": "16/08/2026",
     "v": 8.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "903359": [
@@ -13369,6 +13459,10 @@
    {
     "d": "16/08/2026",
     "v": 1.2
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "990637": [
@@ -13423,6 +13517,10 @@
    {
     "d": "16/08/2026",
     "v": 13.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 15.0
    }
   ],
   "190393": [
@@ -13459,6 +13557,10 @@
    {
     "d": "16/08/2026",
     "v": 10.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 8.0
    }
   ],
   "819215": [
@@ -13471,12 +13573,20 @@
    {
     "d": "16/08/2026",
     "v": 10.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "1097113": [
    {
     "d": "16/08/2026",
     "v": 5.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 8.0
    }
   ],
   "368887": [
@@ -13507,6 +13617,10 @@
    {
     "d": "16/08/2026",
     "v": 0.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.3
    }
   ],
   "575998": [
@@ -13567,6 +13681,10 @@
    {
     "d": "16/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.5
    }
   ],
   "420213": [
@@ -13609,18 +13727,30 @@
    {
     "d": "16/08/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.0
    }
   ],
   "1183719": [
    {
     "d": "16/08/2026",
     "v": 0.05
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "418659": [
    {
     "d": "16/08/2026",
     "v": 28.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 30.0
    }
   ],
   "217115": [
@@ -13675,12 +13805,20 @@
    {
     "d": "16/08/2026",
     "v": 12.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 20.0
    }
   ],
   "798404": [
    {
     "d": "16/08/2026",
     "v": 6.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "1078918": [
@@ -13705,6 +13843,10 @@
    {
     "d": "16/08/2026",
     "v": 7.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "239743": [
@@ -13717,6 +13859,10 @@
    {
     "d": "16/08/2026",
     "v": 3.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 4.0
    }
   ],
   "667517": [
@@ -13765,12 +13911,20 @@
    {
     "d": "16/08/2026",
     "v": 12.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 15.0
    }
   ],
   "977877": [
    {
     "d": "16/08/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.6
    }
   ],
   "568698": [
@@ -13795,18 +13949,30 @@
    {
     "d": "16/08/2026",
     "v": 1.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.0
    }
   ],
   "461607": [
    {
     "d": "16/08/2026",
     "v": 35.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 45.0
    }
   ],
   "967346": [
    {
     "d": "16/08/2026",
     "v": 16.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 18.0
    }
   ],
   "237662": [
@@ -13819,6 +13985,10 @@
    {
     "d": "16/08/2026",
     "v": 3.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "48015": [
@@ -13855,6 +14025,10 @@
    {
     "d": "16/08/2026",
     "v": 7.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "175722": [
@@ -13867,6 +14041,10 @@
    {
     "d": "16/08/2026",
     "v": 6.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "789082": [
@@ -13891,12 +14069,20 @@
    {
     "d": "16/08/2026",
     "v": 40.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 55.0
    }
   ],
   "745173": [
    {
     "d": "16/08/2026",
     "v": 15.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 20.0
    }
   ],
   "745178": [
@@ -13915,6 +14101,10 @@
    {
     "d": "16/08/2026",
     "v": 1.2
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "263918": [
@@ -13927,12 +14117,20 @@
    {
     "d": "16/08/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "1171981": [
    {
     "d": "16/08/2026",
     "v": 15.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 20.0
    }
   ],
   "466810": [
@@ -13957,6 +14155,10 @@
    {
     "d": "16/08/2026",
     "v": 20.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 25.0
    }
   ],
   "565821": [
@@ -13969,6 +14171,10 @@
    {
     "d": "16/08/2026",
     "v": 1.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 15.0
    }
   ],
   "585323": [
@@ -14047,12 +14253,20 @@
    {
     "d": "16/08/2026",
     "v": 0.35
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "937729": [
    {
     "d": "16/08/2026",
     "v": 8.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "863204": [
@@ -14101,12 +14315,20 @@
    {
     "d": "16/08/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 7.0
    }
   ],
   "1172441": [
    {
     "d": "16/08/2026",
     "v": 0.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "992686": [
@@ -14131,6 +14353,10 @@
    {
     "d": "16/08/2026",
     "v": 12.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 20.0
    }
   ],
   "933900": [
@@ -14239,6 +14465,10 @@
    {
     "d": "16/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 7.0
    }
   ],
   "743395": [
@@ -14257,6 +14487,10 @@
    {
     "d": "16/08/2026",
     "v": 2.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "700078": [
@@ -14347,6 +14581,10 @@
    {
     "d": "16/08/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.5
    }
   ],
   "923758": [
@@ -14377,6 +14615,10 @@
    {
     "d": "16/08/2026",
     "v": 9.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "658533": [
@@ -14419,6 +14661,10 @@
    {
     "d": "16/08/2026",
     "v": 0.45
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.5
    }
   ],
   "989574": [
@@ -14461,6 +14707,10 @@
    {
     "d": "16/08/2026",
     "v": 18.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 20.0
    }
   ],
   "818495": [
@@ -14473,12 +14723,20 @@
    {
     "d": "16/08/2026",
     "v": 9.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "668167": [
    {
     "d": "16/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 4.0
    }
   ],
   "914539": [
@@ -14497,6 +14755,10 @@
    {
     "d": "16/08/2026",
     "v": 1.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.2
    }
   ],
   "433887": [
@@ -14533,6 +14795,10 @@
    {
     "d": "16/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 4.0
    }
   ],
   "1363293": [
@@ -14557,6 +14823,10 @@
    {
     "d": "16/08/2026",
     "v": 15.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 20.0
    }
   ],
   "274862": [
@@ -14575,6 +14845,10 @@
    {
     "d": "16/08/2026",
     "v": 6.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 10.0
    }
   ],
   "324690": [
@@ -14587,6 +14861,10 @@
    {
     "d": "16/08/2026",
     "v": 10.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 15.0
    }
   ],
   "358515": [
@@ -14635,6 +14913,10 @@
    {
     "d": "16/08/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 15.0
    }
   ],
   "805908": [
@@ -14701,6 +14983,10 @@
    {
     "d": "16/08/2026",
     "v": 9.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "979551": [
@@ -14821,12 +15107,20 @@
    {
     "d": "16/08/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 6.0
    }
   ],
   "1088110": [
    {
     "d": "16/08/2026",
     "v": 1.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "1133929": [
@@ -14845,6 +15139,10 @@
    {
     "d": "16/08/2026",
     "v": 15.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 12.0
    }
   ],
   "735051": [
@@ -15019,6 +15317,10 @@
    {
     "d": "16/08/2026",
     "v": 1.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "189744": [
@@ -15067,6 +15369,10 @@
    {
     "d": "16/08/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "1291928": [
@@ -15077,6 +15383,10 @@
    {
     "d": "24/08/2026",
     "v": 0.3
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "1144938": [
@@ -15095,6 +15405,10 @@
    {
     "d": "16/08/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.2
    }
   ],
   "1205629": [
@@ -15125,6 +15439,10 @@
    {
     "d": "16/08/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "287635": [
@@ -15281,6 +15599,10 @@
    {
     "d": "16/08/2026",
     "v": 0.15
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.3
    }
   ],
   "688707": [
@@ -15311,12 +15633,20 @@
    {
     "d": "16/08/2026",
     "v": 3.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "1208968": [
    {
     "d": "16/08/2026",
     "v": 1.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 8.0
    }
   ],
   "1180835": [
@@ -15335,6 +15665,10 @@
    {
     "d": "16/08/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "670847": [
@@ -15365,6 +15699,10 @@
    {
     "d": "16/08/2026",
     "v": 1.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "170549": [
@@ -15413,6 +15751,10 @@
    {
     "d": "16/08/2026",
     "v": 0.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.5
    }
   ],
   "986299": [
@@ -15509,6 +15851,10 @@
    {
     "d": "16/08/2026",
     "v": 0.15
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.3
    }
   ],
   "569359": [
@@ -15521,18 +15867,30 @@
    {
     "d": "16/08/2026",
     "v": 1.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "801762": [
    {
     "d": "16/08/2026",
     "v": 0.9
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.2
    }
   ],
   "344382": [
    {
     "d": "16/08/2026",
     "v": 0.7
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.9
    }
   ],
   "386048": [
@@ -15545,6 +15903,10 @@
    {
     "d": "16/08/2026",
     "v": 2.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "554251": [
@@ -15563,6 +15925,10 @@
    {
     "d": "16/08/2026",
     "v": 1.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 1.5
    }
   ],
   "941561": [
@@ -15575,6 +15941,10 @@
    {
     "d": "16/08/2026",
     "v": 0.6
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.8
    }
   ],
   "371143": [
@@ -15593,12 +15963,20 @@
    {
     "d": "16/08/2026",
     "v": 0.5
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.5
    }
   ],
   "626592": [
    {
     "d": "16/08/2026",
     "v": 0.4
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.7
    }
   ],
   "986300": [
@@ -15635,12 +16013,20 @@
    {
     "d": "16/08/2026",
     "v": 0.6
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.7
    }
   ],
   "422711": [
    {
     "d": "16/08/2026",
     "v": 0.6
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.8
    }
   ],
   "1029482": [
@@ -15653,6 +16039,10 @@
    {
     "d": "17/08/2026",
     "v": 1.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 7.0
    }
   ],
   "1297638": [
@@ -15705,12 +16095,20 @@
    {
     "d": "19/08/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 8.0
    }
   ],
   "953004": [
    {
     "d": "19/08/2026",
     "v": 5.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 7.5
    }
   ],
   "35047": [
@@ -15775,12 +16173,20 @@
    {
     "d": "24/08/2026",
     "v": 0.3
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.8
    }
   ],
   "1200417": [
    {
     "d": "24/08/2026",
     "v": 0.25
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "1297635": [
@@ -15799,6 +16205,10 @@
    {
     "d": "25/08/2026",
     "v": 1.7
+   },
+   {
+    "d": "24/09/2026",
+    "v": 4.0
    }
   ],
   "801886": [
@@ -15877,6 +16287,10 @@
    {
     "d": "01/09/2026",
     "v": 2.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "589128": [
@@ -15895,6 +16309,10 @@
    {
     "d": "01/09/2026",
     "v": 2.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "1291922": [
@@ -15937,6 +16355,10 @@
    {
     "d": "01/09/2026",
     "v": 3.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "1045375": [
@@ -15967,6 +16389,10 @@
    {
     "d": "01/09/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "626913": [
@@ -15985,6 +16411,10 @@
    {
     "d": "01/09/2026",
     "v": 2.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 3.0
    }
   ],
   "405397": [
@@ -16003,18 +16433,30 @@
    {
     "d": "02/09/2026",
     "v": 0.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.5
    }
   ],
   "1200419": [
    {
     "d": "04/09/2026",
     "v": 4.0
+   },
+   {
+    "d": "24/09/2026",
+    "v": 5.0
    }
   ],
   "1307000": [
    {
     "d": "06/09/2026",
     "v": 0.8
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ],
   "1092429": [
@@ -16033,6 +16475,10 @@
    {
     "d": "09/09/2026",
     "v": 0.03
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.3
    }
   ],
   "1364925": [
@@ -16045,6 +16491,10 @@
    {
     "d": "09/09/2026",
     "v": 0.1
+   },
+   {
+    "d": "24/09/2026",
+    "v": 0.3
    }
   ],
   "1337539": [
@@ -16069,6 +16519,10 @@
    {
     "d": "21/09/2026",
     "v": 0.3
+   },
+   {
+    "d": "24/09/2026",
+    "v": 2.0
    }
   ]
  }
