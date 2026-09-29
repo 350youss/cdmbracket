@@ -364,6 +364,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const SUBMIT_COLLECTION = 'predis-indiv-2026-27';
 const LIBRES_COLLECTION = 'predis-indiv-2026-27-libres';
+const SUBMISSIONS_CLOSED = true; // coupe les nouvelles soumissions a partir du 2026-09-29, les pronostics deja soumis restent visibles
 
 /* ---- pseudo : identifie la personne pour lui garder ses pronostics en mémoire ---- */
 let PSEUDO = '';
@@ -386,15 +387,20 @@ function persistPicks(){
 }
 function showPseudoBar(){
   document.getElementById('pseudo-name').textContent = PSEUDO;
-  document.getElementById('lock-badge').style.display = LOCKED ? '' : 'none';
+  const badge = document.getElementById('lock-badge');
+  badge.style.display = (LOCKED || SUBMISSIONS_CLOSED) ? '' : 'none';
+  badge.textContent = LOCKED ? ' · verrouillés' : ' · soumissions clôturées';
   document.getElementById('pseudo-bar').style.display = 'flex';
 }
 function applyLockState(){
-  board.classList.toggle('locked', LOCKED);
-  document.getElementById('btn-random').style.display = LOCKED ? 'none' : '';
-  document.getElementById('btn-reset').style.display = LOCKED ? 'none' : '';
-  document.getElementById('btn-submit').style.display = LOCKED ? 'none' : '';
-  document.getElementById('lock-badge').style.display = LOCKED ? '' : 'none';
+  const closed = LOCKED || SUBMISSIONS_CLOSED;
+  board.classList.toggle('locked', closed);
+  document.getElementById('btn-random').style.display = closed ? 'none' : '';
+  document.getElementById('btn-reset').style.display = closed ? 'none' : '';
+  document.getElementById('btn-submit').style.display = closed ? 'none' : '';
+  const badge = document.getElementById('lock-badge');
+  badge.style.display = closed ? '' : 'none';
+  badge.textContent = LOCKED ? ' · verrouillés' : ' · soumissions clôturées';
 }
 async function enterAsPseudo(p){
   PSEUDO = p;
@@ -899,6 +905,7 @@ const btnSubmit = document.getElementById('btn-submit');
 btnSubmit.style.display = '';
 
 btnSubmit.addEventListener('click', async () => {
+  if (SUBMISSIONS_CLOSED){ showToast('Les soumissions sont clôturées.'); return; }
   if (!PSEUDO){ showToast('Choisis d\'abord un pseudo.'); return; }
   const hasAny = Object.keys(picks).length > 0;
   if (!hasAny){ showToast('Choisis au moins un pronostic avant de soumettre.'); return; }
