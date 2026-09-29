@@ -151,6 +151,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hi
   <div class="vl-links">
     <a href="/predis-indiv.html">Proposer une pr&eacute;diction</a>
     <a href="/tendances.html">Voir les classements</a>
+    <a href="#" id="toggle-mode"></a>
   </div>
 </div>
 
@@ -189,6 +190,22 @@ let PSEUDO = '';
 let queue = [];
 let total = 0;
 let voted = 0;
+const REVIEW_MODE = new URLSearchParams(location.search).get('revue') === '1';
+
+function applyModeUI(){
+  const t = document.getElementById('toggle-mode');
+  const h1 = document.querySelector('.vl-head h1');
+  const p = document.querySelector('.vl-head p');
+  if (REVIEW_MODE){
+    h1.innerHTML = 'Revue des pr&eacute;dictions<br>les plus r&eacute;agies';
+    p.textContent = 'Les prédictions avec le plus de réactions en premier, même celles déjà votées — idéal pour les passer en revue avec un invité.';
+    t.textContent = 'Mode aléatoire normal';
+    t.href = location.pathname;
+  } else {
+    t.textContent = 'Mode revue (top réactions)';
+    t.href = location.pathname + '?revue=1';
+  }
+}
 
 const card = document.getElementById('vl-card');
 const stage = document.getElementById('vl-stage');
@@ -202,6 +219,7 @@ function enterAsPseudo(p){
   PSEUDO = p;
   try{ localStorage.setItem('predis-indiv:pseudo', p); }catch(e){}
   document.getElementById('pseudo-gate').style.display = 'none';
+  applyModeUI();
   loadQueue();
 }
 document.getElementById('pseudo-go').addEventListener('click', () => {
@@ -234,8 +252,12 @@ async function loadQueue(){
   }catch(e){ console.error(e); return; }
   queue = snap.docs
     .map(d => ({id: d.id, ...d.data()}))
-    .filter(p => p.text && p.authorKey !== myKey && !(p.voters && p.voters[myKey]))
-    .sort(() => Math.random() - 0.5);
+    .filter(p => p.text && p.authorKey !== myKey && (REVIEW_MODE || !(p.voters && p.voters[myKey])));
+  if (REVIEW_MODE){
+    queue.sort((a, b) => ((b.likes||0) + (b.dislikes||0)) - ((a.likes||0) + (a.dislikes||0)));
+  } else {
+    queue.sort(() => Math.random() - 0.5);
+  }
   total = queue.length;
   voted = 0;
   renderCard();
