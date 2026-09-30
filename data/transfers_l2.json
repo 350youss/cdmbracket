@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-25T12:31:01",
- "sig": "f268c17c93793f564c59f19631084ab5",
+ "updated": "2026-09-30T15:31:28",
+ "sig": "23d973a563fe9d8fe77a98a6faf005a9",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -300,12 +300,12 @@
   "NANCY|out|Maxence Carlier|Ararat-Armenia": "2026-08-18",
   "NANCY|out|Martin Expérience|FCV Dender EH": "2026-08-18",
   "NANCY|out|Jimmy Evans|Uni. Católica": "2026-08-18",
+  "NANCY|out|Patrick Ouotro|Vit. Guimarães": "2026-08-18",
   "NANCY|out|Adrien Julloux|Amiens SC": "2026-08-18",
   "NANCY|out|Cazim Suljic|Amiens SC": "2026-08-18",
   "NANCY|out|Oumar Sidibé|AS Cannes": "2026-09-02",
   "NANCY|out|Martin Sourzac|Imperia": "2026-08-18",
   "NANCY|out|Bakari Camara|FC Rouen 1899": "2026-08-18",
-  "NANCY|out|Patrick Ouotro|Vit. Guimarães": "2026-08-18",
   "NANCY|out|Mattheo Guendez|Paris 13 Atl.": "2026-08-18",
   "NANCY|out|Youssouf Tandia|SAS Épinal": "2026-08-18",
   "NANCY|out|Faitout Maouassa|Sans club": "2026-08-18",
@@ -3211,6 +3211,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Patrick Ouotro",
+     "age": 20,
+     "pos": "AC",
+     "club": "Vit. Guimarães",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-08-18"
+    },
+    {
      "p": "Adrien Julloux",
      "age": 29,
      "pos": "DC",
@@ -3252,15 +3261,6 @@
      "pos": "MDC",
      "club": "FC Rouen 1899",
      "type": "free",
-     "val": 0.0,
-     "fs": "2026-08-18"
-    },
-    {
-     "p": "Patrick Ouotro",
-     "age": 20,
-     "pos": "AC",
-     "club": "Vit. Guimarães",
-     "type": "none",
      "val": 0.0,
      "fs": "2026-08-18"
     },
@@ -6008,7 +6008,7 @@
     "p": "Abdoulaye Mbaye",
     "pos": "AC",
     "grp": "ATT",
-    "age": 20,
+    "age": 21,
     "val": 0.1
    }
   ],
@@ -6364,7 +6364,7 @@
     "p": "Baptiste Mouazan",
     "pos": "MC",
     "grp": "MID",
-    "age": 24,
+    "age": 25,
     "val": 0.5
    },
    {
@@ -6986,7 +6986,7 @@
     "p": "Esteban Riou",
     "pos": "DC",
     "grp": "DEF",
-    "age": 19,
+    "age": 20,
     "val": 0.0
    },
    {
@@ -7890,7 +7890,7 @@
     "p": "Jordan Marié",
     "pos": "MC",
     "grp": "MID",
-    "age": 34,
+    "age": 35,
     "val": 0.15
    },
    {
