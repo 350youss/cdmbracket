@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-27T11:03:57",
- "sig": "70e367ce1fea961a98abc4af9d92acdf",
+ "updated": "2026-09-30T20:03:53",
+ "sig": "0700efeea2b2d816365dc51524b383bc",
  "seen": {
   "PSG|in|Maghnes Akliouche|Monaco": "2026-08-09",
   "PSG|in|Ferran Torres|Barcelone": "2026-08-15",
@@ -216,6 +216,7 @@
   "TFC|out|Djibril Sidibé|Le Mans FC": "2026-08-18",
   "TFC|out|Kjetil Haug|Go Ahead Eagles": "2026-08-09",
   "TFC|out|Álex Domínguez|Ponferradina": "2026-08-09",
+  "TFC|out|Mark McKenzie|Philadelphia": "2026-09-30",
   "TFC|out|Ibrahim Cissoko|PEC Zwolle": "2026-08-09",
   "TFC|out|Edhy Zuliani|VVV-Venlo": "2026-08-09",
   "TFC|out|Mário Sauer|1.FC K'lautern": "2026-08-26",
@@ -2628,6 +2629,16 @@
      "type": "free",
      "val": 0.0,
      "fs": "2026-08-09"
+    },
+    {
+     "p": "Mark McKenzie",
+     "age": 27,
+     "pos": "DC",
+     "club": "Philadelphia",
+     "club_id": 25467,
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-09-30"
     },
     {
      "p": "Ibrahim Cissoko",
@@ -5839,7 +5850,7 @@
     "p": "Olivier Giroud",
     "pos": "AC",
     "grp": "ATT",
-    "age": 39,
+    "age": 40,
     "val": 0.9,
     "stats": {
      "m": 44,
@@ -7425,7 +7436,7 @@
     "p": "Jordan Teze",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 26,
+    "age": 27,
     "val": 15.0,
     "stats": {
      "m": 44,
@@ -7787,7 +7798,7 @@
     "p": "Jeyland Mitchell",
     "pos": "DC",
     "grp": "DEF",
-    "age": 21,
+    "age": 22,
     "val": 8.0,
     "stats": {
      "m": 26,
@@ -8889,7 +8900,7 @@
     "p": "Thomas Jørgensen",
     "pos": "MC",
     "grp": "MID",
-    "age": 20,
+    "age": 21,
     "val": 7.5,
     "stats": {
      "m": 36,
@@ -8943,7 +8954,7 @@
     "p": "Aymen Amaaouch",
     "pos": "MC",
     "grp": "MID",
-    "age": 16,
+    "age": 17,
     "val": 0.0,
     "stats": null,
     "statsClub": null,
@@ -12047,7 +12058,7 @@
     "p": "Mouhamed Diop",
     "pos": "MC",
     "grp": "MID",
-    "age": 25,
+    "age": 26,
     "val": 4.0,
     "stats": {
      "m": 35,
