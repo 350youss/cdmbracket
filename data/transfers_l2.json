@@ -1,6 +1,6 @@
 {
- "updated": "2026-09-30T15:31:28",
- "sig": "23d973a563fe9d8fe77a98a6faf005a9",
+ "updated": "2026-10-02T00:31:02",
+ "sig": "3c39af59d5f5728177bef784869b024e",
  "seen": {
   "ASSE|in|Thierno Ballo|Wolfsberger AC": "2026-08-18",
   "ASSE|in|Tamar Svetlin|Korona Kielce": "2026-08-18",
@@ -65,8 +65,13 @@
   "REIMS|in|Daouda Guindo|Stade Brestois": "2026-08-18",
   "REIMS|in|Sambou Soumano|FC Lorient": "2026-08-18",
   "REIMS|in|Alexis Sauvage|Amiens SC": "2026-08-18",
+  "REIMS|in|Chamsedin Kouranfal|AS Pagny": "2026-10-02",
   "REIMS|in|Armel Zohouri|Iberia 1999": "2026-08-18",
-  "REIMS|in|Aleksandr Guboglo|Montréal": "2026-08-18",
+  "REIMS|in|Maël Debondt|Reims Révél.": "2026-10-02",
+  "REIMS|in|Lenny Sylla|Reims Révél.": "2026-10-02",
+  "REIMS|in|Arone Gadou|Reims Révél.": "2026-10-02",
+  "REIMS|in|Jean-Tryfose Mambuku|Reims Révél.": "2026-10-02",
+  "REIMS|in|Tidiane Diarrassouba|Reims Révél.": "2026-10-02",
   "REIMS|out|Patrick Zabi|Paris FC": "2026-08-18",
   "REIMS|out|Ewen Jaouen|Newcastle": "2026-08-18",
   "REIMS|out|Cédric Kipré|Ipswich Town": "2026-08-18",
@@ -318,6 +323,7 @@
   "ANNECY|in|Souleymane Fofana|ASEC Mimosas": "2026-09-01",
   "ANNECY|out|Axel Drouhin|KV Kortrijk": "2026-09-04",
   "ANNECY|out|Ben Hamed Touré|Barnsley FC": "2026-08-31",
+  "ANNECY|out|Quentin Paris|Reims Révél.": "2026-10-02",
   "ANNECY|out|Valentin Jacob|GFA Rumilly Val": "2026-08-18",
   "ANNECY|out|Aymerick Nedelec|Chambéry SF": "2026-08-18",
   "ANNECY|out|Abdel Hbouch|US Boulogne": "2026-08-18",
@@ -994,6 +1000,15 @@
      "fs": "2026-08-18"
     },
     {
+     "p": "Chamsedin Kouranfal",
+     "age": 20,
+     "pos": "MC",
+     "club": "AS Pagny",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-10-02"
+    },
+    {
      "p": "Armel Zohouri",
      "age": 25,
      "pos": "ArD",
@@ -1003,13 +1018,49 @@
      "fs": "2026-08-18"
     },
     {
-     "p": "Aleksandr Guboglo",
+     "p": "Maël Debondt",
      "age": 19,
-     "pos": "ArD",
-     "club": "Montréal",
-     "type": "loan",
+     "pos": "ArG",
+     "club": "Reims Révél.",
+     "type": "none",
      "val": 0.0,
-     "fs": "2026-08-18"
+     "fs": "2026-10-02"
+    },
+    {
+     "p": "Lenny Sylla",
+     "age": 19,
+     "pos": "MO",
+     "club": "Reims Révél.",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-10-02"
+    },
+    {
+     "p": "Arone Gadou",
+     "age": 17,
+     "pos": "AC",
+     "club": "Reims Révél.",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-10-02"
+    },
+    {
+     "p": "Jean-Tryfose Mambuku",
+     "age": 17,
+     "pos": "ArD",
+     "club": "Reims Révél.",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-10-02"
+    },
+    {
+     "p": "Tidiane Diarrassouba",
+     "age": 17,
+     "pos": "AiD",
+     "club": "Reims Révél.",
+     "type": "none",
+     "val": 0.0,
+     "fs": "2026-10-02"
     }
    ],
    "dep": [
@@ -3383,6 +3434,15 @@
      "fs": "2026-08-31"
     },
     {
+     "p": "Quentin Paris",
+     "age": 19,
+     "pos": "AC",
+     "club": "Reims Révél.",
+     "type": "free",
+     "val": 0.0,
+     "fs": "2026-10-02"
+    },
+    {
      "p": "Valentin Jacob",
      "age": 32,
      "pos": "MO",
@@ -4648,14 +4708,6 @@
     "val": 0.5
    },
    {
-    "n": "",
-    "p": "Aleksandr Guboglo",
-    "pos": "ArD",
-    "grp": "DEF",
-    "age": 19,
-    "val": 0.35
-   },
-   {
     "n": "24",
     "p": "Mory Gbane",
     "pos": "MDC",
@@ -4686,6 +4738,14 @@
     "grp": "MID",
     "age": 23,
     "val": 0.8
+   },
+   {
+    "n": "61",
+    "p": "Chamsedin Kouranfal",
+    "pos": "MC",
+    "grp": "MID",
+    "age": 20,
+    "val": 0.7
    },
    {
     "n": "87",
@@ -6300,7 +6360,7 @@
     "p": "Yvann Maçon",
     "pos": "ArD",
     "grp": "DEF",
-    "age": 27,
+    "age": 28,
     "val": 0.8
    },
    {
@@ -6606,7 +6666,7 @@
     "p": "Teddy Averlant",
     "pos": "MD",
     "grp": "MID",
-    "age": 26,
+    "age": 27,
     "val": 0.9
    },
    {
