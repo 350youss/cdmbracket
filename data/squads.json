@@ -1,6 +1,6 @@
 {
- "updated": "2026-10-05T15:52:58",
- "sig": "10890ef632d92b8b95a76f8bcba43b11",
+ "updated": "2026-10-05T18:00:56",
+ "sig": "506ab6f233fcdcdcc05e857ec374da78",
  "squads": {
   "FCB": [
    {
@@ -3976,6 +3976,24 @@
      "g": 0,
      "a": 0,
      "min": 1170
+    },
+    "statsClub": "",
+    "valDelta": 0.0,
+    "valSince": "05/10/2026"
+   },
+   {
+    "n": "42",
+    "p": "James Wright",
+    "pos": "GdB",
+    "grp": "GK",
+    "age": 21,
+    "val": 0.2,
+    "stats": {
+     "m": 0,
+     "s": 0,
+     "g": 0,
+     "a": 0,
+     "min": 0
     },
     "statsClub": "",
     "valDelta": 0.0,
