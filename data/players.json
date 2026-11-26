@@ -1,6 +1,6 @@
 {
   "season": "2026-27",
-  "updated": "2026-11-25T14:11:17",
+  "updated": "2026-11-26T13:40:43",
   "clubs": [
     {
       "id": "psg",
@@ -487,6 +487,18 @@
           "squad": "U17"
         },
         {
+          "name": "Kévin Pegourie",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U17"
+        },
+        {
+          "name": "Zayd Belarbi",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U17"
+        },
+        {
           "name": "Ewan Polter",
           "pos": "MO",
           "posGroup": "MID",
@@ -752,6 +764,12 @@
           "squad": "U19"
         },
         {
+          "name": "Madi Gnonlonfoun",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U19"
+        },
+        {
           "name": "Noé Kemtchoum",
           "pos": "DC",
           "posGroup": "DEF",
@@ -833,6 +851,12 @@
           "name": "Noé Domgjoni",
           "pos": "MC",
           "posGroup": "MID",
+          "squad": "U19"
+        },
+        {
+          "name": "Boubacar Diakité",
+          "pos": "AiD",
+          "posGroup": "ATT",
           "squad": "U19"
         },
         {
@@ -1007,12 +1031,6 @@
           "name": "Khalil Stambouli",
           "pos": "MO",
           "posGroup": "MID",
-          "squad": "U17"
-        },
-        {
-          "name": "Boubacar Diakité",
-          "pos": "AiD",
-          "posGroup": "ATT",
           "squad": "U17"
         },
         {
@@ -1317,12 +1335,6 @@
           "squad": "U19"
         },
         {
-          "name": "Hacène Zaanane",
-          "pos": "D",
-          "posGroup": "MID",
-          "squad": "U19"
-        },
-        {
           "name": "Mouad Gounfissi",
           "pos": "DC",
           "posGroup": "DEF",
@@ -1342,6 +1354,12 @@
         },
         {
           "name": "Kassim Nyabenda",
+          "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "U19"
+        },
+        {
+          "name": "Hacène Zaanane",
           "pos": "DC",
           "posGroup": "DEF",
           "squad": "U19"
@@ -4838,6 +4856,12 @@
           "squad": "U17"
         },
         {
+          "name": "Moriba Sissoko",
+          "pos": "MC",
+          "posGroup": "MID",
+          "squad": "U17"
+        },
+        {
           "name": "Yanis Bouataoun",
           "pos": "MO",
           "posGroup": "MID",
@@ -6714,6 +6738,12 @@
           "squad": "PRO"
         },
         {
+          "name": "Ibrahim Yayiya Kanté",
+          "pos": "AiD",
+          "posGroup": "ATT",
+          "squad": "PRO"
+        },
+        {
           "name": "Djylian N'Guessan",
           "pos": "AC",
           "posGroup": "ATT",
@@ -6836,12 +6866,6 @@
         {
           "name": "Samba Diop",
           "pos": "AiG",
-          "posGroup": "ATT",
-          "squad": "B"
-        },
-        {
-          "name": "Ibrahim Yayiya Kanté",
-          "pos": "AiD",
           "posGroup": "ATT",
           "squad": "B"
         },
@@ -8193,12 +8217,6 @@
           "squad": "PRO"
         },
         {
-          "name": "Ackah-Tidiane Zoukrou",
-          "pos": "ArG",
-          "posGroup": "DEF",
-          "squad": "PRO"
-        },
-        {
           "name": "Marvin Senaya",
           "pos": "ArD",
           "posGroup": "DEF",
@@ -8351,6 +8369,12 @@
         {
           "name": "Ata-Yis Onday Nianga",
           "pos": "DC",
+          "posGroup": "DEF",
+          "squad": "B"
+        },
+        {
+          "name": "Ackah-Tidiane Zoukrou",
+          "pos": "ArG",
           "posGroup": "DEF",
           "squad": "B"
         },
